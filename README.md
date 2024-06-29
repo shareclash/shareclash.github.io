@@ -1,4 +1,4 @@
-# 6月28日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度21M/S 免费Clash机场订阅  更新时间 2024-06-28 10:01:50
+# 6月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度19.2M/S 免费Clash机场订阅  更新时间 2024-06-29 11:20:27
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://shareclash.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,19 +9,19 @@
 
 ### Clash订阅链接
 
-- https://shareclash.github.io/uploads/2024/06/0-20240628.yaml
-- https://shareclash.github.io/uploads/2024/06/1-20240628.yaml
-- https://shareclash.github.io/uploads/2024/06/2-20240628.yaml
-- https://shareclash.github.io/uploads/2024/06/3-20240628.yaml
-- https://shareclash.github.io/uploads/2024/06/4-20240628.yml
+- https://shareclash.github.io/uploads/2024/06/0-20240629.yaml
+- https://shareclash.github.io/uploads/2024/06/1-20240629.yaml
+- https://shareclash.github.io/uploads/2024/06/2-20240629.yaml
+- https://shareclash.github.io/uploads/2024/06/3-20240629.yaml
+- https://shareclash.github.io/uploads/2024/06/4-20240629.yml
 
 ### V2ray订阅链接
 
-- https://shareclash.github.io/uploads/2024/06/0-20240628.txt
-- https://shareclash.github.io/uploads/2024/06/1-20240628.txt
-- https://shareclash.github.io/uploads/2024/06/2-20240628.txt
-- https://shareclash.github.io/uploads/2024/06/3-20240628.txt
-- https://shareclash.github.io/uploads/2024/06/4-20240628.txt
+- https://shareclash.github.io/uploads/2024/06/0-20240629.txt
+- https://shareclash.github.io/uploads/2024/06/1-20240629.txt
+- https://shareclash.github.io/uploads/2024/06/2-20240629.txt
+- https://shareclash.github.io/uploads/2024/06/3-20240629.txt
+- https://shareclash.github.io/uploads/2024/06/4-20240629.txt
 
 ## 更多clash节点订阅 ：
 
