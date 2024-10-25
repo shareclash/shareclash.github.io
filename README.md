@@ -1,4 +1,4 @@
-# 10月24日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度23M/S 免费Clash机场订阅  更新时间 2024-10-24 09:12:45
+# 10月25日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度19.6M/S 免费Clash机场订阅  更新时间 2024-10-25 09:34:24
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://shareclash.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,19 +9,19 @@
 
 ### Clash订阅链接
 
-- https://shareclash.github.io/uploads/2024/10/0-20241024.yaml
-- https://shareclash.github.io/uploads/2024/10/1-20241024.yaml
-- https://shareclash.github.io/uploads/2024/10/2-20241024.yaml
-- https://shareclash.github.io/uploads/2024/10/3-20241024.yaml
-- https://shareclash.github.io/uploads/2024/10/4-20241024.yml
+- https://shareclash.github.io/uploads/2024/10/0-20241025.yaml
+- https://shareclash.github.io/uploads/2024/10/1-20241025.yaml
+- https://shareclash.github.io/uploads/2024/10/2-20241025.yaml
+- https://shareclash.github.io/uploads/2024/10/3-20241025.yaml
+- https://shareclash.github.io/uploads/2024/10/4-20241025.yml
 
 ### V2ray订阅链接
 
-- https://shareclash.github.io/uploads/2024/10/0-20241024.txt
-- https://shareclash.github.io/uploads/2024/10/1-20241024.txt
-- https://shareclash.github.io/uploads/2024/10/2-20241024.txt
-- https://shareclash.github.io/uploads/2024/10/3-20241024.txt
-- https://shareclash.github.io/uploads/2024/10/4-20241024.txt
+- https://shareclash.github.io/uploads/2024/10/0-20241025.txt
+- https://shareclash.github.io/uploads/2024/10/1-20241025.txt
+- https://shareclash.github.io/uploads/2024/10/2-20241025.txt
+- https://shareclash.github.io/uploads/2024/10/3-20241025.txt
+- https://shareclash.github.io/uploads/2024/10/4-20241025.txt
 
 ## 更多clash节点订阅 ：
 
