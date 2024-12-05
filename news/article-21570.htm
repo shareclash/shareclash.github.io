@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-21570.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>如何加快循环操作和Numpy数组运算速度！</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="前言 Python 虽然写起来代码量要远少于如 C++,Java，但运行速度又不如它们，因此也有了各种提升 Python 速度的方法技巧，这次要介绍的是用 Numba 库进行加速比较耗时的循环操作以及" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="htmledit_views"> <h3>前言</h3> <p>Python 虽然写起来代码量要远少于如 C++,Java，但运行速度又不如它们，因此也有了各种提升 Python 速度的方法技巧，这次要介绍的是用 Numba 库进行加速比较耗时的循环操作以及 Numpy 操作。</p> <p>在24式加速你的Python中介绍对循环的加速方法中，一个办法就是采用&nbsp; <code>Numba</code> 加速，刚好最近看到一篇文章介绍了利用&nbsp; <code>Numba</code> 加速 Python ，文章主要介绍了两个例子，也是&nbsp; <code>Numba</code> 的两大作用，分别是加速循环，以及对&nbsp; <code>Numpy</code> 的计算加速。</p> <p>原文：https://towardsdatascience.com/heres-how-you-can-get-some-free-speed-on-your-python-code-with-numba-89fdc8249ef3</p> <p>相比其他语言，Python 确实在运行速度上是比较慢的。</p> <p>一种常用解决方法，就是用如 C++ 改写代码，然后用 Python 进行封装，这样既可以实现 C++ 的运行速度又可以保持在主要应用中采用 Python 的方便。</p> <p>这种办法的唯一难点就是改写为 C++ 部分的代码需要耗费不少时间，特别是如果你对 C++ 并不熟悉的情况。</p> <p><code>Numba</code> 可以实现提升速度但又不需要改写部分代码为其他编程语言。</p> <p>Numba 简介</p> <p><code>Numba</code> 是一个可以将 Python 代码转换为优化过的机器代码的编译库。通过这种转换，对于数值算法的运行速度可以提升到接近&nbsp; <code>C</code> 语言代码的速度。</p> <p>采用 <code>Numba</code> 并不需要添加非常复杂的代码，只需要在想优化的函数前 添加一行代码，剩余的交给&nbsp; <code>Numba</code> 即可。</p> <p><code>Numba</code> 可以通过&nbsp; <code>pip</code> 安装：</p> <pre>$ pip install numba </pre> <p><code>Numba</code> 对于有许多数值运算的， <code>Numpy</code> 操作或者大量循环操作的情况，都可以大大提升运行速度。</p> <p>加速 Python 循环</p> <p><code>Numba</code> 的最基础应用就是加速 Python 中的循环操作。</p> <p>首先，如果你想使用循环操作，你先考虑是否可以采用 <code>Numpy</code> 中的函数替代，有些情况，可能没有可以替代的函数。这时候就可以考虑采用&nbsp; <code>Numba</code> 了。</p> <p>第一个例子是通过插入排序算法来进行说明。我们会实现一个函数，输入一个无序的列表，然后返回排序好的列表。</p> <p>我们先生成一个包含 100,000 个随机整数的列表，然后执行 50 次插入排序算法，然后计算平均速度。</p> <p>代码如下所示：</p> <pre>import time import random  num_loops = 50 len_of_list = 100000  def insertion_sort(arr):     for i in range(len(arr)):         cursor = arr[i]         pos = i          while pos &gt; 0 and arr[pos-1] &gt; cursor:             # 从后往前对比，从小到大排序             arr[pos] = arr[pos-1]             pos = pos-1         # 找到当前元素的位置         arr[pos] = cursor     return arr start = time.time() list_of_numbers = list() for i in range(len_of_list):     num = random.randint(0, len_of_list)     list_of_numbers.append(num)  for i in range(num_loops):     result = insertion_sort(list_of_numbers)  end = time.time()  run_time = end-start print('Average time={}'.format(run_time/num_loops)) </pre> <p>输出结果：</p> <pre>Average time=22.84399790763855 </pre> <p>从代码可以知道插入排序算法的时间复杂度是 <img decoding="async" alt="" class="has" src="0"/> ，因为这里包含了两个循环， <code>for</code> 循环里面带有&nbsp; <code>while</code> 循环，这是最差的情况。然后输入数量是 10 万个整数，再加上重复 50 次，这是非常耗时的操作了。</p> <p>原作者采用的是电脑配置是 i7-8700k，所以其平均耗时是 <code>3.0104s</code> 。但这里我的电脑配置就差多了，i5-4210M 的笔记本电脑，并且已经使用了接近 4 年，所以我跑的结果是，平均耗时为&nbsp; <code>22.84s</code> 。</p> <p>那么，如何采用 <code>Numba</code> 加速循环操作呢，代码如下所示：</p> <pre>import time import random from numba import jit  num_loops = 50 len_of_list = 100000  @jit(nopython=True) def insertion_sort(arr):     for i in range(len(arr)):         cursor = arr[i]         pos = i          while pos &gt; 0 and arr[pos-1] &gt; cursor:             # 从后往前对比，从小到大排序             arr[pos] = arr[pos-1]             pos = pos-1         # 找到当前元素的位置         arr[pos] = cursor     return arr start = time.time() list_of_numbers = list() for i in range(len_of_list):     num = random.randint(0, len_of_list)     list_of_numbers.append(num)  for i in range(num_loops):     result = insertion_sort(list_of_numbers)  end = time.time()  run_time = end-start print('Average time={}'.format(run_time/num_loops)) </pre> <p>输出结果：</p> <pre>Average time=0.09438572406768798 </pre> <p>可以看到，其实只增加了两行代码，第一行就是导入 <code>jit</code> 装饰器</p> <pre>from numba import jit </pre> <p>接着在函数前面增加一行代码，采用装饰器</p> <pre>@jit(nopython=True) def insertion_sort(arr): </pre> <p>使用 <code>jit</code> 装饰器表明我们希望将该函数转换为机器代码，然后参数&nbsp; <code>nopython</code> 指定我们希望&nbsp; <code>Numba</code> 采用纯机器代码，或者有必要的情况加入部分&nbsp; <code>Python</code> 代码，这个参数必须设置为&nbsp; <code>True</code> 来得到更好的性能，除非出现错误。</p> <p>原作者得到的平均耗时是 <code>0,1424s</code> ，而我的电脑上则是提升到仅需&nbsp; <code>0.094s</code> ，速度都得到非常大的提升。</p> <p>加速 Numpy 操作</p> <p><code>Numba</code> 的另一个常用地方，就是加速&nbsp; <code>Numpy</code> 的运算。</p> <p>这次将初始化 3 个非常大的 <code>Numpy</code> 数组，相当于一个图片的尺寸大小，然后采用&nbsp; <code>numpy.square()</code> 函数对它们的和求平方。</p> <p>代码如下所示：</p> <pre>import time import numpy as np  num_loops = 50 img1 = np.ones((1000, 1000), np.int64) * 5 img2 = np.ones((1000, 1000), np.int64) * 10 img3 = np.ones((1000, 1000), np.int64) * 15  def add_arrays(img1, img2, img3):     return np.square(img1+img2+img3)  start1 = time.time() for i in range(num_loops):     result = add_arrays(img1, img2, img3) end1 = time.time() run_time1 = end1 - start1 print('Average time for normal numpy operation={}'.format(run_time1/num_loops)) </pre> <p>输出结果：</p> <pre>Average time for normal numpy operation=0.040156774520874024 </pre> <p>当我们对 <code>Numpy</code> 数组进行基本的数组计算，比如加法、乘法和平方， <code>Numpy</code> 都会自动在内部向量化，这也是它可以比原生&nbsp; <code>Python</code> 代码有更好性能的原因。</p> <p>上述代码在原作者的电脑运行的速度是 <code>0.002288s</code> ，而我的电脑需要&nbsp; <code>0.04s</code> 左右。</p> <p>但即便是 <code>Numpy</code> 代码也不会和优化过的机器代码速度一样快，因此这里依然可以采用&nbsp; <code>Numba</code> 进行加速，代码如下所示：</p> <pre># numba 加速 from numba import vectorize, int64  @vectorize([int64(int64,int64,int64)], target='parallel') def add_arrays_numba(img1, img2, img3):     return np.square(img1+img2+img3)  start2 = time.time() for i in range(num_loops):     result = add_arrays_numba(img1, img2, img3) end2 = time.time() run_time2 = end2 - start2 print('Average time using numba accelerating={}'.format(run_time2/num_loops)) </pre> <p>输出结果：</p> <pre>Average time using numba accelerating=0.007735490798950195 </pre> <p>这里采用的是 <code>vectorize</code> 装饰器，它有两个数参数，第一个参数是指定需要进行操作的&nbsp; <code>numpy</code> 数组的数据类型，这是必须添加的，因为&nbsp; <code>numba</code> 需要将代码转换为最佳版本的机器代码，以便提升速度；</p> <p>第二个参数是 <code>target</code> ，它有以下三个可选数值，表示如何运行函数：</p> <ul> <li> <p>cpu：运行在单线程的 CPU 上</p> </li> <li> <p>parallel：运行在多核、多线程的 CPU</p> </li> <li> <p>cuda：运行在 GPU 上</p> </li> </ul> <p><code>parallel</code> 选项在大部分情况是快过&nbsp; <code>cpu</code> ，而&nbsp; <code>cuda</code> 一般用于有非常大数组的情况。</p> <p>上述代码在原作者的电脑运行时间是 <code>0.001196s</code> ，提升了 2 倍左右，而我的电脑是&nbsp; <code>0.0077s</code> ，提升了 5 倍左右速度。</p> <p>小结</p> <p><code>numba</code> 在以下情况下可以更好发挥它提升速度的作用：</p> <ul> <li> <p><code>Python</code> 代码运行速度慢于&nbsp; <code>C</code> 代码的地方，典型的就是循环操作</p> </li> <li> <p>在同个地方重复使用同个操作的情况，比如对许多元素进行同个操作，即 <code>numpy</code> 数组的操作</p> </li> </ul> <p>而在其他情况下， <code>Numba</code> 并不会带来如此明显的速度提升，当然，一般情况下尝试采用&nbsp; <code>numba</code> 提升速度也是一个不错的尝试。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-21120.htm">附近宠物领养 附近宠物领养中心在哪</a></p>
+                                        <p>下一个：<a href="/news/article-21573.htm">动物疫苗生产厂家排名榜前十名图片（动物疫苗品牌）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-8-2-free-ssr-node.htm" title="8月2日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度18.8M/S 免费Clash机场订阅">8月2日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度18.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-2-node-share-links.htm" title="6月2日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度19.1M/S">6月2日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度19.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-20658.htm" title="宠物粮品牌名称大全及图片（宠物粮食排行榜）">宠物粮品牌名称大全及图片（宠物粮食排行榜）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-10-clash-v2ray-ss-ssr.htm" title="9月10日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.1M/S 免费Clash机场订阅">9月10日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.1M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-4-free-subscribe-node.htm" title="9月4日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19M/S 免费Clash机场订阅">9月4日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-12-clash-v2ray-ss-ssr.htm" title="10月12日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.2M/S 免费Clash机场订阅">10月12日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.2M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-7-free-ssr-node.htm" title="7月7日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S 免费Clash机场订阅">7月7日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-20-node-share-links.htm" title="9月20日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度21.9M/S 免费Clash机场订阅">9月20日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度21.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-18654.htm" title="动物疫苗管理法律法规有哪些要求呢图片（动物疫苗管理法律法规有哪些要求呢图片大全）">动物疫苗管理法律法规有哪些要求呢图片（动物疫苗管理法律法规有哪些要求呢图片大全）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-19-free-high-speed-nodes.htm" title="9月19日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.5M/S 免费Clash机场订阅">9月19日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.5M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
