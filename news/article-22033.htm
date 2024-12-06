@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-22033.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>《C语言及程序设计》程序阅读——宏定义</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="返回：贺老师课程教学链接 写出下面程序的输出结果，并和运行的结果对照。 （1） #include&lt;stdio.h&gt; #define M 3 #define N M+1 #define NN" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="htmledit_views"> <div class="content-detail markdown-body"> <div class="markdown_views"> <p>返回：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://blog.csdn.net/sxhelijian/article/details/8001601"  rel="nofollow">贺老师课程教学链接</a></p> <p>写出下面程序的输出结果，并和运行的结果对照。</p> <pre class="prettyprint"><code class="hljs vala">（<span class="hljs-number">1</span>） <span class="hljs-preprocessor">#include&lt;stdio.h&gt;</span> <span class="hljs-preprocessor">#define M 3</span> <span class="hljs-preprocessor">#define N M+1</span> <span class="hljs-preprocessor">#define NN N*N/2</span> <span class="hljs-keyword">int</span> main() {     printf(<span class="hljs-string">"%d\n"</span>, NN);     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }</code></pre> <p>（2）</p> <pre class="prettyprint"><code class="hljs vala"><span class="hljs-preprocessor">#include&lt;stdio.h&gt;</span> <span class="hljs-preprocessor">#define SQR(X) X*X</span> <span class="hljs-keyword">int</span> main( ) {     <span class="hljs-keyword">int</span> a=<span class="hljs-number">10</span>,k=<span class="hljs-number">2</span>,m=<span class="hljs-number">1</span>;     a/=SQR(k+m)/SQR(k+m);     printf(<span class="hljs-string">"%d\n"</span>,a);     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }</code></pre> <p>（3）</p> <pre class="prettyprint"><code class="hljs vala"><span class="hljs-preprocessor">#include&lt;stdio.h&gt;</span> <span class="hljs-preprocessor">#define PR(ar) printf("%d",ar)</span> <span class="hljs-keyword">int</span> main( ) {     <span class="hljs-keyword">int</span> j ,a[ ]= {<!-- --><span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>,<span class="hljs-number">11</span>,<span class="hljs-number">13</span>,<span class="hljs-number">15</span>},*p=a+<span class="hljs-number">5</span>;     <span class="hljs-keyword">for</span>(j=<span class="hljs-number">3</span>; j; j--)     {         <span class="hljs-keyword">switch</span>(j)         {         <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:         <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:             PR(*p++);             <span class="hljs-keyword">break</span>;         <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:             PR(*(--p));         }     }     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }</code></pre> <p>（4）</p> <pre class="prettyprint"><code class="hljs vala"><span class="hljs-preprocessor">#include  &lt;stdio.h&gt;</span> <span class="hljs-preprocessor">#define PT  5.5</span> <span class="hljs-preprocessor">#define S(x) PT*x*x</span> <span class="hljs-keyword">int</span> main() {     <span class="hljs-keyword">int</span> a=<span class="hljs-number">1</span>,b=<span class="hljs-number">2</span>;     printf(<span class="hljs-string">"%4.1f\n"</span>,S(a+b));     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; }</code></pre> </p></div> </div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-21573.htm">动物疫苗生产厂家排名榜前十名图片（动物疫苗品牌）</a></p>
+                                        <p>下一个：<a href="/news/article-22034.htm">青浦二中高考录取率高吗多少（青浦二中升学率）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-8-19-clash-windows.htm" title="8月19日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度18.2M/S 免费Clash机场订阅">8月19日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度18.2M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-1-node-share.htm" title="11月1日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅">11月1日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-5-27-node-share-links.htm" title="5月27日|SSR/Shadowrocket/Clash/V2ray每天更新19.2M/S免费节点订阅链接">5月27日|SSR/Shadowrocket/Clash/V2ray每天更新19.2M/S免费节点订阅链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-24-free-subscribe-node.htm" title="10月24日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度20M/S 免费Clash机场订阅">10月24日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度20M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-21570.htm" title="如何加快循环操作和Numpy数组运算速度！">如何加快循环操作和Numpy数组运算速度！</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-13-free-node-subscribe.htm" title="9月13日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.5M/S 免费Clash机场订阅">9月13日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.5M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-26-free-v2ray.htm" title="7月26日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度20M/S 免费Clash机场订阅">7月26日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度20M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-7-clash-windows.htm" title="9月7日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度22.2M/S 免费Clash机场订阅">9月7日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度22.2M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-20-node-share.htm" title="6月20日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度21.1M/S">6月20日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度21.1M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-29-clash-node-daily-updates.htm" title="8月29日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度23M/S 免费Clash机场订阅">8月29日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度23M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
