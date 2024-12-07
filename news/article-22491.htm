@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-22491.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="【以下内容仅为本人在学习中的所感所想，本人水平有限目前尚处学习阶段，如有错误及不妥之处还请各位大佬指正，请谅解，谢谢！】 #Updated【2022.5.2 修复移动端排版混乱的问题】 ！！！观前提醒" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<p><span style="font-size: 15px"><strong>【以下内容仅为本人在学习中的所感所想，本人水平有限目前尚处学习阶段，如有错误及不妥之处还请各位大佬指正，请谅解，谢谢！】</strong></span></p> <p><span style="font-size: 18pt; font-family: &quot;comic sans ms&quot;, sans-serif; color: rgba(136, 136, 136, 1)"><strong><strong>#Updated【2022.5.2 修复移动端排版混乱的问题】</strong></strong></span></p> <p><span style="font-size: 14pt"><strong>！！！观前提醒！！！</strong></span></p> <p><span style="font-size: 14pt"><strong>【本文内容可能较为复杂，虽然我已经以较为清晰的方式展现我的思想，但可能依旧容易引起思维混乱，若感到混乱或不舒服的情况，可直接转跳至文末的总结处；也可以先看完结论再来阅读文章】</strong></span></p> <p><strong></strong></p> <p><span style="font-size: 18pt"><strong>引言</strong></span></p> <p>List作为一种动态存储结构，可以代替数组，还可以将其当作链表使用。本文将介绍C#中List的相关内容，重点介绍其包含的Contains与Equals方法，并针对集合的比较与去重进行分析，提供可行的解决方案。</p> <p><span style="font-size: 18pt"><strong>起因</strong></span></p> <p>题目链接：</a></p> <p><img fetchpriority="high" decoding="async" src="http://img.555519.xyz/uploads3/20220507/601b1bd077f262f903c77e353c594060.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p>实际上就是在一个数组的所有非空“子数组”中，统计其中满足要求的子数组的数量。</p> <p><span style="font-size: 18pt"><strong>经过与结果</strong></span></p> <p>想法：枚举每一个子数组，判断其是否符合要求；若符合则判断该子数组是否应经被统计过；未统计则加入，已统计则跳过。</p> <p>结果：（我真的是匪夷所思啊！！！）</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/f2728efe5854ea47dac5c58c1af5a93a.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/351eb7477ac80626abffb0127236f7f0.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p><strong>【注：将HashSet换为List运行结果相同】</strong>当换用字符串为元素后，结果却没有问题且AC通过</p> </h1> <p><span style="font-size: 15px"><strong>【注：此部分属于介绍内容，非本文重点，可转跳至</strong><strong>第二部分</strong><strong>】</strong></span></p> <p>在分析上面问题之前，我们先对List有一个认知。List是一个C#中最常见的可伸缩数组组件，即动态数据存储结构。我们常常用它来替代数组，并且因为它的长度是动态的，所以我们在写的时候不用手动去分配的大小；甚至有时我们也会拿它当链表使用。</p> <p><span style="font-size: 14pt"><strong>属性</strong></span></p> <p><span style="font-size: 16px"><strong>（一）Count</strong></span></p> <p>定义：获取 List&lt;T&gt;中包含的元素数。</p> <p><span style="font-size: 16px"><strong>（二）Capacity</strong></span></p> <p>（1）定义：获取或设置该内部数据结构在不调整大小的情况下能够容纳的元素总数。</p> <p>（2）可能触发的异常：</p> <p align="left"></a>：Capacity&nbsp;被设置为一个小于现有长度的值。</p> <p align="left"></a>：系统上没有足够的可用内存。</p> <p><span style="font-size: 14pt"><strong>小结</strong></span></p> <p>（1）Capacity是可能需要调整大小之前存储的元素数目，以4为基数，每次递增4；Count是实际位于其中List&lt;T&gt;元素的数目。</p> <p>（2）Capacity始终大于等于Count。如果在添加元素时Count超过Capacity，则会在添加元素前自动重新分配Capacity的值；在清空List&lt;T&gt;或删除元素后Capacity的值不会变化。</p> <p>（3）可通过TrimExcess()方法删除多余的预留空间，即使Capacity的值等于Count的值。</p> <p>（3）获取此属性的值的运算时间复杂度为 O(1)。</p> <p><span style="font-size: 16px"><strong>（三）Item[index]</strong></span></p> <p>（1）定义：获取或设置指定索引处的元素。</p> <p>（2）可能触发的异常：</p> <p align="left"></a>：index小于0或大于等于&nbsp;Count。</p> <p><span style="font-size: 14pt"><strong>常用方法</strong></span></p> <p><span style="font-size: 16px"><strong>（一）添加</strong></span></p> <p>（1）Add(T)&nbsp;&nbsp; 将对象添加到末尾</p> <p>（2）AddRange(List&lt;T&gt;)&nbsp;&nbsp; 将集合添加到末尾<strong>【注：List&lt;T&gt;非空】</strong></p> <p>（3）Insert(int index, T)&nbsp;&nbsp; 将元素插入指定索引处</p> <p>（4）InsertRange(int index, List&lt;T&gt;)&nbsp;&nbsp; 将集合插入指定索引处<strong>【注：List&lt;T&gt;非空】</strong></p> <p><span style="font-size: 16px"><strong>（二）删除</strong></span></p> <p>（1）Remove(T)&nbsp;&nbsp;&nbsp; 移除指定对象的第一个匹配项</p> <p>（2）RemoveAll(Predicate&lt;T&gt; match) &nbsp;&nbsp;&nbsp; 移除与match相匹配的所有元素</p> <p>（3）RemoveAt(int num)&nbsp;&nbsp; 移除指定s索引处的元素</p> <p>（4）RemoveRange(int index, int count) &nbsp;&nbsp;&nbsp; 移除指定范围内的元素</p> <p><span style="font-size: 16px"><strong>（三）查找</strong></span></p> <p>（1）Find(Predicate&lt;T&gt; match)&nbsp;&nbsp; 搜索并返回第一个与match相匹配的元素</p> <p>（2）FindIndex(Predicate&lt;T&gt; match) 返回第一个与match相匹配的元素的索引值</p> <p>（3）FindIndex(int startIndex, Predicate&lt;T&gt; match)&nbsp;&nbsp; 从startIndex开始搜索，返回第一个与match相匹配的元素的索引值</p> <p>（4）FindIndex(int startIndex, int count, Predicate&lt;T&gt; match) 从startIndex开始搜索count位，返回第一个与match相匹配的元素的索引值</p> <p>【注：FindLast、FindLastIndex从后往前搜索，其余部分相同】</p> <p>（5）IndexOf(T)&nbsp;&nbsp; 搜索指定对象，返回第一个匹配项从零开始的索引</p> <p>（6）Find(T, int index)&nbsp; 在[index, count)范围内搜索指定对象，返回第一个匹配项从零开始的索引</p> <p>（7）Find(T, int index, int count) 在[index, index + count]范围内搜索指定对象，返回第一个匹配项从零开始的索引</p> <p><span style="font-size: 16px"><strong>（四）排序</strong></span></p> <p>（1）Sort()&nbsp;&nbsp; 使用默认比较器（升序）对List进行排序</p> <p>（2）Sort(IComparer&lt;T&gt;)&nbsp; 使用指定比较器对List进行排序</p> <p>（3）Sort(int index, int count, IComparer&lt;T&gt;) 在指定范围内使用指定比较器（不写，则为默认比较器）对List进行排序</p> </h1> <p><span style="font-size: 14pt"><strong>（一）包含——Contains</strong></span></p> <p><span style="font-size: 15px">【</span><strong><span style="font-size: 15px">注：元素之间的比较较为简单，在此不做叙述</span>】</strong></p> <p>C#中变量可分为值类型和引用类型。值类型储存在栈中，引用类型储存在堆中，<strong>引用类型的内存地址储存在栈中</strong>。其中：泛型List的<strong><em><span style="text-decoration: underline">Contains在比较值类型时，直接比较值，但在比较引用类型时，比较的是引用地址</span></em>。</strong></p> <p align="left">虽然明白了Contains的比较原理，但这时候又出现了一个问题：List&lt;T&gt;是引用类型，string也是引用类型，那为什么在判断string是否相同时可以达到预期效果而判断List&lt;T&gt;时不能达到预期效果呢？针对这个问题，我们直接查看一下这两个类型所声明的变量的内存地址。</p> <p align="left"><span style="font-size: 15px"><strong>（1）</strong><strong>泛型类型为</strong><strong>List&lt;T&gt;</strong>【<strong>此时，内部储存的元素为集合</strong>】</span></p> <p align="left"><img decoding="async" src="http://img.555519.xyz/uploads3/20220507/da34621a1402c3ece9c84c872828464a.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left">可以发现：</p> <p>　a. 两个字符串值相同，则其内存地址相同</p> <p>&nbsp; &nbsp; b.&nbsp; 两个List&lt;T&gt;值相同，但其内存地址不同</p> <p>&nbsp; &nbsp; c. 当泛型类型为<strong>集合</strong>时，即使两个集合中储存的元素值相同且元素内存地址相同，<strong>但这两个集合本身的内存地址不同</strong>，即list1的地址不同于list2。而根据Contains的查找规律，无法将这两个集合视为同一个集合。</p> <p align="left"><strong>所以我们所认为的集合相同是内部元素相同，而</strong><strong>C#</strong><strong>所认为的集合相同是内存地址的相同。</strong></p> <p align="left"><span style="font-size: 15px"><strong>（</strong><strong>2</strong><strong>）泛型类型为</strong><strong>string</strong>【<strong>此时，内部储存的元素为字符串</strong>】</span></p> <p align="left"><strong>内部元素不同：</strong></p> <p align="left"><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/028047d587e6c95d57911532b7fb2274.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left"><strong>内部元素相同：</strong></p> <p align="left"><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/86c1a020446b25fc87d8c9d6a9d91e65.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left">可以发现：</p> <p align="left">　a. 两个字符串值相同，则其内存地址相同</p> <p align="left">　b. 当泛型类型为<strong>字符串</strong>时，只有两个字符串的内存地址相同，即str1的地址等同于str2，所以可将这两个元素视为同一个元素。</p> <p><span style="font-size: 15px"><strong>（3）泛型类型为自定义类型</strong>【<strong>此时，内部储存的元素为自定义对象</strong>】</span></p> <p><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/2f90e9d99c47f1a71f1243cd2b7bbf89.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/6d5761e38689a4f16792001ef9f58c18.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left">通过上面这个例子可以发现：</p> <p align="left">　a. 两个自定义对象值相同，但其内存地址不同</p> <p>　b. 对象再传递时，传递的是内存地址</p> <p>　c. 当泛型类型为<strong>自定义对象类型</strong>时，只有两个对象的内存地址相同时，才判定这两个对象是同一个对象。</p> <p><span style="font-size: 14pt"><strong>小结</strong></span></p> <p>至此，我们得出List. Contains()方法的执行原理：</p> <p><strong><em><span style="text-decoration: underline">a. 在查找是否包含时，查找的是针对定义的泛型T，所存储的对象，与对象中再存储的元素无关。</span></em></strong></p> <p><span style="text-decoration: underline"><strong><em><span style="text-decoration: underline"></span></em></strong></span><strong><em><span style="text-decoration: underline">b. 在查找是否包含值类型时，直接比较值；查找引用类型时，先比较内存地址，若内存地址相同则返回True；否则再比较值。</span></em></strong></p> <p><span style="font-size: 14pt"><strong>（二）比较——Equals</strong></span></p> <p align="left"><span style="font-size: 15px"><strong>（</strong><strong>1</strong><strong>）泛型类型为</strong><strong>List&lt;T&gt;</strong>【<strong>此时，内部储存的元素为集合</strong>】</span></p> <p><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/be752c83ff33622d40430a7d3c2dae5b.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/26d0051dedc1e5ba6c99e9210a2be1c6.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left"><span style="font-size: 15px"><strong>（</strong><strong>2</strong><strong>）泛型类型为</strong><strong>string</strong>【<strong>此时，内部储存的元素为字符串</strong>】</span></p> <p align="left"><strong>内部元素不同：</strong></p> <p align="left"><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/5a3ec46ac9bf2bc989b1997bfc106b19.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left"><strong>内部元素相同：</strong></p> <p align="left"><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/799801328fc10913a3e4b996bbf75538.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left"><strong>直接使集合本身相同：</strong></p> <p align="left"><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/3c4181326d27e86e21cdc54e49f8c3ad.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p><span style="font-size: 15px"><strong>（3）泛型类型为自定义类型</strong>【<strong>此时，内部储存的元素为自定义对象</strong>】</span></p> <p><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/469844777bad2d64aabb2c738649d09f.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left"><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/f1b37104f189121aaeb49c8439c77274.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p align="left"><img loading="lazy" decoding="async" src="http://img.555519.xyz/uploads3/20220507/030e8f0a1f9df02a8aad7946f8b04404.jpg" alt="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具"></p> <p><span style="font-size: 14pt"><strong>小结</strong></span></p> <p><span style="font-size: 14pt"><strong></strong></span>a. 通过以上两个例子，我们可以总结出List. Equals()方法的执行原理：<strong><em><span style="text-decoration: underline">在比较值类型时，直接比较值；在比较引用类型时，只比较内存地址。</span></em></strong></p> <p><span style="font-size: 14pt"><strong>回到开头的题目</strong></span></p> <p>为什么第一种方法是错的，因为执行Contains操作的对象是是两个集合，虽然两个集合内部存储元素相同，但两个集合本身的内存地址是不同的，所以总会被判定为是不同的元素，因而不能用于判重；</p> <p>第二种方法使用字符串，操作对象即为字符串，相同的字符串值，内存地址相同，所以可以用来判重。</p> </h1> <p>　a. 不论是Contains方法还是Equals方法，首先要明确操作的对象，即要查找或比较的是哪两个对象。</p> <p>　b. 确定对象后，判断其内存地址是否相同，相同返回True，不同返回False。</p> <p>　c. 一般地，引用类型传递时，传递的是内存地址，且<strong>相同值的引用类型内存地址不同</strong>；<strong>特别地，当字符串值相同时，内存地址也相同。</strong></p> <p><span style="font-size: 15px"><strong>【感谢您可以抽出时间阅读到这里，博客可能会有许多不妥之处；受限于水平，许多地方可能存在错误，还请各位大佬留言指正，请见谅，谢谢！】</strong></span></p> <p><strong></strong></p> <p align="left"><strong><span style="font-size: 18pt">&nbsp;#附本题代码</span></strong></p> <p align="left"><span style="font-size: 14pt"><strong>模拟 + 哈希去重</strong></span></p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">class</span><span style="color: rgba(0, 0, 0, 1)"> Solution {</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">int</span> CountDistinct(<span style="color: rgba(0, 0, 255, 1)">int</span>[] nums,<span style="color: rgba(0, 0, 255, 1)">int</span> k,<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> p) {</span><span style="color: rgba(0, 0, 255, 1)">int</span> res =<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;         HashSet</span>&lt;<span style="color: rgba(0, 0, 255, 1)">string</span>&gt;<span style="color: rgba(0, 0, 255, 1)">set</span> =<span style="color: rgba(0, 0, 255, 1)">new</span> HashSet&lt;<span style="color: rgba(0, 0, 255, 1)">string</span>&gt;<span style="color: rgba(0, 0, 0, 1)">();</span><span style="color: rgba(0, 0, 255, 1)">for</span> (<span style="color: rgba(0, 0, 255, 1)">int</span> i =<span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; nums.Length; i++<span style="color: rgba(0, 0, 0, 1)">) {</span><span style="color: rgba(0, 0, 255, 1)">int</span> cnt =<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;             StringBuilder builder</span>=<span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> StringBuilder();</span><span style="color: rgba(0, 0, 255, 1)">for</span> (<span style="color: rgba(0, 0, 255, 1)">int</span> j = i; j &gt;=<span style="color: rgba(128, 0, 128, 1)">0</span>; j--<span style="color: rgba(0, 0, 0, 1)">) {                 builder.Append(nums[j]</span>+<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);</span><span style="color: rgba(0, 0, 255, 1)">if</span> (nums[j] % p ==<span style="color: rgba(128, 0, 128, 1)">0</span>) cnt++<span style="color: rgba(0, 0, 0, 1)">;</span><span style="color: rgba(0, 0, 255, 1)">if</span> (cnt &lt;= k &amp;&amp; !<span style="color: rgba(0, 0, 255, 1)">set</span><span style="color: rgba(0, 0, 0, 1)">.Contains(builder.ToString())) {</span><span style="color: rgba(0, 0, 255, 1)">set</span><span style="color: rgba(0, 0, 0, 1)">.Add(builder.ToString());                     res</span>++<span style="color: rgba(0, 0, 0, 1)">;                 }             }         }</span><span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> res;     } }</span></pre> </div> <p><textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none"></textarea><textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none"></textarea><textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none"></textarea><textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none"></textarea><textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none"></textarea><textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none"></textarea><textarea id="BFI_DATA" style="width: 1px; height: 1px; display: none"></textarea></p> <div id="WidgetFloaterPanels" class="LTRStyle" style="display: none; text-align: left; direction: ltr; visibility: hidden"> <div id="WidgetFloater" style="display: none"> <div id="WidgetLogoPanel"><span id="WidgetTranslateWithSpan"><span>TRANSLATE with</span><img id="FloaterLogo"/></span><span id="WidgetCloseButton" title="Exit Translation">x</span></div> <div id="LanguageMenuPanel"> <div class="DDStyle_outer"><input id="LanguageMenu_svid" style="display: none" type="text" name="LanguageMenu_svid" value="en"/><input id="LanguageMenu_textid" style="display: none" type="text" name="LanguageMenu_textid"/><span id="__LanguageMenu_header" class="DDStyle">English</span></p> <div style="position: relative; text-align: left; left: 0"> <div style="position: absolute; left: 0"> <div id="__LanguageMenu_popup" class="DDStyle" style="display: none"> <table id="LanguageMenu" border="0"> <tbody> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></a></td> </tr> <tr> <td></a></td> <td></a></td> <td></td> </tr> </tbody> </table> <p><img alt="" style="height: 7px; width: 17px; border-width: 0; left: 20px"/></div> </div> </div> </div> </div> <div id="CTFLinksPanel"><span id="ExternalLinksPanel"></a></a></a></span></div> <div id="FloaterProgressBar"></div> </div> <div id="WidgetFloaterCollapsed" style="display: none"><span>TRANSLATE with</span><img id="CollapsedLogoImg"/></div> <div id="FloaterSharePanel" style="display: none"> <div id="ShareTextDiv"><span id="ShareTextSpan"> COPY THE URL BELOW</span></div> <div id="ShareTextboxDiv"><input id="ShareTextbox" type="text" name="ShareTextbox" readonly=""/></a><img id="EmailImg"/></div> <div id="ShareFooter"><span id="ShareHelpSpan"></a><img id="ShareHelpImg"/></span><span id="ShareBackSpan"></a></span></div> <p><input id="EmailSubject" type="hidden" name="EmailSubject" value="Check out this page in {0} translated from {1}"/><input id="EmailBody" type="hidden" name="EmailBody" value="Translated: {0}%0d%0aOriginal: {1}%0d%0a%0d%0aAutomatic translation powered by Microsoft® Translator%0d%0ahttp://www.bing.com/translator?ref=MSTWidget"/><input id="ShareHelpText" type="hidden" value="This link allows visitors to launch this page and automatically translate it to {0}."/></div> <div id="FloaterEmbed" style="display: none"> <div id="EmbedTextDiv"><span id="EmbedTextSpan">EMBED THE SNIPPET BELOW IN YOUR SITE</span></a><img id="EmbedHelpImg"/></div> <div id="EmbedTextboxDiv"><input id="EmbedSnippetTextBox" type="text" name="EmbedSnippetTextBox" value="  <div id='MicrosoftTranslatorWidget' class='Dark' style='color:white;background-color:#555555'/></div> <p><script type='text/javascript'>setTimeout(function(){var s=document.createElement('script');s.type='text/javascript';s.charset='UTF-8';s.src=((location &amp;&amp; location.href &amp;&amp; location.href.indexOf('https') == 0)?'https://ssl.microsofttranslator.com':'http://www.microsofttranslator.com')+'/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**&amp;ctf=true&amp;ui=true&amp;settings=manual&amp;from=en';var p=document.getElementsByTagName('head')[0]||document.documentElement;p.insertBefore(s,p.firstChild); },0);</script>" readonly=""></div> <div id="EmbedNoticeDiv"><span id="EmbedNoticeSpan">Enable collaborative features and customize widget:</a></span></div> <div id="EmbedFooterDiv"><span id="EmbedBackSpan"></a></span></div> </div> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-22034.htm">青浦二中高考录取率高吗多少（青浦二中升学率）</a></p>
+                                        <p>下一个：<a href="/news/article-22493.htm">领养狗在哪里领养,免费吗安全吗（领养狗的地方在哪）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-8-11-clash-v2ray-ss-ssr.htm" title="8月11日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅">8月11日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-12-free-clash-subscribe.htm" title="8月12日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅">8月12日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-31-free-shadowrocket-node.htm" title="7月31日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.4M/S 免费Clash机场订阅">7月31日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-20200.htm" title="聊城宠物店买的宠物哪家好（聊城宠物店买的宠物哪家好一点）">聊城宠物店买的宠物哪家好（聊城宠物店买的宠物哪家好一点）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-8-free-shadowrocket-node.htm" title="11月8日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.5M/S 免费Clash机场订阅">11月8日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.5M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-15-clash-node.htm" title="10月15日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.3M/S 免费Clash机场订阅">10月15日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.3M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-13-free-subscribe-node.htm" title="8月13日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度19.5M/S 免费Clash机场订阅">8月13日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度19.5M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-11-free-shadowrocket-node.htm" title="11月11日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度19.1M/S 免费Clash机场订阅">11月11日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度19.1M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-5-29-free-clash.htm" title="5月29日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度18.5M/S">5月29日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度18.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-1-node-share.htm" title="11月1日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅">11月1日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
