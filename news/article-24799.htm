@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-24799.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JAVA生成指定位数不重复的随机数，随机数含0-9、A-Z</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="琢磨了一晚上，就为了写一个“不重复的随机码生成函数”，生成格式包含0-9，a-z。 头脑风暴，异想天开，写下了如下算法，看上去很高大上的一个随机生成方法。 原理先产生一个UUID，再根据UUID生成一" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="htmledit_views"> <p>琢磨了一晚上，就为了写一个“不重复的随机码生成函数”，生成格式包含0-9，a-z。</p> <p>头脑风暴，异想天开，写下了如下算法，看上去很高大上的一个随机生成方法。</p> <p>原理先产生一个UUID，再根据UUID生成一个随机数，UUID，不重复嘛。一测试，坑爹了，生成100万条长度为4的随机码，重复率达到25%，傻眼了。</p> <pre><code class="language-java">/**  * 随机码生成  * @author Mo  *   * @param length 随机码长度  * @return  */ public static String random1(int length){ 	/* 	 * 这里直接数字代替，没用uuid.length() 	 * */ 	String uuid = UUID.randomUUID().toString().replace("-", ""); 	 	int len = uuid.length(); 	 	/*定义随机码字符串变量，初始化为""*/ 	String random = ""; 	 	/* 	 * 循环截取UUID 	 * len/length 每次循环截取的字符串长度 	 * len%length 如果出现32长度除不尽的情况，取余数 	 * */ 	int subLen = len/length; 	int remainder = len%length; 	 	/*定义substring的两个参数*/ 	int start = 0,end = 0; 	for(int i=0;i&lt;length;i++){ 		/* 		 * 计算start和end的值 		 * 这里涉及两种方法，一种是除不尽的时候，将截取长度分散到头部，一种是分散到尾部 		 *  		 * uuid的前部分是时间戳构成的，因此前部分截取越少，重复率越底 		 * 固本方法采用了将多余的部分分散到尾部 		 * */ 		/*分散到尾部，如length为7的时候4,4,4,4,5,5,5*/ //			end = start + (length-i &lt;= remainder ? 1 : 0)+subLen; 		/*分散到头部，如length为7 的时候5,5,5,5,4,4,4*/ 		end = start + (i &lt; remainder ? 1 : 0)+subLen; 		/*截取到的字符串*/ 		String code = uuid.substring(start,end); 		/*对所截取的长度进行16位求和*/ 		int count = 0; 		for(char c : code.toCharArray()){ 			count += Integer.valueOf(String.valueOf(c),16); 		} 		/*将求和结果转化成36位，并增加到随机码中，36位包含了0-9a-z*/ 		random += Integer.toString(count%36, 36); 		start = end; 	} 	/*返回随机码*/ 	return random; }</code></pre> <p>泡杯咖啡，清醒一下，随机码生成函数2应运而生，小学生（入门级程序员）都能看懂。经过测试，生成100万条长度4的随机码，重复率也在25%左右。</p> <p><span style="color:#FF0000"><strong>推荐方法：</strong></span></p> <pre><code class="language-java">/**  * 随机码生成  * @author Mo  *   * @param length  * @return  */ public static String random2(int length){ 	String random = ""; 	/*随机数函数*/ 	java.util.Random r=new java.util.Random(); 	for(int i = 0;i&lt;length;i++){ 		/*生成36以内的随机数，不含36，并转化为36位*/ 		random += Integer.toString(r.nextInt(36), 36); 	} 	return random; }</code></pre> <p>事实证明，最复杂的方法并不是最好的方法，程序开发跟其他的事情一样，不要画蛇添足，时间浪费了，性能浪费了，还得不到好的结果。当然，多尝试是对的。</p> <p>事后想想，既然是随机生成，又要控制长度，长度为4，又怎么会出现不重复的数字呢。当然，将长度调整到8的时候，重复率基本没有，这个没有也不能绝对，只是说概率降低了而已。</p> <p><span style="color:#009900">总结：要生成不重复的随机码，必经要经过数据验证，拿新生成的随机码去与历史生成数据对比，如果已存在，则舍弃重新生成。如果对长度没要求，可以直接采用UUID，UUID是国际通用的不重复的串，不过长度达到了36位之多。</span></p> <p>以下提供一个自写随机码测试函数：</p> <pre><code class="language-java">public static void main(String args []){ 	Set&lt;String&gt; set = new HashSet&lt;String&gt;(); 	int times = 1000000; 	for(int i = 0 ;i&lt;times;i++){ 		String random = random1(8); 		set.add(random); 	} 	System.out.println("重复了："+(times-set.size())+"次"); }</code></pre> <p> 关于java的更多交流，请给我留言，简单的问题，也可以很复杂化，只有更深入的去尝试，才能更深刻的理解每一个细节问题。<br />  </p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-24543.htm">领养宠物免费的地方在哪里啊（免费领养宠物店在哪里）</a></p>
+                                        <p>下一个：<a href="/news/article-24801.htm">json数据交互——@RequestBody与@ResponseBody</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-node-subscribe.htm" title="10月30日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22M/S 免费Clash机场订阅">10月30日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-14-clash-windows.htm" title="8月14日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.9M/S 免费Clash机场订阅">8月14日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-18-node-share-links.htm" title="7月18日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅">7月18日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-free-v2ray-subscribe.htm" title="11月10日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.9M/S 免费Clash机场订阅">11月10日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-free-node-subscribe.htm" title="11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅">11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-free-node-subscribe-links.htm" title="11月6日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.7M/S 免费Clash机场订阅">11月6日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-4-clash-node.htm" title="10月4日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.5M/S 免费Clash机场订阅">10月4日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.5M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-30-free-clash-subscribe.htm" title="8月30日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.5M/S 免费Clash机场订阅">8月30日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.5M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-24799.htm" title="JAVA生成指定位数不重复的随机数，随机数含0-9、A-Z">JAVA生成指定位数不重复的随机数，随机数含0-9、A-Z</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-31-free-shadowrocket-node.htm" title="7月31日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.4M/S 免费Clash机场订阅">7月31日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.4M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">36</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
