@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-25733.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>python读取HDFS文件</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="2019独角兽企业重金招聘Python工程师标准&gt;&gt;&gt;    ###方法一：使用hdfs库读取HDFS文件 ###在读取数据时，要加上 encoding='utf-8'，否则字符串前" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="htmledit_views"> <div class="content" id="articleContent"> <div class="ad-wrap"> <p><a style="color:#A00;font-weight:bold;" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://my.oschina.net/u/2663968/blog/3061697"  rel="nofollow">2019独角兽企业重金招聘Python工程师标准&gt;&gt;&gt; </a> <img decoding="async" src="http://img.555519.xyz/uploads/20221230/6cd21c0e1295f2e6d3c0f8ed9e972592.jpg" alt="python读取HDFS文件"></p> </p></div> <pre><code>###方法一：使用hdfs库读取HDFS文件 ###在读取数据时，要加上 encoding='utf-8'，否则字符串前面会有b'xxx' ###先写入list，再转为df，注意要对数据进行分列，最后要对指定字段转换数据类型 </code></pre> <pre><code>from hdfs.client import Client client = Client("http://hadoop-1-1:50070")  lines = [] with client.read("/user/spark/H2O/Wholesale_customers_data.csv", encoding='utf-8') as reader:     for line in reader:           lines.append(line.strip())  column_str = lines[0] column_list = column_str.split(',')  data = {"item_list":lines[1:]}  import pandas as pd df = pd.DataFrame(data=data) df[column_list] =  df["item_list"].apply(lambda x: pd.Series([i for i in x.split(",")]))  ##重新指定列 df.drop("item_list", axis=1, inplace=True)  ##删除列  df.dtypes """ Region              object Fresh               object Milk                object Grocery             object Frozen              object Detergents_Paper    object Delicassen          object target              object dtype: object  """   df = df.astype('int')  ##将object类型转为int64 df.dtypes """ Region              int64 Fresh               int64 Milk                int64 Grocery             int64 Frozen              int64 Detergents_Paper    int64 Delicassen          int64 target              int64 dtype: object """ </code></pre> <pre><code>###方法二：采用pydoop库读取HDFS文件 </code></pre> <pre><code>import pydoop.hdfs as hdfs  lines = [] with hdfs.open('/user/spark/security/iris.csv', 'rt') as f:     for line in f:         ##print(line)         lines.append(line.strip())   column_list = ['Sepal_Length', 'Sepal_Width', 'Petal_Length', 'Petal_Width', 'Species']  data = {"item_list":lines[0:]}  import pandas as pd df = pd.DataFrame(data=data) df[column_list] =  df["item_list"].apply(lambda x: pd.Series([i for i in x.split(",")]))  ##重新指定列 df.drop("item_list", axis=1, inplace=True)  ##删除列  ##调整数据类型 df[['Sepal_Length', 'Sepal_Width', 'Petal_Length', 'Petal_Width']] = df[['Sepal_Length', 'Sepal_Width', 'Petal_Length', 'Petal_Width']].astype('float64')  df.dtypes """ Sepal_Length    float64 Sepal_Width     float64 Petal_Length    float64 Petal_Width     float64 Species          object dtype: object """ </code></pre> <pre><code>###直接运用pd.read_table进行数据读取操作 import pydoop.hdfs as hdfs import pandas as pd  ###此份数据含有表头 with hdfs.open('/user/spark/security/iris.csv', 'rt') as f:     df = pd.read_table(f)   column_list = df.columns[0].split(",") df[column_list] =  df.iloc[:,0].apply(lambda x: pd.Series([i for i in x.split(",")]))  ##此处注意要写成df.iloc[:,0]  df.head() """ Sepal_Length,Sepal_Width,Petal_Length,Petal_Width,Species	Sepal_Length	Sepal_Width	Petal_Length	Petal_Width	Species 0	5.1,3.5,1.4,0.2,setosa	5.1	3.5	1.4	0.2	setosa 1	4.9,3,1.4,0.2,setosa	4.9	3	1.4	0.2	setosa 2	4.7,3.2,1.3,0.2,setosa	4.7	3.2	1.3	0.2	setosa 3	4.6,3.1,1.5,0.2,setosa	4.6	3.1	1.5	0.2	setosa 4	5,3.6,1.4,0.2,setosa	5	3.6	1.4	0.2	setosa """   df.drop(df.columns[0], axis=1, inplace=True) df.dtypes """ Sepal_Length    object Sepal_Width     object Petal_Length    object Petal_Width     object Species         object dtype: object """   #####将'Sepal_Length', 'Sepal_Width', 'Petal_Length', 'Petal_Width'这四个字段转换为float类型 df[['Sepal_Length', 'Sepal_Width', 'Petal_Length', 'Petal_Width']] = df[['Sepal_Length', 'Sepal_Width', 'Petal_Length', 'Petal_Width']].astype('float')  df.dtypes """ Sepal_Length    float64 Sepal_Width     float64 Petal_Length    float64 Petal_Width     float64 Species          object dtype: object """  </code></pre> <div class="ad-wrap"> <div id="blog-title-ad">    <ins class="adsbygoogle"></ins>   </div> </p></div> </div> <p>转载于:https://my.oschina.net/kyo4321/blog/3016864</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-25266.htm">小动物疫苗注射证明是疫苗本吗 动物疫苗注射证明怎么开</a></p>
+                                        <p>下一个：<a href="/news/article-25734.htm">猫咪驱虫内外驱是怎样驱（猫咪内外驱虫注意事项）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-9-free-node-subscribe.htm" title="10月9日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度20M/S 免费Clash机场订阅">10月9日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度20M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-29-free-node-subscribe-links.htm" title="7月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅">7月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-21-clash-node-daily-updates.htm" title="7月21日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度20.8M/S 免费Clash机场订阅">7月21日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度20.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-19-free-v2ray.htm" title="7月19日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度20.4M/S 免费Clash机场订阅">7月19日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-16-free-subscribe-node.htm" title="7月16日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度19.6M/S 免费Clash机场订阅">7月16日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度19.6M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-4-free-node-subscribe.htm" title="6月4日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.8M/S">6月4日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.8M/S</a></li>
+                        <li class="py-2"><a href="/news/article-18653.htm" title="闲鱼怎么做无货源赚钱视频教程（闲鱼无货源赚钱详细教程视频）">闲鱼怎么做无货源赚钱视频教程（闲鱼无货源赚钱详细教程视频）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-1-node-share.htm" title="11月1日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅">11月1日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-13-free-v2ray-subscribe.htm" title="10月13日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.3M/S 免费Clash机场订阅">10月13日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.3M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-free-subscribe-node.htm" title="12月12日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.6M/S 免费Clash机场订阅">12月12日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.6M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">42</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
