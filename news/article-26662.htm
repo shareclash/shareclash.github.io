@@ -2,13 +2,12 @@
 <html lang="zh-CN">
 
 <head>
-        <link rel="canonical" href="https://shareclash.github.io" />
+        <link rel="canonical" href="https://shareclash.github.io/news/article-26662.htm" />
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>2024-08归档 - ShareClash官网订阅站</title>
+    <title>c语言查看文件详细信息</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta name="keywords" content="2024-08归档" />
-        <meta name="description" content="2024-08归档" />
+        <meta name="description" content="#include &lt;stdio.h&gt; #include &lt;sys/types.h&gt; #include &lt;sys/stat.h&gt; #include &lt;unist" />
     
     <!-- Favicon -->
     <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
@@ -36,7 +35,7 @@
      crossorigin="anonymous"></script>
 </head>
 
-<body data-page="category">
+<body data-page="detail">
         <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
         <div class="container d-flex align-items-center">
@@ -68,41 +67,22 @@
             <div class="container">
                 <ol>
                     <li><a href="/">首页</a></li>
-                    <li>2024-08 归档</li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
                 </ol>
-                <h1>2024-08 归档</h1>
+                <h1>新闻资讯</h1>
             </div>
         </section><!-- End Breadcrumbs -->
         <section class="inner-page">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                    <div class="xcblog-blog-list">
-                                                <!-- ======= About Section ======= -->
-                        <section class="about py-2 xcblog-blog-item" data-date="2024-08-01">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-3">
-                                        <a href="/free-nodes/2024-8-1-free-clash.htm" class="xcblog-blog-url">
-                                            <img src="/uploads/20240527/0991722e16a3086b18c86db304c5ab53.webp" class="img-fluid" alt="8月1日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22.3M/S 免费Clash机场订阅">
-                                        </a>
+                                          				  				  				<div id="content_views" class="htmledit_views"> <pre><code class="language-cs">#include &lt;stdio.h&gt; #include &lt;sys/types.h&gt; #include &lt;sys/stat.h&gt; #include &lt;unistd.h&gt; #include &lt;pwd.h&gt; #include &lt;grp.h&gt; #include &lt;string.h&gt; #include &lt;time.h&gt; //文件权限 void get_filePermission(mode_t m) { 	char str[4]="rwx"; 	int i=0; 	for(i=0;i&lt;9;i++) 	{ 		if((m&amp;(0400&gt;&gt;i))==0) 		{ 			putchar('-'); 			continue; 		} 		printf("%c",str[i%3]); 	} 	//	puts(""); } //文件类型 char get_filetype(mode_t m) { 	switch (m&amp;S_IFMT) 	{ 	case S_IFBLK: return ('b'); break; 	case S_IFLNK: return ('l'); break; 	case S_IFREG: return ('-'); break; 	case S_IFSOCK: return ('s'); break; 	case S_IFDIR: return ('d'); break; 	case S_IFCHR: return ('c'); break; 	case S_IFIFO: return ('p'); break; 	default:return 0;  	} } //文件所属用户 char* get_pwdname(uid_t uid,char *ptr) { 	struct passwd* pwd=getpwuid(uid); 	if(NULL==pwd) 	{ 		perror("getpwuid"); 		return NULL; 	} 	strcpy(ptr,pwd-&gt;pw_name); 	return ptr; } //文件所属组用户 char* get_grname(gid_t gid,char *ptr) { 	struct group* grp=getgrgid(gid); 	if(NULL==grp) 	{ 		perror("gergrgid"); 		return NULL; 	} 	strcpy(ptr,grp-&gt;gr_name); 	return ptr; } int main(int argc, const char *argv[]) { 	if(argc&lt;2) 	{ 		fprintf(stderr,"请在命令行上输入一个文件名\n"); 		return -1; 	} 	struct stat buf; 	char a; 	char pwd[20]=""; 	char grp[20]=""; 	if(stat(argv[1],&amp;buf)&lt;0) 	{ 		perror("stat"); 		return -1; 	} 	//文件的类型以及权限 	//printf("st_mode:%o\n",buf.st_mode); 	a=get_filetype(buf.st_mode); 	printf("%c",a); 	get_filePermission(buf.st_mode); 	//硬链接个数 	printf(" %ld ",buf.st_nlink); 	//文件所属用户 	get_pwdname(buf.st_uid,pwd); 	printf("%s ",pwd); 	//puts(pwd); 	//printf("st_uid:%d\n",buf.st_uid); 	//文件所属组用户 	get_grname(buf.st_uid,grp); 	printf("%s ",grp); 	//puts( grp); 	//printf("st_gid:%d\n",buf.st_gid); 	//文件大小 	printf("%ld ",buf.st_size); 	//时间 	//printf("st_ctime:%ld\n",buf.st_ctime); 	struct tm *info=NULL; 	info=localtime(&amp;buf.st_ctime); 	printf("%02d-%02d %02d:%02d ",\ 			info-&gt;tm_mon+1,\ 			info-&gt;tm_mday,info-&gt;tm_hour,info-&gt;tm_min); 	//文件名 	printf("%s\n",argv[1]); 	return 0; } </code></pre> <p>运行结果</p> <p><img decoding="async" alt="" height="48" src="http://img.555519.xyz/uploads/20230119/0b8638c5142330a4ce594b02edaaa610.jpg"></p> <p>&nbsp;</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-26203.htm">Mysql数据库基本操作（六）多表查询-内连接查询，外连接查询</a></p>
+                                        <p>下一个：<a href="/news/article-26664.htm">Elasticsearch -from + size设置</a></p>
                                     </div>
-                                    <div class="col-lg-9 d-flex flex-column justify-contents-center" data-aos="fade-left">
-                                        <div class="content pt-4 pt-lg-0">
-                                            <a href="/free-nodes/2024-8-1-free-clash.htm" class="xcblog-blog-url">
-                                                <h3 class="xcblog-blog-title">
-                                                    8月1日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22.3M/S 免费Clash机场订阅                                                </h3>
-                                            </a>
-                                            <p class="fst-italic">
-                                                这一次的节点更新覆盖了欧洲、美国、日本、加拿大、新加坡、韩国、香港等地区,最高速度可达22.3 M/S。只需复制下方的Clash/v2ray订阅链接,在客户端添加后即可正常使用。                                            </p>
-                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </section><!-- End About Section -->
-                                            </div>
-
-                        <ul class="pagination"><li><a href="/date/2024-08/page-3.htm">&laquo;</a></li> <li><a href="/date/2024-08/">1</a></li><li><a href="/date/2024-08/page-2.htm">2</a></li><li><a href="/date/2024-08/page-3.htm">3</a></li><li class="active"><span>4</span></li> <li class="disabled"><span>&raquo;</span></li></ul>                    </div>
                     <div class="col-md-3">
                         <div class="panel panel-default">
     <div class="panel-heading">
@@ -110,16 +90,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-7-29-free-node-subscribe-links.htm" title="7月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅">7月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/news/article-21573.htm" title="动物疫苗生产厂家排名榜前十名图片（动物疫苗品牌）">动物疫苗生产厂家排名榜前十名图片（动物疫苗品牌）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-20-node-share-links.htm" title="9月20日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度21.9M/S 免费Clash机场订阅">9月20日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度21.9M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-29-clash-node-daily-updates.htm" title="8月29日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度23M/S 免费Clash机场订阅">8月29日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度23M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/news/article-24543.htm" title="领养宠物免费的地方在哪里啊（免费领养宠物店在哪里）">领养宠物免费的地方在哪里啊（免费领养宠物店在哪里）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-26-free-high-speed-nodes.htm" title="10月26日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅">10月26日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/news/article-26203.htm" title="Mysql数据库基本操作（六）多表查询-内连接查询，外连接查询">Mysql数据库基本操作（六）多表查询-内连接查询，外连接查询</a></li>
-                        <li class="py-2"><a href="/news/article-22034.htm" title="青浦二中高考录取率高吗多少（青浦二中升学率）">青浦二中高考录取率高吗多少（青浦二中升学率）</a></li>
-                        <li class="py-2"><a href="/news/article-25266.htm" title="小动物疫苗注射证明是疫苗本吗 动物疫苗注射证明怎么开">小动物疫苗注射证明是疫苗本吗 动物疫苗注射证明怎么开</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-29-free-shadowrocket-node.htm" title="9月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度19.8M/S 免费Clash机场订阅">9月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度19.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-27-clash-windows.htm" title="11月27日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度18.7M/S 免费Clash机场订阅">11月27日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度18.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-18-free-subscribe-node.htm" title="6月18日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.5M/S">6月18日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-clash-subscribe.htm" title="12月9日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度18.2M/S 免费Clash机场订阅">12月9日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度18.2M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-15-free-clash.htm" title="7月15日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度19.9M/S 免费Clash机场订阅">7月15日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度19.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-free-node-subscribe.htm" title="11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅">11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-22-free-clash.htm" title="9月22日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅">9月22日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-13-clash-node-daily-updates.htm" title="7月13日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度20.2M/S 免费Clash机场订阅">7月13日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度20.2M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-31-free-shadowrocket-node.htm" title="8月31日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19.3M/S 免费Clash机场订阅">8月31日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19.3M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-21570.htm" title="如何加快循环操作和Numpy数组运算速度！">如何加快循环操作和Numpy数组运算速度！</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-28-free-ssr-subscribe.htm" title="8月28日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度19M/S 免费Clash机场订阅">8月28日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度19M/S 免费Clash机场订阅</a></li>
                     </ul>
     </div>
 </div>

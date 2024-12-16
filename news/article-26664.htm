@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-26664.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Elasticsearch -from + size设置</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="Elasticsearch 查询索引结果时，用于分页的两个属性 from和size。用于查询时，默认from=0、size=0。而在生产环境时，查询的数据要大很多。有时是几百G，甚至P级。  在设置s" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="markdown_views prism-github-gist"> <blockquote> <p>Elasticsearch 查询索引结果时，用于分页的两个属性 from和size。用于查询时，默认from=0、size=0。而在生产环境时，查询的数据要大很多。有时是几百G，甚至P级。</p> </blockquote> <p>在设置size时，超过10000。会出现报错。</p> <pre><code class="prism language-java">Result window is too large<span class="token punctuation">,</span> from<span class="token operator">+</span> size must be less than or equal to<span class="token operator">:</span><span class="token punctuation">[</span><span class="token number">10000</span><span class="token punctuation">]</span> but was<span class="token punctuation">[</span><span class="token number">12000</span><span class="token punctuation">]</span><span class="token punctuation">.</span> See the scroll api<span class="token keyword">for</span> a more efficient way to requestlarge data sets<span class="token punctuation">.</span> This  limit can be set by changing the<span class="token punctuation">[</span>index<span class="token punctuation">.</span>max_result_window<span class="token punctuation">]</span> index level parameter</code></pre> <p>说是<em>size</em> 不能超过10000! 查阅资料，显示可以通过设置，改变：</p> <pre><code class="prism language-yaml">PUT _settings<span class="token punctuation">{<!-- --></span><span class="token key atrule">"index"</span><span class="token punctuation">:</span><span class="token punctuation">{<!-- --></span><span class="token key atrule">"max_result_window"</span><span class="token punctuation">:</span><span class="token string">"10000000"</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <p>经过测试，还是不可以。原因是我的Elasticsearch是集群环境（<em>部署了三个master两个data节点</em>）。上面的方式只能改变单节点的size。</p> <p>我想要不就通过yaml文件，不是环境变量。重新部署吧。大胆猜想，然后实践。因为是kubernetes部署的elasticsearch集群。所以直接改他们的yaml文件，重新部署就行啦。</p> <p>加上配置：</p> <pre><code class="prism language-json"><span class="token operator">-</span> name<span class="token punctuation">:</span><span class="token string">"index.max_result_window"</span>            value<span class="token punctuation">:</span><span class="token string">"10000000"</span></code></pre> <p>然后部署：</p> <pre><code class="prism language-powershell">  kubectl apply<span class="token operator">-</span>f  es<span class="token punctuation">.</span>yaml</code></pre> <p>但是查看状态的时候，出错。查看日志：</p> <pre><code class="prism language-powershell">*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span><span class="token operator">*</span> Found index level settings on node level configuration<span class="token punctuation">.</span>  Since elasticsearch 5<span class="token punctuation">.</span>x index level settings can NOT be<span class="token function">set</span> on the nodes  configuration like the elasticsearch<span class="token punctuation">.</span>yaml<span class="token punctuation">,</span> in system properties or command line  arguments<span class="token punctuation">.</span>In order to upgrade all indices the settings must be updated via the<span class="token operator">/</span>$<span class="token punctuation">{<!-- --></span>index<span class="token punctuation">}</span><span class="token operator">/</span>_settings API<span class="token punctuation">.</span> Unless all settings are dynamic all indices must be closed  in order to apply the upgradeIndices created in the future should use index templates  to<span class="token function">set</span> default values<span class="token punctuation">.</span>   Please ensure all required values are updated on all indices by executing:   curl<span class="token operator">-</span>XPUT<span class="token string">'http://localhost:9200/_all/_settings?preserve_existing=true'</span><span class="token operator">-</span>d<span class="token string">'{   "index.max_result_window" : "100000" }'</span><span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span>*<span class="token operator">*</span><span class="token punctuation">[</span>2018<span class="token operator">-</span>11<span class="token operator">-</span>23T07:03:13<span class="token punctuation">,</span>840<span class="token punctuation">]</span><span class="token namespace">[WARN ]</span><span class="token namespace">[o.e.b.ElasticsearchUncaughtExceptionHandler]</span><span class="token namespace">[elasticsearch-master-0]</span> uncaught exception in thread<span class="token namespace">[main]</span> org<span class="token punctuation">.</span>elasticsearch<span class="token punctuation">.</span>bootstrap<span class="token punctuation">.</span>StartupException: java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>IllegalArgumentException: node settings must not contain any index level settings 	at org<span class="token punctuation">.</span>elasticsearch<span class="token punctuation">.</span>bootstrap<span class="token punctuation">.</span>Elasticsearch<span class="token punctuation">.</span>init<span class="token punctuation">(</span>Elasticsearch<span class="token punctuation">.</span>java:136<span class="token punctuation">)</span> ~<span class="token namespace">[elasticsearch-5.6.4.jar:5.6.4]</span></code></pre> <p>可以看到es 5.X以后，就不可以在yaml文件，系统属性，以及命令行参数设置索引级别的配置啦。</p> <p>因此只能通过他给的提示：</p> <pre><code class="prism language-java">curl<span class="token operator">-</span>XPUT<span class="token string">'http://localhost:9200/_all/_settings?preserve_existing=true'</span><span class="token operator">-</span>d '<span class="token punctuation">{<!-- --></span><span class="token string">"index.max_result_window"</span><span class="token operator">:</span><span class="token string">"100000"</span><span class="token punctuation">}</span>'</code></pre> <p>设置size长度。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-26662.htm">c语言查看文件详细信息</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-9-19-free-high-speed-nodes.htm" title="9月19日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.5M/S 免费Clash机场订阅">9月19日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.5M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-23-clash-node-daily-updates.htm" title="9月23日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度21M/S 免费Clash机场订阅">9月23日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度21M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-13-clash-windows.htm" title="11月13日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22M/S 免费Clash机场订阅">11月13日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-26-free-clash-subscribe.htm" title="8月26日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.4M/S 免费Clash机场订阅">8月26日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-22951.htm" title="动物疫苗在哪里打的好呢 动物疫苗在哪里打的好呢知乎">动物疫苗在哪里打的好呢 动物疫苗在哪里打的好呢知乎</a></li>
+                        <li class="py-2"><a href="/news/article-22033.htm" title="《C语言及程序设计》程序阅读——宏定义">《C语言及程序设计》程序阅读——宏定义</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-3-free-ssr-subscribe.htm" title="9月3日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21.1M/S 免费Clash机场订阅">9月3日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21.1M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-26664.htm" title="Elasticsearch -from + size设置">Elasticsearch -from + size设置</a></li>
+                        <li class="py-2"><a href="/news/article-19283.htm" title="动物防疫注射的主要步骤包括（动物防疫注射栏）">动物防疫注射的主要步骤包括（动物防疫注射栏）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-3-free-clash.htm" title="6月3日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度18.7M/S">6月3日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度18.7M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
