@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-28048.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>为vscode开发一款svn右键菜单扩展</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="在我平时的工作中会经常用到svn blame这个命令，但是vscode现有的svn扩展普遍都不能自定义右键菜单。 所以我产生一个想法：自己动手为vscode开发一款svn的扩展来定制右键菜单，本文记录" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>在我平时的工作中会经常用到svn blame这个命令，但是vscode现有的svn扩展普遍都不能自定义右键菜单。</p> <p>所以我产生一个想法：自己动手为vscode开发一款svn的扩展来定制右键菜单，本文记录这个svn扩展的开发记录，此扩展开发约耗时周末中的一天。</p> <blockquote> <p>最终成果：在vscode扩展中搜索：svnHelper就可以找到我编写的svn扩展，商店下载地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://marketplace.visualstudio.com/items?itemName=qingqingzhao.svnhelper"  target="_blank" rel="nofollow">https://marketplace.visualstudio.com/items?itemName=qingqingzhao.svnhelper</a></p> </blockquote> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/9bc32380dce67956393266bab0a12cc7.jpg" alt="为vscode开发一款svn右键菜单扩展"></p> <p></p> <h2 id="vscode的svn扩展源代码">vscode的svn扩展源代码</h2> <blockquote> <p>重点：这几个库拉下来之后，我尝试直接通过vsce package指令生成vsix，全部都失败了，编译代码时有不同的出错，只能去看vscode的开发文档。</p> </blockquote> <p>这里我列一下我找到的几个开源的vscode的tortoise svn 扩展，每个仓库的代码我大概扫了一下：</p> <p>如果想自己往右键菜单中添加选项，这个扩展的源代码比较简单易懂：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/florentulve/vstortoise"  target="_blank" rel="nofollow">https://github.com/florentulve/vstortoise</a></p> <p>这个可以提交整个workspace：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/fantacytyx/vscode-tortoise-svn"  target="_blank" rel="nofollow">https://github.com/fantacytyx/vscode-tortoise-svn</a></p> <p>这个提供很多的命令，<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/cdsama/tortoise-svn-for-vscode"  target="_blank" rel="nofollow">https://github.com/cdsama/tortoise-svn-for-vscode</a></p> <p></p> <h3 id="其它解决办法">其它解决办法</h3> <p>在时间急迫的情况下，我找到了这个神器，在vscode中可以打开系统右键菜单，这样也可以满足我的需求，只是它需要多点一下鼠标</p> <p>Windows Explorer Context Menu：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://marketplace.visualstudio.com/items?itemName=florentulve.vstortoise"  target="_blank" rel="nofollow">https://marketplace.visualstudio.com/items?itemName=florentulve.vstortoise</a></p> <p></p> <h3 id="github上源码报的错">github上源码报的错</h3> <p>上述几个源码库在编译时无一列外都会报错，我猜原因可能是我安装的nodejs和vscode版本太新有关系，因为这些库都是三四年前的。</p> <p>我的操作步骤是看vscode的官方文档来操作的，步骤如下：</p> <p>首先通过npm install来安装依赖，但会报：Cannot find module 'vscode'.</p> <p>然后npm install vscode 之后，再次编译就有一堆的 node.d.ts编译出错</p> <p>尝试过修改package.json中依赖库的版本之后，还是无法解决编译时的报错。</p> <blockquote> <p>结论：期间还出现可以调试，但打包为vsix就会有不一样的报错，最终我放弃了折腾上述几个库，自己重新开始一个项目开发。</p> </blockquote> <p></p> <h2 id="vscode扩展开发学习资料">vscode扩展开发学习资料</h2> <p>新建一个vscode的扩展项目：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://cntofu.com/book/98/md/%E6%89%A9%E5%B1%95/%E8%8C%83%E4%BE%8B-hello-world.md"  target="_blank" rel="nofollow">范例-hello-world-Microsoft Visual Studio Code 中文手册 (cntofu.com)</a></p> <p>推荐这个系列，有配图讲的很清晰：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://blog.haoji.me/vscode-plugin-package-json.html"  target="_blank" rel="nofollow">VSCode扩展开发全攻略（三）package.json详解-好记的博客 (haoji.me)</a></p> <p></p> <h3 id="微软的文档及例子">微软的文档及例子</h3> <p>微软的例子：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/microsoft/vscode-extension-samples"  target="_blank" rel="nofollow">https://github.com/microsoft/vscode-extension-samples</a></p> <p>微软VSCode扩展开发官方文档：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://code.visualstudio.com/docs/extensions/overview"  target="_blank" rel="nofollow">https://code.visualstudio.com/docs/extensions/overview</a></p> <p>生成vsix及发布到市场文档：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://code.visualstudio.com/api/working-with-extensions/publishing-extension"  target="_blank" rel="nofollow">https://code.visualstudio.com/api/working-with-extensions/publishing-extension</a></p> <h3 id="书籍">书籍</h3> <p>如果时间充实的同学，可以看看微软韩老师的这本书《Visual Studio Code 权威指南》，在第15章有讲到如何开发一个vscode扩展</p> <p></p> <h2 id="开发扩展的步骤">开发扩展的步骤</h2> <p>需要下载nodejs，用来编译及发布</p> <p>需要安装的库：</p> <blockquote> <p>用来生成新建项目的：npm install -g yo generator-code</p> </blockquote> <blockquote> <p>用来打包vsix的：npm i vsce -g</p> </blockquote> <p>开发扩展的步骤</p> <ol> <li>cd到你要把项目保存的路径，然后通过yo code新建一个项目，然后选项项目的开发语言，熟悉C#的可选TypeScript</li> <li>编写扩展代码</li> <li>按F5运行扩展，或者在运行调试这里，运行或新建调试项：Run Extension</li> <li>vsce package，把扩展打包为vsix文件</li> <li>vsce publish，把扩展发布到商店</li> </ol> <p></p> <h2 id="发布到vscode商店">发布到vscode商店</h2> <p>这个命令不能使用了：vsce create-publisher your-publisher-name</p> <p>需要到这个网站进行操作(提交的时候可能需要挂VPN)：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://aka.ms/vscode-create-publisher"  target="_blank" rel="nofollow">https://aka.ms/vscode-create-publisher</a></p> <h3 id="发布遇到问题">发布遇到问题</h3> <p>这个报错需要在package.json中把publisher的名字与申请的发布名字一致</p> <pre><code>ERROR  The Personal Access Token verification has failed. Additional information:  Error: Access Denied: e2d743d1-0ffd-4e04-a41d-c894878f29ba needs the following permission(s) on the resource /qingqingzhao to perform this action: View user permissions on a resource</code></pre> <h2 id="开发及发布的注意事项">开发及发布的注意事项</h2> <blockquote> <p>ps：开发过程中还遇到了其它的问题，可参考我的这篇文章《<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/zhaoqingqing/p/14823179.html"  target="_blank" rel="nofollow">知乎vscode插件修改和重新编译</a>》</p> </blockquote> <p>发布的注意事项如果repository有填则会检查github仓库？看到有篇文章中写道，因为我是放在gitee上的，所以我没填。</p> <p>建议往项目中添加这几个文件，否则每次打包时都会需要你二次确认</p> <p>LICENSE.txt</p> <p>CHANGELOG.md</p> <p>package.json中的name建议全小写，否则会有黄色警告线，每一项的意思如果不清晰的话，把鼠标移上去就会有提示这项是干啥的。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-27589.htm">领养宠物需要签协议吗合法吗现在（领养狗狗要签协议吗）</a></p>
+                                        <p>下一个：<a href="/news/article-28049.htm">奉化佳雯宠物医院（奉化哪家宠物医院价格便宜）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-7-7-free-ssr-node.htm" title="7月7日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S 免费Clash机场订阅">7月7日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-29-free-shadowrocket-node.htm" title="9月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度19.8M/S 免费Clash机场订阅">9月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度19.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-19740.htm" title="win11系统怎么关闭通知提醒">win11系统怎么关闭通知提醒</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-22-free-clash.htm" title="9月22日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅">9月22日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-30-free-node-subscribe.htm" title="7月30日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅">7月30日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-2-node-share-links.htm" title="10月2日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度19.1M/S 免费Clash机场订阅">10月2日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度19.1M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-18654.htm" title="动物疫苗管理法律法规有哪些要求呢图片（动物疫苗管理法律法规有哪些要求呢图片大全）">动物疫苗管理法律法规有哪些要求呢图片（动物疫苗管理法律法规有哪些要求呢图片大全）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-16-clash-node.htm" title="9月16日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22M/S 免费Clash机场订阅">9月16日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-11-free-ssr-node.htm" title="7月11日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度18.2M/S 免费Clash机场订阅">7月11日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度18.2M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-23403.htm" title="私人协议签字按手印法律上生效吗（私人协议按手印有法律效应吗）">私人协议签字按手印法律上生效吗（私人协议按手印有法律效应吗）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
