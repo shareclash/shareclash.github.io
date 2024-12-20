@@ -77,7 +77,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                                          				  				  				<div id="content_views" class="htmledit_views"> <p>琢磨了一晚上，就为了写一个“不重复的随机码生成函数”，生成格式包含0-9，a-z。</p> <p>头脑风暴，异想天开，写下了如下算法，看上去很高大上的一个随机生成方法。</p> <p>原理先产生一个UUID，再根据UUID生成一个随机数，UUID，不重复嘛。一测试，坑爹了，生成100万条长度为4的随机码，重复率达到25%，傻眼了。</p> <pre><code class="language-java">/**  * 随机码生成  * @author Mo  *   * @param length 随机码长度  * @return  */ public static String random1(int length){ 	/* 	 * 这里直接数字代替，没用uuid.length() 	 * */ 	String uuid = UUID.randomUUID().toString().replace("-", ""); 	 	int len = uuid.length(); 	 	/*定义随机码字符串变量，初始化为""*/ 	String random = ""; 	 	/* 	 * 循环截取UUID 	 * len/length 每次循环截取的字符串长度 	 * len%length 如果出现32长度除不尽的情况，取余数 	 * */ 	int subLen = len/length; 	int remainder = len%length; 	 	/*定义substring的两个参数*/ 	int start = 0,end = 0; 	for(int i=0;i&lt;length;i++){ 		/* 		 * 计算start和end的值 		 * 这里涉及两种方法，一种是除不尽的时候，将截取长度分散到头部，一种是分散到尾部 		 *  		 * uuid的前部分是时间戳构成的，因此前部分截取越少，重复率越底 		 * 固本方法采用了将多余的部分分散到尾部 		 * */ 		/*分散到尾部，如length为7的时候4,4,4,4,5,5,5*/ //			end = start + (length-i &lt;= remainder ? 1 : 0)+subLen; 		/*分散到头部，如length为7 的时候5,5,5,5,4,4,4*/ 		end = start + (i &lt; remainder ? 1 : 0)+subLen; 		/*截取到的字符串*/ 		String code = uuid.substring(start,end); 		/*对所截取的长度进行16位求和*/ 		int count = 0; 		for(char c : code.toCharArray()){ 			count += Integer.valueOf(String.valueOf(c),16); 		} 		/*将求和结果转化成36位，并增加到随机码中，36位包含了0-9a-z*/ 		random += Integer.toString(count%36, 36); 		start = end; 	} 	/*返回随机码*/ 	return random; }</code></pre> <p>泡杯咖啡，清醒一下，随机码生成函数2应运而生，小学生（入门级程序员）都能看懂。经过测试，生成100万条长度4的随机码，重复率也在25%左右。</p> <p><span style="color:#FF0000"><strong>推荐方法：</strong></span></p> <pre><code class="language-java">/**  * 随机码生成  * @author Mo  *   * @param length  * @return  */ public static String random2(int length){ 	String random = ""; 	/*随机数函数*/ 	java.util.Random r=new java.util.Random(); 	for(int i = 0;i&lt;length;i++){ 		/*生成36以内的随机数，不含36，并转化为36位*/ 		random += Integer.toString(r.nextInt(36), 36); 	} 	return random; }</code></pre> <p>事实证明，最复杂的方法并不是最好的方法，程序开发跟其他的事情一样，不要画蛇添足，时间浪费了，性能浪费了，还得不到好的结果。当然，多尝试是对的。</p> <p>事后想想，既然是随机生成，又要控制长度，长度为4，又怎么会出现不重复的数字呢。当然，将长度调整到8的时候，重复率基本没有，这个没有也不能绝对，只是说概率降低了而已。</p> <p><span style="color:#009900">总结：要生成不重复的随机码，必经要经过数据验证，拿新生成的随机码去与历史生成数据对比，如果已存在，则舍弃重新生成。如果对长度没要求，可以直接采用UUID，UUID是国际通用的不重复的串，不过长度达到了36位之多。</span></p> <p>以下提供一个自写随机码测试函数：</p> <pre><code class="language-java">public static void main(String args []){ 	Set&lt;String&gt; set = new HashSet&lt;String&gt;(); 	int times = 1000000; 	for(int i = 0 ;i&lt;times;i++){ 		String random = random1(8); 		set.add(random); 	} 	System.out.println("重复了："+(times-set.size())+"次"); }</code></pre> <p> 关于java的更多交流，请给我留言，简单的问题，也可以很复杂化，只有更深入的去尝试，才能更深刻的理解每一个细节问题。<br />  </p> </p></div> 			                <div class="clearfix"></div>
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>琢磨了一晚上，就为了写一个“不重复的随机码生成函数”，生成格式包含0-9，a-z。</p> <p>头脑风暴，异想天开，写下了如下算法，看上去很高大上的一个随机生成方法。</p> <p>原理先产生一个UUID，再根据UUID生成一个随机数，UUID，不重复嘛。一测试，坑爹了，生成100万条长度为4的随机码，重复率达到25%，傻眼了。</p> <pre><code class="language-java">/**  * 随机码生成  * @author Mo  *   * @param length 随机码长度  * @return  */ public static String random1(int length){ 	/* 	 * 这里直接数字代替，没用uuid.length() 	 * */ 	String uuid = UUID.randomUUID().toString().replace("-", ""); 	 	int len = uuid.length(); 	 	/*定义随机码字符串变量，初始化为""*/ 	String random = ""; 	 	/* 	 * 循环截取UUID 	 * len/length 每次循环截取的字符串长度 	 * len%length 如果出现32长度除不尽的情况，取余数 	 * */ 	int subLen = len/length; 	int remainder = len%length; 	 	/*定义substring的两个参数*/ 	int start = 0,end = 0; 	for(int i=0;i&lt;length;i++){ 		/* 		 * 计算start和end的值 		 * 这里涉及两种方法，一种是除不尽的时候，将截取长度分散到头部，一种是分散到尾部 		 *  		 * uuid的前部分是时间戳构成的，因此前部分截取越少，重复率越底 		 * 固本方法采用了将多余的部分分散到尾部 		 * */ 		/*分散到尾部，如length为7的时候4,4,4,4,5,5,5*/ //			end = start + (length-i &lt;= remainder ? 1 : 0)+subLen; 		/*分散到头部，如length为7 的时候5,5,5,5,4,4,4*/ 		end = start + (i &lt; remainder ? 1 : 0)+subLen; 		/*截取到的字符串*/ 		String code = uuid.substring(start,end); 		/*对所截取的长度进行16位求和*/ 		int count = 0; 		for(char c : code.toCharArray()){ 			count += Integer.valueOf(String.valueOf(c),16); 		} 		/*将求和结果转化成36位，并增加到随机码中，36位包含了0-9a-z*/ 		random += Integer.toString(count%36, 36); 		start = end; 	} 	/*返回随机码*/ 	return random; }</code></pre> <p>泡杯咖啡，清醒一下，随机码生成函数2应运而生，小学生（入门级程序员）都能看懂。经过测试，生成100万条长度4的随机码，重复率也在25%左右。</p> <p><span style="color:#FF0000"><strong>推荐方法：</strong></span></p> <pre><code class="language-java">/**  * 随机码生成  * @author Mo  *   * @param length  * @return  */ public static String random2(int length){ 	String random = ""; 	/*随机数函数*/ 	java.util.Random r=new java.util.Random(); 	for(int i = 0;i&lt;length;i++){ 		/*生成36以内的随机数，不含36，并转化为36位*/ 		random += Integer.toString(r.nextInt(36), 36); 	} 	return random; }</code></pre> <p>事实证明，最复杂的方法并不是最好的方法，程序开发跟其他的事情一样，不要画蛇添足，时间浪费了，性能浪费了，还得不到好的结果。当然，多尝试是对的。</p> <p>事后想想，既然是随机生成，又要控制长度，长度为4，又怎么会出现不重复的数字呢。当然，将长度调整到8的时候，重复率基本没有，这个没有也不能绝对，只是说概率降低了而已。</p> <p><span style="color:#009900">总结：要生成不重复的随机码，必经要经过数据验证，拿新生成的随机码去与历史生成数据对比，如果已存在，则舍弃重新生成。如果对长度没要求，可以直接采用UUID，UUID是国际通用的不重复的串，不过长度达到了36位之多。</span></p> <p>以下提供一个自写随机码测试函数：</p> <pre><code class="language-java">public static void main(String args []){ 	Set&lt;String&gt; set = new HashSet&lt;String&gt;(); 	int times = 1000000; 	for(int i = 0 ;i&lt;times;i++){ 		String random = random1(8); 		set.add(random); 	} 	System.out.println("重复了："+(times-set.size())+"次"); }</code></pre> <p> 关于java的更多交流，请给我留言，简单的问题，也可以很复杂化，只有更深入的去尝试，才能更深刻的理解每一个细节问题。<br />  </p> </p></div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-24543.htm">领养宠物免费的地方在哪里啊（免费领养宠物店在哪里）</a></p>
                                         <p>下一个：<a href="/news/article-24801.htm">json数据交互——@RequestBody与@ResponseBody</a></p>
@@ -90,16 +91,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-8-30-free-clash-subscribe.htm" title="8月30日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.5M/S 免费Clash机场订阅">8月30日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.5M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/news/article-25734.htm" title="猫咪驱虫内外驱是怎样驱（猫咪内外驱虫注意事项）">猫咪驱虫内外驱是怎样驱（猫咪内外驱虫注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-26203.htm" title="Mysql数据库基本操作（六）多表查询-内连接查询，外连接查询">Mysql数据库基本操作（六）多表查询-内连接查询，外连接查询</a></li>
+                        <li class="py-2"><a href="/news/article-25264.htm" title="南京农大动物医院犬瘟热门诊（南京农大动物医院犬瘟热门诊电话）">南京农大动物医院犬瘟热门诊（南京农大动物医院犬瘟热门诊电话）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-23-free-subscribe-node.htm" title="8月23日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度18.4M/S 免费Clash机场订阅">8月23日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度18.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-26-free-clash-subscribe.htm" title="8月26日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.4M/S 免费Clash机场订阅">8月26日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-16-free-high-speed-nodes.htm" title="6月16日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19.5M/S">6月16日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-21-clash-node-daily-updates.htm" title="7月21日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度20.8M/S 免费Clash机场订阅">7月21日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度20.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-9-free-clash-subscribe.htm" title="8月9日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度21M/S 免费Clash机场订阅">8月9日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度21M/S 免费Clash机场订阅</a></li>
                         <li class="py-2"><a href="/free-nodes/2024-11-22-clash-windows.htm" title="11月22日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度19.6M/S 免费Clash机场订阅">11月22日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度19.6M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-4-free-node-subscribe-links.htm" title="8月4日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度18.8M/S 免费Clash机场订阅">8月4日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度18.8M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-4-free-subscribe-node.htm" title="9月4日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19M/S 免费Clash机场订阅">9月4日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-12-free-subscribe-node.htm" title="12月12日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.6M/S 免费Clash机场订阅">12月12日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.6M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-14-free-subscribe-node.htm" title="11月14日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度23M/S 免费Clash机场订阅">11月14日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度23M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-11-clash-v2ray-ss-ssr.htm" title="10月11日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度18M/S 免费Clash机场订阅">10月11日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度18M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-26-node-share.htm" title="11月26日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度23M/S 免费Clash机场订阅">11月26日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度23M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-16-free-clash-subscribe.htm" title="11月16日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.8M/S 免费Clash机场订阅">11月16日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-1-node-share-links.htm" title="10月1日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度18.8M/S 免费Clash机场订阅">10月1日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度18.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-24-free-subscribe-node.htm" title="7月24日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度21.5M/S 免费Clash机场订阅">7月24日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度21.5M/S 免费Clash机场订阅</a></li>
                     </ul>
     </div>
 </div>
@@ -111,7 +112,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">42</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -149,6 +150,15 @@
     <footer id="footer">
         <div class="container">
             <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
                 ShareClash官网订阅站 版权所有
                 <br />
                 Powered by WordPress
