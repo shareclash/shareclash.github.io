@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-29716.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>为MySQL创建高性能索引_Mysql_</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="1.2.1 B-Tree  1.2.2 B+Tree索引  1.2.3 Hash索引  聚簇索引  非聚簇索引  2.5.1 最左匹配  2.5.2 匹配列前缀  2.5.3 匹配范围值  2.5.5" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				  			 <div id="log-box">  				<div id="catalog"><ul id="catalog-ul"> <li><i class="be be-arrowright"></i> <a href="#title-0" title="1.2.1 B-Tree">1.2.1 B-Tree</a></li> <li><i class="be be-arrowright"></i> <a href="#title-1" title="1.2.2 B+Tree索引">1.2.2 B+Tree索引</a></li> <li><i class="be be-arrowright"></i> <a href="#title-2" title="1.2.3 Hash索引">1.2.3 Hash索引</a></li> <li><i class="be be-arrowright"></i> <a href="#title-3" title="聚簇索引">聚簇索引</a></li> <li><i class="be be-arrowright"></i> <a href="#title-4" title="非聚簇索引">非聚簇索引</a></li> <li><i class="be be-arrowright"></i> <a href="#title-5" title="2.5.1 最左匹配">2.5.1 最左匹配</a></li> <li><i class="be be-arrowright"></i> <a href="#title-6" title="2.5.2 匹配列前缀">2.5.2 匹配列前缀</a></li> <li><i class="be be-arrowright"></i> <a href="#title-7" title="2.5.3 匹配范围值">2.5.3 匹配范围值</a></li> <li><i class="be be-arrowright"></i> <a href="#title-8" title="2.5.5 只访问索引的查询">2.5.5 只访问索引的查询</a></li> </ul><span class="log-zd"><span class="log-close"><a title="隐藏目录"><i class="be be-cross"></i><strong>目录</strong></a></span></span></div>  			</div> <div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">1 索引基础</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_0_0" rel="nofollow">1.1 索引作用</a></li> <li><a href="#_lab2_0_1" rel="nofollow">1.2 MySQL索引常用数据结构</a></li> <ul class="third_class_ul"> <li><a href="#_label3_0_1_0" rel="nofollow">1.2.1 B-Tree</a></li> <li><a href="#_label3_0_1_1" rel="nofollow">1.2.2 B+Tree索引</a></li> <li><a href="#_label3_0_1_2" rel="nofollow">1.2.3 Hash索引</a></li> </ul> </ul> <li><a href="#_label1" rel="nofollow">2 高性能索引策略</a></li> <ul class="second_class_ul"> <li><a href="#_lab2_1_2" rel="nofollow">2.1 聚簇索引与非聚簇索引</a></li> <ul class="third_class_ul"> <li><a href="#_label3_1_2_3" rel="nofollow">聚簇索引</a></li> <li><a href="#_label3_1_2_4" rel="nofollow">非聚簇索引</a></li> </ul> <li><a href="#_lab2_1_3" rel="nofollow">2.2 前缀索引</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_1_4" rel="nofollow">2.3 回表</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_1_5" rel="nofollow">2.4 覆盖索引</a></li> <ul class="third_class_ul"></ul> <li><a href="#_lab2_1_6" rel="nofollow">2.5 索引匹配方式</a></li> <ul class="third_class_ul"> <li><a href="#_label3_1_6_5" rel="nofollow">2.5.1 最左匹配</a></li> <li><a href="#_label3_1_6_6" rel="nofollow">2.5.2 匹配列前缀</a></li> <li><a href="#_label3_1_6_7" rel="nofollow">2.5.3 匹配范围值</a></li> <li><a href="#_label3_1_6_8" rel="nofollow">2.5.5 只访问索引的查询</a></li> </ul> </ul> <li><a href="#_label2" rel="nofollow">3 索引优化最佳实践</a></li> <ul class="second_class_ul"></ul> <li><a href="#_label3" rel="nofollow">4 索引监控</a></li> <ul class="second_class_ul"></ul> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>1 索引基础</h2> <p class="maodian"><a name="_lab2_0_0" rel="nofollow"></a></p> <h3>1.1 索引作用</h3> <p>在MySQL中，查找数据时先在索引中找到对应的值，然后根据匹配的索引记录找到对应的数据行，假如要运行下面查询语句：</p> <div class="ay1code"> <pre class="brush:sql;">SELECT	* FROM  USER  WHERE uid = 5;</pre> </div> <p>如果在uid在建有索引，则MySQL将使用该索引先找到uid为5的行，也就是说MySQL先在索引上按值进行查找，然后返回所有包含该值的数据行。</p> <p class="maodian"><a name="_lab2_0_1" rel="nofollow"></a></p> <h3>1.2 MySQL索引常用数据结构</h3> <p>MySQL索引是在存储引擎层面实现的，不是在服务器实现的。所以，没有统一的索引标准：不同存储引擎的索引工作方式不一样。</p> <p class="maodian"><a name="_label3_0_1_0" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-0">1.2.1 B-Tree</h4> <p>大多数的MySQL引擎都支持这种索引B-Tree，即时多个存储引擎支持同一种类型的索引，其底层实现也可能不同。比如InnoDB使用的是B+Tree。</p> <p>存储引擎以不同的方式实现B-Tree，性能也各有不同，各有优势。如，MyISAM使用前缀压缩技术是的索引更小，当InnoDB则按照原数据格式进行存储，MyISAMy索引通过数据的物理位置引用被索引的行，而InnoDB根据组件应用被索引的行。</p> <p>B-Tree所有值都是顺序存储的，并且每一个叶子页到根的距离相同。如下图大致反应了InnoDB索引是如何工作的，MyISAM使用的结构有所不同。但基本实现是类似的。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/80832d32f723a2db5d22ddd58b0f40f8.jpg"></p> <p>实例图说明：</p> <p>每个节点占用一个磁盘块，一个节点上有两个升序排序的关键字和三个指向子树根节点的指针，指针存储的是子节点所在磁盘块的地址。两个关键词划分成的三个范围域对应三个指针指向的子树的数据的范围域。以根节点为例，关键字为 16 和 34，P1 指针指向的子树的数据范围为小于 16，P2 指针指向的子树的数据范围为 16~34，P3 指针指向的子树的数据范围为大于 34。查找关键字过程：</p> <ul> <li>根据根节点找到磁盘块 1，读入内存。【磁盘 I/O 操作第 1 次】</li> <li>比较关键字 28 在区间（16,34），找到磁盘块 1 的指针 P2。</li> <li>根据 P2 指针找到磁盘块 3，读入内存。【磁盘 I/O 操作第 2 次】</li> <li>比较关键字 28 在区间（25,31），找到磁盘块 3 的指针 P2。</li> <li>根据 P2 指针找到磁盘块 8，读入内存。【磁盘 I/O 操作第 3 次】</li> <li>在磁盘块 8 中的关键字列表中找到关键字 28。 </li> </ul> <p><strong>缺点</strong>：</p> <ul> <li>每个节点都有key，同时也包含data，而每个页存储空间是有限的，如果data比较大的话会导致每个节点存储的key数量变小；</li> <li>当存储的数据量很大的时候会导致深度较大，增大查询时磁盘io次数，进而影响查询性能。</li> </ul> <p class="maodian"><a name="_label3_0_1_1" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-1">1.2.2 B+Tree索引</h4> <p>B+树是对B树的变种。与B树区别：B+树只在叶子节点存储数据，非叶子节点只存储key值及指针。</p> <p>在B+树上有两个指针，一个指向根叶子节点，另一个指向关键字最小的叶子节点，而且所有叶子节点（即数据节点）之间是一种链式环结构，因此可以对B+树进行两种查找运算：一种是对于组件的范围查找，另一种是从根节点开始，进行随机查找。</p> <p>B*树与B+数类似，区别在于B*数非叶子节点之间也有链式环结构。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/8a9205189ebae1639a66c75fad71cfe0.jpg"></p> <p class="maodian"><a name="_label3_0_1_2" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-2">1.2.3 Hash索引</h4> <p>哈希索引基于哈希表实现，只有精准匹配索引所有列的查询才有效。对于每一行数据，存储引擎都会对所有的索引列计算一个哈希码（hash code）,哈希码是一个较小的值，并且不同键值的行计算出来的哈希码也不一样。哈希索引将所有的哈希码存储在索引中，同时在哈希表中保存指向每个数据行的指针。</p> <p>在MySQL中只有Memory默认索引类型就是使用的哈希索引，memory也支持B-Tree索引。同时，Memory引擎支持非唯一哈希索引，如果多个列的哈希值相同，索引会以链表的方式存放多个指针相同一个哈希条目中。类似HashMap。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/4e7992836bd07063fc10b923e57341ad.jpg"></p> <p><strong>优点</strong>：<br />索引自身只需要存储对应的哈希值，所以索引的结构十分紧凑，哈希所以查找的速度非常快。<br /><strong>缺点</strong>：</p> <ul> <li>利用hash存储的话需要将所有的数据文件添加到内存，比较耗费内存空间；</li> <li>哈希索引数据并不是按顺序存储的，所以无法用于排序；</li> <li>如果所有的查询都是等值查询，那么hash确实很快，但是在企业或者实际工作环境中范围查找的数据更多，而不是等值查询，因此hash就不太适合了；</li> <li>如果哈希冲突很多的话，索引维护操作的代价也会很高，这也是HashMap后期通过增加红黑树解决Hash冲突的问题；</li> </ul> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>2 高性能索引策略</h2> <p class="maodian"><a name="_lab2_1_2" rel="nofollow"></a></p> <h3>2.1 聚簇索引与非聚簇索引</h3> <p class="maodian"><a name="_label3_1_2_3" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-3">聚簇索引</h4> <p>不是单独的索引类型，而是一种数据存储方式，在InnoDB存储引擎中聚簇索引实际在同一个结构中保存了键值和数据行。当表中有聚簇索引时，它的数据行实际上存放在索引的叶子页中。因为无法同时把数据行存放在不同的地方，所以一个表中只能有一个聚簇索引（索引覆盖可以模拟出多个聚簇索引的情况）。</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/c39c3cdf43243762bfd0e1e042398d12.jpg"></p> <p>聚簇索引优点：</p> <p>可以把相关数据保存在一起;数据访问更快，因为索引和数据保存在同一个树中;使用覆盖索引扫描的查询可以直接使用页节点中的主键值;</p> <p>缺点：</p> <p>聚簇数据最大限度地提高了IO密集型应用的性能，如果数据全部在内存，那么聚簇索引就没有什么优势；插入速度严重依赖于插入顺序，按照主键的顺序插入是最快的方式；更新聚簇索引列的代价很高，因为会强制将每个被更新的行移动到新的位置；基于聚簇索引的表在插入新行，或者主键被更新导致需要移动行的时候，可能面临页分裂的问题；聚簇索引可能导致全表扫描变慢，尤其是行比较稀疏，或者由于页分裂导致数据存储不连续的时候；</p> <p class="maodian"><a name="_label3_1_2_4" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-4">非聚簇索引</h4> <p>数据文件跟索引文件分开存放</p> <p class="maodian"><a name="_lab2_1_3" rel="nofollow"></a></p> <h3>2.2 前缀索引</h3> <p>有时候需要索引很长的字符串，这会让索引变的大且慢，通常情况下可以使用某个列开始的部分字符串，这样大大的节约索引空间，从而提高索引效率，但这会降低索引的选择性，索引的选择性是指：不重复的索引值（也称为基数cardinality）和数据表记录总数的比值，范围从1/#T到1之间。索引的选择性越高则查询效率越高，因为选择性更高的索引可以让mysql在查找的时候过滤掉更多的行。</p> <p>一般情况下某个列前缀的选择性也是足够高的，足以满足查询的性能，但是对应BLOB,TEXT,VARCHAR类型的列，必须要使用前缀索引，因为mysql不允许索引这些列的完整长度，使用该方法的诀窍在于要选择足够长的前缀以保证较高的选择性，通过又不能太长。</p> <p>举例</p> <p>表结构及数据MySQL官网或<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/dvomu/document/tree/main/blog_doc/mysql/sakila-db"   target="_blank" rel="nofollow">GItHub下载</a>。</p> <p>city Table Columns</p> <table> <tbody> <tr> <th>字段名</th> <th>含义</th> </tr> <tr> <td>city_id</td> <td>城市主键ID</td> </tr> <tr> <td>city</td> <td>城市名</td> </tr> <tr> <td>country_id</td> <td>国家ID</td> </tr> <tr> <td>last_update:</td> <td>创建或最近更新时间</td> </tr> </tbody> </table> <div class="ay1code"> <pre class="brush:sql;">--计算完整列的选择性  select count(distinct left(city,3))/count(*) as sel3,      count(distinct left(city,4))/count(*) as sel4,      count(distinct left(city,5))/count(*) as sel5,      count(distinct left(city,6))/count(*) as sel6,      count(distinct left(city,7))/count(*) as sel7,      count(distinct left(city,8))/count(*) as sel8   from citydemo;</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/4efd3352ad1b3735b431fc12834bad22.jpg"></p> <p>可以看到当前缀长度到达7之后，再增加前缀长度，选择性提升的幅度已经很小了。由此最佳创建前缀索引长度为7。</p> <p class="maodian"><a name="_lab2_1_4" rel="nofollow"></a></p> <h3>2.3 回表</h3> <p>要理解回表需要先了解聚族索引和普通索引。聚族索引即建表时设置的主键索引，如果没有设置MySQL自动将第一个非空唯一值作为索引，如果还是没有InnoDB会创建一个隐藏的row-id作为索引（oracle数据库row-id显式展示，可以用于分页）；普通索引就是给普通列创建的索引。普通列索引在叶子节点中存储的并不是整行数据而是主键，当按普通索引查找时会先在B+树中查找该列的主键，然后根据主键所在的B+树中查找改行数据，这就是回表。</p> <p class="maodian"><a name="_lab2_1_5" rel="nofollow"></a></p> <h3>2.4 覆盖索引</h3> <p>覆盖索引在InnoDB中特别有用。MySQL中可以使用索引直接获取列的数据，如果索引的叶子节点中已经包含要查询的数据，那么就没必要再回表查询了，如果一个索引包含（覆盖）所有需要查询的字段的值，那么该索引就是覆盖索引。简单的说：不回表直接通过一次索引查找到列的数据就叫覆盖索引。</p> <p>表信息</p> <div class="ay1code"> <pre class="brush:sql;">CREATE TABLE `t_user` (    `uid` int(11) NOT NULL AUTO_INCREMENT,    `uname` varchar(255) DEFAULT NULL,    `age` int(11) DEFAULT NULL,    `update_time` datetime DEFAULT NULL,    PRIMARY KEY (`uid`)  ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;</pre> </div> <p>举例</p> <div class="ay1code"> <pre class="brush:sql;">--将uid设置成主键索引后通过下面的SQL查询 在explain的Extra列可以看到“Using index”  explain select uid from t_user where uid = 1;</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/b891de3df8bf0847a92fbfec77c30bf0.jpg"></p> <p>覆盖索引在组合索引中用的比较多，举例</p> <div class="ay1code"> <pre class="brush:sql;">explain select age,uname from t_user where age = 10 ;</pre> </div> <p>当不建立组合索引时，会进行回表查询</p> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/099ef4c8a86b80e39d1ed29b2798ee15.jpg"></p> <p>设置组合索引后再次查询</p> <div class="ay1code"> <pre class="brush:sql;">create index index_user on t_user(age,uname);</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/13a238e62a68d1978d23a764d38e383d.jpg"></p> <p class="maodian"><a name="_lab2_1_6" rel="nofollow"></a></p> <h3>2.5 索引匹配方式</h3> <p class="maodian"><a name="_label3_1_6_5" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-5">2.5.1 最左匹配</h4> <p>在使用组合索引中，比如设置(age,name)为组合索引，单独使用组合索引中最左列是可以匹配索引的，如果不使用最左列则不走索引。例如下面SQL</p> <div class="ay1code"> <pre class="brush:sql;">--走索引  explain select * from t_user where age=10 and uname='zhang';</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/4aec5364bbaba67eee5da7e267356599.jpg"></p> <p>下面的SQL不走索引</p> <pre><code>explain select * from t_user where  uname='zhang';</code></pre> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/4752e2c28fabb49a7850b0a84d082234.jpg"></p> <p class="maodian"><a name="_label3_1_6_6" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-6">2.5.2 匹配列前缀</h4> <p>可以匹配某一列的值的开头部分，比如like 'abc%'。</p> <p class="maodian"><a name="_label3_1_6_7" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-7">2.5.3 匹配范围值</h4> <p>可以查找某一个范围的数据。</p> <div class="ay1code"> <pre class="brush:sql;">explain select * from t_user where age&gt;18;</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/149b03e8ad9fe969ee7be7ef1609d71a.jpg"></p> <p>2.5.4 精确匹配某一列并范围匹配另外一列</p> <p>可以查询第一列的全部和第二列的部分</p> <div class="ay1code"> <pre class="brush:sql;">explain select * from t_user where age=18 and uname like 'zhang%';</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/4059e289b1f6d2dc26668a4c93b731d0.jpg"></p> <p class="maodian"><a name="_label3_1_6_8" rel="nofollow"></a></p> <span class="directory"></span><h4 id="title-8">2.5.5 只访问索引的查询</h4> <p>查询的时候只需要访问索引，不需要访问数据行，本质上就是覆盖索引。</p> <div class="ay1code"> <pre class="brush:sql;">explain select age,uname,update_time from t_user               where age=18 and uname= 'zhang' and update_time='123';</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/a576ce68bdca16ac49104f0860a98e71.jpg"></p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>3 索引优化最佳实践</h2> <p><strong>1. 当使用索引列进行查询的时候尽量不要使用表达式，把计算放到业务层而不是数据库层。</strong></p> <div class="ay1code"> <pre class="brush:sql;">--推荐  select uid,age,uname from t_user where uid=1;    --不推荐  select uid,age,uname from t_user where uid+9=10;</pre> </div> <p><strong>2. 尽量使用主键查询，而不是其他索引，因为主键查询不会触发回表查询</strong></p> <p><strong>3. 使用前缀索引</strong>参考2.2 前缀索引<br /><strong>4. 使用索引扫描排序</strong>mysql有两种方式可以生成有序的结果：通过排序操作或者按索引顺序扫描，如果explain出来的type列的值为index,则说明mysql使用了索引扫描来做排序。<br />扫描索引本身是很快的，因为只需要从一条索引记录移动到紧接着的下一条记录。但如果索引不能覆盖查询所需的全部列，那么就不得不每扫描一条索引记录就得回表查询一次对应的行，这基本都是随机IO，因此按索引顺序读取数据的速度通常要比顺序地全表扫描慢。<br />mysql可以使用同一个索引即满足排序，又用于查找行，如果可能的话，设计索引时应该尽可能地同时满足这两种任务。<br />只有当索引的列顺序和order by子句的顺序完全一致，并且所有列的排序方式都一样时，mysql才能够使用索引来对结果进行排序，如果查询需要关联多张表，则只有当orderby子句引用的字段全部为第一张表时，才能使用索引做排序。order by子句和查找型查询的限制是一样的，需要满足索引的最左前缀的要求，否则，mysql都需要执行顺序操作，而无法利用索引排序。<br /><strong>举例</strong>表结构及数据MySQL官网或<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/dvomu/document/tree/main/blog_doc/mysql/sakila-db"   target="_blank" rel="nofollow">GItHub下载</a>。</p> <div class="ay1code"> <pre class="brush:sql;">CREATE TABLE `rental` (    `rental_id` int(11) NOT NULL AUTO_INCREMENT,    `rental_date` datetime NOT NULL,    `inventory_id` mediumint(8) unsigned NOT NULL,    `customer_id` smallint(5) unsigned NOT NULL,    `return_date` datetime DEFAULT NULL,    `staff_id` tinyint(3) unsigned NOT NULL,    `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    PRIMARY KEY (`rental_id`),    UNIQUE KEY `rental_date` (`rental_date`,`inventory_id`,`customer_id`),    KEY `idx_fk_inventory_id` (`inventory_id`),    KEY `idx_fk_customer_id` (`customer_id`),    KEY `idx_fk_staff_id` (`staff_id`),    CONSTRAINT `fk_rental_customer` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE,    CONSTRAINT `fk_rental_inventory` FOREIGN KEY (`inventory_id`) REFERENCES `inventory` (`inventory_id`) ON UPDATE CASCADE,    CONSTRAINT `fk_rental_staff` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`staff_id`) ON UPDATE CASCADE  ) ENGINE=InnoDB AUTO_INCREMENT=16050 DEFAULT CHARSET=utf8mb4;</pre> </div> <p>rental表在rental_date,inventory_id,customer_id上有rental_date的索引。使用rental_date索引为下面的查询做排序</p> <div class="ay1code"> <pre class="brush:sql;">--该查询为索引的第一列提供了常量条件，而使用第二列进行排序，将两个列组合在一起，就形成了索引的最左前缀  explain select rental_id,staff_id from rental   where rental_date='2005-05-25' order by inventory_id desc    --下面的查询不会利用索引  explain select rental_id,staff_id from rental   where rental_date&gt;'2005-05-25' order by rental_date,inventory_id</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/f64171e8faad5f126b71200177ed497e.jpg"></p> <p><strong>5. union all,in,or都能够使用索引，但是推荐使用in</strong></p> <div class="ay1code"> <pre class="brush:sql;">explain select * from actor where actor_id = 1 union all select * from actor where actor_id = 2;  explain select * from actor where actor_id in (1,2);  explain select * from actor where actor_id = 1 or actor_id =2;</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/5b27d4a2e949297d3234e1a92e2f96ac.jpg"></p> <p><strong>6. 范围列可以用到索引</strong>范围条件是：&lt;、&lt;=、&gt;、&gt;=、between。范围列可以用到索引，但是范围列后面的列无法用到索引，索引最多用于一个范围列。</p> <p><strong>7. 更新十分频繁，数据区分度不高的字段上不宜建立索引</strong></p> <ul> <li>更新会变更B+树，更新频繁的字段建议索引会大大降低数据库性能；</li> <li>类似于性别这类区分不大的属性，建立索引是没有意义的，不能有效的过滤数据；</li> <li>一般区分度在80%以上的时候就可以建立索引，区分度可以使用 count(distinct(列名))/count(*) 来计算；</li> </ul> <p><strong>8. 创建索引的列，不允许为null，可能会得到不符合预期的结果</strong></p> <p><strong>9.当需要进行表连接的时候，最好不要超过三张表，如果需要join的字段，数据类型必须一致</strong></p> <p><strong>10. 能使用limit的时候尽量使用limit</strong></p> <p><strong>11. 单表索引建议控制在5个以内</strong></p> <p><strong>12. 单索引字段数不允许超过5个（组合索引）</strong></p> <p><strong>13. 创建索引的时候应该避免以下错误概念</strong></p> <ul> <li>索引越多越好</li> <li>过早优化，在不了解系统的情况下进行优化</li> </ul> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>4 索引监控</h2> <div class="ay1code"> <pre class="brush:sql;">show status like 'Handler_read%';</pre> </div> <p style="text-align:center"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220415/832f2d5b240e3d422b817a1429182e66.jpg"></p> <table> <tbody> <tr> <th>参数</th> <th>说明</th> </tr> <tr> <td>Handler_read_first</td> <td>读取索引第一个条目的次数</td> </tr> <tr> <td>Handler_read_key</td> <td>通过index获取数据的次数</td> </tr> <tr> <td>Handler_read_last</td> <td>读取索引最后一个条目的次数</td> </tr> <tr> <td>Handler_read_next</td> <td>通过索引读取下一条数据的次数</td> </tr> <tr> <td>Handler_read_prev</td> <td>通过索引读取上一条数据的次数</td> </tr> <tr> <td>Handler_read_rnd</td> <td>从固定位置读取数据的次数</td> </tr> <tr> <td>Handler_read_rnd_next</td> <td>从数据节点读取下一条数据的次数</td> </tr> </tbody> </table> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-29435.htm">动物医院有没有公立的医院 动物医院有没有公立的医院啊</a></p>
+                                        <p>下一个：<a href="/news/article-29717.htm">宠物猫打疫苗一共多少钱一针（宠物猫打疫苗要多少钱）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-9-25-free-high-speed-nodes.htm" title="9月25日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度18M/S 免费Clash机场订阅">9月25日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度18M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-24801.htm" title="json数据交互——@RequestBody与@ResponseBody">json数据交互——@RequestBody与@ResponseBody</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-19-free-v2ray.htm" title="7月19日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度20.4M/S 免费Clash机场订阅">7月19日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-10-free-ssr-subscribe.htm" title="8月10日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度22M/S 免费Clash机场订阅">8月10日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-20201.htm" title="宠物粮食加工厂设备生产厂家排名榜最新 宠物粮食加工厂设备生产厂家排名榜最新">宠物粮食加工厂设备生产厂家排名榜最新 宠物粮食加工厂设备生产厂家排名榜最新</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-13-clash-windows.htm" title="11月13日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22M/S 免费Clash机场订阅">11月13日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-29-clash-windows.htm" title="6月29日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度22M/S 免费Clash机场订阅">6月29日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-25-free-v2ray-subscribe.htm" title="10月25日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度21M/S 免费Clash机场订阅">10月25日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度21M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-11-clash-v2ray-ss-ssr.htm" title="10月11日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度18M/S 免费Clash机场订阅">10月11日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度18M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-29716.htm" title="为MySQL创建高性能索引_Mysql_">为MySQL创建高性能索引_Mysql_</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">69</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
