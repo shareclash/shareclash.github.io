@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-34689.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Python加速技巧</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="Python 是一种脚本语言，相比 C/C++ 这样的编译语言，在效率和性能方面存在一些不足。但是，有很多时候，Python 的效率并没有想象中的那么夸张。本文对一些 Python 代码加速运行的技巧" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>Python 是一种脚本语言，相比 C/C++ 这样的编译语言，在效率和性能方面存在一些不足。但是，有很多时候，Python 的效率并没有想象中的那么夸张。本文对一些 Python 代码加速运行的技巧进行整理。</p> <p>&nbsp;</p> <h2><strong>0. 代码优化原则</strong></h2> <p>本文会介绍不少的 Python 代码加速运行的技巧。在深入代码优化细节之前，需要了解一些代码优化基本原则。</p> <p>第一个基本原则是不要过早优化。很多人一开始写代码就奔着性能优化的目标，“让正确的程序更快要比让快速的程序正确容易得多”。因此，优化的前提是代码能正常工作。过早地进行优化可能会忽视对总体性能指标的把握，在得到全局结果前不要主次颠倒。</p> <p>第二个基本原则是权衡优化的代价。优化是有代价的，想解决所有性能的问题是几乎不可能的。通常面临的选择是时间换空间或空间换时间。另外，开发代价也需要考虑。</p> <p>第三个原则是不要优化那些无关紧要的部分。如果对代码的每一部分都去优化，这些修改会使代码难以阅读和理解。如果你的代码运行速度很慢，首先要找到代码运行慢的位置，通常是内部循环，专注于运行慢的地方进行优化。在其他地方，一点时间上的损失没有什么影响。</p> <p>&nbsp;</p> <h2><strong>1. 避免全局变量</strong></h2> <pre><code># 不推荐写法。代码耗时：26.8秒 import math  size = 10000 for x in range(size):     for y in range(size):         z = math.sqrt(x) + math.sqrt(y)</code></pre> <p>许多程序员刚开始会用 Python 语言写一些简单的脚本，当编写脚本时，通常习惯了直接将其写为全局变量，例如上面的代码。但是，由于全局变量和局部变量实现方式不同，定义在全局范围内的代码运行速度会比定义在函数中的慢不少。通过将脚本语句放入到函数中，通常可带来 15% - 30% 的速度提升。</p> <pre><code># 推荐写法。代码耗时：20.6秒 import math  def main():  # 定义到函数中，以减少全部变量使用     size = 10000     for x in range(size):         for y in range(size):             z = math.sqrt(x) + math.sqrt(y)  main()</code></pre> <p>&nbsp;</p> <h2><strong>2. 避免<code>.</code></strong></h2> <p><strong>2.1 避免模块和函数属性访问</strong></p> <pre><code># 不推荐写法。代码耗时：14.5秒 import math  def computeSqrt(size: int):     result = []     for i in range(size):         result.append(math.sqrt(i))     return result  def main():     size = 10000     for _ in range(size):         result = computeSqrt(size)  main()</code></pre> <p>每次使用<code>.</code>（属性访问操作符时）会触发特定的方法，如<code>__getattribute__()</code>和<code>__getattr__()</code>，这些方法会进行字典操作，因此会带来额外的时间开销。通过<code>from import</code>语句，可以消除属性访问。</p> <pre><code># 第一次优化写法。代码耗时：10.9秒 from math import sqrt  def computeSqrt(size: int):     result = []     for i in range(size):         result.append(sqrt(i))  # 避免math.sqrt的使用     return result  def main():     size = 10000     for _ in range(size):         result = computeSqrt(size)  main()</code></pre> <p>在第 1 节中我们讲到，局部变量的查找会比全局变量更快，因此对于频繁访问的变量<code>sqrt</code>，通过将其改为局部变量可以加速运行。</p> <pre><code># 第二次优化写法。代码耗时：9.9秒 import math  def computeSqrt(size: int):     result = []     sqrt = math.sqrt  # 赋值给局部变量     for i in range(size):         result.append(sqrt(i))  # 避免math.sqrt的使用     return result  def main():     size = 10000     for _ in range(size):         result = computeSqrt(size)  main()</code></pre> <p>除了<code>math.sqrt</code>外，<code>computeSqrt</code>函数中还有<code>.</code>的存在，那就是调用<code>list</code>的<code>append</code>方法。通过将该方法赋值给一个局部变量，可以彻底消除<code>computeSqrt</code>函数中<code>for</code>循环内部的<code>.</code>使用。</p> <pre><code># 推荐写法。代码耗时：7.9秒 import math  def computeSqrt(size: int):     result = []     append = result.append     sqrt = math.sqrt    # 赋值给局部变量     for i in range(size):         append(sqrt(i))  # 避免 result.append 和 math.sqrt 的使用     return result  def main():     size = 10000     for _ in range(size):         result = computeSqrt(size)  main()</code></pre> <h2><strong>2.2 避免类内属性访问</strong></h2> <pre><code># 不推荐写法。代码耗时：10.4秒 import math from typing import List  class DemoClass:     def __init__(self, value: int):         self._value = value          def computeSqrt(self, size: int) -&gt; List[float]:         result = []         append = result.append         sqrt = math.sqrt         for _ in range(size):             append(sqrt(self._value))         return result  def main():     size = 10000     for _ in range(size):         demo_instance = DemoClass(size)         result = demo_instance.computeSqrt(size)  main()</code></pre> <p>避免<code>.</code>的原则也适用于类内属性，访问<code>self._value</code>的速度会比访问一个局部变量更慢一些。通过将需要频繁访问的类内属性赋值给一个局部变量，可以提升代码运行速度。</p> <pre><code># 推荐写法。代码耗时：8.0秒 import math from typing import List  class DemoClass:     def __init__(self, value: int):         self._value = value          def computeSqrt(self, size: int) -&gt; List[float]:         result = []         append = result.append         sqrt = math.sqrt         value = self._value         for _ in range(size):             append(sqrt(value))  # 避免 self._value 的使用         return result  def main():     size = 10000     for _ in range(size):         demo_instance = DemoClass(size)         demo_instance.computeSqrt(size)  main()</code></pre> <p>&nbsp;</p> <h2><strong>3. 避免不必要的抽象</strong></h2> <pre><code># 不推荐写法，代码耗时：0.55秒 class DemoClass:     def __init__(self, value: int):         self.value = value      @property     def value(self) -&gt; int:         return self._value      @value.setter     def value(self, x: int):         self._value = x  def main():     size = 1000000     for i in range(size):         demo_instance = DemoClass(size)         value = demo_instance.value         demo_instance.value = i  main()</code></pre> <p>任何时候当你使用额外的处理层（比如装饰器、属性访问、描述器）去包装代码时，都会让代码变慢。大部分情况下，需要重新进行审视使用属性访问器的定义是否有必要，使用<code>getter/setter</code>函数对属性进行访问通常是 C/C++ 程序员遗留下来的代码风格。如果真的没有必要，就使用简单属性。</p> <pre><code># 推荐写法，代码耗时：0.33秒 class DemoClass:     def __init__(self, value: int):         self.value = value  # 避免不必要的属性访问器  def main():     size = 1000000     for i in range(size):         demo_instance = DemoClass(size)         value = demo_instance.value         demo_instance.value = i  main()</code></pre> <p>&nbsp;</p> <h2><strong>4. 避免数据复制</strong></h2> <p><strong>4.1 避免无意义的数据复制</strong></p> <pre><code># 不推荐写法，代码耗时：6.5秒 def main():     size = 10000     for _ in range(size):         value = range(size)         value_list = [x for x in value]         square_list = [x * x for x in value_list]  main()</code></pre> <p>上面的代码中<code>value_list</code>完全没有必要，这会创建不必要的数据结构或复制。</p> <pre><code># 推荐写法，代码耗时：4.8秒 def main():     size = 10000     for _ in range(size):         value = range(size)         square_list = [x * x for x in value]  # 避免无意义的复制  main()</code></pre> <p>另外一种情况是对 Python 的数据共享机制过于偏执，并没有很好地理解或信任 Python 的内存模型，滥用&nbsp;<code>copy.deepcopy()</code>之类的函数。通常在这些代码中是可以去掉复制操作的。</p> <p><strong>4.2 交换值时不使用中间变量</strong></p> <pre><code># 不推荐写法，代码耗时：0.07秒 def main():     size = 1000000     for _ in range(size):         a = 3         b = 5         temp = a         a = b         b = temp  main()</code></pre> <p>上面的代码在交换值时创建了一个临时变量<code>temp</code>，如果不借助中间变量，代码更为简洁、且运行速度更快。</p> <pre><code># 推荐写法，代码耗时：0.06秒 def main():     size = 1000000     for _ in range(size):         a = 3         b = 5         a, b = b, a  # 不借助中间变量  main()</code></pre> <p><strong>4.3 字符串拼接用<code>join</code>而不是<code>+</code></strong></p> <pre><code># 不推荐写法，代码耗时：2.6秒 import string from typing import List  def concatString(string_list: List[str]) -&gt; str:     result = ''     for str_i in string_list:         result += str_i     return result  def main():     string_list = list(string.ascii_letters * 100)     for _ in range(10000):         result = concatString(string_list)  main()</code></pre> <p>当使用<code>a + b</code>拼接字符串时，由于 Python 中字符串是不可变对象，其会申请一块内存空间，将<code>a</code>和<code>b</code>分别复制到该新申请的内存空间中。因此，如果要拼接&nbsp;<img decoding="async" alt="[公式]" src="http://img.555519.xyz/uploads/20230108/674404853be91a5acc7e6ad5d2fa4de8.jpg">&nbsp;个字符串，会产生&nbsp;<img decoding="async" alt="[公式]" src="http://img.555519.xyz/uploads/20230108/674404853be91a5acc7e6ad5d2fa4de8.jpg">&nbsp;个中间结果，每产生一个中间结果都需要申请和复制一次内存，严重影响运行效率。而使用<code>join()</code>拼接字符串时，会首先计算出需要申请的总的内存空间，然后一次性地申请所需内存，并将每个字符串元素复制到该内存中去。</p> <pre><code># 推荐写法，代码耗时：0.3秒 import string from typing import List  def concatString(string_list: List[str]) -&gt; str:     return ''.join(string_list)  # 使用 join 而不是 +  def main():     string_list = list(string.ascii_letters * 100)     for _ in range(10000):         result = concatString(string_list)  main()</code></pre> <p>&nbsp;</p> <h2><strong>5. 利用<code>if</code>条件的短路特性</strong></h2> <pre><code># 不推荐写法，代码耗时：0.05秒 from typing import List  def concatString(string_list: List[str]) -&gt; str:     abbreviations = {'cf.', 'e.g.', 'ex.', 'etc.', 'flg.', 'i.e.', 'Mr.', 'vs.'}     abbr_count = 0     result = ''     for str_i in string_list:         if str_i in abbreviations:             result += str_i     return result  def main():     for _ in range(10000):         string_list = ['Mr.', 'Hat', 'is', 'Chasing', 'the', 'black', 'cat', '.']         result = concatString(string_list)  main()</code></pre> <p><code>if</code>&nbsp;条件的短路特性是指对<code>if a and b</code>这样的语句， 当<code>a</code>为<code>False</code>时将直接返回，不再计算<code>b</code>；对于<code>if a or b</code>这样的语句，当<code>a</code>为<code>True</code>时将直接返回，不再计算<code>b</code>。因此， 为了节约运行时间，对于<code>or</code>语句，应该将值为<code>True</code>可能性比较高的变量写在<code>or</code>前，而<code>and</code>应该推后。</p> <pre><code># 推荐写法，代码耗时：0.03秒 from typing import List  def concatString(string_list: List[str]) -&gt; str:     abbreviations = {'cf.', 'e.g.', 'ex.', 'etc.', 'flg.', 'i.e.', 'Mr.', 'vs.'}     abbr_count = 0     result = ''     for str_i in string_list:         if str_i[-1] == '.' and str_i in abbreviations:  # 利用 if 条件的短路特性             result += str_i     return result  def main():     for _ in range(10000):         string_list = ['Mr.', 'Hat', 'is', 'Chasing', 'the', 'black', 'cat', '.']         result = concatString(string_list)  main()</code></pre> <p>&nbsp;</p> <h2><strong>6. 循环优化</strong></h2> <p><strong>6.1 用<code>for</code>循环代替<code>while</code>循环</strong></p> <pre><code># 不推荐写法。代码耗时：6.7秒 def computeSum(size: int) -&gt; int:     sum_ = 0     i = 0     while i &lt; size:         sum_ += i         i += 1     return sum_  def main():     size = 10000     for _ in range(size):         sum_ = computeSum(size)  main()</code></pre> <p>Python 的<code>for</code>循环比<code>while</code>循环快不少。</p> <pre><code># 推荐写法。代码耗时：4.3秒 def computeSum(size: int) -&gt; int:     sum_ = 0     for i in range(size):  # for 循环代替 while 循环         sum_ += i     return sum_  def main():     size = 10000     for _ in range(size):         sum_ = computeSum(size)  main()</code></pre> <p><strong>6.2 使用隐式<code>for</code>循环代替显式<code>for</code>循环</strong></p> <p>针对上面的例子，更进一步可以用隐式<code>for</code>循环来替代显式<code>for</code>循环</p> <pre><code># 推荐写法。代码耗时：1.7秒 def computeSum(size: int) -&gt; int:     return sum(range(size))  # 隐式 for 循环代替显式 for 循环  def main():     size = 10000     for _ in range(size):         sum = computeSum(size)  main()</code></pre> <p><strong>6.3 减少内层<code>for</code>循环的计算</strong></p> <pre><code># 不推荐写法。代码耗时：12.8秒 import math  def main():     size = 10000     sqrt = math.sqrt     for x in range(size):         for y in range(size):             z = sqrt(x) + sqrt(y)  main() </code></pre> <p>上面的代码中<code>sqrt(x)</code>位于内侧<code>for</code>循环， 每次训练过程中都会重新计算一次，增加了时间开销。</p> <pre><code># 推荐写法。代码耗时：7.0秒 import math  def main():     size = 10000     sqrt = math.sqrt     for x in range(size):         sqrt_x = sqrt(x)  # 减少内层 for 循环的计算         for y in range(size):             z = sqrt_x + sqrt(y)  main() </code></pre> <p>&nbsp;</p> <h2><strong>7. 使用<code>numba.jit</code></strong></h2> <p>我们沿用上面介绍过的例子，在此基础上使用<code>numba.jit</code>。&nbsp;<code>numba</code>可以将 Python 函数 JIT 编译为机器码执行，大大提高代码运行速度。关于<code>numba</code>的更多信息见下面的主页：</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://link.zhihu.com/?target=http%3A//numba.pydata.org/"  rel="nofollow">http://numba.pydata.org/numba.pydata.org</a></p> <p>&nbsp;</p> <pre><code># 推荐写法。代码耗时：0.62秒 import numba  @numba.jit def computeSum(size: float) -&gt; int:     sum = 0     for i in range(size):         sum += i     return sum  def main():     size = 10000     for _ in range(size):         sum = computeSum(size)  main()</code></pre> <p>&nbsp;</p> <h2><strong>8. 选择合适的数据结构</strong></h2> <p>Python 内置的数据结构如<code>str</code>,&nbsp;<code>tuple</code>,&nbsp;<code>list</code>,&nbsp;<code>set</code>,&nbsp;<code>dict</code>底层都是 C 实现的，速度非常快，自己实现新的数据结构想在性能上达到内置的速度几乎是不可能的。</p> <p><code>list</code>类似于 C++ 中的<code>std::vector</code>，是一种动态数组。其会预分配一定内存空间，当预分配的内存空间用完，又继续向其中添加元素时，会申请一块更大的内存空间，然后将原有的所有元素都复制过去，之后销毁之前的内存空间，再插入新元素。删除元素时操作类似，当已使用内存空间比预分配内存空间的一半还少时，会另外申请一块小内存，做一次元素复制，之后销毁原有大内存空间。因此，如果有频繁的新增、删除操作，新增、删除的元素数量又很多时，list的效率不高。此时，应该考虑使用<code>collections.deque</code>。<code>collections.deque</code>是双端队列，同时具备栈和队列的特性，能够在两端进行&nbsp;<img decoding="async" alt="[公式]" src="http://img.555519.xyz/uploads/20230108/674404853be91a5acc7e6ad5d2fa4de8.jpg">&nbsp;复杂度的插入和删除操作。</p> <p><code>list</code>的查找操作也非常耗时。当需要在<code>list</code>频繁查找某些元素，或频繁有序访问这些元素时，可以使用<code>bisect</code>维护<code>list</code>对象有序并在其中进行二分查找，提升查找的效率。</p> <p>另外一个常见需求是查找极小值或极大值，此时可以使用<code>heapq</code>模块将<code>list</code>转化为一个堆，使得获取最小值的时间复杂度是&nbsp;<img decoding="async" alt="[公式]" src="http://img.555519.xyz/uploads/20230108/674404853be91a5acc7e6ad5d2fa4de8.jpg">&nbsp;。</p> <p>下面的网页给出了常用的 Python 数据结构的各项操作的时间复杂度：</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://link.zhihu.com/?target=https%3A//wiki.python.org/moin/TimeComplexity"  rel="nofollow">TimeComplexity - Python Wikiwiki.python.org</a></p> <p>&nbsp;</p> <p>&nbsp;</p> <p>&nbsp;</p> <h2><strong>参考资料</strong></h2> <ul> <li>David Beazley &amp; Brian K. Jones. Python Cookbook, Third edition. O'Reilly Media, ISBN: 9781449340377, 2013.</li> <li>张颖 &amp; 赖勇浩. 编写高质量代码：改善Python程序的91个建议. 机械工业出版社, ISBN: 9787111467045, 2014.</li> </ul> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-34217.htm">宠物领养系统毕业论文任务书怎么写（宠物领养项目计划书）</a></p>
+                                        <p>下一个：<a href="/news/article-34691.htm">利用Redis实现防止接口重复提交功能</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-28-free-clash-subscribe.htm" title="11月28日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度22.7M/S 免费Clash机场订阅">11月28日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度22.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-24-clash-v2ray-ss-ssr.htm" title="11月24日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度20.2M/S 免费Clash机场订阅">11月24日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度20.2M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-4-free-node-subscribe.htm" title="6月4日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.8M/S">6月4日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.8M/S</a></li>
+                        <li class="py-2"><a href="/news/article-29717.htm" title="宠物猫打疫苗一共多少钱一针（宠物猫打疫苗要多少钱）">宠物猫打疫苗一共多少钱一针（宠物猫打疫苗要多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-32303.htm" title="宠物粮食成本分析表（宠物粮食原材料）">宠物粮食成本分析表（宠物粮食原材料）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-29-free-node-subscribe-links.htm" title="7月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅">7月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-22-free-clash.htm" title="9月22日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅">9月22日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-27-free-high-speed-nodes.htm" title="6月27日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度21.8M/S 免费Clash机场订阅">6月27日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度21.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-4-shadowrocket-node.htm" title="11月4日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅">11月4日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-12-free-clash-subscribe.htm" title="8月12日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅">8月12日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">9</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
