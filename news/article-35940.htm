@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-35940.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>递归调用</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="今天cf遇见了一点问题，是自己学过却不怎么熟悉的递归调用。 &nbsp; &nbsp; 递归定义使人们能够用有限的语句描述一个无穷的集合。C++语言允许一个函数体中出现调用自身的语句，成为直接递归调用" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>今天cf遇见了一点问题，是自己学过却不怎么熟悉的递归调用。</p> <p>&nbsp; &nbsp; 递归定义使人们能够用有限的语句描述一个无穷的集合。C++语言允许一个函数体中出现调用自身的语句，成为直接递归调用。也允许被调用的另一个函数反过来调用原函数，策划功能为间接递归调用。这种功能为递归结构问题提供了求解的实现手段，使程序语言的描述与问题的自然描述完全一直，因而使程序易于理解、易于维护。</p> <p>&nbsp; &nbsp; 通过简单的例子说明递归函数的构成规律和执行过程。</p> <p>&nbsp; &nbsp; 使用递归函数编程序求n！</p> <p>&nbsp; &nbsp; 当n&gt;=0时，阶乘可以用循环迭代（非递归）计算：</p> <pre><code class="language-cpp">fact=1; for(int k=n;k&gt;=1;k--) fact*=k;</code></pre> <p></p> <p>也可以用另一种递归形式定义阶乘：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230207/173b878cd2c44c637ddbd608e3272ed2.jpg" alt="递归调用"></p> <p>&nbsp; &nbsp; 阶乘的递归定义把问题分为两部分，一部分用已知的参数n作为被乘数，另一部分使用原来的阶乘定义作为参数。不过，乘数n*（n-1）的规模变小了，以此类推，问题的规模进一步缩小，从而产生越来越小的问题，最后归结到基本情况，0！=1。C++函数调用能够识别并处理这种基本情况，向前一个函数调用并返回结果，并回溯一系列的中间结果，直到把最终结果返回给调用函数。</p> <p>&nbsp; &nbsp; 以下程序在main函数中调用求阶乘的递归函数。</p> <pre><code class="language-cpp">#include&lt;iostream&gt; using namespace std; long fact(int n) { 	if (n == 0) 		return 1; 	else 		return n*fact(n - 1); } int main() { 	int n; 	cout &lt;&lt; "Enter n(n&gt;=0):"; 	cin &gt;&gt; n; 	cout &lt;&lt; n &lt;&lt; "!="&lt;&lt;fact(n) &lt;&lt; endl; 	return 0; }</code></pre> <p> &nbsp; &nbsp; 递归函数执行由递推和回归两个过程完成。递归函数之所以能够实现，关键是系统使用堆栈来保存函数调用中的传值参数、局部变量和函数调用后的返回地址。函数自身调用进行递推：系统把有关参数和地址压进堆栈，一直递推到满足终止条件，找到问题的最基本模式为止。然后进行回归：系统从堆栈中逐层弹出有关参数和地址，执行地址所指向的代码，一直到栈空为止，得到问题的解。</p> <p>&nbsp; &nbsp; 递归调用与一般函数调用，堆栈管理的操作过程是一致的。不同的是，函数的自身调用就像是产生多个正在运行（等待结束）的相同函数副本。如果这种调用不能终止并产生副本，将是程序十分严重的错误。</p> <p>&nbsp; &nbsp; 构成递归函数有两个基本要素：</p> <p>&nbsp; &nbsp; 描述问题规模逐步缩小的递归算法；</p> <p>&nbsp; &nbsp; 描述基本情况的递归 终止条件。</p> <p>&nbsp; &nbsp; &nbsp;在fact函数中，递归调用的语句为：</p> <pre><code class="language-cpp">    t=n*fact(n - 1);</code></pre> <p>由调用参数n-1，使问题规模逐渐缩小，直至到达递归带哦用终止条件：</p> <pre><code class="language-cpp">    n==0</code></pre> <p>&nbsp; &nbsp; 返回基本情况值1.</p> <p>&nbsp; &nbsp; 在程序中，递归算法和递归条件通常用条件语句表达。递归调用可以出现在语句中，也可以出现在判断表达式中。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-35458.htm">郑州市动物防疫站电话查询（郑州市动物防疫站电话查询是多少）</a></p>
+                                        <p>下一个：<a href="/news/article-35941.htm">网页中的动态加载(js文件和css文件即换肤)</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-34216.htm" title="MyBatis-Plus 高级功能多租户功能实现">MyBatis-Plus 高级功能多租户功能实现</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-26-free-high-speed-nodes.htm" title="10月26日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅">10月26日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22.8M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-28-shadowrocket-node.htm" title="12月28日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅地址">12月28日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-35940.htm" title="递归调用">递归调用</a></li>
+                        <li class="py-2"><a href="/news/article-20660.htm" title="宠物粮食价格表图片高清（宠物粮食图片大全）">宠物粮食价格表图片高清（宠物粮食图片大全）</a></li>
+                        <li class="py-2"><a href="/news/article-36606.htm" title="动物疫苗价格排行前十的有哪些品种呢 动物疫苗价格排行前十的有哪些品种呢图片">动物疫苗价格排行前十的有哪些品种呢 动物疫苗价格排行前十的有哪些品种呢图片</a></li>
+                        <li class="py-2"><a href="/news/article-21570.htm" title="如何加快循环操作和Numpy数组运算速度！">如何加快循环操作和Numpy数组运算速度！</a></li>
+                        <li class="py-2"><a href="/news/article-23403.htm" title="私人协议签字按手印法律上生效吗（私人协议按手印有法律效应吗）">私人协议签字按手印法律上生效吗（私人协议按手印有法律效应吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-4-shadowrocket-node.htm" title="11月4日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅">11月4日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-free-subscribe-node.htm" title="12月12日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.6M/S 免费Clash机场订阅">12月12日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.6M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
