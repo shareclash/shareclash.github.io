@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-37102.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理 前言 相信很多人对迭代器和生成器都不陌生，当提到async和await的原理时，大部分人可能都知道async、aw" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2 id="掌握javascript中的迭代器和生成器顺便了解一下asyncawait的原理">掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理</h2> <h3 id="前言">前言</h3> <p>相信很多人对迭代器和生成器都不陌生，当提到async和await的原理时，大部分人可能都知道async、await是Promise+生成器的语法糖，其原理具体是怎么做的呢？下面通过这篇文章带你详细了解一下迭代器和生成器，以及带你从生成器一步步推导到async和await。</p> <h3 id="1迭代器iterator">1.迭代器（Iterator）</h3> <h4 id="11什么是迭代器">1.1.什么是迭代器？</h4> <blockquote> <p>迭代器是确使用户在<strong>容器对象</strong>（链表或数组）上遍访的对象，使用该接口无需关心对象的内部实现细节。</p> </blockquote> <ul> <li> <p>迭代器的定义可能比较抽象，简单来说<strong>迭代器就是一个对象</strong>，可用于帮助我们对<strong>某个数据结构</strong>（链表、数组）进行<strong>遍历</strong>；</p> </li> <li> <p>在JavaScript中，迭代器也是一个具体的对象，并且这个对象必须符合<strong>迭代器协议</strong>（iterator protocol）；</p> </li> <li> <p>什么是迭代器协议？</p> <ul> <li>在JavaScript中就是指这个对象必须实现一个<strong>特定的next方法</strong>，并且next方法有如下要求；</li> <li>next方法可<strong>接收0个或者1个参数</strong>（在生成器中next可以接收1个参数），并且需返回一个对象，对象包含以下两个属性： <ul> <li><strong>done</strong>：值为Boolean，如果迭代器可以迭代产生下一个值，就为false，如果已经迭代完毕，就为true；</li> <li><strong>value</strong>：迭代器返回的值，如果done为true，value一般为undefined；</li> </ul> </li> </ul> </li> <li> <p>编写一个最简单的迭代器：</p> <pre><code class="language-js">const iterator = {   next: function() {     return { done: false, value: 123 }   } }</code></pre> </li> </ul> <h4 id="12迭代器的基本使用">1.2.迭代器的基本使用</h4> <blockquote> <p>明白了迭代器的基本定义，下面就来实现一下符合迭代器协议的对象吧，并且看看其它的一些基本用法。比如，需要通过迭代器访问一个数组：</p> </blockquote> <p><strong>（1）创建一个迭代器对象</strong></p> <pre><code class="language-js">const names = ['curry', 'kobe', 'klay']  let index = 0 // 通过一个index来记录当前访问的位置 const iterator = {   next() {     if (index &lt; names.length) {       return { done: false, value: names[index++] }     } else {       return { done: true, value: undefined }     }   } }  console.log(iterator.next()) // { done: false, value: 'curry' } console.log(iterator.next()) // { done: false, value: 'kobe' } console.log(iterator.next()) // { done: false, value: 'klay' } console.log(iterator.next()) // { done: true, value: undefined }</code></pre> <p><strong>（2）实现生成迭代器的函数</strong></p> <ul> <li>如果每次需要去访问一个数组就去编写一个对应的迭代器对象肯定是很麻烦的；</li> <li>可以封装一个函数，用于生成一个访问数组的迭代器；</li> </ul> <pre><code class="language-js">function createIterator(arr) {   let index = 0   return {     next() {       if (index &lt; arr.length) {         return { done: false, value: arr[index++] }       } else {         return { done: true, value: undefined }       }     }   } }</code></pre> <pre><code class="language-js">const names = ['curry', 'kobe', 'klay'] // 调用createIterator函数，生成一个访问names数组的迭代器 const namesIterator = createIterator(names)  console.log(namesIterator.next()) // { done: false, value: 'curry' } console.log(namesIterator.next()) // { done: false, value: 'kobe' } console.log(namesIterator.next()) // { done: false, value: 'klay' } console.log(namesIterator.next()) // { done: true, value: undefined }</code></pre> <h4 id="13可迭代对象">1.3.可迭代对象</h4> <h5 id="131什么是可迭代对象">1.3.1.什么是可迭代对象？</h5> <blockquote> <p>上面提到了迭代器是一个对象，并且符合迭代器协议，那么什么是可迭代对象呢？它与迭代器又有什么区别？</p> </blockquote> <ul> <li>迭代器是一个符合<strong>迭代器协议（iterator protocol）</strong>的对象，对象内实现了一个特定的next方法；</li> <li>而可迭代对象是一个符合<strong>可迭代协议（iterable protocol）</strong>的对象，对象内实现了一个<code>Symbol.iterator</code>方法，并且该方法返回一个迭代器对象；</li> <li>所以，可以说可迭代对象包含了迭代器对象，可迭代对象中实现了一个特定方法用于返回迭代器对象；</li> </ul> <p>如下，<code>iteratorObj</code>就是一个可迭代对象：</p> <pre><code class="language-js">const iteratorObj = {   names: ['curry', 'kobe', 'klay'],   [Symbol.iterator]: function() {     let index = 0     return {       // 注意：这里的next需要使用箭头函数，否则this访问不到iteratorObj       next: () =&gt; {         if (index &lt; this.names.length) {           return { done: false, value: this.names[index++] }         } else {           return { done: true, value: undefined }         }       }     }   } }</code></pre> <pre><code class="language-js">// 调用iteratorObj中的Symbol.iterator得到一个迭代器 const iterator = iteratorObj[Symbol.iterator]()  console.log(iterator.next()) // { done: false, value: 'curry' } console.log(iterator.next()) // { done: false, value: 'kobe' } console.log(iterator.next()) // { done: false, value: 'klay' } console.log(iterator.next()) // { done: true, value: undefined }</code></pre> <h5 id="132js内置的可迭代对象">1.3.2.JS内置的可迭代对象</h5> <blockquote> <p>上面的可迭代对象都是由自己实现的，其实在JavaScript中为我们提供了很多可迭代对象，如：String、Array、Map、Set、arguments对象、NodeList（DOM集合）等。</p> </blockquote> <pre><code class="language-js">// 1.String const str = 'abc'  const strIterator = str[Symbol.iterator]() console.log(strIterator.next()) // { value: 'a', done: false } console.log(strIterator.next()) // { value: 'b', done: false } console.log(strIterator.next()) // { value: 'c', done: false } console.log(strIterator.next()) // { value: undefined, done: true }  // 2.Array const names = ['curry', 'kobe', 'klay'] console.log(names[Symbol.iterator])  const namesIterator = names[Symbol.iterator]() console.log(namesIterator.next()) // { value: 'curry', done: false } console.log(namesIterator.next()) // { value: 'kobe', done: false } console.log(namesIterator.next()) // { value: 'klay', done: false } console.log(namesIterator.next()) // { value: undefined, done: true }  // 3.Map/Set const set = new Set set.add(10) set.add(20) set.add(30)  const setIterator = set[Symbol.iterator]() console.log(setIterator.next()) // { value: 10, done: false } console.log(setIterator.next()) // { value: 20, done: false } console.log(setIterator.next()) // { value: 30, done: false } console.log(setIterator.next()) // { value: undefined, done: true }</code></pre> <h5 id="133可迭代对象应用场景">1.3.3.可迭代对象应用场景</h5> <blockquote> <p>可迭代对象在实际应用中特别常见，像一些语法的使用、创建一些对象和方法调用都用到了可迭代对象。</p> </blockquote> <ul> <li> <p><strong>JS中的语法</strong>：for...of、展开语法、解构等。</p> <ul> <li> <p>for...of可用于遍历一个可迭代对象，其原理就是利用迭代器的next函数，如果done为false，就从返回的对象中拿到value返回给我们，而对象不是一个可迭代对象，所以对象不能使用for...of遍历；</p> <pre><code class="language-js">const num = [1, 2, 3] for (const item of num) {   console.log(item) // 1 2 3 } // 遍历上面自己定义的可迭代对象iteratorObj也是可以的 for (const item of iteratorObj) {   console.log(item) // curry kobe klay }</code></pre> <pre><code class="language-js">const obj = { name: 'curry', name: 30 } for (const key of obj) {   console.log(key) }</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/643ac420133698eca09f38b2819ce1fe.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> </li> <li> <p>为什么数组能使用展开语法，其原理也是用到了迭代器，在使用<code>...</code>对数组进行展开时，也是通过迭代器的next去获取数组的每一项值，然后存放到新数组中；</p> <pre><code class="language-js">const names = ['james', 'green'] // 将数组和iteratorObj通过扩展进行合并 const newNames = [...names, ...iteratorObj] console.log(newNames) // [ 'james', 'green', 'curry', 'kobe', 'klay' ]</code></pre> </li> <li> <p>可迭代对象都是可以使用解构语法的，像数组、字符串为什么可以使用解构，其原因就在这，原理也是通过迭代器一个个取值然后再赋值给对应变量；</p> <pre><code class="language-js">const str = 'abc' const nums = [1, 2, 3]  const [str1, str2, str3] = str console.log(str1, str2, str3) // a b c  const [num1, num2, num3] = nums console.log(num1, num2, num3) // 1 2 3  const [name1, name2, name3] = iteratorObj console.log(name1, name2, name3) // curry kobe klay</code></pre> </li> <li> <p><strong>注意</strong>：在扩展语法和解构语法中，我们知道数组可以使用，但是对象也可以使用呀，为什么没有提到对象呢？因为对象的扩展和解构是在ES9中新增的特性，其原理并不是使用迭代器实现的，只是ECMA提供给我们的一种操作对象的新语法而已；</p> </li> </ul> </li> <li> <p><strong>JS创建对象</strong>：new Map([Iterable])、new WeakMap([Iterable])、new Set([Iterable])、new WeakSet([Iterable])等。</p> <pre><code class="language-js">// 1.Set const set = new Set(iteratorObj) console.log(set) // Set(3) { 'curry', 'kobe', 'klay' }  // 2.Array.from const names = Array.from(iteratorObj) console.log(names) // [ 'curry', 'kobe', 'klay' ]</code></pre> </li> <li> <p><strong>JS方法调用</strong>：Promise.all(Iterable)、Promise.race(Iterable)、Array.from(Iterable)等。</p> <pre><code class="language-js">// 传入的可迭代对象中的每个值，会使用Promise.resolve进行包裹 Promise.all(iteratorObj).then(res =&gt; {   console.log(res) // [ 'curry', 'kobe', 'klay' ] })</code></pre> </li> </ul> <p><strong>扩展</strong>：现在我们都知道了for...of可用于遍历一个可迭代对象，如果在遍历过程中终端了呢？因为使用<code>break、continue、return、throw</code>都是可以中断遍历的，既然for...of遍历的原理是基于迭代器的，那么在for...of中进行中断操作，一定是可以被迭代器监听到的，上面说了，在迭代器中有一个next方法，其实还可以<strong>指定一个return方法，如果遍历过程中断了，就会去调用return方法</strong>，注意return方法也要返回和next方法一样的对象。这种情况就称之为<strong>迭代器的中断</strong>。</p> <pre><code class="language-js">const iteratorObj = {   names: ['curry', 'kobe', 'klay'],   [Symbol.iterator]: function() {     let index = 0     return {       next: () =&gt; {         if (index &lt; this.names.length) {           return { done: false, value: this.names[index++] }         } else {           return { done: true, value: undefined }         }       },       return() {         console.log('哎呀，我被中断了！')         return { done: true, value: undefined }       }     }   } }  for (const item of iteratorObj) {   console.log(item)   if (item === 'kobe') break }</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/c1ca5886b18666c66c160e227e8269d3.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <h5 id="134自定义可迭代类">1.3.4.自定义可迭代类</h5> <blockquote> <p>上面提到了对象不是一个可迭代对象，所以对象不能使用for...of遍历，如果我们想要实现通过for...of遍历对象呢？那么可以自己实现一个类，这个类的实例化对象是可迭代对象。</p> </blockquote> <ul> <li>实现一个Person类，并且Person类中实现了<code>Symbol.iterator</code>方法用于返回一个迭代器；</li> <li>Person类的实例化对象<code>p</code>中包含一个friends数组，通过for...of遍历<code>p</code>对象时，可以将friends数组的每一项遍历出来；</li> </ul> <pre><code class="language-js">class Person {   constructor(name, age, friends) {     this.name = name     this.age = age     this.friends = friends   }    [Symbol.iterator]() {     let index = 0     return {       next: () =&gt; {         if (index &lt; this.friends.length) {           return { done: false, value: this.friends[index++] }         } else {           return { done: true, value: undefined }         }       }     }   } }</code></pre> <p>简单看一下效果：</p> <pre><code class="language-js">const p = new Person('curry', 30, ['kobe', 'klay', 'green']) for (const name of p) {   console.log(name) // kobe klay green }</code></pre> <h3 id="2生成器generator">2.生成器（Generator）</h3> <h4 id="21什么是生成器">2.1.什么是生成器？</h4> <blockquote> <p>生成器是ES6中新增的一种控制函数执行的方案，它可以帮助我们控制函数的暂停和执行。生成器是一种特殊的迭代器，所以生成器也是一个对象，并且可以调用next方法。那么怎么创建一个生成器对象呢？</p> </blockquote> <p>创建生成器对象需要使用<strong>生成器函数</strong>，生成器函数和普通函数不一样，主要有以下特点：</p> <ul> <li>生成器函数的声明需要在function后加上一个符号<code>*</code>；</li> <li>在生成器函数中可以使用<code>yield</code>关键字来分割函数体代码，控制函数的执行；</li> <li>生成器函数调用的返回值就是生成器对象了；</li> </ul> <h4 id="22生成器的基本使用">2.2.生成器的基本使用</h4> <blockquote> <p>实现一个生成器函数，该函数的执行可以通过返回的生成器对象进行控制。</p> </blockquote> <pre><code class="language-js">function* generatorFn() {   console.log('函数开始执行~')    console.log('函数第一段代码执行...')   yield   console.log('函数第二段代码执行...')   yield   console.log('函数第三段代码执行...')   yield   console.log('函数第四段代码执行...')    console.log('函数执行结束~') }  // 调用generatorFn获取生成器 const generator = generatorFn()  generator.next() console.log('------------------------') generator.next() console.log('------------------------') generator.next() console.log('------------------------') generator.next()</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/280b9ab1670c8a1f7d100ed974489cff.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <h4 id="23生成器next方法的返回值">2.3.生成器next方法的返回值</h4> <blockquote> <p>上面说到了生成器是一种特殊的迭代器，那么调用next方法肯定也是有返回值的，并且返回值是一个包含done、value属性的对象。</p> </blockquote> <pre><code class="language-js">function* generatorFn() {   console.log('函数第一段代码执行...')   yield   console.log('函数第二段代码执行...')   yield   console.log('函数第三段代码执行...')   yield   console.log('函数第四段代码执行...') }  // 调用generatorFn获取生成器 const generator = generatorFn()  console.log(generator.next()) console.log('------------------------') console.log(generator.next()) console.log('------------------------') console.log(generator.next()) console.log('------------------------') console.log(generator.next())</code></pre> <p>从打印结果可以看出来，next返回的对象中value是没有值的，当执行到最后一段代码后，done的值就为true了：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/3cd158f86713b7211d7a7d114ff92289.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <p>如果需要指定next返回值中的value，那么可以通过在<code>yield</code>后面跟上一个值或者表达式，就可以将对应的值传递到next返回对象value中了。</p> <pre><code class="language-js">function* generatorFn() {   console.log('函数第一段代码执行...')   yield 10   console.log('函数第二段代码执行...')   yield 20   console.log('函数第三段代码执行...')   yield 30   console.log('函数第四段代码执行...') }  // 调用generatorFn获取生成器 const generator = generatorFn()  console.log(generator.next()) console.log('------------------------') console.log(generator.next()) console.log('------------------------') console.log(generator.next()) console.log('------------------------') console.log(generator.next())</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/9f6d0e0d5765e5234e247501e094ed56.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <p>观察以上打印结果，在执行完第四段代码后，调用的next返回值为<code>{ value: undefined, done: true }</code>，原因是后面已经没有<code>yield</code>了，而且当函数没有指定返回值时，最后会默认执行<code>return undefined</code>。</p> <h4 id="24生成器next方法的参数传递">2.4.生成器next方法的参数传递</h4> <blockquote> <p>在前面介绍迭代器定义时，提到迭代器的next可以传递0个或1个参数，而可以传递1个参数的情况就是生成器的next可以传递一个参数，而给每一段代码传递过去的参数可以通过yield来接收。</p> </blockquote> <pre><code class="language-js">function* generatorFn(value) {   console.log('函数第一段代码执行...', value)   const value1 = yield 10    console.log('函数第二段代码执行...', value1)   const value2 = yield 20    console.log('函数第三段代码执行...', value2)   const value3 = yield 30    console.log('函数第四段代码执行...', value3) }  // 调用generatorFn获取生成器 const generator = generatorFn('参数0')  console.log(generator.next()) console.log('------------------------') console.log(generator.next('参数1')) console.log('------------------------') console.log(generator.next('参数2')) console.log('------------------------') console.log(generator.next('参数3'))</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/eb596c4d2cf3f8d2c30729740ccc8299.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <p><strong>next参数传递解释</strong>：</p> <ul> <li>next中传递的参数是会被上一个<code>yield</code>接收的，这样可以方便下面代码使用这个参数，所以给next传递参数，需要从第二个next开始传递；</li> <li>如果第一段代码需要使用参数呢？可以在调用生成器函数时传递参数过去，供第一段代码使用；</li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/1043ba0a0eb4c29a9901afc985741da4.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <h4 id="25生成器的return方法">2.5.生成器的return方法</h4> <blockquote> <p>return方法也可以给生成器函数传递参数，但是调用return后，生成器函数就会中断，之后再调用next就不会再继续生成值了。</p> </blockquote> <pre><code class="language-js">function* generatorFn() {   console.log('函数第一段代码执行...')   yield    console.log('函数第二段代码执行...')   yield    console.log('函数第三段代码执行...')   yield    console.log('函数第四段代码执行...') }  // 调用generatorFn获取生成器 const generator = generatorFn()  console.log(generator.next()) console.log('------------------------') console.log(generator.next()) console.log('------------------------') console.log(generator.return(123)) console.log('------------------------') console.log(generator.next()) console.log(generator.next()) console.log(generator.next()) console.log(generator.next()) console.log(generator.next())</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/56f38c42edc782df5869704a9db53a94.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <p>上面的执行return方法，相当于函数内部执行了return：</p> <pre><code class="language-js">function* generatorFn() {   console.log('函数第一段代码执行...')   yield    console.log('函数第二段代码执行...')   const value = yield   return value    console.log('函数第三段代码执行...')   yield    console.log('函数第四段代码执行...') }  // 调用generatorFn获取生成器 const generator = generatorFn()  console.log(generator.next()) console.log('------------------------') console.log(generator.next()) console.log('------------------------') console.log(generator.next(123)) console.log('------------------------') console.log(generator.next()) console.log(generator.next()) console.log(generator.next()) console.log(generator.next()) console.log(generator.next())</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/02c8a65f9a72dbdb5e8893142bdc1d79.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <h4 id="26生成器的throw方法">2.6.生成器的throw方法</h4> <blockquote> <p>throw方法可以给生成器函数内部抛出异常。</p> </blockquote> <ul> <li>生成器调用throw方法抛出异常后，可以在生成器函数中进行捕获；</li> <li>通过<code>try catch</code>捕获异常后，后续的代码还是可以正常执行的；</li> </ul> <pre><code class="language-js">function* generatorFn() {   console.log('函数第一段代码执行...')   yield 10    console.log('函数第二段代码执行...')   try {     yield 20   } catch (err) {     console.log(err)   }    console.log('函数第三段代码执行...')   yield 30    console.log('函数第四段代码执行...') }  // 调用generatorFn获取生成器 const generator = generatorFn()  console.log(generator.next()) console.log('------------------------') console.log(generator.next()) console.log('------------------------') console.log(generator.throw('err message')) console.log('------------------------') console.log(generator.next())</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/610e6b19f210876771b1d100276b2a6e.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <h4 id="27生成器替换迭代器">2.7.生成器替换迭代器</h4> <blockquote> <p>在前面实现了一个生成迭代器的函数，实现过程还需要进行判断，并自己返回对应的对象，下面就用生成器来实现一个生成迭代器的函数。</p> </blockquote> <ul> <li> <p>方式一：根据数组元素的个数，执行yield；</p> <pre><code class="language-js">function* createIterator(arr) {   let index = 0   yield arr[index++]   yield arr[index++]   yield arr[index++] }</code></pre> </li> <li> <p>方式二：遍历数组，执行yield；</p> <pre><code class="language-js">function* createIterator(arr) {   for (const item of arr) {     yield item   } }</code></pre> </li> <li> <p>方式三：执行<code>yield*</code>，后面可以跟上一个可迭代对象，它会依次迭代其中每一个值；</p> <pre><code class="language-js">function* createIterator(arr) {   yield* arr }</code></pre> </li> </ul> <p>测试一下以上三种方法，执行结果都是一样的：</p> <pre><code class="language-js">const names = ['curry', 'kobe', 'klay'] const iterator = createIterator(names)  console.log(iterator.next()) // { value: 'curry', done: false } console.log(iterator.next()) // { value: 'kobe', done: false } console.log(iterator.next()) // { value: 'klay', done: false } console.log(iterator.next()) // { value: undefined, done: true }</code></pre> <h3 id="3异步请求的处理方案">3.异步请求的处理方案</h3> <blockquote> <p>在进行异步请求时，如果出现了这样一个需求，下一次的请求需要拿到上一次请求的结果。如下是使用Promise封装的一个request方法。</p> </blockquote> <pre><code class="language-js">function request(url) {   return new Promise((resolve, reject) =&gt; {     setTimeout(() =&gt; {       resolve(url)     }, 300)   }) }</code></pre> <p>实现上面的需求可以怎么做呢？</p> <h4 id="31方案一使用promise的then进行嵌套调用">3.1.方案一：使用Promise的then进行嵌套调用</h4> <ul> <li>在then中拿到结果后，再去做下一次请求，以此类推；</li> <li>缺点：形成了回调地狱；</li> </ul> <pre><code class="language-js">request('/aaa').then(res =&gt; {   request(res + '/bbb').then(res =&gt; {     request(res + '/ccc').then(res =&gt; {       console.log(res) // /aaa/bbb/ccc     })   }) })</code></pre> <h4 id="32方案二使用promise的then的返回值">3.2.方案二：使用Promise的then的返回值</h4> <ul> <li>虽然可以解决回调地狱问题，但是阅读性不佳；</li> </ul> <pre><code class="language-js">request('/aaa').then(res =&gt; {   return request(res + '/bbb') }).then(res =&gt; {   return request(res + '/ccc') }).then(res =&gt; {   console.log(res) // /aaa/bbb/ccc })</code></pre> <h4 id="33方案三使用promise和generator处理">3.3.方案三：使用Promise和Generator处理</h4> <pre><code class="language-js">function* getRequestData() {   const res1 = yield request('/aaa')   const res2 = yield request(res1 + '/bbb')   const res3 = yield request(res2 + '/ccc')   console.log(res3) }</code></pre> <ul> <li> <p>手动执行生成器的next方法；</p> <pre><code class="language-js">const generator = getRequestData() generator.next().value.then(res =&gt; {   generator.next(res).value.then(res =&gt; {     generator.next(res).value.then(res =&gt; {       generator.next(res) // /aaa/bbb/ccc     })   }) })</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/564d01f881a009b5f8cd7652861eb965.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> </li> <li> <p>自动执行生成器的next方法：如果手动执行嵌套层级过多的话是不方便的，那么可以借助递归的思想实现一个自动执行生成器的函数；</p> <pre><code class="language-js">function autoGenerator(generatorFn) {   const generator = generatorFn()    function recursion(res) {     const result = generator.next(res)     // 如果done值为true，说明结束了     if (result.done) return result.value     // 没有结束，继续调用Promise的then     result.value.then(res =&gt; {       recursion(res)     })   }    recursion() }  autoGenerator(getRequestData) // /aaa/bbb/ccc</code></pre> </li> <li> <p>使用第三方库来执行生成器：像自动执行生成器函数，早就已经有第三方库帮助我们实现了，如<code>co</code>；</p> <pre><code class="language-js">const co = require('co') co(getRequestData) // /aaa/bbb/ccc</code></pre> </li> </ul> <h4 id="34方案四使用async和await">3.4.方案四：使用async和await</h4> <blockquote> <p>async和await是我们解决异步回调的最终解决方案，它可以让我们异步的代码，看上去是同步执行的。</p> </blockquote> <pre><code class="language-js">async function getRequestData() {   const res1 = await request('/aaa')   const res2 = await request(res1 + '/bbb')   const res3 = await request(res2 + '/ccc')   console.log(res3) }  getRequestData() // /aaa/bbb/ccc</code></pre> <h3 id="4async和await的原理">4.async和await的原理</h3> <blockquote> <p>相信从上面讲述的四个异步请求的处理方案中，就可以看出来async、await和生成器的关系了。</p> </blockquote> <ul> <li>将生成器函数的<code>*</code>换成<code>async</code>；</li> <li>将生成器函数中的<code>yield</code>换成<code>await</code>；</li> <li>两种方案所体现出的效果和代码书写形式几乎差不多；</li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/d5067d8c0e255769768a4bd7915db0c9.jpg" alt="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理"></p> <p><strong>总结</strong>：</p> <ul> <li>async和await的原理其实就是<strong>Promise+生成器</strong>实现的；</li> <li>为什么async、await能够让异步代码看上去是同步执行的，其原因就在于生成器的next方法可以对函数内代码的执行进行控制，当上一次请求拿到结果后，再去执行下一次next；</li> <li>所以为什么说async和await只是Promise+生成器的语法糖，其原理就在这；</li> </ul> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-36606.htm">动物疫苗价格排行前十的有哪些品种呢 动物疫苗价格排行前十的有哪些品种呢图片</a></p>
+                                        <p>下一个：<a href="/news/article-37103.htm">猫咪三针疫苗间隔时间（猫咪三针疫苗间隔多久）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-30874.htm" title="pandas读取CSV文件报错：编码错误 ，无法读取">pandas读取CSV文件报错：编码错误 ，无法读取</a></li>
+                        <li class="py-2"><a href="/news/article-27130.htm" title="宠物狗批发网站大全（宠物狗批发价格）">宠物狗批发网站大全（宠物狗批发价格）</a></li>
+                        <li class="py-2"><a href="/news/article-32302.htm" title="宠物疫苗常温下可以保存多久（宠物疫苗常温下可以保存多久呢）">宠物疫苗常温下可以保存多久（宠物疫苗常温下可以保存多久呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-4-shadowrocket-node.htm" title="11月4日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅">11月4日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-clash-node-daily-updates.htm" title="11月20日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度22.4M/S 免费Clash机场订阅">11月20日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度22.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-7-free-subscribe-node.htm" title="1月7日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度20.8M/S 免费Clash机场订阅地址">1月7日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度20.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-28048.htm" title="为vscode开发一款svn右键菜单扩展">为vscode开发一款svn右键菜单扩展</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-17-free-high-speed-nodes.htm" title="10月17日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.3M/S 免费Clash机场订阅">10月17日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.3M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-22033.htm" title="《C语言及程序设计》程序阅读——宏定义">《C语言及程序设计》程序阅读——宏定义</a></li>
+                        <li class="py-2"><a href="/news/article-25266.htm" title="小动物疫苗注射证明是疫苗本吗 动物疫苗注射证明怎么开">小动物疫苗注射证明是疫苗本吗 动物疫苗注射证明怎么开</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
