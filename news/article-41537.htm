@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-41537.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>领域事件和集成事详解</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="前言 随着系统架构的演变，有很多名词也随之涌现，如：微服务、灰度发布、资源隔离、容器、领域/集成事件等，听着的确高大上，让很多小伙伴有一种无法征服的感觉；其实很多东西可能之前就已经用过了，只是名字不这" />
+    
+    <!-- Favicon -->
+    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h3 id="前言">前言</h3> <p>随着系统架构的演变，有很多名词也随之涌现，如：微服务、灰度发布、资源隔离、容器、领域/集成事件等，听着的确高大上，让很多小伙伴有一种无法征服的感觉；其实很多东西可能之前就已经用过了，只是名字不这么叫而已，就算没应用上也别慌，现在很多轮子都很成熟，用起来很容易上手的。这里就来说说比较常见的领域事件和集成事件。</p> <h3 id="正文">正文</h3> <h4 id="1概述">1.概述</h4> <p>微服务和DDD盛行的时代，领域事件和集成事件经常被提及到；对于事件，小伙伴可以根据不同场景去理解，比如点击一个按钮时，这个就是一个事件(点击事件)，又或者说当购买商品时付款成功，也可以理解为一个事件，就像咱们在生活中对每一件事的定义是一样的。</p> <h5 id="11-领域事件">1.1 领域事件</h5> <p><strong>领域事件（Domain Event）是在一个特定领域由一个动作触发的，是发生在过去的行为产生的事件(行为可以是人操作的，也可以是系统自动的)</strong> ；</p> <p>其实在项目中，<strong>通常咱们会把领域事件用在一个应用程序进程内</strong>，比如说在用户管理时，当用户注册成功时，需要发送邮件或短信提醒； 其中用户管理可以简单理解为一个领域，用户注册成功就是事件，而发送提醒就是针对事件的处理方式。</p> <p>这里可能对领域的比喻不是特别恰当，如果小伙伴想更多了解，可以看看DDD(领域驱动设计)相关资料。</p> <p>对于我个人的理解，<strong>我认为领域事件的主要目的是为了让代码更加容易维护，让业务更加容易扩展，也就是对代码业务层面的优化</strong>。如下图：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/545ada22810cf5ab3dd05404b9463ef3.jpg" alt="领域事件和集成事详解"></p> <p>对于原始这种方式，相信很多小伙伴也和我曾经一样写过这样的代码逻辑，不用想什么代码顺序，直接撸码就行了，但是这样扩展性不好，比如我想加一个微信发送怎么办，还得在原来基础上继续加，如果过两天不要短信发送了，还得去改原来代码。这样是不是违背了软件开发的<strong>开闭原则</strong>，尽量还是少改原有逻辑的代码，避免重复修改、重复测试。</p> <p>对于优化后的这种方式，只需要在注册成功之后发布一个事件出来就行了，至于后面要发送什么样的消息不用管，只要捕获到事件消息，只需新增额外扩展的处理器类即可，就算是取消，只需不捕获对应的事件就行，无需改动原有用户注册代码的逻辑。这种方式的事件就可以理解为领域事件。</p> <p>小伙伴回想一下，之前在优化代码的时候是不是也这样做过，只是当时不称它为领域事件。</p> <h5 id="12-集成事件">1.2 集成事件</h5> <p><strong>集成事件(IntegrationEvent)同样也是指在过去的行为产生的事件(行为可以是人操作的，也可以是系统自动的)，一般用于跨多个微服务或外部系统。</strong></p> <p>比如现在的电商系统，订单模块和物流模块会拆分为不同微服务，通常在订单支付成功之后，物流模块需要知道订单相关的明细，这样才会根据订单进行物流跟踪。所以订单在付款成功之后，就会发布一个事件出去，物流系统订阅到事件之后就可以处理对应业务逻辑。</p> <p><strong>对于集成事件的主要目的我认为就是为了让服务模块之间或系统之间的对接耦合性变低，只要约定好事件类型，发事件模块和处理事件的模块就会有很少对接，便于扩展和维护</strong>。如图：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e82c984fec710f46986671e9c88741d6.jpg" alt="领域事件和集成事详解"></p> <p>原始的这种方式，像我有点年长的小伙伴应该之前都用过，当然现在有很多传统企业项目也是这种方式。这种方式主要是通过接口的形式进行模块或系统之间的对接，这样对接成本稍微偏高，因为订单服务还需要开发调用物流服务接口的逻辑，还要各种联调，考虑接口超时、失败等各种情况；另外如果还有其他业务模块的系统需要对接怎么办，如果接口规范不一样，还得重复再开发一套调用逻辑，这样后面订单服务这个模块就变得很臃肿，而且模块间的耦合性比较高。</p> <p>优化后的方式就相对来说比较好，对订单付款成功之后，只需将事件发布出去就行了，剩下的不用过多干涉，对应的业务模块订阅到消息之后进行相关业务处理即可；这种模式就算有其他业务模块加入也会很便捷，模块间的耦合性比较低。由于模块间的消息需要传输，所以就需要EventBus来做这个事了。这种方式看上去不错，但<strong>需要第三方的消息中间件做消息转发和存储</strong>，如RabbitMq、Kafka等；另外使用过程中，消息的持久化、消息丢失的情况都需要考虑，后续会单独出相关系列的文章说这块。</p> <h4 id="2演示">2.演示</h4> <p>对于技术落地，大神都把轮子造好了，咱们拿来就可以用啦。</p> <h5 id="21-领域事件">2.1 领域事件</h5> <ul> <li> <p><strong>技术简介</strong></p> <p><strong>MediatR是用.Net实现的简单中介者模式，无需其他依赖就能处理进程内的消息传递，支持请求/响应、命令、查询、通知和事件的同步或异步传递，通过C#的泛型智能调度</strong>。</p> <p>这里就不详细说了，详细说明小伙伴们可以看我之前分享的这篇文章《<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzU1MzYwMjQ5MQ==&amp;mid=2247484243&amp;idx=1&amp;sn=0ab57e2fde642fd42a96e40127579ba5&amp;chksm=fbf11f87cc8696915b77b6b09c31be30fc2c079acd640a77e7b19cd3a26a6e41e9e2302adbd4#rd"  target="_blank" rel="nofollow">跟我一起学.NetCore之MediatR好像有点火</a>》</p> </li> <li> <p><strong>案例实操</strong></p> <p>准备一个API项目，引入对应的Nuget包，并注册相关服务，如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e3a07e017ea94beacb8d52315acd9f4d.jpg" alt="领域事件和集成事详解"></p> <p>模拟用户注册成功发布领域事件，这里在默认的控制器里添加一个接口进行测试，代码如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/dbb5b13751b702347c2a0dbe323b164b.jpg" alt="领域事件和集成事详解"></p> <p>发布的事件信息其实就是一个对象信息，只是该类按照MediatR约定继承对应的接口即可，如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e9985e0cb48c7b57636431b7f0208c32.jpg" alt="领域事件和集成事详解"></p> <p>增加对事件的处理逻辑，即捕获到事件之后如何处理，代码如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/b482c66954231dae719e8d73939f6c79.jpg" alt="领域事件和集成事详解"></p> <p>这个处理类可以根据需要增加，这里增加一个邮件的和短信的，如果还需要其他方式的，只需要按照约定继承对应的接口，并实现对应的方法处理业务逻辑即可。</p> <p>运行起来看效果：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/50578e3d34ab54147ed07caea277a953.jpg" alt="领域事件和集成事详解"></p> <p>是不是用起来很Easy~~~，集成事件也是一样。</p> </li> </ul> <h5 id="22-集成事件">2.2 集成事件</h5> <ul> <li> <p><strong>技术简介</strong></p> <p>这块自己比较常用是CAP和Masstransit，关于CAP自己也分享过一篇文章《<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzU1MzYwMjQ5MQ==&amp;mid=2247485515&amp;idx=1&amp;sn=0285c048ac4c5a4456fd52208cc8acc0&amp;chksm=fbf1149fcc869d897f2f46ff00a6d59baad8cdcbb0370818d9b9adeb4b348608bfd4b63f5a7d#rd"  target="_blank" rel="nofollow">分布式事务最终一致性-CAP框架轻松搞定</a>》，也可以用其进行事件的发布，这里就不在赘述。</p> <p><strong>Masstransit是一个免费的、开源的.NET 分布式应用程序框架，轻量级的消息总线(EventBus)</strong> ，即专门用来传输和接收消息的；集成很多消息中间件，如：RabbitMQ、AcitveMQ、Azure Service Bus、Kafka、Redis等，这里我们主要说应用，更多详情小伙伴们查看官网，如下：</p> <p>官网地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://masstransit-project.com/getting-started/"  target="_blank" rel="nofollow">http://masstransit-project.com/getting-started/</a></p> <p>开源地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/MassTransit/MassTransit"  target="_blank" rel="nofollow">https://github.com/MassTransit/MassTransit</a></p> </li> <li> <p><strong>案例实操</strong></p> <p>其实可以用内存的方式进行演示，但为了更符合真实场景，这里采用RabbitMQ的方式进行演示，所以首先需要安装RabbitMQ，为了方便，还是用Docker的方式进行安装，如果对Docker还不了解的小伙伴，可以查阅我分享的系列文章《<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzU1MzYwMjQ5MQ==&amp;action=getalbum&amp;album_id=2002073750875308033#wechat_redirect"  target="_blank" rel="nofollow">Docker系列</a>》。</p> <p>在确保有Docker的环境下，执行如下命令即可：</p> <pre><code>docker run -di --name myrabbit -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin -p 15672:15672 -p 5672:5672 -p 25672:25672 -p 61613:61613 -p 1883:1883 rabbitmq:management</code></pre> <p>这个命令指定了默认用户为admin，默认密码也是admin，如果能正常登陆RabbitMQ系统，代表安装成功了，如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/45e77aad9f0b35df8cbe405813a800a1.jpg" alt="领域事件和集成事详解"></p> <p>注：我这里用的是阿里云服务器，所以需要在安全组和防火墙中开启端口15672和5672的访问，15672是RabbitMQ的Web界面，5672是程序之间通信需要用到的。</p> <p>准备两个API项目，一个模拟订单发布事件，一个模拟物流订阅事件，首先都需要引入相关的Nuget包：<strong>MassTransit、MassTransit.RabbitMQ</strong>，并注册相关服务，如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c184ddfa1105dcb705cb9d5bcd6bf2a6.jpg" alt="领域事件和集成事详解"></p> <p>模拟订单发布付款成功事件，在默认的控制器中增加对应的接口进行演示，如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/54629da1364c3527f5be94d7a4ab03dd.jpg" alt="领域事件和集成事详解"></p> <p>事件的定义这里为了方便直接定义为公共的类库，同样就是一个简单的类，里面的内容如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/8e5a084cda14fdcab40cae4486dbc504.jpg" alt="领域事件和集成事详解"></p> <p><strong>物流模块</strong></p> <p>模拟物流订阅付完款成功事件，这里需要稍微注意一下，因为订阅到事件之后需要进行相关的业务处理，所以在注册服务的时候，需要把对应的处理器也注册上，处理类的逻辑如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/b8771d6bf205b97ec126cf5d19ad198f.jpg" alt="领域事件和集成事详解"></p> <p>将处理器也进行注册，如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/bca8e07b1b4861f9dd2475fd41917b0d.jpg" alt="领域事件和集成事详解"></p> <p>启动时候订单的端口为5001，物流模块的端口为5000，只要避免两个模块的端口不一样就行，端口不能重复用，这样就可以运行看效果了，两个模块都启动起来：</p> <p>在订单模块访问发布接口，物流模块收到事件消息之后就会马上处理如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/178dba10aa9dba3d8d011da242145b05.jpg" alt="领域事件和集成事详解"></p> <p>注：以上演示方式没有指定对应队列，所以采用的是RabbitMQ中的Fanout模式，Fanout是一种广播机制的发布与订阅模式，也就是所有的订阅者都可以收到生产者发布的事件，实际场景中这种模式用的不多，通常比较常用的是direct模式，小伙伴可以根据实际情况指定即可；关于RabbitMQ系列的文章我正在整理，后续会分享给大家。</p> </li> </ul> <p>相关源码地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://gitee.com/CodeZoe/dot-net-core-study-demo"  target="_blank" rel="nofollow">https://gitee.com/CodeZoe/dot-net-core-study-demo</a></p> <h3 id="总结">总结</h3> <p>关于领域事件和集成事件的介绍和使用暂时先说这么多，只是简单介绍了我对领域事件和集成事件的理解及应用，更多细节还得小伙伴根据实际业务需求进配置和改进，但用法就是这么简单；对于消息丢失、持久化等相关问题，后续会跟随消息队列的文章分享出来。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-41034.htm">回收宠物电话多少（宠物回收店价格表）</a></p>
+                                        <p>下一个：<a href="/news/article-41538.htm">同安哪里有宠物医院 同安哪里有宠物医院啊</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-35941.htm" title="网页中的动态加载(js文件和css文件即换肤)">网页中的动态加载(js文件和css文件即换肤)</a></li>
+                        <li class="py-2"><a href="/news/article-25733.htm" title="python读取HDFS文件">python读取HDFS文件</a></li>
+                        <li class="py-2"><a href="/news/article-39556.htm" title="合肥宠物店收狗吗（合肥宠物店收狗吗多少钱）">合肥宠物店收狗吗（合肥宠物店收狗吗多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-34689.htm" title="Python加速技巧">Python加速技巧</a></li>
+                        <li class="py-2"><a href="/news/article-23405.htm" title="动物疫苗注射方法有哪些图片及价格（动物疫苗接种方法）">动物疫苗注射方法有哪些图片及价格（动物疫苗接种方法）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-31-node-share.htm" title="10月31日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度19.6M/S 免费Clash机场订阅">10月31日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度19.6M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-22949.htm" title="动物疫苗接种方法介绍（动物疫苗接种方法介绍图片）">动物疫苗接种方法介绍（动物疫苗接种方法介绍图片）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-18-node-share-links.htm" title="12月18日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20M/S 免费Clash机场订阅">12月18日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-31267.htm" title="动物疫苗贵吗多少钱一针啊（动物疫苗价格查询）">动物疫苗贵吗多少钱一针啊（动物疫苗价格查询）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-27-free-subscribe-node.htm" title="10月27日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.8M/S 免费Clash机场订阅">10月27日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.8M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
