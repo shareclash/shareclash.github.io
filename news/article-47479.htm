@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-47479.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Python  turtle  模块可以编写游戏，是真的吗？</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="turtle （小海龟） 是Python 内置的一个绘图模块，其实它不仅可以用来绘图，还可以制作简单的小游戏，甚至可以当成简易的GUI 模块，编写简单的GUI 程序。 本文使用turtle 模块编写一" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-47479.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="Python  turtle  模块可以编写游戏，是真的吗？" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/445137fa2062059317c5dfbcdb3097bd.webp" />
+        <meta property="og:release_date" content="2025-01-28T09:33:05" />
+    <meta property="og:updated_time" content="2025-01-28T09:33:05" />
+        <meta property="og:description" content="turtle （小海龟） 是Python 内置的一个绘图模块，其实它不仅可以用来绘图，还可以制作简单的小游戏，甚至可以当成简易的GUI 模块，编写简单的GUI 程序。 本文使用turtle 模块编写一" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python  turtle  模块可以编写游戏，是真的吗？">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				</h1> <p><strong><code>turtle</code></strong> （小海龟） 是<strong>Python</strong> 内置的一个绘图模块，其实它不仅可以用来绘图，还可以制作简单的小游戏，甚至可以当成简易的<strong>GUI</strong> 模块，编写简单的<strong>GUI</strong> 程序。</p> <p>本文使用<strong><code>turtle</code></strong> 模块编写一个简单的小游戏，通过此程序的编写过程聊一聊对<code>turtle</code>  模块的感悟。</p> <p>编写游戏，如果要做专业的、趣味性高的，还是请找<strong><code>pygame</code></strong>，本文用<strong><code>turtle</code></strong> 编写游戏的目的是为了深度理解<strong><code>turtle</code></strong>  的功能。</p> <p><code>turtle</code> 模块的使用相对而言较简单，对于基础方法不做讲解。只聊<code>turtle</code> 模块中稍难或大家忽视的地方。</p> <h2 id="2-需求描述">2. 需求描述</h2> <p>程序运行时，画布上会出现<strong><code>一个红色的小球</code></strong>和<strong><code>很多绿色、蓝色的小球</code></strong>。</p> <p>刚开始红色的小球会朝某一个方向移动，使用者可以通过按下上、下、左、右方向键控制红色小球的运动方向。</p> <p>绿色、蓝色小球以初始的默认方向在画布上移动。</p> <p>当红色的小球碰到绿色小球时，红色小球球体会变大，当红色小球碰到蓝色小球时，红色球体会变小。</p> <p>当红色小球球体缩小到某一个阈值时，游戏结束。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/9e9e5053b659f953c627aaf1843a7f3f.jpg" alt="Python  turtle  模块可以编写游戏，是真的吗？"></p> <h2 id="3-制作流程">3. 制作流程</h2> <h3 id="31--初始化变量">3.1  初始化变量</h3> <p>本程序需要使用到<strong><code>turtle</code>、<code>random</code>、<code>math</code></strong> 模块，使用之前，先导入。</p> <pre><code class="language-python">import turtle import random import math ''' 初始化游戏界面大小 ''' # 游戏区域的宽度 game_wid = 600   # 游戏区域的高度 game_hei = 400   # 砖块的大小，以及每一个小球初始大小 cell = 20 # 红球初始大小 red_size = cell # 红色小球 red_ball = None # 存储绿色小球的列表 green_balls = [] # 存储蓝色小球的列表 blue_balls = [] # 红色小球的方向 当前方向 0 向右，90 向上 180 向左 -90 向下 dir = 0</code></pre> <p><strong>上述代码说明：</strong></p> <p>红色小球只有一个，由变量<code>red_ball</code> 保存，红色小球在运动过程中可以改大小，<code>red_size</code> 保存其大小。</p> <p>绿色和蓝色小球会有很多，这里使用<code>green_balls</code> 和<code>blue_balls</code> 2 个列表存储。</p> <h3 id="32-通用函数">3.2 通用函数</h3> <p><strong>随机位置计算函数：</strong> 为小球们随机生成刚开始出现的位置。</p> <pre><code class="language-python">''' 随机位置计算函数 ''' def rand_pos():     # 水平有 30 个单元格，垂直有 20 个单元格     x = random.randint(-14, 14)     y = random.randint(-9, 9)     return x * cell, y * cell</code></pre> <p><strong>绘制指定填充颜色的小正方形：</strong> 在游戏里有一个虚拟区域，四周使用很多小正方形围起来。</p> <pre><code class="language-python">''' 绘制一个指定填充颜色的正方形 填充颜色可以不指定 ''' def draw_square(color):     if color is not None:         # 的颜色就填充         turtle.fillcolor(color)         turtle.begin_fill()     for i in range(4):         turtle.fd(cell)         turtle.left(90)     if color is not None:         turtle.end_fill()</code></pre> <p><strong>自定义画笔形状：</strong></p> <p><strong>使用<code>turtle</code>  制作游戏的底层思想：</strong></p> <p>当我们导入<code>turtle</code> 模块时，意味着我们有了一支可以在画布上画画的画笔，画笔的默认形状是一个小海龟。</p> <p>本文称这支默认画笔叫<strong>主画笔</strong>，可以使用<code>turtle</code> 模块中的<code>turtle.Turtle()</code> 类创建更多画笔 ，并且可以使用 ``turtle<code>模块提供的</code>turtle.register_shape(name, shape)` 方法为每一支画笔定制画笔形状。</p> <p>如上所述，是使用<code>turtle</code> 设计游戏的关键。</p> <p><strong>强调一下：</strong></p> <p><em>通过主画笔创建更多的画笔，以及为每一支画笔设置不同的形状。</em>是编写游戏的关键，游戏中的每一个角色，其本质是一支支画笔，我们只是在控制画笔在画布上按我们设计好的轨迹移动。</p> <p>本游戏中红、绿、蓝  3 种颜色的小球就是形状为圆形的画笔。</p> <blockquote> <p><strong>画笔清单：</strong></p> <p>红色小球画笔一支。</p> <p>绿色小球画笔 n 支。</p> <p>蓝色小球画笔 n 支。</p> </blockquote> <pre><code class="language-python">''' 自定义画笔形状 name:画笔名称 color:可选项 ''' def custom_shape(name, size):     turtle.begin_poly()     turtle.penup()     turtle.circle(size)     turtle.end_poly()     cs = turtle.get_poly()     turtle.register_shape(name, cs)</code></pre> <p><code>turtle.register_shape(name, shape)</code> 方法参数说明：</p> <ul> <li> <p><strong>name：</strong> 自定义形状的名称。</p> </li> <li> <p><strong>shape：</strong> 由开发者绘制的形状。</p> <blockquote> <p><strong>开发者绘制的哪一部分图形用来充当画笔形状？</strong></p> <p>由<strong><code>turtle.begin_poly()</code></strong> 记录的第一点到由<strong><code>turtle.end_poly()</code></strong> 记录的最后一点之间的图形作为画笔形状。</p> <p><code>cs = turtle.get_poly()</code> 可以理解为获取到刚绘制的图形，然后使用<code>turtle.register_shape(name, cs)</code> 注册画笔形状，以后就可以随时使用此形状。</p> <p><strong>如上代码记录了一个圆的绘制过程，也就是创建了一个圆形的画笔形状。</strong></p> </blockquote> </li> </ul> <p><strong>移动到某个位置函数：</strong></p> <p>此函数用来让某一支画笔移到指定位置，不留下移动过程中的轨迹。</p> <pre><code class="language-python">''' 移到某点 ''' def move_pos(pen, pos):     pen.penup()     pen.goto(pos)     pen.pendown()</code></pre> <p><strong>参数说明：</strong></p> <ul> <li><code>pen</code> : 画笔对象。</li> <li><code>pos</code>：要移到的目标地。</li> </ul> <p><strong>注册键盘事件函数：</strong></p> <p>使用者可以通过键盘上的方向键更改红色小球的方向。</p> <p><code>turtle</code> 模块提供有很多事件，可以以交互式的方式使用<code>turtle</code>。<code>turtle</code> 模块中主要有 2 类事件：键盘事件、点击事件。因<code>turtle</code> 的工作重点还是绘制静态图案上，其动画绘制比较弱，所以它的事件少而简单。</p> <pre><code class="language-python">''' 改变红色小球 4 方向的函数， 这些函数只有当使用者触发按键后方可调用，故这些函数也称为回调函数。 ''' def dir_right():     global dir     dir = 0 def dir_left():     global dir     dir = 180 def dir_up():     global dir     dir = 90 def dir_down():     global dir     dir = -90     ''' 注册键盘响应事件，用来改变红球的方向 ''' def register_event():     for key, f in {"Up": dir_up, "Down": dir_down, "Left": dir_left, "Right": dir_right}.items():         turtle.onkey(f, key)     turtle.listen() ''' 当红色小球遇到墙体后，也要修改方向 '''     def is_meet_qt():     global dir     if red_ball.xcor() &lt; -220:         dir = 0     if red_ball.xcor() &gt; 240:         dir = 180     if red_ball.ycor() &gt; 140:         dir = -90     if red_ball.ycor() &lt; -120:         dir = 90</code></pre> <p>红色的小球在 2 个时间点需要改变方向，一是使用者按下了方向键，一是碰到了墙体。</p> <h3 id="33-游戏角色函数">3.3 游戏角色函数</h3> <p><strong>绘制墙体函数：</strong></p> <p>墙体是游戏中的虚拟区域，用来限制小球的活动范围。</p> <blockquote> <p><strong>Tips：</strong> 墙体由主画笔绘制。</p> </blockquote> <pre><code class="language-python">''' 绘制四面的墙体 ''' def draw_blocks():     # 隐藏画笔     turtle.hideturtle()     # 上下各30个单元格，左右各 20 个单元格     for j in [30, 20, 30, 20]:         for i in range(j):             # 调用前面绘制正方形的函数             draw_square('gray')             turtle.fd(cell)         turtle.right(90)         turtle.fd(-cell)     # 回到原点     move_pos(turtle, (0, 0))</code></pre> <p><strong>创建小球画笔：</strong> 此函数用来创建新画笔。本程序中的红色、蓝色、绿色小球都是由此函数创建的画笔，且外观形状是圆。</p> <pre><code class="language-python">def init_ball(pos, color, shape):     #  由主画笔创建新画笔     ball = turtle.Turtle()     ball.color(color)     # 指定新画笔的形状，如果不指定，则为默认形状     ball.shape(shape)     # 移到随机位置     move_pos(ball, pos)     # 移动过程要不显示任何轨迹     ball.penup()     return ball</code></pre> <p>参数说明：</p> <ul> <li><strong><code>pos</code>：</strong>  创建画笔后画笔移动的位置。</li> <li><strong><code>color</code>：</strong>指定画笔和填充颜色。</li> <li><strong><code>shape</code>：</strong> 已经定义好的画笔形状名称。</li> </ul> <p><strong>创建绿色、蓝色小球：</strong></p> <pre><code class="language-python">def ran_gb_ball(balls, color):     # 随机创建蓝色、绿色小球的频率，     # 也就是说，不是调用此函数就一定会创建小球，概率大概是调用 5 次其中会有一次创建     ran = random.randint(1, 5)     # 随机一个角度     a = random.randint(0, 360)     # 1/5 的概率     if ran == 5:         turtle.tracer(False)         # 每一个小球就是一只画笔         ball = init_ball(rand_pos(), color, 'ball')         ball.seth(a)         # 添加到列表中         balls.append(ball)         turtle.tracer(True)</code></pre> <p><strong>为什么要设置一个概率值？</strong></p> <p>适当控制蓝色、绿色小球的数量。</p> <p><code>turtle.tracer(False)</code> 方法的作用：是否显示画笔绘制过程中的动画。<code>False</code> 关闭动画效果，<code>True</code> 打开动画效果。</p> <p>这里设置为<code>False</code> 的原因是不希望用户看到新画笔创建过程。</p> <p><strong>蓝色、绿色小球的移动函数：</strong></p> <p>蓝色、绿色小球被创建后会移到一个随机位置，然后按默认方向移动。</p> <pre><code class="language-python">def gb_ball_m(balls):     s = 20     a = random.randint(0, 360)     r = random.randint(0, 10)     for b in balls:         b.fd(s)         if b.xcor() &lt; -220 or b.xcor() &gt; 240 or b.ycor() &gt; 140 or b.ycor() &lt; -120:             b.goto(rand_pos())</code></pre> <p>当小球碰到墙体后让其再随机移到墙体内部（简单粗粗暴！！）。</p> <p><strong>红色球是否碰到了蓝色或绿色小球：</strong></p> <p>此函数逻辑不复杂，计算小球相互之间的坐标，判断坐标是否重叠。</p> <pre><code class="language-python">''' 红球是否碰到绿、蓝球 ''' def r_g_b_meet():     global red_size     # 红色小球的坐标     s_x, s_y = red_ball.pos()     # 迭代绿色小球，蓝色小球列表     for bs in [green_balls, blue_balls]:         for b in bs:             # 计算蓝色或绿色小球坐标             f_x, f_y = b.pos()             # 计算和红色球之间的距离             x_ = math.fabs(s_x - f_x)             y_ = math.fabs(s_y - f_y)             # 碰撞距离：两个球的半径之和             h = cell + red_size             if 0 &lt;= x_ &lt;= h and y_ &gt;= 0 and y_ &lt;= h:                 if b in green_balls:                     # 遇到绿色球红球变大                     red_size += 2                 if b in blue_balls:                     # 遇到蓝色球红球变大                     red_size -= 2                 # 关键代码                     custom_shape('red', red_size)                 return True     return False</code></pre> <p>上述代码整体逻辑不复杂。而<code> custom_shape('red', red_size)</code> 是关键代码，因红色小球的半径发生了变化，所以需要重新定制红色小球的外观形状，这样才能在画布上看到半径变化的红色小球。</p> <h3 id="34-让小球动起来">3.4 让小球动起来</h3> <p><strong>怎样让小球动起来？</strong></p> <p>每隔一定时间，让小球重新移动。<code> turtle.ontimer(ball_move, 100)</code> 是让小球动起来的核心逻辑，每隔一定时间，重新移动红、蓝、绿外观如圆形状的小球。</p> <pre><code class="language-python">def ball_move():     red_ball.seth(dir)     red_ball.fd(40)     # 检查红球是否碰到墙体     is_meet_qt()     # 随机创建绿色小球     ran_gb_ball(green_balls, 'green')     # 随机创建蓝色小球     ran_gb_ball(blue_balls, 'blue')     # 让绿色小球移动     gb_ball_m(green_balls)     # 让蓝色小球移动     gb_ball_m(blue_balls)     # 检查红球是否碰到蓝色、绿色小球     r_g_b_meet()     # 定时器     turtle.ontimer(ball_move, 100)</code></pre> <p><strong>主方法：</strong></p> <pre><code class="language-python">if __name__ == "__main__":     # 关闭动画效果     turtle.tracer(False)     # 注册事件     register_event()     # 定制 2 种画笔形状     for name in ['red', 'ball']:         custom_shape(name, cell)     # 主画笔移动墙体的左上角     move_pos(turtle, (-300, 200))     # 绘制墙体     draw_blocks()     red_ball = init_ball(rand_pos(), 'red', 'red')     turtle.tracer(True)     # 让红球移动起来     ball_move()     #     turtle.done()</code></pre> <p>以上为此游戏程序中的每一个函数讲解。</p> <p>运行后，可以控制红色小球，当遇到绿色球和蓝色球时，红色球体会变大或变小。</p> <h2 id="4-总结">4. 总结</h2> <p>使用<code>turtle</code> 模块的过程说明了一个道理，没有所谓简单的知识，如果你认为简单，那是因为你对它的认知太浅。只是学到了大家都学到的内容。</p> <p>如果要真正悟透知识点的内核，需要多查阅官方文档，把所有内容吃透，并试着把这些知识向更高层面拔高。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-46993.htm">如何去除小狗身上的跳蚤（怎么去除小狗狗身上的跳蚤）</a></p>
+                                        <p>下一个：<a href="/news/article-47480.htm">济南有宠物领养中心嘛 济南有宠物领养中心嘛多少钱</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-34217.htm" title="宠物领养系统毕业论文任务书怎么写（宠物领养项目计划书）">宠物领养系统毕业论文任务书怎么写（宠物领养项目计划书）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-clash-subscribe.htm" title="12月9日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度18.2M/S 免费Clash机场订阅">12月9日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度18.2M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-13-clash-v2ray-ss-ssr.htm" title="1月13日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.4M/S 免费Clash机场订阅地址">1月13日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-28522.htm" title="自己买疫苗去宠物店打多少钱（自己买疫苗去宠物店打多少钱啊）">自己买疫苗去宠物店打多少钱（自己买疫苗去宠物店打多少钱啊）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-24-free-clash.htm" title="12月24日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19.7M/S 免费Clash机场订阅地址">12月24日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-41034.htm" title="回收宠物电话多少（宠物回收店价格表）">回收宠物电话多少（宠物回收店价格表）</a></li>
+                        <li class="py-2"><a href="/news/article-44523.htm" title="重庆的宠物批发市场在哪里（重庆的宠物批发市场在哪里啊）">重庆的宠物批发市场在哪里（重庆的宠物批发市场在哪里啊）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-19-free-clash.htm" title="11月19日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度18.6M/S 免费Clash机场订阅">11月19日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度18.6M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-17-free-high-speed-nodes.htm" title="10月17日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.3M/S 免费Clash机场订阅">10月17日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.3M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-22-clash-windows.htm" title="11月22日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度19.6M/S 免费Clash机场订阅">11月22日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度19.6M/S 免费Clash机场订阅</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
