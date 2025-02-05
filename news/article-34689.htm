@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://shareclash.github.io/news/article-34689.htm" />
@@ -10,16 +10,44 @@
         <meta name="description" content="Python 是一种脚本语言，相比 C/C++ 这样的编译语言，在效率和性能方面存在一些不足。但是，有很多时候，Python 的效率并没有想象中的那么夸张。本文对一些 Python 代码加速运行的技巧" />
     
     <!-- Favicon -->
-    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-34689.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="Python加速技巧" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/5f10ba4123a645ffe1d66305c144ab89.webp" />
+        <meta property="og:release_date" content="2025-01-02T09:59:37" />
+    <meta property="og:updated_time" content="2025-01-02T09:59:37" />
+        <meta property="og:description" content="Python 是一种脚本语言，相比 C/C++ 这样的编译语言，在效率和性能方面存在一些不足。但是，有很多时候，Python 的效率并没有想象中的那么夸张。本文对一些 Python 代码加速运行的技巧" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python加速技巧">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!-- Vendor CSS Files -->
-    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
@@ -91,16 +119,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-7-14-clash-node-daily-updates.htm" title="7月14日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20M/S 免费Clash机场订阅">7月14日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-8-free-shadowrocket-node.htm" title="11月8日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.5M/S 免费Clash机场订阅">11月8日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.5M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-5-clash-node.htm" title="9月5日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度22M/S 免费Clash机场订阅">9月5日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/news/article-34689.htm" title="Python加速技巧">Python加速技巧</a></li>
-                        <li class="py-2"><a href="/news/article-31823.htm" title="Java原生HttpClient的使用详解_java">Java原生HttpClient的使用详解_java</a></li>
-                        <li class="py-2"><a href="/news/article-34956.htm" title="动物疫苗上市企业有哪些品牌的（国内动物疫苗龙头企业）">动物疫苗上市企业有哪些品牌的（国内动物疫苗龙头企业）</a></li>
-                        <li class="py-2"><a href="/news/article-32782.htm" title="免费领养宠物的正规平台上海有哪些地方（上海免费领养宠物猫）">免费领养宠物的正规平台上海有哪些地方（上海免费领养宠物猫）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-24-free-clash.htm" title="12月24日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19.7M/S 免费Clash机场订阅地址">12月24日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度19.7M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-12-free-clash.htm" title="11月12日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度20.3M/S 免费Clash机场订阅">11月12日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度20.3M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-7-node-share.htm" title="12月7日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19M/S 免费Clash机场订阅">12月7日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-33281.htm" title="动物疫苗有哪几种类型（我国疫苗有几种类型）">动物疫苗有哪几种类型（我国疫苗有几种类型）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-29-clash-windows.htm" title="1月29日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.6M/S 免费Clash机场订阅地址">1月29日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度18.6M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-22951.htm" title="动物疫苗在哪里打的好呢 动物疫苗在哪里打的好呢知乎">动物疫苗在哪里打的好呢 动物疫苗在哪里打的好呢知乎</a></li>
+                        <li class="py-2"><a href="/news/article-22491.htm" title="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具">C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-34217.htm" title="宠物领养系统毕业论文任务书怎么写（宠物领养项目计划书）">宠物领养系统毕业论文任务书怎么写（宠物领养项目计划书）</a></li>
+                        <li class="py-2"><a href="/news/article-35941.htm" title="网页中的动态加载(js文件和css文件即换肤)">网页中的动态加载(js文件和css文件即换肤)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-15-shadowrocket-node.htm" title="1月15日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度20.2M/S 免费Clash机场订阅地址">1月15日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度20.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-37598.htm" title="动物疫苗是处方药吗知乎（动物疫苗属于疫苗吗）">动物疫苗是处方药吗知乎（动物疫苗属于疫苗吗）</a></li>
+                        <li class="py-2"><a href="/news/article-42031.htm" title="太原哪里批发狗粮（太原哪里有批发狗粮的地方?）">太原哪里批发狗粮（太原哪里有批发狗粮的地方?）</a></li>
+                        <li class="py-2"><a href="/news/article-41033.htm" title="动物疫苗间隔时间多长打一次比较好（动物疫苗多长时间内打）">动物疫苗间隔时间多长打一次比较好（动物疫苗多长时间内打）</a></li>
                     </ul>
     </div>
 </div>
@@ -112,31 +140,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

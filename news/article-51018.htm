@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-51018.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Dapr 远程调试之 Nocalhost</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="虽然Visual studio 、Visual studio code 都支持debug甚至远程debug ，Dapr 搭配Bridge to Kubernetes 支持在计算机上调试 Dapr 应用" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-51018.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="Dapr 远程调试之 Nocalhost" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/3361c65913f4ff827aa21eeb35f55190.webp" />
+        <meta property="og:release_date" content="2025-02-04T00:28:39" />
+    <meta property="og:updated_time" content="2025-02-04T00:28:39" />
+        <meta property="og:description" content="虽然Visual studio 、Visual studio code 都支持debug甚至远程debug ，Dapr 搭配Bridge to Kubernetes 支持在计算机上调试 Dapr 应用" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Dapr 远程调试之 Nocalhost">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>虽然Visual studio 、Visual studio code 都支持debug甚至远程debug ，Dapr 搭配<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.dapr.io/developing-applications/debugging/bridge-to-kubernetes/"  target="_blank" rel="nofollow">Bridge to Kubernetes</a> 支持在计算机上调试 Dapr 应用程序，同时仍然让它们与 Kubernetes 集群上运行的服务和应用程序进行交互。 但是在调试过程中，难免修改配置、添加调试信息、修改代码并验证，这样就需要提交代码，重新编译、部署以验证功能是否符合预期，这样就拉长时间线，拉低了开发效率。一个系统可能还好点，如何项目A调用B、B又调用C，想要调试C，本地调试的话就需要配置3套环境，分别运行3个项目，流程线可想而知。</p> <p>今天要给大家介绍一款神奇nocalhost, Nocalhost 是一款腾讯云Coding团队 开源的基于 IDE 的云原生应用开发工具，下面是摘抄自他的文档介绍，<a title="https://nocalhost.dev/zh-CN/docs/introduction/" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://nocalhost.dev/zh-CN/docs/introduction/"  rel="nofollow">https://nocalhost.dev/zh-CN/docs/introduction/</a>：</p> <ul> <li><strong>直接在 Kubernetes 集群中构建、测试和调试应用程序</strong></li> <li>提供易于使用的 IDE 插件（支持 VS Code 和 JetBrains），即使在 Kubernetes 集群中进行开发和调试，Nocalhost 也能保持和本地开发一样的开发体验</li> <li><strong>使用即时文件同步进行开发：</strong> 即时将您的代码更改同步到远端容器，而无需重建镜像或重新启动容器。</li> </ul> <p><img decoding="async" width="800" src="https://nocalhost.dev/zh-CN/img/intro/coding-in-cluster.gif" alt="Dapr 远程调试之 Nocalhost"/></p> <p>使用Nocalhost直接在k8s中进行开发，有如下几点优势：</p> <ul> <li>生产环境相似 - 开发环境与你的生产环境非常相似，让你更有信心在发布新功能时一切都像在生产环境中一样工作。</li> <li>更改即时生效 - 通过文件同步，对代码的所有更改都可以在容器中立即生效，而无需重建镜像或重新部署容器，从而提升开发效率，特别是可以借助于dotnet的热重载hot reload技术在云原生场景下搞笑开发。</li> <li>灵活的扩展性 - 开发人员无需再担心本地资源不足。</li> <li>降低成本 - 更有效地使用资源并降低 IT 设施成本，特别是很多公司都是虚拟化的场景下，本地的windows 机器不支持docker，用户无需在本地电脑配置开发、调试、测试环境，可以直接使用远端的云原生开发环境进行开发 。</li> <li>方便调试 - Nocalhost支持远程debug，可以方便地在本地计算机上复现线上的问题。</li> <li>减少本地配置 - 由于线上、测试环境已经部署过，Nocalhost使用这些现成的资源，不需再在本地安装数据库、redis等进行配置，也不必担心本地资源的限制，从而可以更愉快地本地开发，远程k8s部署并调试。</li> </ul> <p></p> <p>Nocalhost 由单个二进制 CLI 和 IDE 插件组成，可以直接与IDE 一起配合调试程序。 Nocalhost 不需要服务器端组件，因为它通过 KubeConfig 直接与 Kubernetes 集群通信，就像 kubectl 一样。</p> <p> Nocalhost远程调试过程，主要分为Start DevMode启动调试模式、Associate Local DIR关联本地目录、设置断点、Remote Debug远程调试、本地请求接口、查看断点处信息等过程。</p> <p>Visual Studio code 安装nocalhost 插件，在查看-扩展的搜索框中，搜索nocalhost，点击安装，即可进行快速安装Nocalhost插件。默认安装在C:\Users\xxx\.nh\目录下，生成的kubeConfigs也会在这个目录下。</p> <p><a href="https://img2022.cnblogs.com/blog/510/202204/510-20220421104523647-1639332865.png" rel="nofollow" class="fancybox" data-fancybox-group="button"><img fetchpriority="high" decoding="async" width="896" height="376" title="image" style="display: inline; background-image: none" alt="image" src="http://img.555519.xyz/uploads3/20220509/36887ce7854d0fedb0d83401158fffc3.jpg"></a></p> <p><a href="https://img2022.cnblogs.com/blog/510/202204/510-20220421104524612-763559272.png" rel="nofollow" class="fancybox" data-fancybox-group="button"><img decoding="async" width="896" height="755" title="image" style="display: inline; background-image: none" alt="image" src="http://img.555519.xyz/uploads3/20220509/6f1bf1004deb4b967fbc27f38075449a.jpg"></a></p> <p>进行nocalhost remote debug之前，还需要设置nocalhost的config配置信息,目前还不支持dotnet 的调试 。</p> <p>在Visual studio code 的左侧有个nocalhost，点击Nocalhost，会以目录树的形式展示所有的k8s集群，找到相关k8s的namespace，点对应的项目，然后点Workloads工作负载 → Deployments部署，看到对应的pod。鼠标右键点Start DevMode，等待启动调试模式。</p> <p>首先要连接k8s集群：connect to cluster</p> <p><a href="https://img2022.cnblogs.com/blog/510/202204/510-20220421104526368-2143609770.png" rel="nofollow" class="fancybox" data-fancybox-group="button"><img decoding="async" width="899" height="851" title="image" style="display: inline; background-image: none" alt="image" src="http://img.555519.xyz/uploads3/20220509/84a6bc62f7bf2d673b43c084c1716fd8.jpg"></a></p> <p>然后编辑这个服务的<strong>Dev Config</strong>： 点击这个，进行一些简单的设定。（这里配置很方便的，会选择用浏览器打开，进行修改，后复制修改的内容到这个文件即可），如下图：</p> <p><a href="https://img2022.cnblogs.com/blog/510/202204/510-20220421104527415-1310357225.png" rel="nofollow" class="fancybox" data-fancybox-group="button"><img loading="lazy" decoding="async" width="914" height="523" title="image" style="display: inline; background-image: none" alt="image" src="http://img.555519.xyz/uploads3/20220509/b73c71d821946215c94339a86f41ca52.jpg"></a></p> <p>将修改的内容复制到那个配置的yml中保存，可以直接用上面那个Apply 按钮完成拷贝，这里要特别指出的是对于Dapr sidecar的 配置一定要放在Patches下<a title="https://nocalhost.dev/docs/config/config-dev-container-en/#patches" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://nocalhost.dev/docs/config/config-dev-container-en/#patches"  rel="nofollow">https://nocalhost.dev/docs/config/config-dev-container-en/#patches</a> ：</p> <p><a href="https://img2022.cnblogs.com/blog/510/202204/510-20220421104528290-1790183053.png" rel="nofollow" class="fancybox" data-fancybox-group="button"><img loading="lazy" decoding="async" width="924" height="441" title="image" style="display: inline; background-image: none" alt="image" src="http://img.555519.xyz/uploads3/20220509/5eab4b7a64f6554baef63e68de7b5dfa.jpg"></a></p> <p>name: catalog</p> <p>serviceType: deployment</p> <p>containers:</p> <p>&nbsp; - name: catalog-api</p> <p>dev:</p> <p>gitUrl: ""</p> <p>image: mcr.microsoft.com/dotnet/sdk:6.0-bullseye-slim</p> <p>shell: ""</p> <p>workDir: ""</p> <p>storageClass: ""</p> <p>resources:</p> <p>limits:</p> <p>memory: 4Gi</p> <p>cpu: "2"</p> <p>requests:</p> <p>memory: 2Gi</p> <p>cpu: "2"</p> <p>persistentVolumeDirs: []</p> <p>command:</p> <p>run:</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - dotnet</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - dev-certs</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - https</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - --trust;</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - dotnet</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - run</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - --urls=http://*:80</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - --project</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - ./src/Services/Catalog/Catalog.API/Catalog.API.csproj</p> <p>debug:</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - dotnet</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - dev-certs</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - https</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - --trust;</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - dotnet</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - watch</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - run</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - --urls=http://*:80</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - --project</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - ./src/Services/Catalog/Catalog.API/Catalog.API.csproj</p> <p>debug:</p> <p>remoteDebugPort: 0</p> <p>language: ruby</p> <p>hotReload: false</p> <p>sync: null</p> <p>env:</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - name: DOTNET_RUNNING_IN_CONTAINER</p> <p>value: "true"</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - name: DOTNET_VERSION</p> <p>value: 6.0.0</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - name: ASPNET_VERSION</p> <p>value: 6.0.0</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - name: ASPNETCORE_URLS</p> <p>value: http://+:80</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - name: PATH</p> <p>value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</p> <p>portForward:</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - 8080:80</p> <p>patches:</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - patch: '{"spec":{"template":{"metadata":{"annotations":{"dapr.io/app-id":</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "catalog-api", "dapr.io/app-port": "80", "dapr.io/enabled": "true",</p> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "dapr.io/config": "dapr-config","dapr.io/log-as-json": "true" }}}}}'</p> <p>type: strategic</p> <p>（这里有一个镜像地址，可以填写我们作为nocalhost的开发镜像，因为最终还是你本地的代码部署到远程的容器中，那这个镜像地址其实不是多么重要，填一个存在的即可），最好是nocalhost 官方有支持的，他们的镜像仓库的dockerfile地址在这里<a title="https://github.com/nocalhost/dev-container" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/nocalhost/dev-container"  rel="nofollow">https://github.com/nocalhost/dev-container</a> ，我做了一个dotnet 6的dockerfile。</p> <p>使用Nocalhost之前，要先启动开发模式。成功进去开发模式后，会自动在DE中打开一个终端，这就是Nocalhost为我们创建好的容器了。顺利的话，你应该能在该容器的/home/nocalhost-dev目录下看到你的源代码。这里中间应该会选择一个目录，就是关联你本地服务的代码的目录就好了；</p> <p>通过patch 拉起Dapr sidecar，不过由于进入开发模式的实例里面并没有运行 业务服务的代码，只是把Nocalhost的调试代码的容器启动，我们可以通过Remote run来运行在run 所定义的命令来拉起业务服务，这样dapr 就可以正常启动了，具体过程可以看我提的一个issue<a title="https://github.com/nocalhost/nocalhost/issues/1306" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/nocalhost/nocalhost/issues/1306"  rel="nofollow">https://github.com/nocalhost/nocalhost/issues/1306</a>：</p> <p><img decoding="async" alt="4b447a806007bbc1ebf1d6a650324f2" src="http://img.555519.xyz/uploads3/20220509/7e540d9b2cb5d1a7283614a9f3d2d0c0.jpg"></p> <p>在本地修改一行代码，就会实时的在远端容器中生效了，从代码修改，到远端容器中生效的过程很快，可能都不到1秒，如果不使用nocalhots，那起码都是几分钟起步的，流程很复杂，Nocalhost 是使用了源码启动进程，实时热加载技术，当进入开发模式（Dev Model）后，会实时把本地的源码同步到远端容器中，免去了提交，构建，推送镜像等循环，提升了开发效率。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-50509.htm">南京领养宠物的平台电话是多少（南京宠物猫领养中心）</a></p>
+                                        <p>下一个：<a href="/news/article-51019.htm">猫轻微抓伤有一点渗血过了24小时会好吗（猫轻微抓伤有一点渗血过了24小时会好吗）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-free-v2ray-subscribe.htm" title="11月10日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.9M/S 免费Clash机场订阅">11月10日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-43029.htm" title="宠物粮品牌排行榜前十（宠物粮品牌排行榜前十名）">宠物粮品牌排行榜前十（宠物粮品牌排行榜前十名）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-14-shadowrocket-node.htm" title="1月14日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址">1月14日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-41033.htm" title="动物疫苗间隔时间多长打一次比较好（动物疫苗多长时间内打）">动物疫苗间隔时间多长打一次比较好（动物疫苗多长时间内打）</a></li>
+                        <li class="py-2"><a href="/news/article-49484.htm" title="java中空指针异常情况以及解决办法">java中空指针异常情况以及解决办法</a></li>
+                        <li class="py-2"><a href="/news/article-23405.htm" title="动物疫苗注射方法有哪些图片及价格（动物疫苗接种方法）">动物疫苗注射方法有哪些图片及价格（动物疫苗接种方法）</a></li>
+                        <li class="py-2"><a href="/news/article-34689.htm" title="Python加速技巧">Python加速技巧</a></li>
+                        <li class="py-2"><a href="/news/article-40550.htm" title="记将一个大型客户端应用项目迁移到 dotnet 6 的经验和决策_在线工具">记将一个大型客户端应用项目迁移到 dotnet 6 的经验和决策_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-20-clash-node.htm" title="12月20日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度21.7M/S 免费Clash机场订阅">12月20日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度21.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-32781.htm" title="pytorch数据批次的大小对模型拟合效果的影响">pytorch数据批次的大小对模型拟合效果的影响</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

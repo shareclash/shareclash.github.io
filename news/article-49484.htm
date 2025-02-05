@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-49484.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>java中空指针异常情况以及解决办法</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="概述： 出现空指针异常，常常是因为我们调用的对象是空的而抛出的异常。  问题描述： 第一种: 　out.println(request.getParameter("username"));   如果r" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-49484.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="java中空指针异常情况以及解决办法" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/50dd297a15490b3bbaf918a2cae6889b.webp" />
+        <meta property="og:release_date" content="2025-02-01T07:14:21" />
+    <meta property="og:updated_time" content="2025-02-01T07:14:21" />
+        <meta property="og:description" content="概述： 出现空指针异常，常常是因为我们调用的对象是空的而抛出的异常。  问题描述： 第一种: 　out.println(request.getParameter("username"));   如果r" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="java中空指针异常情况以及解决办法">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                                <a href="/">Share Clash</a>
+                            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                        <li><a class="nav-link" href="#">关于</a></li>
+                    <li><a class="nav-link" href="#">联系</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h2> <a id="_0" rel="nofollow"></a>概述：</h2> <p>出现空指针异常，常常是因为我们调用的对象是空的而抛出的异常。</p> <h2> <a id="_4" rel="nofollow"></a>问题描述：</h2> <p><strong>第一种:</strong></p> <pre><code class="prism language-java">　out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  </code></pre> <p>如果request里面并没有username的值，这时无法对空对象进行操作的，就会抛出异常。</p> <p><strong>第二种：</strong></p> <pre><code class="prism language-java">String userName <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span><span class="token string">"username"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  　　If <span class="token punctuation">(</span>userName<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  　　<span class="token punctuation">{<!-- --></span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span>  </code></pre> <p>如果没有username值，或者username为null时，是不能将一个为null的对象与另外一个对象进行比较的。</p> <pre><code class="prism language-java">If <span class="token punctuation">(</span><span class="token string">"root"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>user Name<span class="token punctuation">)</span><span class="token punctuation">)</span>  　 <span class="token punctuation">{<!-- --></span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span> </code></pre> <p>如果返回值与常量进行比较时，就可以避免调用null对象的equals方法。不会抛出异常。</p> <p><strong>第三种：</strong><br /> 假设有一个student类，有属性name。</p> <pre><code class="prism language-java">Student a<span class="token punctuation">;</span> String b <span class="token operator">=</span> a<span class="token punctuation">.</span>name<span class="token punctuation">;</span> </code></pre> <p>这个时候就会报错，因为a为空的，解决办法就是让a指向一个对象，Student a = new Student();</p> <h2> <a id="_40" rel="nofollow"></a>问题定位：</h2> <p>对于日志中的报错信息，在java中抛出异常是从内往外，因此只需要重点关注第一行报错信息，下面的报错都是由于一层层传递调用该方法导致。</p> <p><strong>Java空指针异常的若干解决方案：</strong><br /> Java中任何对象都可以为空，我们可以使用若干种方法来避免产生这类异常。比如我们传统的空值检测，编程规范，以及使用java中各种工具类。</p> <p>(1)最常用的一种就是直接对 对象进行判断，比如if(Object == null)来对所有用到的对象进行判断，这个对象也就是我们常用的函数参数，返回值，以及类实例的成员变量等。当我们检测到null值时，我们可以异常的类型抛出更具有针对性的异常类型，再附加上我们自己加的消息内容。我们也可以直接使用一些库函数来简化代码：</p> <pre><code class="prism language-java">Object checkData <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">requireNoNull</span><span class="token punctuation">(</span>resultMessage<span class="token punctuation">,</span><span class="token string">"The resultMessage must not be null"</span><span class="token punctuation">)</span> </code></pre> <p>如果我们使用过Lombok工具的话，里面有一个@NotNull注解，就是指被注释的元素不能为空，就会自定检测。</p> <p>（2）第二种方法就是遵守编程规范，可以减少一定的空指针异常的发生。</p> <pre><code class="prism language-java">Strings<span class="token punctuation">.</span><span class="token function">isNullOrEmpty</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span> CollectionUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>collection<span class="token punctuation">)</span><span class="token punctuation">;</span> StringUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token keyword">if</span><span class="token punctuation">(</span>object <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     object<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token comment">// 使用toString()这种方法的话，如果object为空的话，就会抛出异常</span>  String<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span> <span class="token comment">//将Object转换为字符串，不管是否为null，不会抛出异常</span> </code></pre> <p>如果返回是集合类型。而且是空的，不要返回null值，而是要返回一个空的集合，如果返回类型是对象的话，我们可以抛出异常。</p> <pre><code class="prism language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token punctuation">{<!-- --></span>      <span class="token keyword">private</span> <span class="token keyword">static</span> List<span class="token generics function"><span class="token punctuation">&lt;</span>Integer<span class="token punctuation">&gt;</span></span> numbers <span class="token operator">=</span> null<span class="token punctuation">;</span>        <span class="token keyword">public</span> <span class="token keyword">static</span> List<span class="token generics function"><span class="token punctuation">&lt;</span>Integer<span class="token punctuation">&gt;</span></span> <span class="token function">getList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>           <span class="token keyword">if</span> <span class="token punctuation">(</span>numbers <span class="token operator">==</span> null<span class="token punctuation">)</span>                <span class="token keyword">return</span> Collections<span class="token punctuation">.</span><span class="token function">emptyList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token keyword">else</span>                <span class="token keyword">return</span> numbers<span class="token punctuation">;</span>      <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <p>检查一个方法的参数，在执行方法之前，确保检查了参数是否null，当参数被适当检查后，方法会继续执行。否则抛出叫做llegalArgumentException的异常，并通知调用的方法传入的参数有误。</p> <p>使用三元运算符，可以避免NullPointerException，形式如下：<br /> boolean expression ? value1:value2;</p> <h2> <a id="NullPointerException_91" rel="nofollow"></a>存在NullPointerException的安全方法：</h2> <p><strong>第一种使用instanceof 操作符</strong><br /> 即使对象的引用为null，instanceOf操作符可使用。当引用为null时，instanceof操作符返回false，而且不会抛出NullPointerException,比如：</p> <pre><code class="prism language-java">String str <span class="token operator">=</span> null<span class="token punctuation">;</span> <span class="token keyword">if</span><span class="token punctuation">(</span>str <span class="token keyword">instanceof</span> <span class="token class-name">null</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> </code></pre> <h2> <a id="_103" rel="nofollow"></a>如何避免：</h2> <p>确保所有对象在使用之前被初始化。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-48953.htm">狗粮加工厂利润成本分析表格（生产狗粮利润）</a></p>
+                                        <p>下一个：<a href="/news/article-49485.htm">猫三联多长时间打一针（猫三联多长时间打一针有效）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-1-3-node-share-links.htm" title="1月3日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度22M/S 免费Clash机场订阅地址">1月3日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度22M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-free-node-subscribe-links.htm" title="11月6日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.7M/S 免费Clash机场订阅">11月6日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-clash-node-daily-updates.htm" title="11月20日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度22.4M/S 免费Clash机场订阅">11月20日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度22.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-21573.htm" title="动物疫苗生产厂家排名榜前十名图片（动物疫苗品牌）">动物疫苗生产厂家排名榜前十名图片（动物疫苗品牌）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-2-free-v2ray-subscribe.htm" title="1月2日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度20.6M/S 免费Clash机场订阅地址">1月2日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度20.6M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-31266.htm" title="宠物领养送养平台app（宠物领养免费送到家）">宠物领养送养平台app（宠物领养免费送到家）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-free-node-subscribe-links.htm" title="1月12日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度19.5M/S 免费Clash机场订阅地址">1月12日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度19.5M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-3-clash-v2ray-ss-ssr.htm" title="12月3日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.4M/S 免费Clash机场订阅">12月3日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.4M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-free-shadowrocket-node.htm" title="11月9日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度18.9M/S 免费Clash机场订阅">11月9日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度18.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-19283.htm" title="动物防疫注射的主要步骤包括（动物防疫注射栏）">动物防疫注射的主要步骤包括（动物防疫注射栏）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">9</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/glightbox/js/glightbox.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

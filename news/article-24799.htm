@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://shareclash.github.io/news/article-24799.htm" />
@@ -10,16 +10,44 @@
         <meta name="description" content="琢磨了一晚上，就为了写一个“不重复的随机码生成函数”，生成格式包含0-9，a-z。 头脑风暴，异想天开，写下了如下算法，看上去很高大上的一个随机生成方法。 原理先产生一个UUID，再根据UUID生成一" />
     
     <!-- Favicon -->
-    <link href="__ADDON__/img/shareclash/favicon.ico" rel="icon">
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-24799.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="JAVA生成指定位数不重复的随机数，随机数含0-9、A-Z" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/5f10ba4123a645ffe1d66305c144ab89.webp" />
+        <meta property="og:release_date" content="2024-12-12T10:06:44" />
+    <meta property="og:updated_time" content="2024-12-12T10:06:44" />
+        <meta property="og:description" content="琢磨了一晚上，就为了写一个“不重复的随机码生成函数”，生成格式包含0-9，a-z。 头脑风暴，异想天开，写下了如下算法，看上去很高大上的一个随机生成方法。 原理先产生一个UUID，再根据UUID生成一" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="JAVA生成指定位数不重复的随机数，随机数含0-9、A-Z">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!-- Vendor CSS Files -->
-    <link href="__ADDON__/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
     <!-- Google tag (gtag.js) -->
@@ -91,16 +119,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-11-16-free-clash-subscribe.htm" title="11月16日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.8M/S 免费Clash机场订阅">11月16日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.8M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-13-free-high-speed-nodes.htm" title="12月13日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度18.2M/S 免费Clash机场订阅">12月13日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度18.2M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/news/article-23405.htm" title="动物疫苗注射方法有哪些图片及价格（动物疫苗接种方法）">动物疫苗注射方法有哪些图片及价格（动物疫苗接种方法）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-7-node-share-links.htm" title="10月7日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度22.8M/S 免费Clash机场订阅">10月7日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度22.8M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-node-subscribe.htm" title="10月30日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22M/S 免费Clash机场订阅">10月30日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-30-free-node-subscribe-links.htm" title="9月30日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.9M/S 免费Clash机场订阅">9月30日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.9M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/news/article-21573.htm" title="动物疫苗生产厂家排名榜前十名图片（动物疫苗品牌）">动物疫苗生产厂家排名榜前十名图片（动物疫苗品牌）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-1-free-v2ray.htm" title="9月1日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.3M/S 免费Clash机场订阅">9月1日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.3M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-21-clash-node.htm" title="8月21日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.4M/S 免费Clash机场订阅">8月21日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.4M/S 免费Clash机场订阅</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-6-5-shadowrocket-node.htm" title="6月5日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20M/S">6月5日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20M/S</a></li>
+                        <li class="py-2"><a href="/news/article-34216.htm" title="MyBatis-Plus 高级功能多租户功能实现">MyBatis-Plus 高级功能多租户功能实现</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-free-v2ray.htm" title="12月30日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度21M/S 免费Clash机场订阅地址">12月30日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度21M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-22951.htm" title="动物疫苗在哪里打的好呢 动物疫苗在哪里打的好呢知乎">动物疫苗在哪里打的好呢 动物疫苗在哪里打的好呢知乎</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-free-node-subscribe.htm" title="11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅">11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-20660.htm" title="宠物粮食价格表图片高清（宠物粮食图片大全）">宠物粮食价格表图片高清（宠物粮食图片大全）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-18-node-share-links.htm" title="12月18日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20M/S 免费Clash机场订阅">12月18日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-37103.htm" title="猫咪三针疫苗间隔时间（猫咪三针疫苗间隔多久）">猫咪三针疫苗间隔时间（猫咪三针疫苗间隔多久）</a></li>
+                        <li class="py-2"><a href="/news/article-26664.htm" title="Elasticsearch -from + size设置">Elasticsearch -from + size设置</a></li>
+                        <li class="py-2"><a href="/news/article-36603.htm" title="厦门小动物领养中心（厦门小动物救助站地址）">厦门小动物领养中心（厦门小动物救助站地址）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-25-free-high-speed-nodes.htm" title="12月25日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.8M/S 免费Clash机场订阅地址">12月25日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.8M/S 免费Clash机场订阅地址</a></li>
                     </ul>
     </div>
 </div>
@@ -112,31 +140,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2024-05/" title="2024-05 归档">2024-05</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>
