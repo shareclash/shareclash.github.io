@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-55331.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>2022Vue.js 面试题汇总及答案</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="文章目录  1. 基本问题   1.1. Vue.js 的特点 1.2. Vue.js 双向绑定的原理 1.3. Vue.js 3.0 放弃defineProperty, 使用Proxy的原因 1.4" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-55331.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="2022Vue.js 面试题汇总及答案" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/dc3e38094db4145b335793b458a1c19c.webp" />
+        <meta property="og:release_date" content="2025-02-12T09:08:07" />
+    <meta property="og:updated_time" content="2025-02-12T09:08:07" />
+        <meta property="og:description" content="文章目录  1. 基本问题   1.1. Vue.js 的特点 1.2. Vue.js 双向绑定的原理 1.3. Vue.js 3.0 放弃defineProperty, 使用Proxy的原因 1.4" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="2022Vue.js 面试题汇总及答案">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#1__2" rel="nofollow">1. 基本问题</a></li> <li> <ul> <li><a href="#11_Vuejs__3" rel="nofollow">1.1. Vue.js 的特点</a></li> <li><a href="#12_Vuejs__12" rel="nofollow">1.2. Vue.js 双向绑定的原理</a></li> <li><a href="#13_Vuejs_30_defineProperty_Proxy_30" rel="nofollow">1.3. Vue.js 3.0 放弃defineProperty, 使用Proxy的原因</a></li> <li><a href="#14_Vue_2__data__39" rel="nofollow">1.4. Vue 2 中给 data 中的对象属性添加一个新的属性时会发生什么？如何解决？</a></li> <li><a href="#15_ComputedWatch_43" rel="nofollow">1.5. Computed和Watch的区别</a></li> <li><a href="#16_Computed__Methods__55" rel="nofollow">1.6. Computed 和 Methods 的区别</a></li> <li><a href="#17_DOMdiff_59" rel="nofollow">1.7. 虚拟DOM，diff算法</a></li> <li><a href="#18_Virtual_DOM_65" rel="nofollow">1.8. 为何需要Virtual DOM？</a></li> <li><a href="#19__Filter_70" rel="nofollow">1.9. 过滤器 (Filter)</a></li> <li><a href="#110__74" rel="nofollow">1.10. 常见的事件修饰符及其作用</a></li> <li><a href="#111_vshowvif_81" rel="nofollow">1.11. v-show指令和v-if指令的区别是什么？</a></li> <li><a href="#112_vmodel__85" rel="nofollow">1.12. v-model 是如何实现的，语法糖实际是什么</a></li> <li><a href="#113_data_89" rel="nofollow">1.13. data为什么是一个函数而不是对象</a></li> <li><a href="#114_Vue_template__render__96" rel="nofollow">1.14. Vue template 到 render 的过程</a></li> <li><a href="#115_Vue_data__101" rel="nofollow">1.15. Vue data 中某一个属性的值发生改变后，视图会立即同步执行重新渲染吗？</a></li> <li><a href="#116_axios_109" rel="nofollow">1.16. axios是什么</a></li> <li><a href="#117_sassvue_113" rel="nofollow">1.17. sass是什么？如何在vue中安装和使用？</a></li> <li><a href="#118_Vuejs_120" rel="nofollow">1.18. Vue.js页面闪烁</a></li> <li><a href="#119__129" rel="nofollow">1.19. 如何解决数据层级结构太深的问题</a></li> <li><a href="#120__Vue_jsAPI_132" rel="nofollow">1.20. 在 Vue. js开发环境下调用API接口，如何避免跨域</a></li> <li><a href="#121__135" rel="nofollow">1.21. 批量异步更新策略</a></li> <li><a href="#122_vue__nextTick__139" rel="nofollow">1.22. vue 的 nextTick 方法的实现原理</a></li> <li><a href="#123_Vue__data___143" rel="nofollow">1.23. Vue 组件 data 为什么必须是函数 ?</a></li> <li><a href="#124_vifvfor_147" rel="nofollow">1.24. v-if和v-for一起使用的弊端及解决办法</a></li> <li><a href="#125_vue_154" rel="nofollow">1.25. vue常用指令</a></li> <li><a href="#126__171" rel="nofollow">1.26. 组件传值方式有哪些</a></li> <li><a href="#127_vueloader_177" rel="nofollow">1.27. vue-loader是什么？使用它的用途有哪些？</a></li> </ul> </li> <li><a href="#2__Component_179" rel="nofollow">2. 组件 Component</a></li> <li> <ul> <li><a href="#21_vue__180" rel="nofollow">2.1. vue中如何编写可复用的组件 （编写组件的原则）</a></li> <li><a href="#22_CSS_186" rel="nofollow">2.2. 如何让CSS只在当前组件中起作用？</a></li> <li><a href="#23_keepalive_190" rel="nofollow">2.3. keep-alive是什么？</a></li> <li><a href="#24__Vue_js_195" rel="nofollow">2.4. 如何在 Vue. js动态插入图片</a></li> <li><a href="#25__198" rel="nofollow">2.5. 父子组件的生命周期顺序</a></li> </ul> </li> <li><a href="#3_Vuex_205" rel="nofollow">3. Vuex</a></li> <li> <ul> <li><a href="#31_vuex_207" rel="nofollow">3.1. vuex的核心概念</a></li> <li><a href="#32_vuex_215" rel="nofollow">3.2. vuex是什么？怎么使用？哪种功能场景使用它？</a></li> <li><a href="#33_state_219" rel="nofollow">3.3. 多个组件之间如何拆分各自的state，每块小的组件有自己的状态，它们之间还有一些公共的状态需要维护，如何思考这块</a></li> </ul> </li> <li><a href="#4_Router_223" rel="nofollow">4. Router</a></li> <li> <ul> <li><a href="#41_vuerouter_224" rel="nofollow">4.1. vue-router路由的两种模式</a></li> <li><a href="#42_vuerouter_229" rel="nofollow">4.2. vue-router如何定义嵌套路由</a></li> <li><a href="#43_vuerouter_256" rel="nofollow">4.3. vue-router有哪几种导航钩子？</a></li> <li><a href="#44_routerouter_261" rel="nofollow">4.4.<span class="katex--inline"><span class="katex"><span class="katex-mathml"> <p>            r</p> <p>            o</p> <p>            u</p> <p>            t</p> <p>            e</p> <p>            和</p> <p>           route和</span><span class="katex-html"><span class="base"><span class="strut" style="height: 0.61508em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">u</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">和</span></span></span></span></span>router的区别</a></li> <li><a href="#45__265" rel="nofollow">4.5. 路由之间跳转的方式</a></li> <li><a href="#46_activeclass_269" rel="nofollow">4.6. active-class是哪个组件的属性</a></li> </ul> </li> </ul> </div> </h1> <h2><a id="11_Vuejs__3" rel="nofollow"></a>1.1. Vue.js 的特点</h2> <ul> <li>易用： 简单，易学，上手快</li> <li>灵活： （渐进式）不断繁荣的生态系统，可以在一个库和一套完整框架之间自如伸缩。</li> <li>高效： 20kB min+gzip 运行大小；超快虚拟 DOM；最省心的优化</li> <li>双向绑定：开发效率高</li> <li>基于组件的代码共享</li> <li>Web项目工程化，增加可读性、可维护性</li> </ul> <h2><a id="12_Vuejs__12" rel="nofollow"></a>1.2. Vue.js 双向绑定的原理</h2> <p>Vue.js 2.0 采用数据劫持（Proxy 模式）结合发布者-订阅者模式（PubSub 模式）的方式，通过 Object.defineProperty()来劫持各个属性的 setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。</p> <p>每个组件实例都有相应的watcher程序实例，它会在组件渲染的过程中把属性记录为依赖，之后当依赖项的setter被调用时，会通知watcher重新计算，从而致使它关联的组件得以更新。</p> <blockquote> <p>Vue.js 3.0, 放弃了Object.defineProperty ，使用更快的ES6原生 Proxy (访问对象拦截器, 也称代理器)</p> </blockquote> <p>步骤：</p> <ol> <li> <p>需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上setter和getter这样的话，给这个对象的某个值赋值，就会触发setter，那么就能监听到了数据变化</p> </li> <li> <p>compile解析模板指令，将模板中的变量替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，更新视图</p> </li> <li> <p>Watcher订阅者是Observer和Compile之间通信的桥梁，主要做的事情是: ①在自身实例化时往属性订阅器(dep)里面添加自己 ②自身必须有一个update()方法 ③待属性变动dep.notice()通知时，能调用自身的update()方法，并触发Compile中绑定的回调，则功成身退。</p> </li> <li> <p>MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者，通过Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起Observer和Compile之间的通信桥梁，达到数据变化 -&gt; 视图更新；视图交互变化(input) -&gt; 数据model变更的双向绑定效果。</p> </li> </ol> <h2><a id="13_Vuejs_30_defineProperty_Proxy_30" rel="nofollow"></a>1.3. Vue.js 3.0 放弃defineProperty, 使用Proxy的原因</h2> <p>Object.defineProperty缺陷</p> <ol> <li>监控到数组下标的变化时，开销很大。所以Vue.js放弃了下标变化的检测；</li> <li>Object.defineProperty只能劫持对象的属性，而Proxy是直接代理对象。Object.defineProperty需要遍历对象的每个属性，如果属性值也是对象，则需要深度遍历。而 Proxy 直接代理对象，不需要遍历操作。</li> <li>Object.defineProperty对新增属性需要手动进行Observe。vue2时需要使用 vm.$set 才能保证新增的属性也是响应式</li> <li>Proxy支持13种拦截操作，这是defineProperty所不具有的</li> <li>Proxy 作为新标准，长远来看，JS引擎会继续优化 Proxy，但 getter 和 setter 基本不会再有针对性优化</li> </ol> <h2><a id="14_Vue_2__data__39" rel="nofollow"></a>1.4. Vue 2 中给 data 中的对象属性添加一个新的属性时会发生什么？如何解决？</h2> <p>视图并未刷新。这是因为在Vue实例创建时，新属性并未声明，因此就没有被Vue转换为响应式的属性，自然就不会触发视图的更新，这时就需要使用Vue的全局 api<span class="katex--inline"><span class="katex"><span class="katex-mathml"></p> <p>        s</p> <p>        e</p> <p>        t</p> <p>        (</p> <p>        )</p> <p>        ：</p> <p>        ‘</p> <p>        t</p> <p>        h</p> <p>        i</p> <p>        s</p> <p>        .</p> <p>       set()：`this.</span><span class="katex-html"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mopen">(</span><span class="mclose">)</span><span class="mord cjk_fallback">：</span><span class="mord">‘</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord">.</span></span></span></span></span>set(this.obj, ‘new_property’, ‘new_value’)`</p> <h2><a id="15_ComputedWatch_43" rel="nofollow"></a>1.5. Computed和Watch的区别</h2> <ol> <li>computed 计算属性 : 依赖其它属性值,并且 computed 的值有缓存,只有它依赖的 属性值发生改变,下一次获取 computed 的值时才会重新计算 computed 的值。</li> <li>watch 侦听器 : 更多的是观察的作用,无缓存性,类似于某些数据的监听回调,每 当监听的数据变化时都会执行回调进行后续操作。</li> </ol> <blockquote> <p>运用场景：</p> </blockquote> <ol> <li>当我们需要进行数值计算,并且依赖于其它数据时,应该使用 computed,因为可以利用 computed 的缓存特性,避免每次获取值时,都要重新计算。</li> <li>当我们需要在数据变化时执行异步或开销较大的操作时,应该使用 watch,使用 watch 选项允许我们执行异步操作 ( 访问一个 API ),限制我们执行该操作的频率, 并在我们得到最终结果前,设置中间状态。这些都是计算属性无法做到的。</li> <li>多个因素影响一个显示，用Computed；一个因素的变化影响多个其他因素、显示，用Watch;</li> </ol> <h2><a id="16_Computed__Methods__55" rel="nofollow"></a>1.6. Computed 和 Methods 的区别</h2> <ol> <li>computed: 计算属性是基于它们的依赖进行缓存的,只有在它的相关依赖发生改变时才会重新求值对于 method ，只要发生重新渲染，</li> <li>method 调用总会执行该函数</li> <li></li> </ol> <h2><a id="17_DOMdiff_59" rel="nofollow"></a>1.7. 虚拟DOM，diff算法</h2> <p>（1）让我们不用直接操作DOM元素，只操作数据便可以重新渲染页面<br /> （2）虚拟dom是为了解决浏览器性能问题而被设计出来的<br /> 当操作数据时，将改变的dom元素缓存起来，都计算完后再通过比较映射到真实的dom树上<br /> （3）diff算法比较新旧虚拟dom。如果节点类型相同，则比较数据，修改数据；如果节点不同，直接干掉节点及所有子节点，插入新的节点；如果给每个节点都设置了唯一的key，就可以准确的找到需要改变的内容，否则就会出现修改一个地方导致其他地方都改变的情况。比如A-B-C-D, 我要插入新节点A-B-M-C-D,实际上改变的了C和D。但是设置了key，就可以准确的找到B C并插入</p> <h2><a id="18_Virtual_DOM_65" rel="nofollow"></a>1.8. 为何需要Virtual DOM？</h2> <ol> <li>具备跨平台的优势</li> <li>操作 DOM 慢，js运行效率高。我们可以将DOM对比操作放在JS层，提高效率。</li> <li>提升渲染性能</li> </ol> <h2><a id="19__Filter_70" rel="nofollow"></a>1.9. 过滤器 (Filter)</h2> <p>在Vue中使用filters来过滤(格式化)数据，filters不会修改数据，而是过滤(格式化)数据，改变用户看到的输出（计算属性 computed ，方法 methods 都是通过修改数据来处理数据格式的输出显示。<br /> 使用场景： 比如需要处理时间、数字等的的显示格式；</p> <h2><a id="110__74" rel="nofollow"></a>1.10. 常见的事件修饰符及其作用</h2> <ol> <li><code>.stop</code>：等同于 JavaScript 中的 event.stopPropagation() ，防止事件冒泡；</li> <li><code>.prevent</code> ：等同于 JavaScript 中的 event.preventDefault() ，防止执行预设的行为（如果事件可取消，则取消该事件，而不停止事件的进一步传播）；</li> <li><code>.capture</code> ：当元素发生冒泡时，先触发带有该修饰符的元素。若有多个该修饰符，则由外而内触发。如 div1中嵌套div2中嵌套div3.capture中嵌套div4，那么执行顺序为：div3=》div4=》div2=》div1</li> <li><code>.self</code> ：只会触发自己范围内的事件，不包含子元素；</li> <li><code>.once</code> ：只会触发一次。</li> </ol> <h2><a id="111_vshowvif_81" rel="nofollow"></a>1.11. v-show指令和v-if指令的区别是什么？</h2> <p>v-show 仅仅控制元素的显示方式，将 display 属性在 block 和 none 来回切换；而v-if会控制这个 DOM 节点的存在与否。当我们需要经常切换某个元素的显示/隐藏时，使用v-show会更加节省性能上的开销；当只需要一次显示或隐藏时，使用v-if更加合理。</p> <h2><a id="112_vmodel__85" rel="nofollow"></a>1.12. v-model 是如何实现的，语法糖实际是什么</h2> <ol> <li>作用在表单元素上<code>v-model="message"</code>等同于<code>v-bind:value="message" v-on:input="message=$event.target.value"</code></li> <li>作用在组件上, 本质是一个父子组件通信的语法糖，通过prop和$.emit实现, 等同于<code>:value="message" @input=" $emit('input', $event.target.value)"</code></li> </ol> <h2><a id="113_data_89" rel="nofollow"></a>1.13. data为什么是一个函数而不是对象</h2> <p>JavaScript中的对象是引用类型的数据，当多个实例引用同一个对象时，只要一个实例对这个对象进行操作，其他实例中的数据也会发生变化。</p> <p>而在Vue中，我们更多的是想要复用组件，那就需要每个组件都有自己的数据，这样组件之间才不会相互干扰。</p> <p>所以组件的数据不能写成对象的形式，而是要写成函数的形式。数据以函数返回值的形式定义，这样当我们每次复用组件的时候，就会返回一个新的data，也就是说每个组件都有自己的私有数据空间，它们各自维护自己的数据，不会干扰其他组件的正常运行。</p> <h2><a id="114_Vue_template__render__96" rel="nofollow"></a>1.14. Vue template 到 render 的过程</h2> <ol> <li>调用parse方法将template转化为ast（抽象语法树, abstract syntax tree）</li> <li>对静态节点做优化。如果为静态节点，他们生成的DOM永远不会改变，这对运行时模板更新起到了极大的优化作用。</li> <li>生成渲染函数. 渲染的返回值是VNode，VNode是Vue的虚拟DOM节点，里面有（标签名，子节点，文本等等）</li> </ol> <h2><a id="115_Vue_data__101" rel="nofollow"></a>1.15. Vue data 中某一个属性的值发生改变后，视图会立即同步执行重新渲染吗？</h2> <p>不会立即同步执行重新渲染。<br /> Vue 实现响应式并不是数据发生变化之后 DOM 立即变化，而是按一定的策略进行 DOM 的更新。<br /> Vue 在更新 DOM 时是异步执行的。只要侦听到数据变化， Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。</p> <p>如果同一个watcher被多次触发，只会被推入到队列中一次。这种在缓冲时去除重复数据对于避免不必要的计算和 DOM 操作是非常重要的。<br /> 然后，在下一个的事件循环"tick"中，Vue 刷新队列并执行实际（已去重的）工作。</p> <h2><a id="116_axios_109" rel="nofollow"></a>1.16. axios是什么</h2> <p>易用、简洁且高效的http库， 支持node端和浏览器端，支持Promise，支持拦截器等高级配置。</p> <h2><a id="117_sassvue_113" rel="nofollow"></a>1.17. sass是什么？如何在vue中安装和使用？</h2> <p>sass是一种CSS预编译语言安装和使用步骤如下。</p> <ol> <li>用npm安装加载程序（ sass-loader、 css-loader等加载程序)。</li> <li>在 webpack.config.js中配置sass加载程序。</li> </ol> <h2><a id="118_Vuejs_120" rel="nofollow"></a>1.18. Vue.js页面闪烁</h2> <p>Vue. js提供了一个v-cloak指令，该指令一直保持在元素上，直到关联实例结束编译。当和CSS一起使用时，这个指令可以隐藏未编译的标签，直到实例编译结束。用法如下。</p> <pre><code class="prism language-html">[v-cloak]{   display:none;  }<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token attr-name">v-cloak</span><span class="token punctuation">&gt;</span></span>{<!-- -->{ title }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span></code></pre> <h2><a id="119__129" rel="nofollow"></a>1.19. 如何解决数据层级结构太深的问题</h2> <p>在开发业务时，经常会岀现异步获取数据的情况，有时数据层次比较深，如以下代码:<code>span 'v-text="a.b.c.d"&gt;&lt;/span&gt;</code>, 可以使用vm.<span class="katex--inline"><span class="katex"><span class="katex-mathml"></p> <p>        s</p> <p>        e</p> <p>        t</p> <p>        手</p> <p>        动</p> <p>        定</p> <p>        义</p> <p>        一</p> <p>        层</p> <p>        数</p> <p>        据</p> <p>        :</p> <p>        ‘</p> <p>        v</p> <p>        m</p> <p>        .</p> <p>       set手动定义一层数据: `vm.</span><span class="katex-html"><span class="base"><span class="strut" style="height: 0.61508em; vertical-align: 0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord cjk_fallback">手</span><span class="mord cjk_fallback">动</span><span class="mord cjk_fallback">定</span><span class="mord cjk_fallback">义</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">层</span><span class="mord cjk_fallback">数</span><span class="mord cjk_fallback">据</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.69444em; vertical-align: 0em;"></span><span class="mord">‘</span><span class="mord mathdefault" style="margin-right: 0.03588em;">v</span><span class="mord mathdefault">m</span><span class="mord">.</span></span></span></span></span>set(“demo”，a.b.c.d)`</p> <h2><a id="120__Vue_jsAPI_132" rel="nofollow"></a>1.20. 在 Vue. js开发环境下调用API接口，如何避免跨域</h2> <p>config/ index.js内对 proxyTable项配置代理。</p> <h2><a id="121__135" rel="nofollow"></a>1.21. 批量异步更新策略</h2> <p>Vue 在修改数据后，视图不会立刻更新，而是等同一事件循环中的所有数据变化完成之后，再统一进行视图更新。<br /> 换句话说，只要观察到数据变化，就会自动开启一个队列，并缓冲在同一个事件循环中发生的所以数据改变。在缓冲时会去除重复数据，从而避免不必要的计算和 DOM 操作。</p> <h2><a id="122_vue__nextTick__139" rel="nofollow"></a>1.22. vue 的 nextTick 方法的实现原理</h2> <ol> <li>vue 用异步队列的方式来控制 DOM 更新和 nextTick 回调先后执行</li> <li>microtask 因为其高优先级特性，能确保队列中的微任务在一次事件循环前被执行完毕</li> </ol> <h2><a id="123_Vue__data___143" rel="nofollow"></a>1.23. Vue 组件 data 为什么必须是函数 ?</h2> <p>因为组件是可以复用的,JS 里对象是引用关系,如果组件 data 是一个对象,那么子组件中的 data 属性值会互相污染。<br /> 所以一个组件的 data 选项必须是一个函数,因此每个实例可以维护一份被返回对象的独立的拷贝。</p> <h2><a id="124_vifvfor_147" rel="nofollow"></a>1.24. v-if和v-for一起使用的弊端及解决办法</h2> <p>由于v-for的优先级比v-if高，所以导致每循环一次就会去v-if一次，而v-if是通过创建和销毁dom元素来控制元素的显示与隐藏，所以就会不停的去创建和销毁元素，造成页面卡顿，性能下降。</p> <p>解决办法：</p> <ol> <li>在v-for的外层或内层包裹一个元素来使用v-if</li> <li>用computed处理</li> </ol> <h2><a id="125_vue_154" rel="nofollow"></a>1.25. vue常用指令</h2> <ol> <li>v-model 多用于表单元素实现双向数据绑定（同angular中的ng-model）</li> <li>v-bind 动态绑定 作用： 及时对页面的数据进行更改</li> <li>v-on:click 给标签绑定函数，可以缩写为@，例如绑定一个点击函数 函数必须写在methods里面</li> <li>v-for 格式： v-for=“字段名 in(of) 数组json” 循环数组或json(同angular中的ng-repeat)</li> <li>v-show 显示内容 （同angular中的ng-show）</li> <li>v-hide 隐藏内容（同angular中的ng-hide）</li> <li>v-if 显示与隐藏 （dom元素的删除添加 同angular中的ng-if 默认值为false）</li> <li>v-else-if 必须和v-if连用</li> <li>v-else 必须和v-if连用 不能单独使用 否则报错 模板编译错误</li> <li>v-text 解析文本</li> <li>v-html 解析html标签</li> <li>v-bind:class 三种绑定方法 1、对象型 ‘{red:isred}’ 2、三元型 ‘isred?“red”:“blue”’ 3、数组型 ‘[{red:“isred”},{blue:“isblue”}]’</li> <li>v-once 进入页面时 只渲染一次 不在进行渲染</li> <li>v-cloak 防止闪烁</li> <li>v-pre 把标签内部的元素原位输出</li> </ol> <h2><a id="126__171" rel="nofollow"></a>1.26. 组件传值方式有哪些</h2> <ol> <li>父传子：子组件通过props[‘xx’] 来接收父组件传递的属性 xx 的值</li> <li>子传父：子组件通过 this.$emit(‘fnName’,value) 来传递,父组件通过接收 fnName 事件方法来接收回调</li> <li>其他方式：通过创建一个bus，进行传值</li> <li>使用Vuex</li> </ol> <h2><a id="127_vueloader_177" rel="nofollow"></a>1.27. vue-loader是什么？使用它的用途有哪些？</h2> </h1> <h2><a id="21_vue__180" rel="nofollow"></a>2.1. vue中如何编写可复用的组件 （编写组件的原则）</h2> <ol> <li>以组件功能命名</li> <li>只负责ui的展示和交互动画，不要在组件里与服务器打交道（获取异步数据等）</li> <li>可复用组件不会因组件使用的位置、场景而变化。尽量减少对外部条件的依赖。</li> </ol> <h2><a id="22_CSS_186" rel="nofollow"></a>2.2. 如何让CSS只在当前组件中起作用？</h2> <p>在每一个Vue.js组件中都可以定义各自的CSS、 JavaScript代码。如果希望组件内写的CSS只对当前组件起作用，只需要在Style标签添加Scoped属性，即。</p> <h2><a id="23_keepalive_190" rel="nofollow"></a>2.3. keep-alive是什么？</h2> <p>如果需要在组件切换的时候，保存一些组件的状态防止多次渲染，就可以使用 keep-alive 组件包裹需要保存的组件。</p> <p>两个重要属性，include 缓存组件名称，exclude 不需要缓存的组件名称。</p> <h2><a id="24__Vue_js_195" rel="nofollow"></a>2.4. 如何在 Vue. js动态插入图片</h2> <p>对“src”属性插值将导致404请求错误。应使用 v-bind:src （简写<code>:src</code>）格式代替。</p> <h2><a id="25__198" rel="nofollow"></a>2.5. 父子组件的生命周期顺序</h2> <ol> <li>加载渲染过程：<br /> 父beforeCreate-&gt;父created-&gt;父beforeMount-&gt;子beforeCreate-&gt;子created-&gt;子beforeMount-&gt;子mounted-&gt;父mounted</li> <li>子组件更新过程：父beforeUpdate-&gt;子beforeUpdate-&gt;子updated-&gt;父updated</li> <li>父组件更新过程：父beforeUpdate-&gt;父updated</li> <li>销毁过程：父beforeDestroy-&gt;子beforeDestroy-&gt;子destroyed-&gt;父destroyed</li> </ol> </h1> <h2><a id="31_vuex_207" rel="nofollow"></a>3.1. vuex的核心概念</h2> <ol> <li>state =&gt; 基本数据</li> <li>getters =&gt; 从基本数据派生的数据</li> <li>mutations =&gt; 修改数据，同步</li> <li>actions =&gt; 修改数据，异步 (Action 提交的是 mutation，而不是直接变更状态)</li> <li>modules =&gt; 模块化Vuex</li> </ol> <h2><a id="32_vuex_215" rel="nofollow"></a>3.2. vuex是什么？怎么使用？哪种功能场景使用它？</h2> <p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理器，采用集中式存储管理应用的所有组件的状态，主要是为了多页面、多组件之间的通信。<br /> Vuex有5个重要的属性，分别是 State、Getter、Mutation、Action、Module，由 view 层发起一个 Action 给 Mutation，在 Mutation 中修改状态，返回新的状态，通过 Getter暴露给 view层的组件或者页面，页面监测到状态改变于是更新页面。如果你的项目很简单，最好不要使用 Vuex，对于大型项目，Vuex 能够更好的帮助我们管理组件外部的状态，一般可以运用在购物车、登录状态、播放等场景中。</p> <h2><a id="33_state_219" rel="nofollow"></a>3.3. 多个组件之间如何拆分各自的state，每块小的组件有自己的状态，它们之间还有一些公共的状态需要维护，如何思考这块</h2> <ol> <li>公共的数据部分可以提升至和他们最近的父组件，由父组件派发</li> <li>公共数据可以放到vuex中统一管理，各组件分别获取</li> </ol> </h1> <h2><a id="41_vuerouter_224" rel="nofollow"></a>4.1. vue-router路由的两种模式</h2> <p>vue-router中默认使用的是hash模式</p> <ol> <li>hash模式, 带#。如：http://localhost:8080/#/pageA。改变hash，浏览器本身不会有任何请求服务器动作的，但是页面状态和url已经关联起来了。</li> <li>history模式，不带#， 如：http://localhost:8080/ 正常的而路径，并没有#。基于HTML5的 pushState、replaceState实现</li> </ol> <h2><a id="42_vuerouter_229" rel="nofollow"></a>4.2. vue-router如何定义嵌套路由</h2> <p>通过children 数组：</p> <pre><code class="prism language-js"><span class="token keyword">const</span> router<span class="token operator">=</span><span class="token keyword">new</span><span class="token class-name">VueRouter</span><span class="token punctuation">(</span><span class="token punctuation">{<!-- --></span>   routes<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">{<!-- --></span>       path<span class="token punctuation">:</span><span class="token string">"/parentPage"</span><span class="token punctuation">,</span>       component<span class="token punctuation">:</span> testPage<span class="token punctuation">,</span>       children<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">{<!-- --></span>           path<span class="token punctuation">:</span><span class="token string">"/childrenA"</span><span class="token punctuation">,</span>           component<span class="token punctuation">:</span> childrenComponentA<span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{<!-- --></span>           path<span class="token punctuation">:</span><span class="token string">"/childrenB"</span><span class="token punctuation">,</span>           component<span class="token punctuation">:</span> childrenComponentB<span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{<!-- --></span><span class="token comment">// 其他和parentPage平级的路由</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <h2><a id="43_vuerouter_256" rel="nofollow"></a>4.3. vue-router有哪几种导航钩子？</h2> <ol> <li>全局导航钩子：router.beforeEach(to,from,next)</li> <li>组件内的钩子beforeRouteEnter (to, from, next) beforeRouteUpdate (to, from, next) beforeRouteLeave (to, from, next)</li> <li>单独路由独享组件 beforeEnter: (to, from, next)</li> </ol> <h2><a id="44_routerouter_261" rel="nofollow"></a>4.4.<span class="katex--inline"><span class="katex"><span class="katex-mathml"></p> <p>        r</p> <p>        o</p> <p>        u</p> <p>        t</p> <p>        e</p> <p>        和</p> <p>       route和</span><span class="katex-html"><span class="base"><span class="strut" style="height: 0.61508em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.02778em;">r</span><span class="mord mathdefault">o</span><span class="mord mathdefault">u</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord cjk_fallback">和</span></span></span></span></span>router的区别</h2> <ol> <li>$route是“路由信息对象”，包括path，params，hash，query，fullPath，matched，name等路由信息参数。</li> <li>$router是“路由实例”对象包括了路由的跳转方法，钩子函数等</li> </ol> <h2><a id="45__265" rel="nofollow"></a>4.5. 路由之间跳转的方式</h2> <ol> <li>声明式（标签跳转）</li> <li>编程式（ js跳转）</li> </ol> <h2><a id="46_activeclass_269" rel="nofollow"></a>4.6. active-class是哪个组件的属性</h2> <p>vue-router 模块 的router-link组件</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-54778.htm">动物医院翻译英语（动物医院用英语怎么写）</a></p>
+                                        <p>下一个：<a href="/news/article-55332.htm">JS/JQ动态创建（添加）optgroup和option属性</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-28983.htm" title="宠物粮食成本价 宠物粮食成本价格表">宠物粮食成本价 宠物粮食成本价格表</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-10-shadowrocket-node.htm" title="12月10日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.9M/S 免费Clash机场订阅">12月10日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-17-free-clash.htm" title="1月17日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址">1月17日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-51562.htm" title="中国动物疫苗厂家排名前十有哪些（动物疫苗有哪些大厂家）">中国动物疫苗厂家排名前十有哪些（动物疫苗有哪些大厂家）</a></li>
+                        <li class="py-2"><a href="/news/article-32302.htm" title="宠物疫苗常温下可以保存多久（宠物疫苗常温下可以保存多久呢）">宠物疫苗常温下可以保存多久（宠物疫苗常温下可以保存多久呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-23-node-share.htm" title="1月23日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度22.7M/S 免费Clash机场订阅地址">1月23日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度22.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-20-clash-windows.htm" title="1月20日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.5M/S 免费Clash机场订阅地址">1月20日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.5M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-22491.htm" title="C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具">C# 有关List&lt;T&gt;的Contains与Equals方法_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-45509.htm" title="兽药疫苗查询网站（兽药疫苗查询网站官网）">兽药疫苗查询网站（兽药疫苗查询网站官网）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-11-free-high-speed-nodes.htm" title="1月11日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.5M/S 免费Clash机场订阅地址">1月11日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.5M/S 免费Clash机场订阅地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">42</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
