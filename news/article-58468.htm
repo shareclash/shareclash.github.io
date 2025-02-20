@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-58468.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JAVA8 日期和时间(LocalDate、LocalDateTime、ZoneId、Duration、Period、Instant)API 用法详解</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="文章目录    一、LocalDate、LocalTime、Instant、Duration、Period   1、LocalDate和LocalTime   a、LocalDate b、LocalT" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-58468.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="JAVA8 日期和时间(LocalDate、LocalDateTime、ZoneId、Duration、Period、Instant)API 用法详解" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/9f4b89ce8d7e0bb12cbfb602e700bf1a.webp" />
+        <meta property="og:release_date" content="2025-02-18T00:37:06" />
+    <meta property="og:updated_time" content="2025-02-18T00:37:06" />
+        <meta property="og:description" content="文章目录    一、LocalDate、LocalTime、Instant、Duration、Period   1、LocalDate和LocalTime   a、LocalDate b、LocalT" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="JAVA8 日期和时间(LocalDate、LocalDateTime、ZoneId、Duration、Period、Instant)API 用法详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>文章目录</h3> <ul> <li> <ul> <li><a href="#LocalDateLocalTimeInstantDurationPeriod_4" rel="nofollow">一、LocalDate、LocalTime、Instant、Duration、Period</a></li> <li> <ul> <li><a href="#1LocalDateLocalTime_6" rel="nofollow">1、LocalDate和LocalTime</a></li> <li> <ul> <li><a href="#aLocalDate_8" rel="nofollow">a、LocalDate</a></li> <li><a href="#bLocalTime_30" rel="nofollow">b、LocalTime</a></li> </ul> </li> <li><a href="#2_46" rel="nofollow">2、合并时间和日期</a></li> <li><a href="#3_62" rel="nofollow">3、机器日期和时间格式</a></li> <li><a href="#4Duration_Period_71" rel="nofollow">4、定义Duration 和Period</a></li> </ul> </li> <li><a href="#_96" rel="nofollow">二、操纵、解析和格式化日期</a></li> <li> <ul> <li><a href="#1TemporalAdjuster_115" rel="nofollow">1、使用TemporalAdjuster</a></li> <li><a href="#2_177" rel="nofollow">2、打印输出及解析日期</a></li> <li> <ul> <li><a href="#ajava8DateTimeFormatter_178" rel="nofollow">a、格式化和解析日期java8提供了线程安全DateTimeFormatter类，创建格式化器最简单的方法时通过它的静态工厂方法及常量。</a></li> <li><a href="#bDateTimeFormatter_193" rel="nofollow">b、按照某个模式创建DateTimeFormatter</a></li> <li><a href="#cDateTimeFormatter_201" rel="nofollow">c、创建本地化的DateTimeFormatter</a></li> </ul> </li> </ul> </li> <li><a href="#_210" rel="nofollow">三、处理不同时区</a></li> </ul> </li> </ul> </div> <blockquote> <p><strong>前言：java8之前我们创建时间new Date或者使用Calendar，很不幸这些类设计的有缺陷，导致使用这些方法写出的代码很容易出错。DateFormat是一个线程不安全的类，在多线程使用会有意想不到的结果出现。在java8中整合了很多Joda-Time的特性。</strong></p> </blockquote> <h2><a id="LocalDateLocalTimeInstantDurationPeriod_4" rel="nofollow"></a>一、LocalDate、LocalTime、Instant、Duration、Period</h2> <p>如果创建简单的时间和日期。java.time包提供了很多新类帮你解决问题，分别是LocalDate、LocalTime、Instant、Duration、Period实现的接口都是TemporalAccessor，这些类都是final类型的，都不能修改。</p> <h3><a id="1LocalDateLocalTime_6" rel="nofollow"></a>1、LocalDate和LocalTime</h3> <p>可以通过of的静态方法创建LocalDate和LocalTime实例。</p> <h4><a id="aLocalDate_8" rel="nofollow"></a>a、LocalDate</h4> <pre><code>LocalDate date = LocalDate.of(2019, 9, 1); int year = date.getYear(); Month month = date.getMonth(); int day = date.getDayOfMonth(); DayOfWeek dow = date.getDayOfWeek(); int len = date.lengthOfMonth(); boolean leap = date.isLeapYear();</code></pre> <p>还可以通过工厂方法系统日期获取当前日期：</p> <pre><code>LocalDate today = LocalDate.now();</code></pre> <p>还可以传递一个TemporalField参数给get方法也可以拿到同样的信息。TemporalField是一个接口，ChronoField实现了这一接口。</p> <pre><code>int year = date.get(ChronoField.YEAR); int month = date.get(ChronoField.MONTH_OF_YEAR); int day = date.get(ChronoField.DAY_OF_MONTH);</code></pre> <h4><a id="bLocalTime_30" rel="nofollow"></a>b、LocalTime</h4> <p>创建LocalTime也可以使用of静态方法</p> <pre><code>LocalTime time = LocalTime.of(15, 30, 20); int hour = time.getHour(); int minute = time.getMinute(); int second = time.getSecond();</code></pre> <p>LocalDate和LocalTime都可以使用parse方法将字符串解析为LocalDate或LocalTime</p> <pre><code>LocalDate date = LocalDate.parse("2019-09-01"); LocalTime time = LocalTime.parse("15:30:20");</code></pre> <h3><a id="2_46" rel="nofollow"></a>2、合并时间和日期</h3> <p>LocalDateTime是LocalDate和LocalTime的合体。它同时表示了日期和时间，但不带有时区信息。<br /> 可以使用atTime或atDate创建LocalDateTime</p> <pre><code> LocalDateTime dt1 = LocalDateTime.of(2019, 9, 1, 15, 45, 20);  LocalDate date = LocalDate.now();  LocalTime date1 = LocalTime.now();  LocalDateTime dt3 = date.atTime(15, 45, 20);  LocalDateTime dt5 = date1.atDate(date);</code></pre> <p>也可以使用toLocalDate或toLocalTime，从LocalDateTime提取LocalDate或LocalTime。</p> <pre><code>LocalDate date1 = dt1.toLocalDate(); LocalTime time1 = dt1.toLocalTime();</code></pre> <h3><a id="3_62" rel="nofollow"></a>3、机器日期和时间格式</h3> <p>今天是某年，某月，某日等等作为人我们可以看懂，但是作为机器是看不懂的。从机器角度看，建模时间最自然的格式是表示一个持续时间段上某个点的单一大整型数。这也是java.time.Instant类对时间建模的方式。基本上是以Unix元年时间(1970年1月1日)开始所经历秒数计算的。<br /> 可以使用静态工厂方式创建该实例</p> <pre><code>  Instant instant = Instant.ofEpochSecond(3);   Instant.ofEpochSecond(3,-1000000);//三秒之前的100w纳秒(1秒)     Instant.ofEpochSecond(3,1000000);//三秒之后的100w纳秒(1秒)</code></pre> <h3><a id="4Duration_Period_71" rel="nofollow"></a>4、定义Duration 和Period</h3> <p>需要创建Temporal对象之间的Duration (间隔)，Duration 类的静态工厂方法between就是为了这个目的设计的。</p> <pre><code>Duration d1 = Duration.between(time1, time2); Duration d1 = Duration.between(dateTime1, dateTime2); Duration d2 = Duration.between(instant1, instant2)</code></pre> <p>如果是需要以年，月，日的方式对多个时间建模，可以使用Period类。该类也有between方法。</p> <pre><code>Period tenDays = Period.between(LocalDate.of(2019, 3, 8), LocalDate.of(2019, 9, 1));</code></pre> <p>Duration 和Period提供了很多静态方法，可以直接创建对应的实例。</p> <pre><code>Duration threeMinutes = Duration.ofMinutes(3); Duration threeMinutes = Duration.of(3, ChronoUnit.MINUTES); Period tenDays = Period.ofDays(10); Period threeWeeks = Period.ofWeeks(3); Period twoYearsSixMonthsOneDay = Period.of(2, 6, 1);</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221105/0b50956263c2082414aefc4b750ee73c.jpg" alt="JAVA8 日期和时间(LocalDate、LocalDateTime、ZoneId、Duration、Period、Instant)API 用法详解"><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221105/93d0148c13dff913bf05cebb6858f408.jpg" alt="JAVA8 日期和时间(LocalDate、LocalDateTime、ZoneId、Duration、Period、Instant)API 用法详解"></p> <h2><a id="_96" rel="nofollow"></a>二、操纵、解析和格式化日期</h2> <p>如果已经有了一个LocalDate对象，想要创建它的修改版本，最直接的方法使用withxxx()方法。withxxx()会创建一个对象的副本。</p> <pre><code>LocalDate date1 = LocalDate.of(2019, 1, 1); LocalDate date2 = date1.withYear(2011); LocalDate date3 = date2.withDayOfMonth(25); LocalDate date4 = date3.with(ChronoField.MONTH_OF_YEAR, 9);</code></pre> <p>还可以加上或者减去一段时间</p> <pre><code>LocalDate date1 = LocalDate.of(2019, 9, 1); LocalDate date2 = date1.plusWeeks(1); LocalDate date3 = date2.minusYears(3); LocalDate date4 = date3.plus(6, ChronoUnit.MONTHS);</code></pre> <p>LocalDate、LocalTime、LocalDateTIme、Instant都有大量的通用方法<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221105/cb17b867331a670eb18cc134c445de25.jpg" alt="JAVA8 日期和时间(LocalDate、LocalDateTime、ZoneId、Duration、Period、Instant)API 用法详解"></p> <h3><a id="1TemporalAdjuster_115" rel="nofollow"></a>1、使用TemporalAdjuster</h3> <p>截止目前看到的日期比较都是相对比较直接的，有时候需要更加复杂的操作。比如，将日期调整到下个周日、下个工作日等。可以使用with的重载版本，向其传递一个更多定制化的TemporalAdjuster对象。</p> <pre><code>LocalDate date1 = LocalDate.of(2019, 9, 1); LocalDate date2 = date1.with(nextOrSame(DayOfWeek.SUNDAY)); LocalDate date3 = date2.with(lastDayOfMonth());</code></pre> <p>TemporalAdjuster的工厂方法列表</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221105/666568e50b32bcaff519cb3896d17098.jpg" alt="JAVA8 日期和时间(LocalDate、LocalDateTime、ZoneId、Duration、Period、Instant)API 用法详解"><br /> 如果没有符合你要求的预定义TemporalAdjuster，你可以创建自己的TemporalAdjuster</p> <pre><code>//函数式接口 @FunctionalInterface public interface TemporalAdjuster { 	Temporal adjustInto(Temporal temporal); }</code></pre> <p>例：计算明天的日期，同时过滤掉周六日</p> <pre><code>public class NextWorkingDay implements TemporalAdjuster {     @Override     public Temporal adjustInto(Temporal temporal) {         DayOfWeek dow =                 DayOfWeek.of(temporal.get(ChronoField.DAY_OF_WEEK));  //当前日期         int dayToAdd = 1;         if (dow == DayOfWeek.FRIDAY) dayToAdd = 3;         else if (dow == DayOfWeek.SATURDAY) dayToAdd = 2;         return temporal.plus(dayToAdd, ChronoUnit.DAYS);     } }</code></pre> <p>由于TemporalAdjuster是一个函数式接口你能以lambda方式想该adjuster接口传递行为</p> <pre><code>date = date.with(temporal -&gt; { 	DayOfWeek dow = 	DayOfWeek.of(temporal.get(ChronoField.DAY_OF_WEEK)); 	int dayToAdd = 1; 	if (dow == DayOfWeek.FRIDAY) dayToAdd = 3; 	else if (dow == DayOfWeek.SATURDAY) dayToAdd = 2; 	return temporal.plus(dayToAdd, ChronoUnit.DAYS); });</code></pre> <p>如果你使用lambda方式定义TemporalAdjuster对象，推荐使用TemporalAdjusters的ofDateAdjuster方法</p> <pre><code>TemporalAdjuster nextWorkingDay = TemporalAdjusters.ofDateAdjuster( 	temporal -&gt; { 	DayOfWeek dow = 	DayOfWeek.of(temporal.get(ChronoField.DAY_OF_WEEK)); 	int dayToAdd = 1; 	if (dow == DayOfWeek.FRIDAY) dayToAdd = 3; 	if (dow == DayOfWeek.SATURDAY) dayToAdd = 2; 	return temporal.plus(dayToAdd, ChronoUnit.DAYS); }); date = date.with(nextWorkingDay);</code></pre> <h3><a id="2_177" rel="nofollow"></a>2、打印输出及解析日期</h3> <h4><a id="ajava8DateTimeFormatter_178" rel="nofollow"></a>a、格式化和解析日期java8提供了线程安全DateTimeFormatter类，创建格式化器最简单的方法时通过它的静态工厂方法及常量。</h4> <p>下面例子，生成不同格式的字符串</p> <pre><code>LocalDate date = LocalDate.of(2019, 9, 1); String s1 = date.format(DateTimeFormatter.BASIC_ISO_DATE);//20190901 String s2 = date.format(DateTimeFormatter.ISO_LOCAL_DATE);//2019-09-01</code></pre> <p>可以用prase方法解析字符串</p> <pre><code>LocalDate date1 = LocalDate.parse("20190901", DateTimeFormatter.BASIC_ISO_DATE); LocalDate date2 = LocalDate.parse("2019-09-01", DateTimeFormatter.ISO_LOCAL_DATE);</code></pre> <h4><a id="bDateTimeFormatter_193" rel="nofollow"></a>b、按照某个模式创建DateTimeFormatter</h4> <pre><code>DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); LocalDate date1 = LocalDate.of(2019, 9, 1); String formattedDate = date1.format(formatter); LocalDate date2 = LocalDate.parse(formattedDate, formatter);</code></pre> <h4><a id="cDateTimeFormatter_201" rel="nofollow"></a>c、创建本地化的DateTimeFormatter</h4> <pre><code>DateTimeFormatter italianFormatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.ITALIAN); LocalDate date1 = LocalDate.of(2019, 3, 1); String formattedDate = date.format(italianFormatter); // 1. marzo 2019 LocalDate date2 = LocalDate.parse(formattedDate, italianFormatter);</code></pre> <h2><a id="_210" rel="nofollow"></a>三、处理不同时区</h2> <p>时区的处理是新版日期和时间API新增的功能。新的java.time.ZoneId替代了老版的java.util.TimeZone。<br /> 例：</p> <pre><code>ZoneId romeZone = ZoneId.of("Europe/Rome");//"区域/城市"</code></pre> <p>toZoneId可以将老时区对象转换为ZoneId</p> <pre><code>ZoneId zoneId = TimeZone.getDefault().toZoneId();</code></pre> <p>为时间点添加区域</p> <pre><code>LocalDate date = LocalDate.of(2014, Month.MARCH, 18); ZonedDateTime zdt1 = date.atStartOfDay(romeZone); LocalDateTime dateTime = LocalDateTime.of(2014, Month.MARCH, 18, 13, 45); ZonedDateTime zdt2 = dateTime.atZone(romeZone); Instant instant = Instant.now(); ZonedDateTime zdt3 = instant.atZone(romeZone);</code></pre> <p><strong>下面这张图可以更好的让我我们理解LocalDate、LocalTime、LocalDateTime、ZonedDateTime</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221105/0b4ad7d7b739fcd647453ade63c7d0c7.jpg" alt="JAVA8 日期和时间(LocalDate、LocalDateTime、ZoneId、Duration、Period、Instant)API 用法详解"><br /> 通过ZoneId可以将LocalDateTime转换为Instant</p> <pre><code>LocalDateTime dateTime = LocalDateTime.of(2014, Month.MARCH, 18, 13, 45); Instant instantFromDateTime = dateTime.toInstant(romeZone);</code></pre> <p>反之也可以转换为LocalDateTime</p> <pre><code>Instant instant = Instant.now(); LocalDateTime timeFromInstant = LocalDateTime.ofInstant(instant, romeZone);</code></pre> <p><strong>LocalDateTime和Date转换实例</strong></p> <pre><code>  public static void dateToCoverLocadate() {         Date date = new Date();         Instant instant = date.toInstant();         ZoneId zoneId = ZoneId.systemDefault();         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zoneId);         System.out.println(localDateTime);     }       public static void LocaldateToCoverDate() {         LocalDateTime now = LocalDateTime.now();         ZoneId zoneId = ZoneId.systemDefault();         Instant instant = now.atZone(zoneId).toInstant();         Date from = Date.from(instant);         System.out.println(from);     }</code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-58135.htm">解决python针对hdfs上传和下载问题</a></p>
+                                        <p>下一个：<a href="/news/article-58469.htm">青浦二中高考录取率大概多少分（青浦二中高考录取率大概多少分数）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-clash-windows.htm" title="11月7日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.9M/S 免费Clash机场订阅">11月7日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度20.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-29-clash-v2ray-ss-ssr.htm" title="11月29日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度22M/S 免费Clash机场订阅">11月29日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度22M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-23403.htm" title="私人协议签字按手印法律上生效吗（私人协议按手印有法律效应吗）">私人协议签字按手印法律上生效吗（私人协议按手印有法律效应吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-15-free-node-subscribe-links.htm" title="2月15日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址">2月15日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-7-node-share.htm" title="12月7日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19M/S 免费Clash机场订阅">12月7日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-21570.htm" title="如何加快循环操作和Numpy数组运算速度！">如何加快循环操作和Numpy数组运算速度！</a></li>
+                        <li class="py-2"><a href="/news/article-36603.htm" title="厦门小动物领养中心（厦门小动物救助站地址）">厦门小动物领养中心（厦门小动物救助站地址）</a></li>
+                        <li class="py-2"><a href="/news/article-27128.htm" title="宠物领养平台app推荐下载苹果手机（宠物领养平台app推荐下载苹果手机软件）">宠物领养平台app推荐下载苹果手机（宠物领养平台app推荐下载苹果手机软件）</a></li>
+                        <li class="py-2"><a href="/news/article-32303.htm" title="宠物粮食成本分析表（宠物粮食原材料）">宠物粮食成本分析表（宠物粮食原材料）</a></li>
+                        <li class="py-2"><a href="/news/article-27589.htm" title="领养宠物需要签协议吗合法吗现在（领养狗狗要签协议吗）">领养宠物需要签协议吗合法吗现在（领养狗狗要签协议吗）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">60</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
