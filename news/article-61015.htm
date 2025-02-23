@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-61015.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>缓存与数据库的一致性思考</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="时隔两年，重新启动这个博客。熟悉又有点陌生，这两年我的技术方向有了很大改变，但由于一直在使用为知笔记，因此这些改变没有提现在本博客上。之所以重启这个博客，主要是因为博客是一个开放的东西，可以带来一些交" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-61015.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="缓存与数据库的一致性思考" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/b87a5d42a5ea191c68250bad95d80853.webp" />
+        <meta property="og:release_date" content="2025-02-22T07:11:40" />
+    <meta property="og:updated_time" content="2025-02-22T07:11:40" />
+        <meta property="og:description" content="时隔两年，重新启动这个博客。熟悉又有点陌生，这两年我的技术方向有了很大改变，但由于一直在使用为知笔记，因此这些改变没有提现在本博客上。之所以重启这个博客，主要是因为博客是一个开放的东西，可以带来一些交" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="缓存与数据库的一致性思考">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <div id="cnblogs_post_body" class="blogpost-body"> <p>时隔两年，重新启动这个博客。熟悉又有点陌生，这两年我的技术方向有了很大改变，但由于一直在使用为知笔记，因此这些改变没有提现在本博客上。之所以重启这个博客，主要是因为博客是一个开放的东西，可以带来一些交流，而笔记则是个人的东西，缺少思维碰撞。闲话少叙，这就开始。</p> <p>问题：怎么保持缓存与数据库一致？</p> <p>要解答这个问题，我们首先来看不一致的几种情况。我将不一致分为三种情况：</p> <p>1. 数据库有数据，缓存没有数据；</p> <p>2. 数据库有数据，缓存也有数据，数据不相等；</p> <p>3. 数据库没有数据，缓存有数据。</p> <p>在讨论这三种情况之前，先说明一下我使用缓存的策略，也是大多数人使用的策略，叫做&nbsp;Cache Aside Pattern。酷壳里的<a title="缓存更新的套路" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://coolshell.cn/articles/17416.html"  rel="nofollow">缓存更新的套路</a> 一文，很值得一读，我的策略也是从他那学来的。</p> <p>简而言之，就是</p> <p>1. 首先尝试从缓存读取，读到数据则直接返回；如果读不到，就读数据库，并将数据会写到缓存，并返回。</p> <p>2. 需要更新数据时，先更新数据库，然后把缓存里对应的数据失效掉（删掉）。</p> <p>读的逻辑大家都很容易理解，谈谈更新。如果不采取我提到的这种更新方法，你还能想到什么更新方法呢？大概会是：先删除缓存，然后再更新数据库。这么做引发的问题是，如果A,B两个线程同时要更新数据，并且A,B已经都做完了删除缓存这一步，接下来，A先更新了数据库，C线程读取数据，由于缓存没有，则查数据库，并把A更新的数据，写入了缓存，最后B更新数据库。那么缓存和数据库的值就不一致了。</p> <p>另外有人会问，如果采用你提到的方法，为什么最后是把缓存的数据删掉，而不是把更新的数据写到缓存里。这么做引发的问题是，如果A,B两个线程同时做数据更新，A先更新了数据库，B后更新数据库，则此时数据库里存的是B的数据。而更新缓存的时候，是B先更新了缓存，而A后更新了缓存，则缓存里是A的数据。这样缓存和数据库的数据也不一致。</p> <p>按照我提到的这种更新缓存的策略，理论上也是有不一致的风险的，酷壳的文章有提到，只不过概率很小，我们暂时可以不考虑，后面我们有其他手段来补救。</p> <p>讨论完使用缓存的策略，我们再来看这三种不一致的情况。</p> <p>1. 对于第一种，在读数据的时候，会自动把数据库的数据写到缓存，因此不一致自动消除</p> <p>2. 对于第二种，数据最终变成了不相等，但他们之前在某一个时间点一定是相等的（不管你使用懒加载还是预加载的方式，在缓存加载的那一刻，它一定和数据库一致）。这种不一致，一定是由于你更新数据所引发的。前面我们讲了更新数据的策略，先更新数据库，然后删除缓存。因此，不一致的原因，一定是数据库更新了，但是删除缓存失败了。</p> <p>3. 对于第三种，情况和第二种类似，你把数据库的数据删了，但是删除缓存的时候失败了。</p> <p>因此，最终的结论是，需要解决的不一致，产生的原因是更新数据库成功，但是删除缓存失败。</p> <p>我想出的解决方案大概有以下几种：</p> <p>1. 对删除缓存进行重试，数据的一致性要求越高，我越是重试得快。</p> <p>2. 定期全量更新，简单地说，就是我定期把缓存全部清掉，然后再全量加载。</p> <p>3. 给所有的缓存一个失效期。</p> <p>第三种方案可以说是一个大杀器，任何不一致，都可以靠失效期解决，失效期越短，数据一致性越高。但是失效期越短，查数据库就会越频繁。因此失效期应该根据业务来定。</p> </div> <p>转载于:https://www.cnblogs.com/johnsblog/p/6426287.html</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-61014.htm">一个完整的pytorch预训练实现图像分类，模型融合</a></p>
+                                        <p>下一个：<a href="/news/article-61606.htm">领养狗狗需要什么手续（领养狗狗需要什么流程）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-45017.htm" title="给猫打三联和狂犬疫苗一共得多少钱（猫咪猫三联加狂犬疫苗一共下来多少钱）">给猫打三联和狂犬疫苗一共得多少钱（猫咪猫三联加狂犬疫苗一共下来多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-44007.htm" title="领养宠物条件是什么样的（领养宠物需要具备什么条件）">领养宠物条件是什么样的（领养宠物需要具备什么条件）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-29-free-clash-subscribe.htm" title="12月29日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度20.5M/S 免费Clash机场订阅地址">12月29日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度20.5M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-18-free-subscribe-node.htm" title="2月18日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址">2月18日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-27-free-clash.htm" title="1月27日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址">1月27日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-34691.htm" title="利用Redis实现防止接口重复提交功能">利用Redis实现防止接口重复提交功能</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-15-free-ssr-subscribe.htm" title="12月15日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度20.6M/S 免费Clash机场订阅">12月15日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度20.6M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-43523.htm" title="动物防疫检测（动物防疫检测报告在哪做）">动物防疫检测（动物防疫检测报告在哪做）</a></li>
+                        <li class="py-2"><a href="/news/article-55881.htm" title="猫打不打疫苗有什么区别图片（宠物猫打不打疫苗）">猫打不打疫苗有什么区别图片（宠物猫打不打疫苗）</a></li>
+                        <li class="py-2"><a href="/news/article-44523.htm" title="重庆的宠物批发市场在哪里（重庆的宠物批发市场在哪里啊）">重庆的宠物批发市场在哪里（重庆的宠物批发市场在哪里啊）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">69</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

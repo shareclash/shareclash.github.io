@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-61014.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>一个完整的pytorch预训练实现图像分类，模型融合</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="向AI转型的程序员都关注了这个号???????????? 机器学习AI算法工程&nbsp;&nbsp; 公众号：datayx 利用pytorch实现图像分类，其中包含的densenet，resnext" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-61014.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="一个完整的pytorch预训练实现图像分类，模型融合" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/5f10ba4123a645ffe1d66305c144ab89.webp" />
+        <meta property="og:release_date" content="2025-02-22T07:11:40" />
+    <meta property="og:updated_time" content="2025-02-22T07:11:40" />
+        <meta property="og:description" content="向AI转型的程序员都关注了这个号???????????? 机器学习AI算法工程&nbsp;&nbsp; 公众号：datayx 利用pytorch实现图像分类，其中包含的densenet，resnext" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="一个完整的pytorch预训练实现图像分类，模型融合">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <div id="js_content"> <p><span style="font-size: 16px;">向AI转型的程序员都关注了这个号????????????</span></p> <p><strong>机器学习AI算法工程&nbsp;&nbsp; 公众号：datayx</strong></p> <p>利用pytorch实现图像分类，其中包含的densenet，resnext，mobilenet，efficientnet, resnet等图像分类网络，可以根据需要再行利用torchvision扩展其他的分类算法</p> <p>实现功能</p> <ul> <li> <p>基础功能利用pytorch实现图像分类</p> </li> <li> <p>包含带有warmup的cosine学习率调整</p> </li> <li> <p>warmup的step学习率优调整</p> </li> <li> <p>多模型融合预测，加权与投票融合</p> </li> <li> <p>利用flask实现模型云端api部署</p> </li> <li> <p>使用tta测试时增强进行预测</p> </li> <li> <p>添加label smooth的pytorch实现（标签平滑）</p> </li> <li> <p>添加使用cnn提取特征，并使用SVM，RF，MLP，KNN等分类器进行分类。</p> </li> <li> <p>更新添加了模型蒸馏的的训练方法</p> </li> <li> <p>添加中间层可视化</p> </li> <li> <p>更新模型部署(采用flask+Redis的方法)</p> </li> <li> <p>c++ libtorch进行模型部署的简单demo</p> </li> </ul> <h3>代码运行教程&nbsp; 获取：</h3> <p>关注微信公众号 datayx &nbsp;然后回复&nbsp;&nbsp;<strong>图像分类</strong>&nbsp; 即可获取。</p> <p>AI项目体验地址 https://loveai.tech</p> <h2></h2> <h2>运行环境</h2> <ul> <li> <p>python3.7</p> </li> <li> <p>pytorch 1.1</p> </li> <li> <p>torchvision 0.3.0</p> </li> </ul> <h2>   代码仓库的使用</h2> <h3>   数据集形式</h3> <p>原始数据集存储形式为，同个类别的图像存储在同一个文件夹下，所有类别的图像存储在一个主文件夹data下。</p> <p style="text-align: center"><img decoding="async" src="http://img.555519.xyz/uploads/20230108/1cdc39c1ad47ca7835c09ba8943b2cba.jpg" alt="一个完整的pytorch预训练实现图像分类，模型融合"/></p> <p>利用preprocess.py将数据集格式进行转换（个人习惯这种数据集的方式）</p> <pre class="has"><code class="language-go">python ./data/preprocess.py </code></pre> <p>转换后的数据集为，将训练集的路径与类别存储在train.txt文件中，测试机存储在val.txt中. 其中txt文件中的内容为</p> <p style="text-align: center"><img decoding="async" src="http://img.555519.xyz/uploads/20230108/905a6e502bd086c75977a5eb30b35f05.jpg" alt="一个完整的pytorch预训练实现图像分类，模型融合"/></p> <h3>模型介绍</h3> <p>仓库中模型densenet，mobilenet,resnext 模型来自于torchvision</p> <p>训练</p> <ul> <li> <p>在<code>cfg.py</code>中修改合适的参数，并在train.py中选择合适的模型</p> </li> </ul> <h3></h3> <h3>预测</h3> <p>在cfg.py中<code>TRAINED_MODEL</code>参数修改为指定的权重文件存储位置,在predict文件中可以选定是否使用tta</p> <pre class="has"><code class="language-php">python predict.py</code></pre> <ul> <li> <p>当训练完成多模型之后生成多个txt文件之后，利用<code>ensamble</code>文件夹中的<code>kaggle_vote.py</code>进行投票融合或者加权投票融合。</p> </li> </ul> <p>将每个模型生成的csv文件，移动到<code>ensamble/samples/</code>然后将每个文件命名为<code>method1.py</code>,<code>method2.py</code>. 然后运行如下命令进行投票融合</p> <pre class="has"><code class="language-php">python ./kaggle_vote.py "./samples/method*.csv" "./samples/vote.csv"</code></pre> <h3></h3> <h3>cnn + svm</h3> <p>代码存在于<code>cnn_ml.py</code>中, 利用训练好的cnn特征提取器，将得到的特征保存为pkl文件，然后训练svm分类器， 并将分类器模型保存，然后读取预测</p> <p>主要需要修改的就是根据不同模型的输出特征向量的大小在<code>cnn_ml.py</code>中修改<code>NB_features</code>对应的大小</p> <h3>   flask云端部署</h3> <p>将训练存储好的权重文件，存储在<code>flask_deployment</code>文件夹中</p> <p>然后修改<code>server.py</code>中路径运行即可 利用<code>client.py</code>进行调用</p> <hr/> <p><strong>阅读过本文的人还看了以下文章：</strong></p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87810ef8b0f687eebbe90dd5539448b988a24a16af99f1291c16b149f8d1b5528367f58db526&amp;idx=1&amp;mid=2650347531&amp;scene=21&amp;sn=1277f25f2dc4d0cb1dce766dd9d96b3c#wechat_redirect"  rel="nofollow">TensorFlow 2.0深度学习案例实战</a><br /></strong></p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87810057b0f68941a39e1ab538a63e4ac23ed62db1919b50820ab88c598ef085f0d9b127b4b5&amp;idx=1&amp;mid=2650347172&amp;scene=21&amp;sn=5a9fa7294200728b658ad3e0a5c12cd8#wechat_redirect"  rel="nofollow">基于40万表格数据集TableBank，用MaskRCNN做表格检测</a><br /></strong></p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8781004cb0f6895aaf631c363ad157ac430ae37bf520ef97c64bdec35d4f4588d2c20a8a4720&amp;idx=1&amp;mid=2650347199&amp;scene=21&amp;sn=ad3ac17247da244852dca318c399e47f#wechat_redirect"  rel="nofollow">《基于深度学习的自然语言处理》中/英PDF</a><br /></strong></p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87810188b0f6889e92ca5d020626fc31e7132129ed9795dcc218d25d06ac671558d7f8cd2ad9&amp;idx=1&amp;mid=2650347387&amp;scene=21&amp;sn=735ba2a326a0315716805956393df6ed#wechat_redirect"  rel="nofollow">Deep Learning 中文版初版-周志华团队</a><br /></strong></p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878119d9b0f690cfaff7acf75a1058961d0daf20afb3c1cd1dba75f098255a313591a8abbffc&amp;idx=1&amp;mid=2650345258&amp;scene=21&amp;sn=96ac0f485c61420ef43908c923a35b11#wechat_redirect"  rel="nofollow">【全套视频课】最全的目标检测算法系列讲解，通俗易懂！</a><br /></strong></p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878118d1b0f691c791a4e757f95448b2216c88aedd23553609d634448798ec5ceb3612ea35df&amp;idx=1&amp;mid=2650344994&amp;scene=21&amp;sn=cc89873afe959fa5bc6134b4226022ac#wechat_redirect"  rel="nofollow">《美团机器学习实践》_美团算法团队.pdf</a><br /></strong></p> <p><strong><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8781188bb0f6919d01ef34b4f94a19c10ab84e470ef892efab65e4388749d467d276505644d1&amp;idx=1&amp;mid=2650345080&amp;scene=21&amp;sn=e54a54a2b99f14277276c6132d264b94#wechat_redirect"  rel="nofollow">《深度学习入门：基于Python的理论与实现》高清中文PDF+源码</a><br /></strong></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8781025eb0f68b48ff0f7bb61c115a4bb54006d587a9205f03c6b49f8af11e3ec6512c0dc15a&amp;idx=1&amp;mid=2650346669&amp;scene=21&amp;sn=773f0de627f8d996a5df9fb6b87ab5eb#wechat_redirect"  rel="nofollow">特征提取与图像处理(第二版).pdf</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878119a4b0f690b26ca00d15868cbfab64daebb88678e20dee582590dabaa1282ee838c1c8fa&amp;idx=1&amp;mid=2650345303&amp;scene=21&amp;sn=460c2b8ef586b372da3f37dbaf6180fc#wechat_redirect"  rel="nofollow">python就业班学习视频，从入门到实战项目</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811b3db0f6922b550bf8b165f7cfc525e72dd91bc2225d8424238b0cdec64c7db6a01ea3aa&amp;idx=1&amp;mid=2650344910&amp;scene=21&amp;sn=e1dd8b2c2156919648115904e8e92905#wechat_redirect"  rel="nofollow">2019最新《PyTorch自然语言处理》英、中文版PDF+源码</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8780e8cab0f761dcbea808bcc7a063c2404b4cbedb5a51eef6e0176fbbf68c58c3ee8dbf83a8&amp;idx=1&amp;mid=2650340921&amp;scene=21&amp;sn=1f55d8a5f4d234ec4b73bf5d56d1247c#wechat_redirect"  rel="nofollow">《21个项目玩转深度学习：基于TensorFlow的实践详解》完整版PDF+附书代码</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811290b0f69b86a4c5b74d43467321cd714c347a9fced8b8de8c25e49b8a8a611f024e026f&amp;idx=1&amp;mid=2650342499&amp;scene=21&amp;sn=c729c58cce9e9a3dbe3923ba345d49b6#wechat_redirect"  rel="nofollow">《深度学习之pytorch》pdf+附书源码</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811b5ab0f6924c8c9c4cb805377e1ea1f436c4c6d92ad8228568a259672cdc3d43f0e149b2&amp;idx=1&amp;mid=2650344873&amp;scene=21&amp;sn=e928950db7c672a8860feca731c8eb16#wechat_redirect"  rel="nofollow">PyTorch深度学习快速实战入门《pytorch-handbook》</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811b7cb0f6926a6656a7c0fb6c8555275c0d2a3cd2f732a9827595cc66b6cd60dd547796d6&amp;idx=1&amp;mid=2650344847&amp;scene=21&amp;sn=bb3ed742cdc682be25bad9421e1e05ef#wechat_redirect"  rel="nofollow">【下载】豆瓣评分8.1,《机器学习实战:基于Scikit-Learn和TensorFlow》</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811b91b0f6928729d9ff80c635bfd39df2ce137d05f5a0acbd7162256528239ba452e81c98&amp;idx=1&amp;mid=2650344802&amp;scene=21&amp;sn=e95f2221f032558d048cede5e846eaee#wechat_redirect"  rel="nofollow">《Python数据分析与挖掘实战》PDF+完整源码</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811b70b0f6926631a50afa50f58dde1c3a39f96891cb5acc56b1b93aeb92ec1aa6bb01d884&amp;idx=1&amp;mid=2650344835&amp;scene=21&amp;sn=ca82aa5b79043dd9e06e65bea19cdb0c#wechat_redirect"  rel="nofollow">汽车行业完整知识图谱项目实战视频(全23课)</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878111ddb0f698cb85abb0847f7b33b83bf4eacc89d9d3850b7a37cd53310e576fa940d3ec76&amp;idx=1&amp;mid=2650343214&amp;scene=21&amp;sn=67ed289063945d73970265db333338c9#wechat_redirect"  rel="nofollow">李沐大神开源《动手学深度学习》，加州伯克利深度学习（2019春）教材</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8781104cb0f6995ab83259e3d08dac53a7d9dd8db8c8ee16e74b7bb5b2181a69a74157a919d3&amp;idx=1&amp;mid=2650343103&amp;scene=21&amp;sn=901c5c2cdb8376f7280813c75f070aa8#wechat_redirect"  rel="nofollow">笔记、代码清晰易懂！李航《统计学习方法》最新资源全套！</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878111ffb0f698e95e4780a3da6e5dfca8481d5577502c4386b5406f59be6b3e24e11808125c&amp;idx=1&amp;mid=2650343180&amp;scene=21&amp;sn=f108d739722c23a8cc55a84669fd473a#wechat_redirect"  rel="nofollow">《神经网络与深度学习》最新2018版中英PDF+源码</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878112c6b0f69bd0ae9497811801df35211507d8bf89d1682a97b6e014da5332c93c027ed067&amp;idx=1&amp;mid=2650342453&amp;scene=21&amp;sn=362aa13078c38ee8366976ec3981a265#wechat_redirect"  rel="nofollow">将机器学习模型部署为REST API</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878112ebb0f69bfd7891c54ac05af67d46780b7c8ea32682eb3388b603bbd234de0f8ceb6339&amp;idx=1&amp;mid=2650342424&amp;scene=21&amp;sn=b7fb23cccd03f598f4fc36b0eeab8ce7#wechat_redirect"  rel="nofollow">FashionAI服装属性标签图像识别Top1-5方案分享</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8781151fb0f69c0983bee1fcaa07e8dc59b5a457a2d90dae55d75a19e5ee6cfefb553532d445&amp;idx=1&amp;mid=2650342380&amp;scene=21&amp;sn=f60e73a582d288bdc7ba5f9055a4e536#wechat_redirect"  rel="nofollow">重要开源！CNN-RNN-CTC 实现手写汉字识别</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811515b0f69c0314e7491347f11cab2388cfad3906e8778459546330b3660da949b330e063&amp;idx=1&amp;mid=2650342374&amp;scene=21&amp;sn=a008a6d0b3f25ec46cb4244138a7a1d5#wechat_redirect"  rel="nofollow">yolo3 检测出图像中的不规则汉字</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8781155eb0f69c48c8d8820903edbb9b9e1411124275869d4bc9f36467e14ae606748c8c5101&amp;idx=1&amp;mid=2650342317&amp;scene=21&amp;sn=afe4df2313239ab52de176013ff9756c#wechat_redirect"  rel="nofollow">同样是机器学习算法工程师，你的面试为什么过不了？</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811523b0f69c354960832ffeed086474b8dca1e9922a032c40cfd5624835e0f6b45a2d5ce3&amp;idx=1&amp;mid=2650342352&amp;scene=21&amp;sn=2e95c4b1371e625054d2fe426b707521#wechat_redirect"  rel="nofollow">前海征信大数据算法：风险概率预测</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811524b0f69c320c462f73a2a5855a6a82f9229c73ac3411ac502540bb53a7c05d7b45ebd1&amp;idx=1&amp;mid=2650342359&amp;scene=21&amp;sn=568797741c58b980dd69c8813ce9a369#wechat_redirect"  rel="nofollow">【Keras】完整实现‘交通标志’分类、‘票据’分类两个项目，让你掌握深度学习图像分类</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811504b0f69c12cb85d7c411f1f2c5865ea4de1a465ce5e039cf9bb5b2427776bc0558c2cf&amp;idx=1&amp;mid=2650342391&amp;scene=21&amp;sn=d8c0f434c23d2b18b7a28d98421c85ef#wechat_redirect"  rel="nofollow">VGG16迁移学习，实现医学图像识别分类工程项目</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811444b0f69d528dc1a01ee980681b09b5059fec377376b3b32219498190dc0de6eae4f03b&amp;idx=1&amp;mid=2650342071&amp;scene=21&amp;sn=97c43ca655ae0d4a9db0006ab9b2ed46#wechat_redirect"  rel="nofollow">特征工程(一)</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8781143eb0f69d28d0923f07fc871e35c9623d9607b93e678e9911a57f5043e5251a89379578&amp;idx=1&amp;mid=2650342093&amp;scene=21&amp;sn=018a13423ed22383f7e5c9d312f7622c#wechat_redirect"  rel="nofollow">特征工程(二) :文本数据的展开、过滤和分块</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811410b0f69d06febaac6fa5f80ad7dad768644f3e0303ba5721acbf0a359d98b3d59f3231&amp;idx=1&amp;mid=2650342115&amp;scene=21&amp;sn=f3c064229c8f7cf9f7657bfd4806044f#wechat_redirect"  rel="nofollow">特征工程(三):特征缩放,从词袋到 TF-IDF</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878115d7b0f69cc18971bd7514431c84a7709968a3718df7b684d6aa2ec587b8788bee2c2ac3&amp;idx=1&amp;mid=2650342180&amp;scene=21&amp;sn=e82d0829e2cee371402a51d92cf9c48d#wechat_redirect"  rel="nofollow">特征工程(四): 类别特征</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878115c7b0f69cd1e55a98aeeeb33dfa0d067e6b0b9431435d80bc01035f8120e011d97fa865&amp;idx=1&amp;mid=2650342196&amp;scene=21&amp;sn=1e0dca2cf49135f81c2b32d07f94b65e#wechat_redirect"  rel="nofollow">特征工程(五): PCA 降维</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878115b6b0f69ca0faca84fcc1dbe5f336a0a4d63d99bfd3cdb5b1097c5c6753efe28bade885&amp;idx=1&amp;mid=2650342213&amp;scene=21&amp;sn=f35833b85c5bdc6238ee17c13b53029b#wechat_redirect"  rel="nofollow">特征工程(六): 非线性特征提取和模型堆叠</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811593b0f69c85abefd9ee43ec068ac32b49cc75d6811cc9609277338844b44348f66246bf&amp;idx=1&amp;mid=2650342240&amp;scene=21&amp;sn=91de97dcbd5a1145f2367bc7f0a0b5ee#wechat_redirect"  rel="nofollow">特征工程(七)：图像特征提取和深度学习</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811579b0f69c6f75ff3f8e911631a52f801f9945415cea32af8ba56b94c05f8ff9f8494729&amp;idx=1&amp;mid=2650342282&amp;scene=21&amp;sn=6f059889581280daac47eea31f49a448#wechat_redirect"  rel="nofollow">如何利用全新的决策树集成级联结构gcForest做特征工程并打分？</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878117c6b0f69ed04a3e282ef0aefefcba6076e0b81281b3f9ce32078eb54a3ec2f2ca5dc324&amp;idx=1&amp;mid=2650341685&amp;scene=21&amp;sn=a58f335670901df4180b039e199841fe#wechat_redirect"  rel="nofollow">Machine Learning Yearning 中文翻译稿</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878114aab0f69dbcfa1f778d4152bc9e2198074c0dd5ff050efbc1e33b636401fb0f863dbbcc&amp;idx=1&amp;mid=2650341977&amp;scene=21&amp;sn=fe2d74d861a9b1e42ef30dd9279aa1e1#wechat_redirect"  rel="nofollow">蚂蚁金服2018秋招-算法工程师（共四面）通过</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=8781166bb0f69f7d7db12bb9672f136cb14de25464396f48aff597aa3947265856697011714e&amp;idx=1&amp;mid=2650341528&amp;scene=21&amp;sn=ffa7f24116c8acd4e2ee84f4ebca135f#wechat_redirect"  rel="nofollow">全球AI挑战-场景分类的比赛源码(多模型融合)</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878114cfb0f69dd993064db08c543d36cfa951b4729f1b323e742300e1d0b65c4aeae662af16&amp;idx=1&amp;mid=2650341948&amp;scene=21&amp;sn=31d7f055444f69bbf862ebe1a5634789#wechat_redirect"  rel="nofollow">斯坦福CS230官方指南：CNN、RNN及使用技巧速查（打印收藏）</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=87811635b0f69f23bf54b5701eb0a9b542e801e240f6cc742c7852ccfc351425c3d3a46d1341&amp;idx=1&amp;mid=2650341574&amp;scene=21&amp;sn=f435538c7d5c7953ea38089baa8d3ed5#wechat_redirect"  rel="nofollow">python+flask搭建CNN在线识别手写中文网站</a></p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MTk3ODI2OA%3D%3D&amp;chksm=878114dcb0f69dcaf1f578b43c7828cc279d28d8415524da2a30effadadd8e4dc72494a1125e&amp;idx=1&amp;mid=2650341935&amp;scene=21&amp;sn=34c478df2075ab9730207d6592e6d312#wechat_redirect"  rel="nofollow">中科院Kaggle全球文本匹配竞赛华人第1名团队-深度学习与特征工程</a></p> </div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-60415.htm">思念餐厅官方网站（思念食品售后服务电话）</a></p>
+                                        <p>下一个：<a href="/news/article-61015.htm">缓存与数据库的一致性思考</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-21570.htm" title="如何加快循环操作和Numpy数组运算速度！">如何加快循环操作和Numpy数组运算速度！</a></li>
+                        <li class="py-2"><a href="/news/article-45509.htm" title="兽药疫苗查询网站（兽药疫苗查询网站官网）">兽药疫苗查询网站（兽药疫苗查询网站官网）</a></li>
+                        <li class="py-2"><a href="/news/article-36606.htm" title="动物疫苗价格排行前十的有哪些品种呢 动物疫苗价格排行前十的有哪些品种呢图片">动物疫苗价格排行前十的有哪些品种呢 动物疫苗价格排行前十的有哪些品种呢图片</a></li>
+                        <li class="py-2"><a href="/news/article-39078.htm" title="Spring Framework源码解析-BeanPostProcessor讲解">Spring Framework源码解析-BeanPostProcessor讲解</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-6-clash-node.htm" title="12月6日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅">12月6日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-55332.htm" title="JS/JQ动态创建（添加）optgroup和option属性">JS/JQ动态创建（添加）optgroup和option属性</a></li>
+                        <li class="py-2"><a href="/news/article-28521.htm" title="宠物用品批发进货渠道电商（宠物用品批发进货网站）">宠物用品批发进货渠道电商（宠物用品批发进货网站）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-25-free-high-speed-nodes.htm" title="11月25日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.7M/S 免费Clash机场订阅">11月25日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度22.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-21-free-clash-subscribe.htm" title="12月21日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22.6M/S 免费Clash机场订阅地址">12月21日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22.6M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-42527.htm" title="附近的动物医院在哪里啊（附近哪有动物医院?）">附近的动物医院在哪里啊（附近哪有动物医院?）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">69</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
