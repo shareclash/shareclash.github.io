@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-62196.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>JavaScript中querySelector使用详解</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="本文记录，JavaScript 中 querySelector 的使用方法。小白贡献，语失莫怪。  // 两种 query 的 method (方法) document.querySelector(s" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-62196.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="JavaScript中querySelector使用详解" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/3e69a83881b4e9ea6a8bb61e9a9712ed.webp" />
+        <meta property="og:release_date" content="2025-02-24T09:16:25" />
+    <meta property="og:updated_time" content="2025-02-24T09:16:25" />
+        <meta property="og:description" content="本文记录，JavaScript 中 querySelector 的使用方法。小白贡献，语失莫怪。  // 两种 query 的 method (方法) document.querySelector(s" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="JavaScript中querySelector使用详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<blockquote> <p>本文记录，JavaScript 中 querySelector 的使用方法。小白贡献，语失莫怪。</p> </blockquote> <pre><code class="language-js">// 两种 query 的 method (方法) document.querySelector(selectors); document.querySelectorAll(selectors);</code></pre> <p></p> <h2 id="为什么要学习-queryselector">为什么要学习 querySelector：</h2> <p>因为 front end 中，JavaScript 的基本逻辑就是：<span style="color: rgba(255, 192, 203, 1)"><strong>选取一个 element，然后 do somethong with it</strong></span>；所以，一切的开始，就是要先想办法，抓到那个 element；而 querySelector 就是众多选择器中，特别好用的一个；所以，非常有必要学习；熟练的使用它，就等于迈开了前端 JS 编程，的第一大步！</p> <p></p> <h2 id="那么-queryselector-是什么">那么 querySelector 是什么：</h2> <p><code>document.querySelector()</code> 用于选取 html 中的节点（node | element）；相较于传统的 DOM 选择器 (DOM selectors)，其特点是，可以使用 CSS 风格的 Selectors；并且几乎支持所有CSS选择器的 syntax 风格；</p> <p></p> <h2 id="常用方法语法对比">常用方法，语法对比：</h2> <p>常用的 get 某个节点的方法，无外乎三种，通过 class，tag，id；传统的 DOM 选取，与<code>querySelector()</code> 的<strong>syntax</strong> 对比如下：</p> <pre><code class="language-js">// select element by class name document.getElementsByClassName("class_x"); document.querySelectorAll(".class_x");  // select element by tag name document.getElementsByTagName("img"); document.querySelectorAll("img");  // select element by id name document.getElementById("id_x"); document.querySelector("#id_x");</code></pre> <p></p> <h2 id="使用-多个-选取条件或-递进式-的选取条件-descendant-selector">使用 "多个" 选取条件，或 "递进式" 的选取条件 (descendant selector)：</h2> <p>选取条件，可以是一个或者多个；多个的情况，并不限制个数，可以是2个，3个 ... N个；</p> <pre><code class="language-js">// "递进式" 的选取条件 (descendant selector) (可以夸级) (使用"空格"符号) document.getElementsByClassName("class_x").getElementsByTagName("img"); document.querySelectorAll(".class_x img");  // "父子递进式" 选取条件 (不可以夸级, 必须是严格的直系父子) document.querySelectorAll(".parent_class &gt; .child_class &gt; .grandChild_class")  // "父子递进 + 混合式" 选取条件 (使用 "&gt;" 符号) // 选取 parent_class 中的 child_class 中的 grandChild_class，中的 img tag document.querySelectorAll(".parent_class &gt; .child_class &gt; .grandChild_class tag_img")  // "递进式" 的选取条件，属性选取 (attribute) // 选取所有，id属性='large'的，并且class='bg'的，img标签 document.querySelectorAll("img[id='large'][class='bg']"); document.querySelector("img[id='large'][class='bg']");  // "多个" 选取条件, 用逗号隔开 (相当于 A 或 B) document.querySelectorAll(".class_x， .class_y"); document.querySelectorAll(".class_x， img"); document.querySelectorAll(".class_x， #id_x");  // "单个" 选取条件，返回第一个 match document.getElementsByClassName("class_x")[0]; document.querySelector(".class_x");  // "多个" 选取条件，返回第一个 match document.getElementsByClassName("class_x").getElementsByTagName("img")[0]; document.querySelector(".class_x， img");  // 选取类 class_x 中，类名为 big_pic 的 li 标签，下面的，全部兄弟们！ document.querySelectorAll(".class_x li.big_pic ~ li ");  // 选取类 class_x 中，类名为 big_pic 的 li 标签，紧挨着的，下一个兄弟！ document.querySelectorAll(".class_x li.big_pic + li ");</code></pre> <p></p> <h2 id="对比-queryselector-和-jquery">对比 querySelector 和 jQuery：</h2> <ol> <li>首先 querySelector 比 jQuery 要快！因为 querySelector 是内置方法！</li> <li>使用 querySelector，无需要挂在 jQuery 的文件，减少 overhead！</li> <li>jQuery 有各种 filter (例如：":input")！ 而 querySelector，没有 jQuery 这种 filter！</li> <li>所以 querySelector 无法使用任何 (":input" 类的) filter！</li> <li>最终 querySelector 还是首选！</li> </ol> <p></p> <h2 id="其他-queryselector-可使用的-css-选择器">其他 querySelector 可使用的 CSS 选择器：</h2> <p>还有很多没介绍的，querySelector 可使用的 CSS 选择器；例如：伪选择器（Pseudo）；通用选择器（Universal selector）；一般兄弟组合器 "~" (General sibling combinator)；紧邻兄弟组合器 "+" (Adjacent sibling combinator)。详情可参见 reference 中的，第4个，和第5个，link，里面有详细的 CSS 选择器的介绍</p> <p></p> <h2 id="个人评价">个人评价：</h2> <p><code>document.querySelectorAll()</code> 的 "递进式" 选取，很好用；</p> <ol> <li>去掉了 "传统 DOM选择器" 中，nest selector 的麻烦</li> <li>代码更简洁了</li> <li>返回的是 nodeList</li> <li>可进一步使用 nodeList.forEach()</li> </ol> <p>而且，可以看出，当 css selectors 组合起来的时候，那种灵巧多变，是多么的强大啊！<br /> 任何一个 element 都逃不过，组合的选择中。除非这个 element 不在 html 中！</p> <p></p> <h2 id="reference">Reference：</h2> <ol> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"  target="_blank" rel="nofollow">Document.querySelector() - Web APIs | MDN</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developer.mozilla.org/en-US/docs/Web/API/Element/querySelectorAll"  target="_blank" rel="nofollow">Element.querySelectorAll() - Web APIs | MDN</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developer.mozilla.org/en-US/docs/web/css/descendant_combinator"  target="_blank" rel="nofollow">Descendant combinator - CSS: Cascading Style Sheets | MDN</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors?msclkid=4da4c359c15f11ec8049fc5a2bb2c36e"  target="_blank" rel="nofollow">CSS selectors - CSS: Cascading Style Sheets | MDN</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Selectors"  target="_blank" rel="nofollow">CSS 选择器 - CSS（层叠样式表） | MDN</a></li> </ol> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-62195.htm">springboot 新建 AutoConfiguration</a></p>
+                                        <p>下一个：<a href="/news/article-62798.htm">家用小型饲料颗粒机500元左右能用吗（家用小型饲料颗粒机500元左右能用吗）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-54235.htm" title="动物疫苗价格表最新图片（动物疫苗价格表最新图片及价格）">动物疫苗价格表最新图片（动物疫苗价格表最新图片及价格）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-6-free-node-subscribe-links.htm" title="11月6日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.7M/S 免费Clash机场订阅">11月6日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.7M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-25734.htm" title="猫咪驱虫内外驱是怎样驱（猫咪内外驱虫注意事项）">猫咪驱虫内外驱是怎样驱（猫咪内外驱虫注意事项）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-30-node-share-links.htm" title="11月30日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度20.9M/S 免费Clash机场订阅">11月30日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度20.9M/S 免费Clash机场订阅</a></li>
+                        <li class="py-2"><a href="/news/article-42528.htm" title="小动物疫苗注射证明是疫苗本吗（动物疫苗本上的十条约定）">小动物疫苗注射证明是疫苗本吗（动物疫苗本上的十条约定）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-free-node-subscribe.htm" title="1月18日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.9M/S 免费Clash机场订阅地址">1月18日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.9M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-36606.htm" title="动物疫苗价格排行前十的有哪些品种呢 动物疫苗价格排行前十的有哪些品种呢图片">动物疫苗价格排行前十的有哪些品种呢 动物疫苗价格排行前十的有哪些品种呢图片</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-13-free-ssr-subscribe.htm" title="2月13日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址">2月13日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-11-clash-node.htm" title="2月11日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.8M/S 免费Clash机场订阅地址">2月11日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-7-free-node-subscribe-links.htm" title="2月7日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址">2月7日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">75</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
