@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-67762.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Spring Cache缓存框架详解</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="一、序言 Spring Cache是Spring体系下标准化缓存框架。Spring Cache有如下优势：  缓存品种多  支持缓存品种多，常见缓存Redis、EhCache、Caffeine均支持。" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-67762.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="Spring Cache缓存框架详解" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/5f10ba4123a645ffe1d66305c144ab89.webp" />
+        <meta property="og:release_date" content="2025-03-05T11:11:58" />
+    <meta property="og:updated_time" content="2025-03-05T11:11:58" />
+        <meta property="og:description" content="一、序言 Spring Cache是Spring体系下标准化缓存框架。Spring Cache有如下优势：  缓存品种多  支持缓存品种多，常见缓存Redis、EhCache、Caffeine均支持。" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Spring Cache缓存框架详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h3 id="一序言">一、序言</h3> <p>Spring Cache是Spring体系下标准化缓存框架。Spring Cache有如下优势：</p> <ul> <li><strong>缓存品种多</strong></li> </ul> <p>支持缓存品种多，常见缓存<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.altitude.xin/blog/home/#/chapter/c1ca4e5acf124db885f8d900400c515d"  target="_blank" rel="nofollow">Redis</a>、<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.altitude.xin/blog/home/#/chapter/13c02e630e46243bc967d55451712549"  target="_blank" rel="nofollow">EhCache</a>、<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.altitude.xin/blog/home/#/chapter/d4ce4de96de9eda8a85d7a009c088944"  target="_blank" rel="nofollow">Caffeine</a>均支持。它们之间既能独立使用，也能组合使用。</p> <ul> <li><strong>平滑迁移</strong></li> </ul> <p>Spring内部支持的缓存，可实现无缝平滑迁移，无需修改业务逻辑。注解缓存的实现依赖于动态代理。</p> <p>大多数情况下使用的是注解版、少数情况下也能使用编程版。注解版与业务代码高度解藕，因其依托动态代理技术实现，使用场景上有一定的限制。编程版嵌入业务代码，代码顺序执行，无前置使用条件。</p> <h3 id="二基本概念">二、基本概念</h3> <h4 id="一核心概念">（一）核心概念</h4> <p>一个应用可以有多个缓存管理器，每个缓存管理器可以有多个缓存，每个缓存可以存储多条记录。</p> <h5 id="1缓存管理器">1、缓存管理器</h5> <p>缓存的存储介质不同、缓存连接不同的数据库、缓存值序列化等由缓存管理器配置。缓存管理器有主次之分，默认情况下使用主（首要）缓存管理器。</p> <p>当服务内只有一个CacheManager时，默认使用此缓存管理器；当超过一个缓存管理器时，需要使用<code>Primary</code>注解指定默认缓存管理器。</p> <h5 id="2缓存">2、缓存</h5> <p>Cache是一组配置相同缓存的集合，可以理解为命名空间，Spring Cache体系下的缓存生命时间是以Cache为单位的，不支持以Key为单位设置生存时间。不同的业务对应不同的缓存配置，应在缓存处予以区分。</p> <p>CacheName应具有显著的业务区分度以及过期时间区分度，并且以全局常量的方式提供，采取集中化管理的方式，禁止采用魔术变量的方式指定CacheName。</p> <h4 id="二补充内容">（二）补充内容</h4> <p>一般来说缓存的Key与Value均是String类型，特别是Value通常序列化成JSON串。</p> <h3 id="三注解版">三、注解版</h3> <p>用于基于注解的方式来管理缓存数据。注解缓存有如下优势：</p> <ul> <li><strong>高度解藕</strong></li> </ul> <p>使用注解来实现缓存，与业务高度解藕。</p> <ul> <li><strong>灵活管理</strong></li> </ul> <p>通过全局配置，不修改缓存逻辑，可实现如下效果：</p> <p>开发环境下，可禁用缓存，将流量打入数据库，尽早的暴露可能存在的性能瓶颈；测试环境开启缓存，进行压力测试等。</p> <h4 id="一动态代理">（一）动态代理</h4> <p>Spring Cache缓存注解版的原理以及缓存配置失败的典型案例。</p> <h5 id="1cglib动态代理">1、CGLib动态代理</h5> <p>缓存的实现底层技术支持是CGLib动态代理，在目标方法调用前、后分别追加相应的缓存操作，以达到添加缓存、更新缓存、删除缓存的操作。</p> <p>如果注解缓存配置未生效，检查目标调用方法是否被动态代理。</p> <h5 id="2配置失效">2、配置失效</h5> <p>配置失效是指尽管配置了缓存注解，但缓存仍然未生效。</p> <ul> <li>final类与final方法</li> </ul> <p>final类与final方法不满足CGLib动态代理的条件，因此缓存配置会失效。</p> <ul> <li>内部调用</li> </ul> <p>使用依赖注入的方式调用配置缓存的方法生效，方法间内部调用不生效。</p> <ul> <li>非public方法</li> </ul> <p>非public方法配置缓存不生效。</p> <h4 id="二常用注解">（二）常用注解</h4> <h5 id="1配置注解">1、配置注解</h5> <p><strong>（1）EnableCaching</strong></p> <p>标注于SpringBoot应用启动类上，添加此注解表示开启Spring Cache缓存；移除表示关闭缓存。如果在全局配置文件中添加如下配置，即使在启动类上标注EnableCaching注解，Spring Cache缓存然后是关闭状态。</p> <pre><code class="language-yml">spring:   cache:     type: none</code></pre> <p>如果应用中自定义独立于Spring容器的缓存，则不受此配置影响。</p> <p><strong>（2）CacheConfig</strong></p> <p>标注于类上，更具体的说是标注于业务服务类上。统一配置如下参数信息：</p> <table> <thead> <tr> <th>参数</th> <th>含义</th> <th>使用说明</th> </tr> </thead> <tbody> <tr> <td><code>cacheManager</code></td> <td>缓存管理器</td> <td>缺省指首要的CacheManager</td> </tr> <tr> <td><code>cacheNames</code></td> <td>缓存名</td> <td></td> </tr> <tr> <td><code>keyGenerator</code></td> <td>key值生成器</td> <td></td> </tr> </tbody> </table> <p>在类上统一进行配置，类下的方法自动继承相应的配置。</p> <h5 id="2缓存注解">2、缓存注解</h5> <p><strong>（1）Cacheable</strong></p> <p>添加缓存的核心注解，分两种情况：一是对应key值未有缓存数据，先执行方法，然后根据condition和unless条件决定是否添加缓存；二是对应key值已有缓存，不执行方法体，直接返回数据。</p> <p>参数<code>keyGenerator</code>与<code>key</code>是互斥的，当<code>key</code>存在时<code>keyGenerator</code>配置自动失效。</p> <ul> <li><strong>基础参数</strong></li> </ul> <table> <thead> <tr> <th>参数</th> <th>含义</th> <th>使用说明</th> </tr> </thead> <tbody> <tr> <td><code>cacheManager</code></td> <td>缓存管理器</td> <td>缺省指首要的CacheManager</td> </tr> <tr> <td><code>cacheNames</code></td> <td>缓存名</td> <td></td> </tr> <tr> <td><code>keyGenerator</code></td> <td>key值生成器</td> <td></td> </tr> <tr> <td><code>key</code></td> <td>key值</td> <td></td> </tr> </tbody> </table> <ul> <li><strong>高级参数</strong></li> </ul> <table> <thead> <tr> <th>参数</th> <th>含义</th> <th>默认值</th> <th>使用说明</th> </tr> </thead> <tbody> <tr> <td><code>condition</code></td> <td>缓存条件</td> <td></td> <td>指示满足条件方执行缓存操作，一般使用参数作为条件</td> </tr> <tr> <td><code>unless</code></td> <td>否定缓存</td> <td></td> <td>当条件为 true ，方法的返回值不会被缓存</td> </tr> <tr> <td><code>sync</code></td> <td>同步状态</td> <td>false</td> <td>表示将方法执行结果以何种方式存入缓存</td> </tr> </tbody> </table> <p><strong>（2）CachePut</strong></p> <p>更新缓存注解。不管对应key值是否有缓存数据，都执行。</p> <ul> <li><strong>基础参数</strong></li> </ul> <table> <thead> <tr> <th>参数</th> <th>含义</th> <th>使用说明</th> </tr> </thead> <tbody> <tr> <td><code>cacheManager</code></td> <td>缓存管理器</td> <td>缺省指首要的CacheManager</td> </tr> <tr> <td><code>cacheNames</code></td> <td>缓存名</td> <td></td> </tr> <tr> <td><code>keyGenerator</code></td> <td>key值生成器</td> <td></td> </tr> <tr> <td><code>key</code></td> <td>key值</td> <td></td> </tr> </tbody> </table> <ul> <li><strong>高级参数</strong></li> </ul> <table> <thead> <tr> <th>参数</th> <th>含义</th> <th>使用说明</th> </tr> </thead> <tbody> <tr> <td><code>condition</code></td> <td>缓存条件</td> <td>指示满足条件方执行缓存操作，一般使用参数作为条件</td> </tr> <tr> <td><code>unless</code></td> <td>否定缓存</td> <td>当条件为 true ，方法的返回值不会被缓存</td> </tr> </tbody> </table> <p><strong>（3）CacheEvict</strong></p> <p>主动清除缓存注解。</p> <ul> <li><strong>基础参数</strong></li> </ul> <table> <thead> <tr> <th>参数</th> <th>含义</th> <th>使用说明</th> </tr> </thead> <tbody> <tr> <td><code>cacheManager</code></td> <td>缓存管理器</td> <td>缺省指首要的CacheManager</td> </tr> <tr> <td><code>cacheNames</code></td> <td>缓存名</td> <td></td> </tr> <tr> <td><code>keyGenerator</code></td> <td>key值生成器</td> <td></td> </tr> <tr> <td><code>key</code></td> <td>key值</td> <td></td> </tr> </tbody> </table> <ul> <li><strong>高级参数</strong></li> </ul> <table> <thead> <tr> <th>参数</th> <th>含义</th> <th>默认值</th> <th>使用说明</th> </tr> </thead> <tbody> <tr> <td><code>condition</code></td> <td>缓存条件</td> <td></td> <td>指示满足条件方执行缓存操作，一般使用参数作为条件</td> </tr> <tr> <td><code>allEntries</code></td> <td>所有缓存</td> <td>false</td> <td>表示是否清空当前CacheName对应的所有缓存</td> </tr> <tr> <td><code>beforeInvocation</code></td> <td>调用前</td> <td>false</td> <td>表示是否在方法调用前清空缓存</td> </tr> </tbody> </table> <h5 id="3keygenerator">3、KeyGenerator</h5> <p>默认情况下使用SimpleKeyGenerator键值生成器，当不指定key值时，根据生成器规则，将方法参数转化为缓存Key值。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-67761.htm">经典数据结构解决迷宫问题（Python实现）</a></p>
+                                        <p>下一个：<a href="/news/article-68373.htm">javascript删除数组元素的7个方法</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-68374.htm" title="动物疫苗制作流程图片（动物疫苗工艺流程）">动物疫苗制作流程图片（动物疫苗工艺流程）</a></li>
+                        <li class="py-2"><a href="/news/article-35941.htm" title="网页中的动态加载(js文件和css文件即换肤)">网页中的动态加载(js文件和css文件即换肤)</a></li>
+                        <li class="py-2"><a href="/news/article-48369.htm" title="宠物粮食生产线设计图纸大全（宠物主粮生产加工工艺要点）">宠物粮食生产线设计图纸大全（宠物主粮生产加工工艺要点）</a></li>
+                        <li class="py-2"><a href="/news/article-52621.htm" title="领养宠物狗是什么意思啊英文怎么说（领养宠物狗是什么意思啊英文怎么说呢）">领养宠物狗是什么意思啊英文怎么说（领养宠物狗是什么意思啊英文怎么说呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-16-free-v2ray.htm" title="1月16日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址">1月16日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-40552.htm" title="动物疫苗价格排行榜前十名有哪些种类图片大全（动物疫苗多少钱一支）">动物疫苗价格排行榜前十名有哪些种类图片大全（动物疫苗多少钱一支）</a></li>
+                        <li class="py-2"><a href="/news/article-54234.htm" title="从零开始学Python(六):函数,模块和类的使用">从零开始学Python(六):函数,模块和类的使用</a></li>
+                        <li class="py-2"><a href="/news/article-55881.htm" title="猫打不打疫苗有什么区别图片（宠物猫打不打疫苗）">猫打不打疫苗有什么区别图片（宠物猫打不打疫苗）</a></li>
+                        <li class="py-2"><a href="/news/article-63399.htm" title="宠物医院需要什么许可证才能开（宠物医院需要什么资质可以开业）">宠物医院需要什么许可证才能开（宠物医院需要什么资质可以开业）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-20-clash-windows.htm" title="1月20日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.5M/S 免费Clash机场订阅地址">1月20日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.5M/S 免费Clash机场订阅地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

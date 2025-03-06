@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-67107.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>.NET Core(.NET6)中gRPC注册到Consul详解</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="上一篇文章介绍了.NET Core 中使用gRPC，在微服务中，我们通常要把服务做成服务注册，服务发现的方式，那么这里来说一下gRPC是如何注册到Consul中的。 Consul的安装这里就不介绍了，" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-67107.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content=".NET Core(.NET6)中gRPC注册到Consul详解" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/3e69a83881b4e9ea6a8bb61e9a9712ed.webp" />
+        <meta property="og:release_date" content="2025-03-04T10:14:33" />
+    <meta property="og:updated_time" content="2025-03-04T10:14:33" />
+        <meta property="og:description" content="上一篇文章介绍了.NET Core 中使用gRPC，在微服务中，我们通常要把服务做成服务注册，服务发现的方式，那么这里来说一下gRPC是如何注册到Consul中的。 Consul的安装这里就不介绍了，" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content=".NET Core(.NET6)中gRPC注册到Consul详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				</h1> <p>上一篇文章介绍了.NET Core 中使用gRPC，在微服务中，我们通常要把服务做成服务注册，服务发现的方式，那么这里来说一下gRPC是如何注册到Consul中的。</p> <p>Consul的安装这里就不介绍了，在之前的篇文章中已经写过：<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/wei325/p/15303859.html"  rel="nofollow">Consul+Ocelot+Polly在.NetCore中使用(.NET5)-Consul服务注册，服务发现</a></p> <p>这里Consul已经安装好。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/ed0fb06ea6ebd487dc46b8d539b1996b.jpg" alt=".NET Core(.NET6)中gRPC注册到Consul详解"></p> </h1> <h2>1.扩展gRPC注册到Consul封装类</h2> <p>这里沿用上一篇的gRPC的代码，如果服务带api和gRPC的话用http的方式或gRPC的方式注册到可以，http的方式上面文章中的Consul注册和发现中已经有，这里介绍单gRPC的服务的注册。</p> <p>先在appsettings.json中加入Consul信息代码</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 0, 1)">{</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Logging</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">: {</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">LogLevel</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">: {</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Default</span><span style="color: rgba(128, 0, 0, 1)">"</span>:<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Information</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Microsoft.AspNetCore</span><span style="color: rgba(128, 0, 0, 1)">"</span>:<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Warning</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">     }   },</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">AllowedHosts</span><span style="color: rgba(128, 0, 0, 1)">"</span>:<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">*</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Kestrel</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">: {</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">EndpointDefaults</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">: {</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Protocols</span><span style="color: rgba(128, 0, 0, 1)">"</span>:<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Http2</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">     }   },</span><span style="color: rgba(255, 0, 0, 1)">"Consul": {     "consulAddress": "http://127.0.0.1:8500",     "serviceName": "api_gRPC",     "currentIp": "127.0.0.1",     "currentPort": "5246"</span><span style="color: rgba(0, 0, 0, 1)"><span style="color: rgba(255, 0, 0, 1)">   }</span> }</span></pre> </div> <p>然后新建ConsulRegister.cs封装注册到Consul的类</p> <div class="cnblogs_code"> <pre><span style="color: rgba(128, 128, 128, 1)">///</span><span style="color: rgba(128, 128, 128, 1)">&lt;summary&gt;</span><span style="color: rgba(128, 128, 128, 1)">///</span><span style="color: rgba(0, 128, 0, 1)"> Consul注册</span><span style="color: rgba(128, 128, 128, 1)">///</span><span style="color: rgba(128, 128, 128, 1)">&lt;/summary&gt;</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">static</span><span style="color: rgba(0, 0, 255, 1)">class</span><span style="color: rgba(0, 0, 0, 1)"> ConsulRegister     {</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">服务注册</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">static</span> IApplicationBuilder UseConsul(<span style="color: rgba(0, 0, 255, 1)">this</span><span style="color: rgba(0, 0, 0, 1)"> IApplicationBuilder app, IConfiguration configuration)         {</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 获取主机生命周期管理接口</span><span style="color: rgba(0, 0, 255, 1)">var</span> lifetime = app.ApplicationServices.GetRequiredService&lt;IHostApplicationLifetime&gt;<span style="color: rgba(0, 0, 0, 1)">();              ConsulClient client</span>=<span style="color: rgba(0, 0, 255, 1)">new</span> ConsulClient(c =&gt;<span style="color: rgba(0, 0, 0, 1)">             {                 c.Address</span>=<span style="color: rgba(0, 0, 255, 1)">new</span> Uri(configuration[<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Consul:consulAddress</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">]);                 c.Datacenter</span>=<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">dc1</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;             });</span><span style="color: rgba(0, 0, 255, 1)">string</span> ip = configuration[<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">ip</span><span style="color: rgba(128, 0, 0, 1)">"</span>];<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">优先接收变量的值</span><span style="color: rgba(0, 0, 255, 1)">string</span> port = configuration[<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">port</span><span style="color: rgba(128, 0, 0, 1)">"</span>];<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">优先接收变量的值</span><span style="color: rgba(0, 0, 255, 1)">string</span> currentIp = configuration[<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Consul:currentIP</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">];</span><span style="color: rgba(0, 0, 255, 1)">string</span> currentPort = configuration[<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Consul:currentPort</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">];              ip</span>=<span style="color: rgba(0, 0, 255, 1)">string</span>.IsNullOrEmpty(ip) ? currentIp : ip;<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">当前程序的IP</span>             port =<span style="color: rgba(0, 0, 255, 1)">string</span>.IsNullOrEmpty(port) ? currentPort : port;<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">当前程序的端口</span><span style="color: rgba(0, 0, 255, 1)">string</span> serviceId = $<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">service:{ip}:{port}</span><span style="color: rgba(128, 0, 0, 1)">"</span>;<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">服务ID，一个服务是唯一的</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">服务注册</span>             client.Agent.ServiceRegister(<span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> AgentServiceRegistration()             {                 ID</span>= serviceId,<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">唯一的</span>                 Name = configuration[<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Consul:serviceName</span><span style="color: rgba(128, 0, 0, 1)">"</span>],<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">组名称-Group</span>                 Address = ip,<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">ip地址</span>                 Port =<span style="color: rgba(0, 0, 255, 1)">int</span>.Parse(port),<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">端口</span>                 Tags =<span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 255, 1)">string</span>[] {<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">api站点</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)"> },                 Check</span>=<span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> AgentServiceCheck()                 {                     Interval</span>= TimeSpan.FromSeconds(<span style="color: rgba(128, 0, 128, 1)">10</span>),<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">多久检查一次心跳</span>                     GRPC = $<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">{ip}:{port}</span><span style="color: rgba(128, 0, 0, 1)">"</span>,<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">gRPC注册特有</span>                     GRPCUseTLS=<span style="color: rgba(0, 0, 255, 1)">false</span>,<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">支持http</span>                     Timeout = TimeSpan.FromSeconds(<span style="color: rgba(128, 0, 128, 1)">5</span>),<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">超时时间</span>                     DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(<span style="color: rgba(128, 0, 128, 1)">5</span>)<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">服务停止多久后注销服务</span><span style="color: rgba(0, 0, 0, 1)">                }              }).Wait();</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">应用程序终止时,注销服务</span>             lifetime.ApplicationStopping.Register(() =&gt;<span style="color: rgba(0, 0, 0, 1)">             {                 client.Agent.ServiceDeregister(serviceId).Wait();             });</span><span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> app;         }     }</span></pre> </div> <p>Program.cs增加使用这个扩展类</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">using</span><span style="color: rgba(0, 0, 0, 1)"> GrpcDemo.Service.Services;</span><span style="color: rgba(0, 0, 255, 1)">using</span><span style="color: rgba(0, 0, 0, 1)"> GrpcDemo.Service.Utils;</span><span style="color: rgba(0, 0, 255, 1)">var</span> builder =<span style="color: rgba(0, 0, 0, 1)"> WebApplication.CreateBuilder(args);</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> Additional configuration is required to successfully run gRPC on macOS.</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> For instructions on how to configure Kestrel and gRPC clients on macOS, visit</span><span style="color: rgba(0, 128, 0, 1); text-decoration: underline">https://go.microsoft.com/fwlink/?linkid=2099682</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> Add services to the container.</span><span style="color: rgba(0, 0, 0, 1)">builder.Services.AddGrpc();</span><span style="color: rgba(0, 0, 255, 1)">var</span> app =<span style="color: rgba(0, 0, 0, 1)"> builder.Build(); IConfiguration _configuration</span>=<span style="color: rgba(0, 0, 0, 1)"> builder.Configuration;</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> Configure the HTTP request pipeline.</span> app.MapGrpcService&lt;GreeterService&gt;<span style="color: rgba(0, 0, 0, 1)">(); app.MapGrpcService</span>&lt;OrderService&gt;<span style="color: rgba(0, 0, 0, 1)">(); app.MapGrpcService</span>&lt;HealthCheckService&gt;<span style="color: rgba(0, 0, 0, 1)">(); app.MapGet(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">/</span><span style="color: rgba(128, 0, 0, 1)">"</span>, () =&gt;<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);<span style="color: rgba(255, 0, 0, 1)">app.UseConsul(_configuration);</span> app.Run();</span></pre> </div> <h2>2.创建健康检查gRPC服务</h2> <p>1.新建健康检查proto文件HealthCheck.proto</p> <div class="cnblogs_code"> <pre>syntax =<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">proto3</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;  package grpc.health.v1;  message HealthCheckRequest {</span><span style="color: rgba(0, 0, 255, 1)">string</span> service =<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">; }  message HealthCheckResponse {</span><span style="color: rgba(0, 0, 255, 1)">enum</span><span style="color: rgba(0, 0, 0, 1)"> ServingStatus {         UNKNOWN</span>=<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;         SERVING</span>=<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;         NOT_SERVING</span>=<span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)">;     }     ServingStatus status</span>=<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">; }  service Health {     rpc Check(HealthCheckRequest) returns (HealthCheckResponse);      rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse); }</span></pre> </div> <p>2.新建健康检查服务实现上面proto协议HealthCheckService.cs</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">class</span><span style="color: rgba(0, 0, 0, 1)"> HealthCheckService : Health.HealthBase     {</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">override</span> Task&lt;HealthCheckResponse&gt;<span style="color: rgba(0, 0, 0, 1)"> Check(HealthCheckRequest request, ServerCallContext context)         {             Console.WriteLine($</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">This is {nameof(HealthCheckService)} Check</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">TODO:检查逻辑</span><span style="color: rgba(0, 0, 255, 1)">return</span> Task.FromResult(<span style="color: rgba(0, 0, 255, 1)">new</span> HealthCheckResponse() { Status =<span style="color: rgba(0, 0, 0, 1)"> HealthCheckResponse.Types.ServingStatus.Serving });         }</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">override</span><span style="color: rgba(0, 0, 255, 1)">async</span> Task Watch(HealthCheckRequest request, IServerStreamWriter&lt;HealthCheckResponse&gt;<span style="color: rgba(0, 0, 0, 1)"> responseStream, ServerCallContext context)         {</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">TODO:检查逻辑</span><span style="color: rgba(0, 0, 255, 1)">await</span> responseStream.WriteAsync(<span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> HealthCheckResponse()             { Status</span>=<span style="color: rgba(0, 0, 0, 1)"> HealthCheckResponse.Types.ServingStatus.Serving });         }     }</span></pre> </div> <p>3.在Program.cs中把服务注册到gRPC管道</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">using</span><span style="color: rgba(0, 0, 0, 1)"> GrpcDemo.Service.Services;</span><span style="color: rgba(0, 0, 255, 1)">using</span><span style="color: rgba(0, 0, 0, 1)"> GrpcDemo.Service.Utils;</span><span style="color: rgba(0, 0, 255, 1)">var</span> builder =<span style="color: rgba(0, 0, 0, 1)"> WebApplication.CreateBuilder(args);</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> Additional configuration is required to successfully run gRPC on macOS.</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> For instructions on how to configure Kestrel and gRPC clients on macOS, visit</span><span style="color: rgba(0, 128, 0, 1); text-decoration: underline">https://go.microsoft.com/fwlink/?linkid=2099682</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> Add services to the container.</span><span style="color: rgba(0, 0, 0, 1)">builder.Services.AddGrpc();</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">配置获取</span><span style="color: rgba(0, 0, 255, 1)">var</span> app =<span style="color: rgba(0, 0, 0, 1)"> builder.Build(); IConfiguration _configuration</span>=<span style="color: rgba(0, 0, 0, 1)"> builder.Configuration;</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> Configure the HTTP request pipeline.</span> app.MapGrpcService&lt;GreeterService&gt;<span style="color: rgba(0, 0, 0, 1)">(); app.MapGrpcService</span>&lt;OrderService&gt;<span style="color: rgba(0, 0, 0, 1)">();<span style="color: rgba(255, 0, 0, 1)">app.MapGrpcService</span></span><span style="color: rgba(255, 0, 0, 1)">&lt;HealthCheckService&gt;</span><span style="color: rgba(0, 0, 0, 1)"><span style="color: rgba(255, 0, 0, 1)">();</span> app.MapGet(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">/</span><span style="color: rgba(128, 0, 0, 1)">"</span>, () =&gt;<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);  app.UseConsul(_configuration); app.Run();</span></pre> </div> <p>到这里服务注册就完成了，服务发现和上面简介的链接文章中一模一样，启动项目查看效果。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/dc26072fa1d7fe09124b611d80124d62.jpg" alt=".NET Core(.NET6)中gRPC注册到Consul详解"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e1b81f912971ce22ba44bd3d9a4cf422.jpg" alt=".NET Core(.NET6)中gRPC注册到Consul详解"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-66479.htm">Java 轻松掌握字符缓冲流的使用_java</a></p>
+                                        <p>下一个：<a href="/news/article-67109.htm">正大猪饲料多少钱一吨（正大饲料价格表）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-clash-node-daily-updates.htm" title="1月8日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址">1月8日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-17-clash-node.htm" title="2月17日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址">2月17日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-8-free-ssr-subscribe.htm" title="2月8日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.4M/S 免费Clash机场订阅地址">2月8日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度22.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-38574.htm" title="动物疫苗的保管与使用方法视频（动物疫苗的保管与使用方法视频讲解）">动物疫苗的保管与使用方法视频（动物疫苗的保管与使用方法视频讲解）</a></li>
+                        <li class="py-2"><a href="/news/article-48371.htm" title="养猫的容易得什么病（养猫容易引起哪些疾病）">养猫的容易得什么病（养猫容易引起哪些疾病）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-6-free-subscribe-node.htm" title="3月6日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址">3月6日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-node-share-links.htm" title="3月5日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度19.7M/S 免费Clash机场订阅地址">3月5日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度19.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-42031.htm" title="太原哪里批发狗粮（太原哪里有批发狗粮的地方?）">太原哪里批发狗粮（太原哪里有批发狗粮的地方?）</a></li>
+                        <li class="py-2"><a href="/news/article-61607.htm" title="长沙学美容的地方（长沙学美容学费大概多少钱?）">长沙学美容的地方（长沙学美容学费大概多少钱?）</a></li>
+                        <li class="py-2"><a href="/news/article-37600.htm" title="猫三联妙三多打几针（妙三多猫三联是几针）">猫三联妙三多打几针（妙三多猫三联是几针）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

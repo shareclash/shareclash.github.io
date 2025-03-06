@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-66478.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>SpringBoot 2.3.x 分层构建 Docker 镜像实践</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="系统环境：  Docker 版本： 19.03.13 Open JDK 基础镜像版本： openjdk:8u275 私有的 Harbor 镜像仓库： 自建 Harbor 私库 项目 Github：Sp" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-66478.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="SpringBoot 2.3.x 分层构建 Docker 镜像实践" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/44e931a05cbabb08a6c864609232ea04.webp" />
+        <meta property="og:release_date" content="2025-03-03T08:14:26" />
+    <meta property="og:updated_time" content="2025-03-03T08:14:26" />
+        <meta property="og:description" content="系统环境：  Docker 版本： 19.03.13 Open JDK 基础镜像版本： openjdk:8u275 私有的 Harbor 镜像仓库： 自建 Harbor 私库 项目 Github：Sp" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot 2.3.x 分层构建 Docker 镜像实践">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p><strong style="font-size: 1em;">系统环境：</strong></p> <ul> <li>Docker 版本： 19.03.13</li> <li>Open JDK 基础镜像版本： openjdk:8u275</li> <li>私有的 Harbor 镜像仓库： 自建 Harbor 私库</li> <li>项目 Github：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/my-dlq/blog-example/tree/master/springboot/springboot-layer"  rel="nofollow">SpringBoot 2.3.x 分层构建 Docker 镜像示例</a></li> </ul> <p><strong>参考地址：</strong></p> <ul> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.docker.com/storage/storagedriver/"  rel="nofollow">Docker 官方文档-镜像分层机制介绍</a></li> </ul> <h2 id="wow0">一、什么是镜像分层</h2> <p><strong>镜像的构成</strong></p> <p>现在一谈起镜像大部分都是指 Docker 引擎构建的镜像，一般 Docker 镜像是由很多层组成，底层是操作系统，然后在其之上是基础镜像或者用户自定义 Dockerfile 脚本中定义的中间层。其中镜像在构建完成后，用户只能对镜像进行读操作，而不能进行写操作，只有镜像启动后变为容器，才能进行读写操作。镜像整体结构，可以观看下图：</p> <p>该图中展示了镜像的基本组成，但是图中这一个个中间层是什么呢？要想了解这些层具体是什么，那得知道如何构建 Docker 镜像了。平时我们构建 Docker 镜像时候，都是编写 Dockerfile 脚本，然后使用 Docker 镜像构建命令，按照脚本一行行执行构建。</p> <p>如下就是一个 Dockerfile 脚本，脚本内容就构建 Java 项目镜像常用的 Dockerfile 命令：</p> <pre><code>FROM openjdk:8u275 VOLUME /tmp ADD target/*.jar app.jar ENV TZ="Asia/Shanghai" ENV JAVA_OPTS="" ENV JVM_OPTS="-XX:MaxRAMPercentage=80.0" ENTRYPOINT ["sh","-c","java $JVM_OPTS $JAVA_OPTS -jar /app.jar"]</code></pre> <p>有了 Dockerfile 脚本，我们需要执行 Docker 的构建镜像命令对执行 Dockerfile 脚本构建镜像，其中构建镜像的过程如下：</p> <pre><code>## 构建镜像的命令 $ docker build -t java-test:latest .   ## 命令执行的过程 Step 1/7 : FROM openjdk:8u275  ---&gt; 82f24ce79de6 Step 2/7 : VOLUME /tmp  ---&gt; Running in a6361fdfc193 Removing intermediate container a6361fdfc193  ---&gt; a43948bf1b98 Step 3/7 : ADD target/*.jar app.jar  ---&gt; 18f4bc60818f Step 4/7 : ENV TZ="Asia/Shanghai"  ---&gt; Running in cc738aa5865b Removing intermediate container cc738aa5865b  ---&gt; 538adb85609e Step 5/7 : ENV JAVA_OPTS=""  ---&gt; Running in f8b635d32b2b Removing intermediate container f8b635d32b2b  ---&gt; 34e7a8cd7b6e Step 6/7 : ENV JVM_OPTS="-XX:MaxRAMPercentage=80.0"  ---&gt; Running in 9331cb6e443e Removing intermediate container 9331cb6e443e  ---&gt; 232b9c6c1d29 Step 7/7 : ENTRYPOINT ["sh","-c","java $JVM_OPTS $JAVA_OPTS -jar /app.jar" ]  ---&gt; Running in c3a24fba3a10 Removing intermediate container c3a24fba3a10  ---&gt; a41974d5f0e3</code></pre> <p>可以看到总共存在 7 个构建步骤，每步都与 Dockerfile 里面一行指令对应。样子和下图相似：</p> <p>如果这时候，我们改变原来 Dockerfile 内容，创建一个新的镜像，其 Dockerfile 如下：</p> <pre><code>FROM openjdk:8u275 VOLUME /tmp ADD target/*.jar app.jar ENV TZ="Asia/Macao"                  #与原来 Dockerfile 不同 ENV JVM_OPTS="-Xmx512m -Xss256k"     #与原来 Dockerfile 不同 ENTRYPOINT ["sh","-c","java $JVM_OPTS $JAVA_OPTS -jar /app.jar" ]</code></pre> <p>执行 Docker 命令构建镜像：</p> <pre><code>$ docker build -t java-test2:latest .  Step 1/6 : FROM openjdk:8u275  ---&gt; 82f24ce79de6 Step 2/6 : VOLUME /tmp  ---&gt; Using cache  ---&gt; a43948bf1b98 Step 3/6 : ADD target/*.jar app.jar  ---&gt; Using cache  ---&gt; 18f4bc60818f Step 4/6 : ENV TZ="Asia/Macao"  ---&gt; Running in fd98b90a5485 Removing intermediate container fd98b90a5485  ---&gt; afab3fcdab07 Step 5/6 : ENV JVM_OPTS="-Xmx512m -Xss256k"  ---&gt; Running in 19a99576fba9 Removing intermediate container 19a99576fba9  ---&gt; 4eeab7d7c720 Step 6/6 : ENTRYPOINT ["sh","-c","java $JVM_OPTS $JAVA_OPTS -jar /app.jar" ]  ---&gt; Running in 2dba72e1eef4 Removing intermediate container 2dba72e1eef4  ---&gt; 7c706ecf7698</code></pre> <p>可以观察到执行过程中，从一开始执行的构建步骤中显示，并没有生成新的中间层镜像，而是直接使用了已经存在的缓存镜像。直至&nbsp;4⁄6&nbsp;这部中，由于新的 Dockerfile 与原来 Dockerfile 发生变动，所以这部中间层镜像直接是新创建的，并没有使用缓存中间层镜像。</p> <p>然后往下观察，发现之后的全部构建都是新创建的中间层镜像，即是脚本最后的一行和原来相同，也没有使用缓存中间层镜像。</p> <p>上面现象说明，Docker 镜像在构建过程中按照 Dockerfile 自上往下的执行顺序中，如果从最上层开始，其脚本内容和已有的缓存中间层镜像内容一致，就会引入缓存中的中间层镜像（并不是直接复制缓存镜像，而是引入镜像文件地址，多个镜像共享这些中间层镜像）。但是，如果执行过程中中间任意一行镜像构建的内容发生变化，那么当前行和之后的全部行在执行时就不会使用缓存中的中间层镜像，而是全部创建新的镜像。</p> <p>这就是 Docker 镜像中缓存中间层镜像的复用，学会使用缓存构建镜像将大大减少存储空间的占用以及镜像的构建的构建速度，镜像的缓存不仅仅体现在镜像的构建上，在执行”镜像推送”、”镜像拉取”操作时都能观察到其的好处。</p> <ul> <li><strong>镜像缓在镜像推送的体现：</strong>&nbsp;如镜像推送时候，也是将镜像整体构成的中间层镜像并行推送到镜像仓库，如果镜像仓库中已经存某个中间层镜像，那么推送过程就不会再次将该层镜像推送到镜像仓库，而是将仓库中并不存在中间层镜像推送到其中。</li> <li><strong>镜像缓存在镜像拉取的体现：</strong>&nbsp;在拉取镜像时候，如果本地某个大镜像的中间层镜像的组成中，已经包含新拉取镜像的中间层部分镜像，那么将直接复用本地已经镜像的中间层镜像，不必再将其进行拉取，而本地不存在的中间层镜像将会被继续拉取。</li> </ul> <p>说了这么多，相信大家已经对镜像缓存的使用有了初步了解，那么再谈及为什么需要镜像分层就很好解释，其原因就是 Docker 想提高资源的复用率，将一个大镜像拆分成很多层小镜像组成，以达到镜像中间层的复用的目的。</p> <h2 id="wow1">二、SpringBoot 2.3.x 新增对分层的支持</h2> <p>SpringBoot 2.3.x 以后支持分层打包应用，需要 Pom.xml 中引入 SpringBoot 2.3.x 后的父依赖和使用 SpringBoot 打包插件<code>spring-boot-maven-plugin</code>，并且开启<code>layers</code>&nbsp;功能，然后执行 Maven 编译源码构建 Jar 包，使用该 Jar 包就可以构建基于分层模式的 Docker 镜像：</p> <p>项目 pom.xml 中引入 SpringBoot 2.3.x 依赖：</p> <pre><code>&lt;parent&gt;     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;     &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;     &lt;version&gt;2.3.6.RELEASE&lt;/version&gt;     &lt;relativePath/&gt; &lt;/parent&gt;</code></pre> <p>项目 pom.xml 中引入 spring-boot-maven-plugin 打包插件，并且开启分层功能：</p> <pre><code>&lt;build&gt;     &lt;plugins&gt;         &lt;plugin&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;             &lt;configuration&gt;                 &lt;!--开启分层编译支持--&gt;                 &lt;layers&gt;                     &lt;enabled&gt;true&lt;/enabled&gt;                 &lt;/layers&gt;             &lt;/configuration&gt;         &lt;/plugin&gt;     &lt;/plugins&gt; &lt;/build&gt;</code></pre> <p>执行 Maven 命令，构建分层的 JAR 包，命令和平时的 Maven 构建命令相同：</p> <pre><code>$ mvn install</code></pre> <p>观察 Jar 结构，可以看到里面多了<code>classpath.idx</code>&nbsp;与<code>layers.idx</code>&nbsp;两个文件：</p> <ul> <li><strong>classpath.idx：</strong>&nbsp;文件列出了依赖的 jar 包列表，到时候会按照这个顺序载入。</li> <li><strong>layers.idx：</strong>&nbsp;文件清单，记录了所有要被复制到 Dokcer 镜像中的文件信息。</li> </ul> <p>根据官方介绍，在构建 Docker 镜像前需要从 Jar 中提起出对应的分层文件到 Jar 外面，可用使用下面命令列出可以从分层 Jar 中提取出的文件夹信息：</p> <pre><code>$ java -Djarmode=layertools -jar target/springboot-layer-0.0.1.jar list</code></pre> <p>可用该看到以下输出，下面的内容就是接下来使用分层构建后，生成的 Jar 提取出对应资源后的结构：</p> <pre><code>dependencies spring-boot-loader snapshot-dependencies application</code></pre> <p>上面即是使用分层工具提取 Jar 的内容后生成的文件夹，其中各个文件夹作用是：</p> <ul> <li><strong>dependencies：</strong>&nbsp;存储项目正常依赖 Jar 的文件夹。</li> <li><strong>snapshot-dependencies：</strong>&nbsp;存储项目快照依赖 Jar 的文件夹。</li> <li><strong>resources：</strong>&nbsp;用于存储静态资源的文件夹。</li> <li><strong>application：</strong>&nbsp;用于存储应用程序类相关文件的文件夹。</li> </ul> <h2 id="wow2">三、创建测试的 SpringBoot 应用</h2> <p>创建测试的 SpringBoot 项目，并且在 pom.xml 中开启镜像分层。</p> <h3 id="wow3">1、Maven 中引入相关依赖和插件</h3> <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;project xmlns="http://maven.apache.org/POM/4.0.0"          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;      &lt;parent&gt;         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;         &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;         &lt;version&gt;2.3.6.RELEASE&lt;/version&gt;     &lt;/parent&gt;      &lt;artifactId&gt;springboot-dockerfile-layer&lt;/artifactId&gt;     &lt;packaging&gt;jar&lt;/packaging&gt;     &lt;name&gt;springboot-dockerfile-layer&lt;/name&gt;     &lt;description&gt;springboot build layer example&lt;/description&gt;      &lt;dependencies&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;         &lt;/dependency&gt;     &lt;/dependencies&gt;      &lt;build&gt;         &lt;plugins&gt;             &lt;plugin&gt;                 &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                 &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;                 &lt;configuration&gt;                     &lt;layers&gt;                         &lt;enabled&gt;true&lt;/enabled&gt;                     &lt;/layers&gt;                 &lt;/configuration&gt;             &lt;/plugin&gt;         &lt;/plugins&gt;     &lt;/build&gt;  &lt;/project&gt;</code></pre> <h3 id="wow4">2、创建测试的 Controller 类</h3> <pre><code>import org.springframework.web.bind.annotation.GetMapping; import org.springframework.web.bind.annotation.RestController;  @RestController public class TestController {      @GetMapping("/hello")     public String hello() {         return "hello world!";     }  }</code></pre> <h3 id="wow5">3、创建 SpringBoot 启动类</h3> <pre><code>import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication;  @SpringBootApplication public class Application {      public static void main(String[] args) {         SpringApplication.run(Application.class, args);     }  }</code></pre> <h2 id="wow6">四、创建两种构建镜像的 Dockerfile 脚本</h2> <p>为了方便体现出 SpringBoot 2.3.x 支持的分层构建 Dockerfile 的优点，这里在 Java 源码文件夹下，创建普通与分层两种构建镜像的 Dockerfile 脚本，后续会使用这两种脚本构建 Docker 镜像进行构建速度、推送速度、拉取速度的对比。</p> <h3 id="wow7">1、普通镜像构建脚本文件 dockerfile-number</h3> <pre><code>FROM openjdk:8u275 VOLUME /tmp ADD target/*.jar app.jar RUN sh -c 'touch /app.jar' ENV TZ="Asia/Shanghai" RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone ENV JVM_OPTS="-XX:MaxRAMPercentage=80.0" ENV JAVA_OPTS="" ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar $APP_OPTS" ]</code></pre> <p><strong>说明：</strong></p> <ul> <li><strong>TZ：</strong>&nbsp;时区设置，而 Asia/Shanghai 表示使用中国上海时区。</li> <li><strong>JVM_OPTS：</strong>&nbsp;指定 JVM 启动时候的参数，-XX:MaxRAMPercentage 参数和 -Xmx 类似，都是限制堆内存大小，只不过 -Xmx 需要手动指定限制大小，而 -XX:MaxRAMPercentage 则是根据虚拟机可用内存百分比限制。</li> <li><strong>JAVA_OPTS：</strong>&nbsp;在镜像启动时指定的自定义 Java 参数，例如 -Dspring.application.name=xxx。</li> </ul> <h3 id="wow8">2、分层镜像构建脚本文件 dockerfile-layer</h3> <pre><code>FROM openjdk:8u275 as builder WORKDIR application COPY target/*.jar application.jar RUN java -Djarmode=layertools -jar application.jar extract  FROM openjdk:8u275 WORKDIR application COPY --from=builder application/dependencies/ ./ COPY --from=builder application/snapshot-dependencies/ ./ COPY --from=builder application/spring-boot-loader/ ./ COPY --from=builder application/application/ ./ ENV TZ="Asia/Shanghai" ENV JVM_OPTS="-XX:MaxRAMPercentage=80.0" ENV JAVA_OPTS="" ENTRYPOINT ["sh","-c","java $JVM_OPTS $JAVA_OPTS org.springframework.boot.loader.JarLauncher"]</code></pre> <p><strong>说明：</strong></p> <ul> <li><strong>TZ：</strong>&nbsp;时区设置，而 Asia/Shanghai 表示使用中国上海时区。</li> <li><strong>-Djarmode=layertools：</strong>&nbsp;指定构建 Jar 的模式。</li> <li><strong>extract：</strong>&nbsp;从 Jar 包中提取构建镜像所需的内容。</li> <li><strong>-from=builder</strong>&nbsp;多级镜像构建中，从上一级镜像复制文件到当前镜像中。</li> </ul> <h2 id="wow9">五、使用两种 Dockerfile 构建项目镜像</h2> <h3 id="wow10">1、在服务器一构建普通 Docker 镜像</h3> <p><strong>(1)、第一次构建</strong></p> <pre><code>## 执行 Maven 命令，将源代码构建 Jar 包 $ mvn clean install  ## 构建 SpringBoot 应用的 Docker 镜像 $ time docker build -t hub.mydlq.club/library/springboot-normal:0.0.1 .</code></pre> <p>Docker 镜像构建总共花费&nbsp;24.98s&nbsp;时间。</p> <p><strong>(2)、第二次构建（修改依赖 pom.xml 文件）</strong></p> <pre><code>## 修改 pom.xml 里面的依赖，随意添加一个新的依赖包，然后再次将源代码构建 Jar 包 $ mvn clean install  ## 构建 SpringBoot 应用的 Docker 镜像 $ time docker build -t hub.mydlq.club/library/springboot-normal:0.0.2 .</code></pre> <p>Docker 镜像构建总共花费&nbsp;1.27s&nbsp;时间。</p> <p><strong>(3)、第三次构建（修改代码内容）</strong></p> <pre><code>## 修改源代码任意内容后，然后再次将源代码构建 Jar 包 $ mvn clean install  ## 构建 SpringBoot 应用的 Docker 镜像 $ time docker build -t hub.mydlq.club/library/springboot-normal:0.0.3 .</code></pre> <p>Docker 镜像构建总共花费&nbsp;1.32s&nbsp;时间。</p> <h3 id="wow11">2、在服务器二构建分层 Docker 镜像</h3> <p><strong>(1)、第一次构建</strong></p> <pre><code>## 执行 Maven 命令，将源代码构建 Jar 包 $ mvn clean install  ## 构建 SpringBoot 应用的 Docker 镜像 $ time docker build -t hub.mydlq.club/library/springboot-layer:0.0.1 .</code></pre> <p>Docker 镜像构建总共花费&nbsp;26.12s&nbsp;时间。</p> <p><strong>(2)、第二次构建（修改依赖 pom.xml 文件）</strong></p> <pre><code>## 修改 pom.xml 里面的依赖，随意添加一个新的依赖包，然后再次将源代码构建 Jar 包 $ mvn clean install  ## 构建 SpringBoot 应用的 Docker 镜像 $ time docker build -t hub.mydlq.club/library/springboot-layer:0.0.2 .</code></pre> <p>Docker 镜像构建总共花费&nbsp;3.44s&nbsp;时间。</p> <p><strong>(3)、第三次构建（修改代码内容）</strong></p> <pre><code>## 修改源代码任意内容后，然后再次将源代码构建 Jar 包 $ mvn clean install  ## 构建 SpringBoot 应用的 Docker 镜像 $ time docker build -t hub.mydlq.club/library/springboot-layer:0.0.3 .</code></pre> <p>Docker 镜像构建总共花费&nbsp;2.82s&nbsp;时间。</p> <h2 id="wow12">六、镜像推送到镜像仓库测试</h2> <h3 id="wow13">1、推送镜像到镜像仓库测试</h3> <p>服务器一推送普通镜像到镜像仓库1：</p> <pre><code>## 第一次推送镜像 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.1  real    0m35.215s  ## 第二次推送镜像 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.2  real    0m14.051s  ## 第三次推送镜像 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.3  real    0m14.183s</code></pre> <p>服务器二推送分层镜像到镜像仓库2：</p> <pre><code>## 第一次推送镜像 $ time docker push hub.mydlq.club/library/springboot-layer:0.0.1  real    0m34.121s  ## 第二次推送镜像 $ time docker push hub.mydlq.club/library/springboot-layer:0.0.2  real    0m13.605s  ## 第三次推送镜像 $ time docker push hub.mydlq.club/library/springboot-layer:0.0.3  real    0m4.805s</code></pre> <h3 id="wow14">2、镜像仓库拉取镜像测试</h3> <p>服务器一推送从镜像仓库1拉取镜像：</p> <pre><code>## 清理全部镜像 $ docker rm --force $(docker images -qa)  ## 拉取镜像 springboot-normal:0.0.1 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.1  real    0m35.395s  ## 拉取镜像 springboot-normal:0.0.2 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.2  real    0m6.501s  ## 拉取镜像 springboot-normal:0.0.3 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.3  real    0m6.993s</code></pre> <p>服务器二推送从镜像仓库2拉取镜像：</p> <pre><code>## 清理全部镜像 $ docker rm --force $(docker images -qa)  ## 拉取镜像 springboot-layer:0.0.1 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.1  real    0m30.615s  ## 拉取镜像 springboot-layer:0.0.2 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.2  real    0m4.811s  ## 拉取镜像 springboot-layer:0.0.3 $ time docker push hub.mydlq.club/library/springboot-normal:0.0.3  real    0m1.293s</code></pre> <h2 id="wow15">七、镜像构建、推送、拉取时间汇总</h2> <h3 id="wow16">1、不使用分层构建镜像</h3> <table> <thead> <tr> <th>次数\阶段</th> <th>构建(s)</th> <th>推送(s)</th> <th>拉取(s)</th> </tr> </thead> <tbody> <tr> <td>第一次构建</td> <td>24.98</td> <td>35.21</td> <td>35.39</td> </tr> <tr> <td>第二次构建-修改依赖包</td> <td>1.27</td> <td>14.05</td> <td>6.50</td> </tr> <tr> <td>第三次构建-修改代码</td> <td>1.32</td> <td>14.18</td> <td>6.99</td> </tr> </tbody> </table> <p><strong>如下图：</strong></p> <h3 id="wow17">2、使用分层构建镜像</h3> <table> <thead> <tr> <th>次数\阶段</th> <th>构建(s)</th> <th>推送(s)</th> <th>拉取(s)</th> </tr> </thead> <tbody> <tr> <td>第一次构建</td> <td>26.12</td> <td>34.12</td> <td>30.61</td> </tr> <tr> <td>第二次构建-修改依赖包</td> <td>3.44</td> <td>13.60</td> <td>4.81</td> </tr> <tr> <td>第三次构建-修改代码</td> <td>2.82</td> <td>4.80</td> <td>1.29</td> </tr> </tbody> </table> <p><strong>如下图：</strong></p> <h3 id="wow18">3、总结</h3> <p>上面进行了使用 SpringBoot2.3.x 分层的方式构建镜像与普通的方式构建镜像，在镜像的构建、推送、拉取方面进行了执行速度对比，总结出如下结论：</p> <ul> <li><strong>镜像构建：</strong>&nbsp;在构建上，使用分层 Jar 构建镜像可能比普通方式构建镜像更繁琐，所以也更耗时，故而在构建上分层 Jar 构建镜像没有太多优势。</li> <li><strong>镜像推送：</strong>&nbsp;在推送上，如果每次构建镜像都只是修改构建镜像项目的源码，使用分层 Jar 构建镜像，可以大大加快镜像推送速度。如果是修改构建镜像项目中的依赖包，则和普通构建一样速度很慢。</li> <li><strong>镜像拉取：</strong>&nbsp;拉取和推送类似，如果只修改构建镜像项目的源码，只会拉取源码相关的中间层镜像，该层非常小（一般几百KB），拉取速度自然非常快。而对构建镜像项目的依赖包进行变动（增加依赖、删除依赖、修改依赖版本等），则会和普通方式构建镜像一样，拉取速度很慢，这是因为依赖包层是中间层镜像最大的一层（一般在10MB~200MB之间），如果该层发生变动则整个层会进行重新拉取，这样速度自然会很慢。</li> </ul> <p>—END—</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-65826.htm">北京农大动物医院最好的医生是谁呀（北京农大动物医院公众号）</a></p>
+                                        <p>下一个：<a href="/news/article-66479.htm">Java 轻松掌握字符缓冲流的使用_java</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-16-free-clash-subscribe.htm" title="2月16日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址">2月16日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-22-free-v2ray.htm" title="1月22日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度23M/S 免费Clash机场订阅地址">1月22日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度23M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-58135.htm" title="解决python针对hdfs上传和下载问题">解决python针对hdfs上传和下载问题</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-free-node-subscribe.htm" title="1月18日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.9M/S 免费Clash机场订阅地址">1月18日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.9M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-35458.htm" title="郑州市动物防疫站电话查询（郑州市动物防疫站电话查询是多少）">郑州市动物防疫站电话查询（郑州市动物防疫站电话查询是多少）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-1-clash-windows.htm" title="3月1日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址">3月1日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-37102.htm" title="掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理">掌握JavaScript中的迭代器和生成器，顺便了解一下async、await的原理</a></li>
+                        <li class="py-2"><a href="/news/article-43030.htm" title="被野猫抓出一点点血有事吗（被野猫抓了一点点血）">被野猫抓出一点点血有事吗（被野猫抓了一点点血）</a></li>
+                        <li class="py-2"><a href="/news/article-41538.htm" title="同安哪里有宠物医院 同安哪里有宠物医院啊">同安哪里有宠物医院 同安哪里有宠物医院啊</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-18-free-subscribe-node.htm" title="2月18日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址">2月18日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
