@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-73652.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Rancher入门到精通-nginx-ingress配置性能优化</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="keep-alive: "75"   keep-alive-requests: "100"   upstream-keepalive-connections: "10000"   upstream-k" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-73652.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="Rancher入门到精通-nginx-ingress配置性能优化" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/e0a5f49260b1efb50ef2f46e755b7470.webp" />
+        <meta property="og:release_date" content="2025-03-14T07:06:18" />
+    <meta property="og:updated_time" content="2025-03-14T07:06:18" />
+        <meta property="og:description" content="keep-alive: "75"   keep-alive-requests: "100"   upstream-keepalive-connections: "10000"   upstream-k" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Rancher入门到精通-nginx-ingress配置性能优化">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <pre><code>keep-alive: "75"   keep-alive-requests: "100"   upstream-keepalive-connections: "10000"   upstream-keepalive-requests: "100"   upstream-keepalive-timeout: "60"</code></pre> <p>打开rancher 映射配置</p> <p><img decoding="async" alt="" height="266" src="http://img.555519.xyz/uploads3/20220605/eed77f5a73d86a9c682326404ca4310f.jpg">、</p> <p><img fetchpriority="high" decoding="async" alt="" height="149" src="http://img.555519.xyz/uploads3/20220605/d3ecfe4e1af7385e4e7871df6c601d7f.jpg"></p> <p><img decoding="async" alt="" height="309" src="http://img.555519.xyz/uploads3/20220605/41ba98c317ade6f2ee3214363306df05.jpg"></p> <p>配置</p> <p>查看nginx-ingress</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-72981.htm">瑞鹏宠物医院收费怎么样（瑞鹏宠物医院收费怎么样啊）</a></p>
+                                        <p>下一个：<a href="/news/article-73655.htm">开一家宠物医院需要什么条件呢知乎（开一家宠物医院需要什么条件呢知乎视频）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-24-shadowrocket-node.htm" title="2月24日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址">2月24日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-69685.htm" title="全国宠物领养平台排行榜（宠物领养中心app）">全国宠物领养平台排行榜（宠物领养中心app）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-17-clash-node.htm" title="2月17日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址">2月17日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-49998.htm" title="戴尔bios设置ssd第一启动盘有什么好处（戴尔bios设置ssd第一启动盘有什么好处嘛）">戴尔bios设置ssd第一启动盘有什么好处（戴尔bios设置ssd第一启动盘有什么好处嘛）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-free-node-subscribe.htm" title="1月18日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.9M/S 免费Clash机场订阅地址">1月18日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.9M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-73652.htm" title="Rancher入门到精通-nginx-ingress配置性能优化">Rancher入门到精通-nginx-ingress配置性能优化</a></li>
+                        <li class="py-2"><a href="/news/article-71661.htm" title="做梦梦见办喜事是什么意思周公解梦（做梦梦见办喜事是什么意思周公解梦女人）">做梦梦见办喜事是什么意思周公解梦（做梦梦见办喜事是什么意思周公解梦女人）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-27-shadowrocket-node.htm" title="2月27日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度20.3M/S 免费Clash机场订阅地址">2月27日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度20.3M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-40550.htm" title="记将一个大型客户端应用项目迁移到 dotnet 6 的经验和决策_在线工具">记将一个大型客户端应用项目迁移到 dotnet 6 的经验和决策_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-9-clash-v2ray-ss-ssr.htm" title="3月9日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址">3月9日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">45</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
