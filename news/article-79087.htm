@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-79087.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Redis常见面试问题分析</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="文章目录    说说你对Redis的了解? 说说Redis中的数据类型？ 说说Redis对应的Java客户端有哪些？ 说说Redis 中持久化机制？ 说说Redis中持久化以及方式？ 如何理解Redi" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-79087.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="Redis常见面试问题分析" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/9f4b89ce8d7e0bb12cbfb602e700bf1a.webp" />
+        <meta property="og:release_date" content="2025-03-22T08:48:51" />
+    <meta property="og:updated_time" content="2025-03-22T08:48:51" />
+        <meta property="og:description" content="文章目录    说说你对Redis的了解? 说说Redis中的数据类型？ 说说Redis对应的Java客户端有哪些？ 说说Redis 中持久化机制？ 说说Redis中持久化以及方式？ 如何理解Redi" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Redis常见面试问题分析">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <div class="toc"> <h3>文章目录</h3> <ul> <li> <ul> <li><a href="#Redis_1" rel="nofollow">说说你对Redis的了解?</a></li> <li><a href="#Redis_4" rel="nofollow">说说Redis中的数据类型？</a></li> <li><a href="#RedisJava_12" rel="nofollow">说说Redis对应的Java客户端有哪些？</a></li> <li><a href="#Redis__15" rel="nofollow">说说Redis 中持久化机制？</a></li> <li><a href="#Redis_18" rel="nofollow">说说Redis中持久化以及方式？</a></li> <li><a href="#RedisRDB_21" rel="nofollow">如何理解Redis中RDB方式的持久化？</a></li> <li><a href="#RedisAOF_35" rel="nofollow">如何理解Redis中AOF方式的持久化？</a></li> <li><a href="#Redis_44" rel="nofollow">如何理解Redis的混合持久化？</a></li> <li><a href="#SaveBgsave_55" rel="nofollow">Save和Bgsave有什么不同？</a></li> <li><a href="#RedisAOF_59" rel="nofollow">Redis为什么要AOF重写？</a></li> <li><a href="#AOF_62" rel="nofollow">说说AOF重写的过程、存在的问题、以及数据不一致问题？</a></li> <li><a href="#Redis_85" rel="nofollow">如何理解Redis缓存穿透？</a></li> <li><a href="#Redis_92" rel="nofollow">如何理解Redis缓存击穿？</a></li> <li><a href="#Redis_136" rel="nofollow">如何理解Redis缓存雪崩？</a></li> <li><a href="#Redis_145" rel="nofollow">如何理解Redis缓存预热？</a></li> <li><a href="#Redis_149" rel="nofollow">如何理解Redis缓存更新？</a></li> <li><a href="#Redis_152" rel="nofollow">如何理解Redis缓存降级？</a></li> <li><a href="#MemcacheRedis_163" rel="nofollow">Memcache与Redis的区别都有哪些？</a></li> <li><a href="#redis_177" rel="nofollow">单线程的redis为什么这么快？</a></li> <li><a href="#Redis_184" rel="nofollow">说说Redis内部存储结构?</a></li> <li><a href="#Sorted_Set_190" rel="nofollow">Sorted Set底层数据存储结构是什么？</a></li> <li><a href="#Redis_207" rel="nofollow">Redis数据过期后的删除策略？</a></li> <li><a href="#Redis_215" rel="nofollow">Redis的数据淘汰策略有哪些？</a></li> <li><a href="#Redis_224" rel="nofollow">Redis为什么是单线程的？</a></li> <li><a href="#Redis_231" rel="nofollow">说说Redis中的事务操作？</a></li> <li><a href="#Redis_239" rel="nofollow">Redis如何实现分布式锁？</a></li> <li><a href="#Redis_242" rel="nofollow">Redis是单线程还是多线程？</a></li> <li><a href="#Redis_249" rel="nofollow">Redis是否可以保证事务的原子性？</a></li> <li><a href="#_255" rel="nofollow">如何保证数据库和缓存的数据一致性？</a></li> <li><a href="#Redis_265" rel="nofollow">使用过Redis做消息队列吗？</a></li> <li><a href="#Redis__key10_Java_key_273" rel="nofollow">如何从Redis 上亿个 key中找出10 个包含Java的 key？</a></li> <li><a href="#Redis_278" rel="nofollow">说说Redis中哨兵？</a></li> </ul> </li> </ul> </div> <h2> <a id="Redis_1" rel="nofollow"></a>说说你对Redis的了解?</h2> <p>Redis（Remote Dictionary Server）是一个基于C语言编写的内存数据库，基于Key/Value结构存储数据，读写速度很快，一般会用来做缓存、消息队列，分布式锁，同时还支持事务 、持久化、集群等。</p> <h2> <a id="Redis_4" rel="nofollow"></a>说说Redis中的数据类型？</h2> <p>常见的有五种基本数据类型和三种特殊数据类型，基本数据结构：String、 list、set、zset和hash，三种特殊数据类型：位图(bitmaps) 、计数器(hyperloglogs)和地理空间(geospatial indexes)。<br /> string：以字符串形式存储数据，经常用于记录用户的访问次数、文章访问量等。<br /> hash：以对象形式存储数据，比较方便的就是操作其中的某个字段，例如存储登陆用户登陆状态，实现购物车。<br /> list：以列表形式存储数据，可记录添加顺序，允许元素重复，通常应用于发布与订阅或者说消息队列、慢查询。<br /> set：以集合形式存储数据，不记录添加顺序，元素不能重复，也不能保证存储顺序，通常可以做全局去重、投票系统。<br /> zset：排序集合，可对数据基于某个权重进行排序。可做排行榜，取TOP N操作。直播系统中的在线用户列表，礼物排行榜，弹幕消息等。</p> <h2> <a id="RedisJava_12" rel="nofollow"></a>说说Redis对应的Java客户端有哪些？</h2> <p>Redis 支持的 Java 客户端都有jedis、lettuce、Redisson等。</p> <h2> <a id="Redis__15" rel="nofollow"></a>说说Redis 中持久化机制？</h2> <p>具体持久化机制是单独fork()一个子进程，将当前父进程的数据库数据复制到子进程的内存中，然后由子进程写入到临时文件中，持久化的过程结束了，再用这个临时文件替换上次的快照文件，然后子进程退出，内存释放。</p> <h2> <a id="Redis_18" rel="nofollow"></a>说说Redis中持久化以及方式？</h2> <p>Redis持久化是把内存中的数据同步到硬盘文件中，当Redis重启后再将硬盘文件内容重新加载到内存以实现数据恢复的目的。具体持久化方式，分别为RDB和AOF方式。</p> <h2> <a id="RedisRDB_21" rel="nofollow"></a>如何理解Redis中RDB方式的持久化？</h2> <p>RDB是Redis默认的持久化方式,按照一定的时间周期策略把内存的数据以快照的形式保存到硬盘的二进制文件。即快照存储，对应产生的数据文件为dump.rdb，通过配置文件中的save参数来定义快照的周期。</p> <p>RDB 的优点:<br /> 1）RDB 文件是是经过压缩的二进制文件，占用空间很小，它保存了 Redis 某个时间点的数据集，很适合用于做备份。<br /> 2）RDB 非常适用于灾难恢复,它只有一个文件，并且内容都非常紧凑，可以（在加密后）将它传送到别的数据中心。<br /> 3）RDB 方式持久化性能好，执行持久化时可以fork 一个子进程，由子进程处理保存工作，父进程无须执行任何磁盘 I/O 操作。<br /> 4）RDB 在恢复大数据集时的速度比 AOF 的恢复速度要快。</p> <p>RDB 的缺点<br /> 1）RDB 在服务器故障时容易造成数据的丢失。RDB 允许我们通过修改 save point 配置来控制持久化的频率。但是，因为 RDB 文件需要保存整个数据集的状态， 所以它是一个比较重的操作，如果频率太频繁，可能会对 Redis 性能产生影响。所以通常可能设置至少5分钟才保存一次快照，这时如果 Redis 出现宕机等情况，则意味着最多可能丢失5分钟数据。<br /> 2）RDB 方式使用 fork 子进程进行数据的持久化，如果数据比较大的话，fork 可能会非常耗时，造成 Redis 停止处理服务N毫秒。如果数据集很大且 CPU 比较繁忙的时候，停止服务的时间甚至会到一秒。<br /> 3）Linux fork 子进程采用的是 copy-on-write 的方式。在 Redis 执行 RDB 持久化期间，如果 client 写入数据很频繁，那么将增加 Redis 占用的内存，最坏情况下，内存的占用将达到原先的2倍。刚 fork 时，主进程和子进程共享内存，但是随着主进程需要处理写操作，主进程需要将修改的页面拷贝一份出来，然后进行修改。极端情况下，如果所有的页面都被修改，则此时的内存占用是原先的2倍。</p> <h2> <a id="RedisAOF_35" rel="nofollow"></a>如何理解Redis中AOF方式的持久化？</h2> <p>AOF持久化是将Redis收到的每一个写命令都追加到文件最后，类似于MySQL的binlog。当Redis重启时会通过重新执行文件中保存的写命令来在内存中重建整个数据库的内容。AOF 持久化默认是关闭的，可以通过配置appendonly yes 开启。当 AOF 持久化功能打开后，服务器在执行完一个写命令之后，会将被执行的写命令追加到服务器状态的 aof 缓冲区（aof_buf）的末尾。然后再将 aof_buf 的内容写到磁盘。Linux 操作系统中为了提升性能，使用了页缓存（page cache）。当我们将 aof_buf 的内容写到磁盘上时，此时数据并没有真正的落盘，而是在 page cache 中，为了将 page cache 中的数据真正落盘，需要执行 fsync / fdatasync 命令来强制刷盘。这边的文件同步做的就是刷盘操作，或者叫文件刷盘可能更容易理解一些。</p> <p><strong>AOF 的优点：</strong><br /> AOF 比 RDB更加可靠。你可以设置不同的 fsync 策略（no、everysec 和 always）。默认是 everysec，在这种配置下，redis 仍然可以保持良好的性能，并且就算发生故障停机，也最多只会丢失一秒钟的数据。AOF文件是一个纯追加的日志文件。即使日志因为某些原因而包含了未写入完整的命令（比如写入时磁盘已满，写入中途停机等等）， 我们也可以使用 redis-check-aof 工具也可以轻易地修复这种问题。当 AOF文件太大时，Redis 会自动在后台进行重写。重写后的新 AOF 文件包含了恢复当前数据集所需的最小命令集合。整个重写是绝对安全，因为重写是在一个新的文件上进行，同时 Redis 会继续往旧的文件追加数据。当新文件重写完毕，Redis 会把新旧文件进行切换，然后开始把数据写到新文件上。AOF 文件有序地保存了对数据库执行的所有写入操作以 Redis 协议的格式保存， 因此 AOF 文件的内容非常容易被人读懂， 对文件进行分析也很轻松。如果你不小心执行了 FLUSHALL 命令把所有数据刷掉了，但只要 AOF 文件没有被重写，那么只要停止服务器， 移除 AOF 文件末尾的 FLUSHALL 命令， 并重启 Redis ， 就可以将数据集恢复到 FLUSHALL 执行之前的状态。</p> <p><strong>AOF 的缺点：</strong><br /> 对于相同的数据集，AOF 文件的大小一般会比 RDB 文件大。根据所使用的 fsync 策略，AOF 的速度可能会比 RDB 慢。通常 fsync 设置为每秒一次就能获得比较高的性能，而关闭 fsync 可以让 AOF 的速度和 RDB 一样快。AOF 在过去曾经发生过这样的 bug ：因为个别命令的原因，导致 AOF 文件在重新载入时，无法将数据集恢复成保存时的原样。阻塞命令 BRPOPLPUSH 就曾经引起过这样的 bug 。虽然这种 bug 在 AOF 文件中并不常见， 但是相较而言， RDB 几乎是不可能出现这种 bug 的。</p> <h2> <a id="Redis_44" rel="nofollow"></a>如何理解Redis的混合持久化？</h2> <p>描述：混合持久化并不是一种全新的持久化方式，而是对已有方式的优化。混合持久化只发生于 AOF 重写过程。使用了混合持久化，重写后的新 AOF 文件前半段是 RDB 格式的全量数据，后半段是 AOF 格式的增量数据。</p> <p>开启：混合持久化的配置参数为 aof-use-rdb-preamble，配置为 yes 时开启混合持久化，在 redis 4 刚引入时，默认是关闭混合持久化的，但是在 redis 5 中默认已经打开了。</p> <p>关闭：使用 aof-use-rdb-preamble no 配置即可关闭混合持久化。混合持久化本质是通过 AOF 后台重写（bgrewriteaof 命令）完成的，不同的是当开启混合持久化时，fork 出的子进程先将当前全量数据以 RDB 方式写入新的 AOF 文件，然后再将 AOF 重写缓冲区（aof_rewrite_buf_blocks）的增量命令以 AOF 方式写入到文件，写入完成后通知主进程将新的含有 RDB 格式和 AOF 格式的 AOF 文件替换旧的的 AOF 文件。</p> <p>优点：结合 RDB 和 AOF 的优点, 更快的重写和恢复。<br /> 缺点：AOF 文件里面的 RDB 部分不再是 AOF 格式，可读性差。</p> <h2> <a id="SaveBgsave_55" rel="nofollow"></a>Save和Bgsave有什么不同？</h2> <p>SAVE生成 RDB 快照文件，但是会阻塞主进程，服务器将无法处理客户端发来的命令请求，所以通常不会直接使用该命令。<br /> BGSAVEfork 子进程来生成 RDB 快照文件，阻塞只会发生在 fork 子进程的时候，之后主进程可以正常处理请求</p> <h2> <a id="RedisAOF_59" rel="nofollow"></a>Redis为什么要AOF重写？</h2> <p>AOF 持久化是通过保存被执行的写命令来记录数据库状态的，随着写入命令的不断增加，AOF 文件中的内容会越来越多，文件的体积也会越来越大。如果不加以控制，体积过大的 AOF 文件可能会对 Redis 服务器、甚至整个宿主机造成影响，并且 AOF 文件的体积越大，使用 AOF 文件来进行数据还原所需的时间就越多。举个例子， 如果你对一个计数器调用了 100 次 INCR ， 那么仅仅是为了保存这个计数器的当前值， AOF 文件就需要使用 100 条记录。然而在实际上， 只使用一条 SET 命令已经足以保存计数器的当前值了， 其余 99 条记录实际上都是多余的。为了处理这种情况， Redis 引入了 AOF 重写：可以在不打断服务端处理请求的情况下， 对 AOF 文件进行重建（rebuild）。</p> <h2> <a id="AOF_62" rel="nofollow"></a>说说AOF重写的过程、存在的问题、以及数据不一致问题？</h2> <p>描述：Redis 生成新的 AOF 文件来代替旧 AOF 文件，这个新的 AOF 文件包含重建当前数据集所需的最少命令。具体过程是遍历所有数据库的所有键，从数据库读取键现在的值，然后用一条命令去记录键值对，代替之前记录这个键值对的多条命令。</p> <p>命令：有两个 Redis 命令可以用于触发 AOF 重写，一个是 BGREWRITEAOF 、另一个是 REWRITEAOF 命令；开启：AOF 重写由两个参数共同控制，auto-aof-rewrite-percentage 和 auto-aof-rewrite-min-size，同时满足这两个条件，则触发 AOF 后台重写 BGREWRITEAOF。// 当前AOF文件比上次</p> <pre><code class="prism language-bash">重写后的AOF文件大小的增长比例超过100  auto-aof-rewrite-percentage <span class="token number">100</span>   // 当前AOF文件的文件大小大于64MB  auto-aof-rewrite-min-size 64mb </code></pre> <p>关闭：auto-aof-rewrite-percentage 0，指定0的百分比，以禁用自动AOF重写功能。auto-aof-rewrite-percentage 0<br /> REWRITEAOF：进行 AOF 重写，但是会阻塞主进程，服务器将无法处理客户端发来的命令请求，通常不会直接使用该命令。BGREWRITEAOF：fork 子进程来进行 AOF 重写，阻塞只会发生在 fork 子进程的时候，之后主进程可以正常处理请求。REWRITEAOF 和 BGREWRITEAOF 的关系与 SAVE 和 BGSAVE 的关系类似。</p> <p>AOF 后台重写存在的问题？</p> <p>AOF 后台重写使用子进程进行从写，解决了主进程阻塞的问题，但是仍然存在另一个问题：子进程在进行 AOF 重写期间，服务器主进程还需要继续处理命令请求，新的命令可能会对现有的数据库状态进行修改，从而使得当前的数据库状态和重写后的 AOF 文件保存的数据库状态不一致。</p> <p>如何解决 AOF 后台重写存在的数据不一致问题为了解决上述问题？<br /> Redis 引入了 AOF 重写缓冲区（aof_rewrite_buf_blocks），这个缓冲区在服务器创建子进程之后开始使用，当 Redis 服务器执行完一个写命令之后，它会同时将这个写命令追加到 AOF 缓冲区和 AOF 重写缓冲区。这样一来可以保证：1、现有 AOF 文件的处理工作会如常进行。这样即使在重写的中途发生停机，现有的 AOF 文件也还是安全的。2、从创建子进程开始，也就是 AOF 重写开始，服务器执行的所有写命令会被记录到 AOF 重写缓冲区里面。这样，当子进程完成 AOF 重写工作后，父进程会在 serverCron 中检测到子进程已经重写结束，则会执行以下工作：1、将 AOF 重写缓冲区中的所有内容写入到新 AOF 文件中，这时新 AOF 文件所保存的数据库状态将和服务器当前的数据库状态一致。2、对新的 AOF 文件进行改名，原子的覆盖现有的 AOF 文件，完成新旧两个 AOF 文件的替换。之后，父进程就可以继续像往常一样接受命令请求了。</p> <h2> <a id="Redis_85" rel="nofollow"></a>如何理解Redis缓存穿透？</h2> <p>描述：访问一个缓存和数据库都不存在的 key，此时会直接打到数据库上，并且查不到数据，没法写缓存，所以下一次同样会打到数据库上。此时，缓存起不到作用，请求每次都会走到数据库，流量大时数据库可能会被打挂。此时缓存就好像被“穿透”了一样，起不到任何作用。一些恶意的请求会故意查询不存在的key,请求量很大，就会对后端系统造成很大的压力。这就叫做缓存穿透。</p> <p>1.接口校验。在正常业务流程中可能会存在少量访问不存在 key 的情况，但是一般不会出现大量的情况，所以这种场景最大的可能性是遭受了非法攻击。可以在最外层先做一层校验：用户鉴权、数据合法性校验等，例如商品查询中，商品的ID是正整数，则可以直接对非正整数直接过滤等等。<br /> 2.缓存空值。当访问缓存和DB都没有查询到值时，可以将空值写进缓存，但是设置较短的过期时间，该时间需要根据产品业务特性来设置。3.布隆过滤器。使用布隆过滤器存储所有可能访问的 key，不存在的 key 直接被过滤，存在的 key 则再进一步查询缓存和数据库。可把所有的可能存在的key放到一个大的Bitmap中，查询时通过该bitmap过滤。</p> <h2> <a id="Redis_92" rel="nofollow"></a>如何理解Redis缓存击穿？</h2> <p>描述：</p> <p>某一个热点 key，在缓存过期的一瞬间，同时有大量的请求打进来，由于此时缓存过期了，所以请求最终都会走到数据库，造成瞬时数据库请求量大、压力骤增，甚至可能打垮数据库。</p> <p>如何避免？<br /> 1.热点数据不设置过期时间，后由定时任务去异步加载数据，更新缓存。<br /> 这种方式适用于比较极端的场景，例如流量特别特别大的场景，使用时需要考虑业务能接受数据不一致的时间，还有就是异常情况的处理，不要到时候缓存刷新不上，一直是脏数据，那就凉了</p> <p>2.使用互斥锁：在并发的多个请求中，保证只有一个请求线程能拿到锁并执行数据库查询操作，其他的线程拿不到锁就阻塞等着，等到第一个线程将数据写入缓存后，直接走缓存。</p> <p>关于互斥锁的选择，网上看到的大部分文章都是选择 Redis 分布式锁，因为这个可以保证只有一个请求会走到数据库，这是一种思路。但是其实仔细想想的话，这边其实没有必要保证只有一个请求走到数据库，只要保证走到数据库的请求能大大降低即可，所以还有另一个思路是 JVM 锁。JVM 锁保证了在单台服务器上只有一个请求走到数据库，通常来说已经足够保证数据库的压力大大降低，同时在性能上比分布式锁更好。需要注意的是，无论是使用“分布式锁”，还是“JVM 锁”，加锁时要按 key 维度去加锁。我看网上很多文章都是使用一个“固定的 key”加锁，这样会导致不同的 key 之间也会互相阻塞，造成性能严重损耗。</p> <p>使用 redis 分布式锁的伪代码，仅供参考：</p> <pre><code class="prism language-java"><span class="token keyword">public</span> <span class="token class-name">Object</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token class-name">String</span> key<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">{<!-- --></span>     <span class="token class-name">Object</span> value <span class="token operator">=</span> redis<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// 缓存值过期</span>     <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token comment">// lockRedis：专门用于加锁的redis；</span>         <span class="token comment">// "empty"：加锁的值随便设置都可以</span>         <span class="token keyword">if</span> <span class="token punctuation">(</span>lockRedis<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> <span class="token string">"empty"</span><span class="token punctuation">,</span> <span class="token string">"PX"</span><span class="token punctuation">,</span> lockExpire<span class="token punctuation">,</span> <span class="token string">"NX"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">try</span> <span class="token punctuation">{<!-- --></span>                 <span class="token comment">// 查询数据库，并写到缓存，让其他线程可以直接走缓存</span>                 value <span class="token operator">=</span> <span class="token function">getDataFromDb</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>                 redis<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">,</span> <span class="token string">"PX"</span><span class="token punctuation">,</span> expire<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 <span class="token comment">// 异常处理</span>             <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{<!-- --></span>                 <span class="token comment">// 释放锁</span>                 lockRedis<span class="token punctuation">.</span><span class="token function">delete</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span>         <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{<!-- --></span>             <span class="token comment">// sleep50ms后，进行重试</span>             <span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token keyword">return</span> <span class="token function">getData</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span>     <span class="token keyword">return</span> value<span class="token punctuation">;</span> <span class="token punctuation">}</span> </code></pre> <h2> <a id="Redis_136" rel="nofollow"></a>如何理解Redis缓存雪崩？</h2> <p>缓存雪崩是当缓存服务器重启或者大量缓存集中在某一个时间段失效，造成瞬时数据库请求量大，压力骤增,导致系统崩溃。缓存雪崩其实有点像“升级版的缓存击穿”，缓存击穿是一个热点 key，缓存雪崩是一组热点 key。</p> <p>如何避免？<br /> 1：打散过期时间，不同的key，设置不同的过期时间（例如使用一个随机值），让缓存失效的时间点尽量均匀。<br /> 2：做二级缓存，A1为原始缓存，A2为拷贝缓存，A1失效时，可以访问A2，A1缓存失效时间设置为短期，A2设置为长期<br /> 3：加互斥锁。缓存失效后，通过加锁或者队列来控制写缓存的线程数量。比如对某个key只允许一个线程操作缓存，其他线程等待。<br /> 4：热点数据不过期。该方式和缓存击穿一样，要着重考虑刷新的时间间隔和数据异常如何处理的情况。</p> <h2> <a id="Redis_145" rel="nofollow"></a>如何理解Redis缓存预热？</h2> <p>缓存预热就是系统上线后，将相关的数据直接加载到缓存系统。这样就可以避免在用户请求的时候，先查询数据库，然后再将数据缓存的问题，接下来，用户直接查询事先被预热的缓存数据。<br /> 解决思路：直接写个缓存刷新页面，上线时手工操作下；数据量不大，可以在项目启动的时候自动进行加载；定时刷新缓存；</p> <h2> <a id="Redis_149" rel="nofollow"></a>如何理解Redis缓存更新？</h2> <p>除了缓存服务器自带的缓存失效策略之外（Redis默认的有6中策略可供选择），我们还可以根据具体的业务需求进行自定义的缓存淘汰，常见的策略有两种：第一是定时去清理过期的缓存。第二是当有用户请求过来时，再判断这个请求所用到的缓存是否过期。过期的话就去底层系统得到新数据并更新缓存。两者各有优劣，第一种的缺点是维护大量缓存的key是比较麻烦的，第二种的缺点就是每次用户请求过来都要判断缓存失效，逻辑相对比较复杂。具体用哪种方案，大家可以根据自己的应用场景来权衡。</p> <h2> <a id="Redis_152" rel="nofollow"></a>如何理解Redis缓存降级？</h2> <p>当访问量剧增、服务出现问题（如响应时间慢或不响应）或非核心服务影响到核心流程的性能时，仍然需要保证服务还是可用的，即使是有损服务。系统可以根据一些关键数据进行自动降级，也可以配置开关实现人工降级。降级的最终目的是保证核心服务可用，即使是有损的。而且有些服务是无法降级的（如加入购物车、结算）。</p> <p>参考日志级别设置预案：<br /> 普通：比如有些服务偶尔因为网络抖动或者服务正在上线而超时，可以自动降级；<br /> 警告：有些服务在一段时间内成功率有波动（如在95~100%之间），可以自动降级或人工降级，并发送告警；<br /> 错误：可用率低于90%或者数据库连接池被打爆了，或者访问量突然猛增到系统能承受的最大阈值，此时可根据情况降级；<br /> 严重错误：比如因为特殊原因数据错误了，此时需要紧急人工降级。</p> <p>服务降级的目的，是为了防止Redis服务故障，导致数据库跟着一起发生雪崩问题。因此，对于不重要的缓存数据，可以采取服务降级策略，例如一个比较常见的做法就是Redis出现问题，不去数据库查询，而是直接返回默认值给用户。</p> <h2> <a id="MemcacheRedis_163" rel="nofollow"></a>Memcache与Redis的区别都有哪些？</h2> <p>1)数据结构：memcached 支持简单的 key-value 数据结构，而 redis 支持丰富的数据结构：String、List、Set、Hash、SortedSet 等。<br /> 2)数据存储：memcached 和 redis 的数据都是全部在内存中。<br /> 网上有一种说法 “当物理内存用完时，Redis可以将一些很久没用到的 value 交换到磁盘，同时在内存中清除”，这边指的是 redis 里的虚拟内存（Virtual Memory）功能，该功能在 Redis 2.0 被引入，但是在 Redis 2.4 中被默认关闭，并标记为废弃，而在后续版中被完全移除。<br /> 3)持久化：memcached 不支持持久化，redis 支持将数据持久化到磁盘<br /> 4)灾难恢复：实例挂掉后，memcached 数据不可恢复，redis 可通过 RDB、AOF 恢复，但是还是会有数据丢失问题<br /> 5)事件库：memcached 使用 Libevent 事件库，redis 自己封装了简易事件库 AeEvent<br /> 6)过期键删除策略：memcached 使用惰性删除，redis 使用惰性删除+定期删除<br /> 7)内存驱逐（淘汰）策略：memcached 主要为 LRU 算法，redis 当前支持8种淘汰策略。<br /> 8)性能比较<br /> 按“CPU 单核” 维度比较：由于 Redis 只使用单核，而 Memcached 可以使用多核，所以在比较上：在处理小数据时，平均每一个核上 Redis 比 Memcached 性能更高，而在 100k 左右的大数据时， Memcached 性能要高于 Redis。<br /> 按“实例”维度进行比较：由于 Memcached 多线程的特性，在 Redis 6.0 之前，通常情况下 Memcached 性能是要高于 Redis 的，同时实例的 CPU 核数越多，Memcached 的性能优势越大。<br /> 至于网上说的 redis 的性能比 memcached 快很多，这个说法就离谱。</p> <h2> <a id="redis_177" rel="nofollow"></a>单线程的redis为什么这么快？</h2> <p>主要有以下几点：<br /> 1、基于内存的操作<br /> 2、使用了 I/O 多路复用模型，select、epoll 等，基于 reactor 模式开发了自己的网络事件处理器。<br /> 3、单线程可以避免不必要的上下文切换和竞争条件，减少了这方面的性能消耗。<br /> 4、以上这三点是 redis 性能高的主要原因，其他的还有一些小优化，例如：对数据结构进行了优化，简单动态字符串、压缩列表等。</p> <h2> <a id="Redis_184" rel="nofollow"></a>说说Redis内部存储结构?</h2> <p>dict 本质上是为了解决算法中的查找问题（Searching），是一个用于维护key和value映射关系的数据结构，与很多语言中的Map或dictionary类似。本质上是为了解决算法中的查找问题（Searching）<br /> sds：就等同于char * ，它可以存储任意二进制数据，不能像C语言字符串那样以字符’\0’来标识字符串的结 束，因此它必然有个长度字段。<br /> skiplist （跳跃表）： 跳表是一种实现起来很简单，单层多指针的链表，它查找效率很高，堪比优化过的二叉平衡树，且比平衡树的实现，quicklist.<br /> ziplist 压缩表:ziplist是一个编码后的列表，是由一系列特殊编码的连续内存块组成的顺序型数据结构。</p> <h2> <a id="Sorted_Set_190" rel="nofollow"></a>Sorted Set底层数据存储结构是什么？</h2> <p>Sorted Set当前有两种数据存储结构,分别为ziplist和skiplist。<br /> 1)ziplist：使用压缩列表实现，当保存的元素长度都小于64字节，同时数量小于128时，使用该方式，否则会使用 skiplist。这两个参数可以通过 zset-max-ziplist-entries、zset-max-ziplist-value 来自定义修改。<br /> 2)skiplist：一个zset同时包含一个字典（dict）和一个跳跃表（skiplist）</p> <p>为什么同时使用字典和跳跃表？</p> <p>主要是为了提升性能。<br /> 单独使用字典：在执行范围型操作(比如 zrank、zrange)，字典需要进行排序，至少需要 O(NlogN) 的时间复杂度及额外 O(N) 的内存空间。<br /> 单独使用跳跃表：根据成员查找分值操作的复杂度从 O(1) 上升为 O(logN)。</p> <p>为什么使用跳跃表，而不是红黑树？</p> <p>主要有以下几个原因：<br /> 1）跳表的性能和红黑树差不多。<br /> 2）跳表更容易实现和调试。</p> <h2> <a id="Redis_207" rel="nofollow"></a>Redis数据过期后的删除策略？</h2> <p>常用的过期数据的删除策略就两个（重要！自己造缓存轮子的时候需要格外考虑的东西）。<br /> 定期删除 ： 每隔一段时间随机抽取一批 key ，检查是否过期，过期了则删除。这里Redis 底层会通过限制删除操作执行时长和频率来减少删除操作对CPU时间的影响。<br /> 惰性删除 ：只会在取出key的时候才对数据进行过期检查。这样对CPU最友好，但是可能会造成太多过期 key 没有被删除。</p> <p>两者各有千秋，定期删除对内存更加友好，惰性删除对CPU更加友好。所以Redis 采用的是 定期删除+惰性/懒汉式删除 。</p> <h2> <a id="Redis_215" rel="nofollow"></a>Redis的数据淘汰策略有哪些？</h2> <p>Redis 中默认提供 6 种数据淘汰策略，分别为：<br /> volatile-lru：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰<br /> volatile-ttl：从已设置过期时间的数据集（server.db[i].expires）中挑选将要过期的数据淘汰<br /> volatile-random：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰<br /> allkeys-lru：当内存不足以容纳新写入数据时，移除最近最少使用的 key（这个是最常用的）<br /> allkeys-random：从数据集（server.db[i].dict）中任意选择数据淘汰。<br /> no-eviction：禁止驱逐数据，也就是说当内存不足以容纳新写入数据时，新写入操作会报错。这个应该没人使用吧！</p> <h2> <a id="Redis_224" rel="nofollow"></a>Redis为什么是单线程的？</h2> <p>官方FAQ表示，因为Redis是基于内存的操作，CPU不是Redis的瓶颈，Redis的瓶颈最有可能是机器内存的大小或者网络带宽。既然单线程容易实现，而且CPU不会成为瓶颈，那就顺理成章地采用单线程的方案了（毕竟采用多线程会有很多麻烦！），Redis利用队列技术将并发访问变为串行访问。</p> <p>1）绝大部分请求是纯粹的内存操作（非常快速）。<br /> 2）采用单线程,避免了不必要的上下文切换和竞争条件。<br /> 3）非阻塞IO操作。</p> <h2> <a id="Redis_231" rel="nofollow"></a>说说Redis中的事务操作？</h2> <p>Redis的一个事务从开始到结束通常会经历以下3个阶段：<br /> 1）事务开始：multi 命令将执行该命令的客户端从非事务状态切换至事务状态，底层通过 flags 属性标识。<br /> 2）命令入队：当客户端处于事务状态时，服务器会根据客户端发来的命令执行不同的操作，例如exec、discard、watch、multi 命令会被立即执行，其他命令不会立即执行，而是将命令放入到一个事务队列，然后向客户端返回 QUEUED 回复。<br /> 3）事务执行：当一个处于事务状态的客户端向服务器发送 exec 命令时，服务器会遍历事务队列，执行队列中的所有命令，最后将结果全部返回给客户端。</p> <p>说明： redis 的事务并不推荐在实际中使用，如果要使用事务，推荐使用 Lua 脚本，redis 会保证一个 Lua 脚本里的所有命令的原子性。</p> <h2> <a id="Redis_239" rel="nofollow"></a>Redis如何实现分布式锁？</h2> <p>Redis为单进程单线程模式，采用队列模式将并发访问变成串行访问，且多客户端对Redis的连接并不存在竞争关系，Redis中可以使用SETNX命令来争抢锁，抢到之后，再用expire给锁加一个过期时间防止锁忘记了释放。 如果在setnx之后执行expire之前进程意外crash或者要重启维护了，那会怎么样？ set指令有非常复杂的参数，这个应该是可以同时把setnx和expire合成一条指令来用的！</p> <h2> <a id="Redis_242" rel="nofollow"></a>Redis是单线程还是多线程？</h2> <p>Redis的线程模型，要看具体的版本：</p> <p>Redis6.0 前的请求解析、键值数据读写、结果返回都是由⼀个线程完成，所以称 Redis 为单线程模型。Redis 单线程容易阻塞，为了避免阻塞，Redis 设计了⼦进程和异步线程的⽅式来完成某些耗时操作，例如使用⼦进程实现 RDB ⽣成，AOF 重写等；</p> <p>Redis 6.0 开始，使用多个线程来完成请求解析和结果返回，提升对⽹络请求的处理，提升系统整体的吞吐量，不过读写命令的执行还是单线程的。</p> <h2> <a id="Redis_249" rel="nofollow"></a>Redis是否可以保证事务的原子性？</h2> <p>这个问题要从三个层面进行说明，分别是：<br /> 1)命令都正常执⾏，此时原⼦性可以保证；<br /> 2)命令⼊队时出错，EXEC 时会拒绝执⾏所有命令，原⼦性可以保证；<br /> 3)命令实际执⾏时出错，Redis 会执⾏剩余命令，原⼦性得不到保证;</p> <h2> <a id="_255" rel="nofollow"></a>如何保证数据库和缓存的数据一致性？</h2> <p>实际项目中，无论是先操作数据库，还是先操作缓存，都会存在脏数据的情况，有办法避免吗？答案是有的，由于数据库和缓存是两个不同的数据源，要保证其数据一致性，其实就是典型的分布式事务场景，可以引入分布式事务来解决，常见的有：2PC、TCC、MQ事务消息等。但是引入分布式事务必然会带来性能上的影响，这与我们当初引入缓存来提升性能的目的是相违背的。所以在实际使用中，通常不会去保证缓存和数据库的强一致性，而是做出一定的牺牲，保证两者数据的最终一致性。如果是实在无法接受脏数据的场景，则比较合理的方式是放弃使用缓存，直接走数据库。<br /> 保证数据库和缓存数据最终一致性的常用方案如下：<br /> 1）更新数据库，数据库产生 binlog。<br /> 2）监听和消费 binlog，执行失效缓存操作。<br /> 3）如果步骤2失效缓存失败，则引入重试机制，将失败的数据通过MQ方式进行重试，同时考虑是否需要引入幂等机制。</p> <p>兜底：当出现未知的问题时，及时告警通知，人为介入处理。<br /> 人为介入是终极大法，那些外表看着光鲜艳丽的应用，其背后大多有一群苦逼的程序员，在不断的修复各种脏数据和bug。</p> <h2> <a id="Redis_265" rel="nofollow"></a>使用过Redis做消息队列吗？</h2> <p>Redis 本身提供了一些组件来实现消息队列的功能，但是多多少少都存在一些缺点，相比于市面上成熟的消息队列，例如 Kafka、Rocket MQ 来说并没有优势，因此目前我们并没有使用 Redis 来做消息队列。</p> <p>关于 Redis 做消息队列的常见方案主要有以下：<br /> 1）Redis 5.0 之前可以使用 List（blocking）、Pub/Sub 等来实现轻量级的消息发布订阅功能组件，但是这两种实现方式都有很明显的缺点，两者中相对完善的 Pub/Sub 的主要缺点就是消息无法持久化，如果出现网络断开、Redis 宕机等，消息就会被丢弃。<br /> 2）为了解决 Pub/Sub 模式等的缺点，Redis 在 5.0 引入了全新的 Stream，Stream 借鉴了很多 Kafka 的设计思想，有以下几个特点：提供了消息的持久化和主备复制功能，可以让任何客户端访问任何时刻的数据，并且能记住每一个客户端的访问位置，还能保证消息不丢失。引入了消费者组的概念，不同组接收到的数据完全一样（前提是条件一样），但是组内的消费者则是竞争关系。<br /> Redis Stream 相比于 pub/sub 已经有很明显的改善，但是相比于 Kafka，其实没有优势，同时尚未经过大量验证、成本较高、不支持分区（partition）、无法支持大规模数据等问题。</p> <h2> <a id="Redis__key10_Java_key_273" rel="nofollow"></a>如何从Redis 上亿个 key中找出10 个包含Java的 key？</h2> <p>1）keys <em>java</em> 命令，该命令性能很好，但是在数据量特别大的时候会有性能问题。<br /> 2）scan 0 MATCH <em>java</em> 命令，基于游标的迭代器，更好的选择SCAN 命令是一个基于游标的迭代器（cursor based iterator）： SCAN 命令每次被调用之后， 都会向用户返回一个新的游标， 用户在下次迭代时需要使用这个新游标作为 SCAN 命令的游标参数， 以此来延续之前的迭代过程。当 SCAN 命令的游标参数被设置为 0 时， 服务器将开始一次新的迭代， 而当服务器向用户返回值为 0 的游标时， 表示迭代已结束。</p> <h2> <a id="Redis_278" rel="nofollow"></a>说说Redis中哨兵？</h2> <p>哨兵（Sentinel） 是 Redis 的高可用性解决方案，由一个或多个 Sentinel 实例组成的 Sentinel 系统可以监视任意多个主服务器，以及这些主服务器属下的所有从服务器。<br /> Sentinel 可以在被监视的主服务器进入下线状态时，自动将下线主服务器的某个从服务器升级为新的主服务器，然后由新的主服务器代替已下线的主服务器继续处理命令请求。<br /><strong>1）哨兵故障检测</strong></p> <p>检查主观下线状态<br /> 在默认情况下，Sentinel 会以每秒一次的频率向所有与它创建了命令连接的实例（包括主服务器、从服务器、其他 Sentinel 在内）发送 PING 命令，并通过实例返回的 PING 命令回复来判断实例是否在线。如果一个实例在 down-after-miliseconds 毫秒内，连续向 Sentinel 返回无效回复，那么 Sentinel 会修改这个实例所对应的实例结构，在结构的 flags 属性中设置 SRI_S_DOWN 标识，以此来表示这个实例已经进入主观下线状态。</p> <p>检查客观下线状态<br /> 当 Sentinel 将一个主服务器判断为主观下线之后，为了确定这个主服务器是否真的下线了，它会向同样监视这一服务器的其他 Sentinel 进行询问，看它们是否也认为主服务器已经进入了下线状态（可以是主观下线或者客观下线）。当 Sentinel 从其他 Sentinel 那里接收到足够数量（quorum，可配置）的已下线判断之后，Sentinel 就会将服务器置为客观下线，在 flags 上打上 SRI_O_DOWN 标识，并对主服务器执行故障转移操作。</p> <p><strong>2）哨兵故障转移流程</strong><br /> 当哨兵监测到某个主节点客观下线之后，就会开始故障转移流程。核心流程如下：发起一次选举，选举出领头 Sentinel领头 Sentinel 在已下线主服务器的所有从服务器里面，挑选出一个从服务器，并将其升级为新的主服务器。领头 Sentinel 将剩余的所有从服务器改为复制新的主服务器。领头 Sentinel 更新相关配置信息，当这个旧的主服务器重新上线时，将其设置为新的主服务器的从服务器。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-78404.htm">东北农业动物医院在哪里啊（东北农业动物医院在哪里啊最近）</a></p>
+                                        <p>下一个：<a href="/news/article-79088.htm">三国杀武将登场特效是什么意思啊（三国杀出场特效）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-51019.htm" title="猫轻微抓伤有一点渗血过了24小时会好吗（猫轻微抓伤有一点渗血过了24小时会好吗）">猫轻微抓伤有一点渗血过了24小时会好吗（猫轻微抓伤有一点渗血过了24小时会好吗）</a></li>
+                        <li class="py-2"><a href="/news/article-42031.htm" title="太原哪里批发狗粮（太原哪里有批发狗粮的地方?）">太原哪里批发狗粮（太原哪里有批发狗粮的地方?）</a></li>
+                        <li class="py-2"><a href="/news/article-74992.htm" title="犬猫专科医院（猫狗动物医院）">犬猫专科医院（猫狗动物医院）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-23-free-shadowrocket-node.htm" title="3月23日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">3月23日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-71660.htm" title="宠物医院好评100字评论（宠物医院好评100字评论文案）">宠物医院好评100字评论（宠物医院好评100字评论文案）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-24-free-node-subscribe.htm" title="3月24日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址">3月24日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-37600.htm" title="猫三联妙三多打几针（妙三多猫三联是几针）">猫三联妙三多打几针（妙三多猫三联是几针）</a></li>
+                        <li class="py-2"><a href="/news/article-44007.htm" title="领养宠物条件是什么样的（领养宠物需要具备什么条件）">领养宠物条件是什么样的（领养宠物需要具备什么条件）</a></li>
+                        <li class="py-2"><a href="/news/article-48371.htm" title="养猫的容易得什么病（养猫容易引起哪些疾病）">养猫的容易得什么病（养猫容易引起哪些疾病）</a></li>
+                        <li class="py-2"><a href="/news/article-47480.htm" title="济南有宠物领养中心嘛 济南有宠物领养中心嘛多少钱">济南有宠物领养中心嘛 济南有宠物领养中心嘛多少钱</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">72</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
