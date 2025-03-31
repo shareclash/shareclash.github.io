@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-84698.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>petite-vue源码剖析-逐行解读@vue-reactivity之Map和Set的reactive</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="本篇我们会继续探索reactive函数中对Map/WeakMap/Set/WeakSet对象的代理实现。 Map/WeakMap/Set/WeakSet的操作 由于WeakMap和WeakSet分别是" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-84698.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="petite-vue源码剖析-逐行解读@vue-reactivity之Map和Set的reactive" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/5f10ba4123a645ffe1d66305c144ab89.webp" />
+        <meta property="og:release_date" content="2025-03-30T09:34:40" />
+    <meta property="og:updated_time" content="2025-03-30T09:34:40" />
+        <meta property="og:description" content="本篇我们会继续探索reactive函数中对Map/WeakMap/Set/WeakSet对象的代理实现。 Map/WeakMap/Set/WeakSet的操作 由于WeakMap和WeakSet分别是" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="petite-vue源码剖析-逐行解读@vue-reactivity之Map和Set的reactive">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>本篇我们会继续探索<code>reactive</code>函数中对<code>Map/WeakMap/Set/WeakSet</code>对象的代理实现。</p> <h2 id="mapweakmapsetweakset的操作">Map/WeakMap/Set/WeakSet的操作</h2> <p>由于WeakMap和WeakSet分别是Map和Set的不影响GC执行垃圾回收的版本，这里我们只研究Map和Set即可。</p> <p>Set的属性和方法</p> <ul> <li><code>size: number</code> 为访问器属性(accessor property)，返回Set对象中的值的个数</li> <li><code>add(value: any): Set</code> 向Set对象队尾添加一个元素</li> <li><code>clear(): void</code> 移除Set对象内所有元素</li> <li><code>delete(value: any): boolean</code> 移除Set中与入参值相同的元素，移除成功则返回true</li> <li><code>has(value: any): boolean</code> 判断Set中是否存在与入参值相同的元素</li> <li><code>values(): Iterator</code> 返回一个新的迭代器对象，包含Set对象中按插入顺序排列的所有元素</li> <li><code>keys(): Iterator</code> 和<code>values(): Iterator</code>一样的功效</li> <li><code>@@iterator</code> 和<code>values(): Iterator</code>一样的功效，<code>for of</code>中调用</li> <li><code>entries(): Iterator</code> 返回一个新的迭代器对象，包含Set对象中按插入顺序排列的所有元素，但为与Map使用一致每次迭代返回的内容为<code>[value, value]</code></li> <li><code>forEach(callbackFn: { (value: any, set: Set) =&gt; any } [, thisArg])</code> 按插入顺序遍历Set对象的每一个元素</li> </ul> <p>Map的属性和方法</p> <ul> <li><code>size: number</code> 为访问器属性(accessor property)，返回Set对象中的值的个数</li> <li><code>set(key: any, value: any): Map</code> 向Map对象添加或更新一个指定键的值</li> <li><code>clear(): void</code> 移除Map对象内所有键值对</li> <li><code>delete(key: any): boolean</code> 移除Map对象中指定的键值对，移除成功则返回true</li> <li><code>has(key: any): boolean</code> 判断Map中是否存在键与入参值相同的键值对</li> <li><code>values(): Iterator</code> 返回一个新的迭代器对象，包含Map对象中按插入顺序排列的所有值</li> <li><code>keys(): Iterator</code> 返回一个新的迭代器对象，包含Map对象中按插入顺序排列的所有键</li> <li><code>@@iterator</code> 和<code>entries(): Iterator</code>一样的功效，<code>for of</code>中调用</li> <li><code>entries(): Iterator</code> 返回一个新的迭代器对象，包含Map对象中按插入顺序排列的所有键值对</li> <li><code>forEach(callbackFn: { (value: any, key: any, map: Map) =&gt; any } [, thisArg])</code> 按插入顺序遍历Map对象的每一个键值对</li> <li><code>get(key: any): any</code> 返回Map对象中指定键对应的值，若没有则返回<code>undefined</code></li> </ul> <h2 id="逐行看代码我是认真的">逐行看代码我是认真的</h2> <pre><code class="language-ts">// reactive.ts  export const mutableCollectionHandlers: ProxyHandler&lt;CollectionTypes&gt; = {   get: /*#__PURE__*/ createInstrumentationGetter(false, false) }</code></pre> <p>由于Map/Set不像Object或Array那样可直接通过属性访问的方式获取其中的元素，而是通过<code>add</code>,<code>has</code>,<code>delete</code>操作，因此需要像处理Array的<code>slice</code>等方法那样代理Map/Set的这些方法。</p> <pre><code class="language-ts">// collectionHandlers.ts  type MapTypes = Map&lt;any, any&gt; | WeakMap&lt;any, any&gt; type SetTypes = Set&lt;any, any&gt; | WeakSet&lt;any, any&gt;  // 代理Map/Set原生的方法 // 没有代理返回迭代器的方法？？ const mutableInstrumentations = {   get(this: MapTypes, key: unknown) {     return get(this, key)   }   get size() {     // 原生的size属性就是一个访问器属性     return size(this as unknown as IterableCollections)   },   has,   add,   set,   delete: deleteEntry, // delete 是关键字不能作为变量或函数名称   clear,   forEach: createForEach(false, false) }  function createInstrumentationGetter(isReadonly: boolean, shallow: boolean) {   const instrumentations = mutableInstrumentations    return (     target: CollectionTypes,     key: string | symbol,     receiver: CollectionTypes   ) =&gt; {     if (key === ReactiveFlags.IS_REACTIVE) {       return !isReadonly     }     else if (key === ReactiveFlags.IS_READONLY) {       return isReadonly     }     else if (key === ReactiveFlags.RAW) {       return target     }      // 代理Map/WeakMap/Set/WeakSet的内置方法     return Reflect.get(       hasOwn(instrumentations, key) &amp;&amp; key in target         ? instrumentations         : target,       key,       receiver     )   } }</code></pre> <p><em>TypeScript小课堂</em>：<code>as</code>断言——<code>this as unknown as IterableCollections</code><br /> 在TypeScript中可通过类型声明定义变量的类型(其中包含复合类型)，而类型推导则可以根据赋值语句中右侧字面量推导出变量的实际类型，或通过当前变量使用的场景推导出当前实际类型(尤其是定义为复合类型)。但有时无法通过当前使用场景执行精确的类型推导，这时开发者可以通过<code>as</code>断言告知TypeScript编译器该变量当前使用范围的数据类型(要相信自己一定比编译器更了解自己的代码:D)。<br /> 那么<code>as unknown</code>即表示将类型修改为<code>unknown</code>，那么类型为<code>unknown</code>是表示什么呢？<code>unknown</code>是TypeScript3.0引入的top type(任何其他类型都是它的subtype)，意在提供一种更安全的方式替代<code>any</code>类型(<code>any</code>类型是top type也是bottom type，使用它意味和绕过类型检查)，具有如下特点：</p> <ol> <li>任何其它类型都可以赋值给<code>unknown</code>类型的变量</li> <li><code>unknown</code>类型的变量只能赋值给<code>any</code>或<code>unknown</code>类型的变量</li> <li>如果不对<code>unknown</code>类型的变量执行类型收缩，则无法执行其它任何操作</li> </ol> <pre><code class="language-ts">// 1. 任何其它类型都可以赋值给`unknown`类型的变量  let uncertain: unknown = 'Hello' uncertain = 12 uncertain = { hello: () =&gt; 'Hello' }  // 2.`unknown`类型的变量只能赋值给`any`或`unknown`类型的变量  let uncertain: unknown = 'Hello' let noSure: any = uncertain let notConfirm: unknown = uncertain  // 3. 如果不对`unknown`类型的变量执行类型收缩，则无法执行其它任何操作 let uncertain = { hello: () =&gt; 'Hello' } uncertain.hello() // 编译报错  // 通过断言as收缩类型 (uncertain as {hello: () =&gt; string}).hello()  let uncertain: unknown = 'Hello' // 通过typeof或instanceof收缩类型 if (typeof uncertain === 'string') {   uncertain.toLowerCase() }</code></pre> <p>那么<code>as unknown</code>后的<code>as IterableCollections</code>意图就十分明显了，就是对变量进行类型收缩。<code>this as unknown as IterableCollections</code>其实就是<code>as IterableCollections</code>啦。</p> <p>然后我们逐一看看代理方法的实现吧</p> <h3 id="map的get方法"><code>Map</code>的<code>get</code>方法</h3> <p><code>get</code>方法只有Map对象拥有，因此其中主要思路是从Map对象中获取值，跟踪键值变化后将值转换为响应式对象返回即可。<br /> 但由于要处理<code>readonly(reactive(new Map()))</code>这一场景，添加了很多一时让人看不懂的代码而已。</p> <pre><code class="language-ts">const getProto = &lt;T extends CollectionTypes&gt;(v: T): any =&gt; Reflect.getProrotypeOf(v)  // 代理Map/WeakMap的get方法 function get(   target: MapTypes, // 指向this，由于Map对象已经被代理，因此this为代理代理   key: unknown,   isReadonly = false,   isShallow = false ) {   /**    * 1. 针对readonly(reactive(new Map()))的情况，    *    target获取的是代理对象，而rawTarget的是Map对象    * 2. 针对reactive(new Map())的情况，    *    target和rawTarget都是指向Map对象    */    target = (target as any)[ReactiveFlags.RAW]   const rawTarget = toRaw(target)   /**    * 若key为代理对象，那么被代理对象和代理对象的键都会被跟踪，即    * const key = { value: 'foo' }    * const pKey = reactive(key),     * const kvs = reactive(new Map())    * kvs.set(pKey, 1)    *     * effect(() =&gt; {    *   console.log('pKey', kvs.get(pKey))    * })    * effect(() =&gt; {    *   console.log('key', kvs.get(key))    * })    *     * kvs.set(pKey, 2)    * // 回显 pkey 2 和 key 2    * kvs.set(key, 3)    * // 回显 key 2    */     const rawKey = toRaw(key)   if (key !== rawKey) {     !isReadonly &amp;&amp; track(rawTraget, TrackOpTypes.GET, key)   }   !isReadonly &amp;&amp; track(rawTraget, TrackOpTypes.GET, rawKey)    // 获取Map原型链上的has方法用于判断获取成员是否存在于Map對象上   const { has } = getProto(rawTarget)   const wrap = isShallow ? toShallow : isReadonly ? toReadonly : toReactive   /**    * Map对象中存在则从Map对象或代理对象上获取值并转换为响应式对象返回。    * 针对readonly(reactive(new Map()))为什么是从响应对象上获取值，而不是直接从Map对象上获取值呢？    * 这是为了保持返回的值的结构，从响应式对象中获取值是响应式对象，在经过readonly的处理则返回的值就是readonly(reactive({value: 'foo'}))。    */    if (has.call(rawTarget, key)) {     return wrap(target.get(key))   }   else if (has.call(rawTarget, rawKey)) {     return wrap(target.get(rawKey))   }   else if (target !== rawTarget) {     /**      * 针对readonly(reactive(new Map()))，即使没有匹配的键值对，也要跟踪对响应式对象某键的依赖信息      * const state = reactive(new Map())      * const readonlyState = readonly(state)      *       * effect(() =&gt; {      *  console.log(readonlyState.get('foo'))      * })      * // 回显 undefined      * state.set('foo', 1)      * // 回显 1      */     target.get(key)   }    // 啥都没有找到就默认返回undefined，所以啥都不用写 }</code></pre> <h3 id="map和set的size访问器属性"><code>Map</code>和<code>Set</code>的<code>size</code>访问器属性</h3> <pre><code class="language-ts">function size(target: IterableCollections, isReadonly = false) {   // 针对readonly(reactive(new Map())) 或 readonly(reactive(new Set()))只需获取响应式对象即可，因此reactive对象也会对size的访问进行相同的操作。   target = (target as any)[RectiveFlags.RAW]   // 跟踪ITERATE_KEY即所有修改size的操作均会触发访问size属性的副作用函数   !iReadonly &amp;&amp; track(toRaw(target), TrackOpTypes.ITERATE, ITERATE_KEY)   /**    * 由于size为访问器属性因此若第三个参数传递receiver(响应式对象)，而响应式对象并没有size访问器属性需要访问的属性和方法，则会报异常``。因此需要最终将Map或Set对象作为size访问器属性的this变量。    */   return Reflect.get(target, 'size', target) }</code></pre> <h3 id="map和set的has方法"><code>Map</code>和<code>Set</code>的<code>has</code>方法</h3> <pre><code class="language-ts">function has(this: CollectionTypes, key: unknown, isReadonly = false): boolean {   const target = (this as any)[ReactiveFlags.RAW]   const rawTarget = toRaw(target)   const rawKey = toRaw(key)   // 和get方法代理一样，若key为代理对象则代理对象或被代理对象作为键的键值对发生变化都会触发访问has的副作用函数   if (key !== rawKey) {     !isReadonly &amp;&amp; track(rawTarget, TrackOpTypes.HAS, key)   }   !isReadonly &amp;&amp; track(rawTarget, TrackOpTypes.HAS, rawKey)    return key === rawKey     ? target.has(key)     : target.has(key) || target.has(rawKey) }</code></pre> <h3 id="set的add方法"><code>Set</code>的<code>add</code>方法</h3> <pre><code class="language-ts">function add(this: SetTypes, value: unknown) {   value = toRaw(value)   const target = toRaw(this)   const proto = getProto(target)   const hadKey = proto.has.call(target, value)   // 当Set对象中没有该元素时则触发依赖ITERATE_KEY的副作用函数，因此ADD操作会影响Set对象的长度   if (!hadKey) {     target.add(value)     trigger(target, TriggerOpTypes.ADD, value, value)   }    return this }</code></pre> <h3 id="map的set方法"><code>Map</code>的<code>set</code>方法</h3> <pre><code class="language-ts">function set(this: MapTypes, key: unknown, value: unknown) {   value = toRaw(value)   const target = toRaw(this)   const { has, get } = getProto(target)    // 分别检查代理和非代理版本的key是否存在于Map对象中   let hadKey = has.call(target, key)   if (!hadKey) {     key = toRaw(key)     hadKey = has.call(target.key)   }    const oldValue = get.call(target, key)   target.set(key, value)   if (!hadKey) {     // 当Map对象中没有该元素时则触发依赖ITERATE_KEY的副作用函数，因此ADD操作会影响Map对象的长度     trigger(target, TriggerOpTypes.ADD, key, value)   }   else if (hasChanged(value, oldValue)) {     // 如果新旧值不同则触发修改，依赖该键值对的副作用函数将被触发     trigger(target, TriggerOpTypes.SET, key, value, oldValue)   } }</code></pre> <p>注意：<code>get</code>和<code>has</code>方法中会同时跟踪代理和非代理版本的键对应的元素变化，而<code>set</code>方法则只会触发查找到的代理或非代理版本的键对应的元素变化。</p> <h3 id="deleteentry方法"><code>deleteEntry</code>方法</h3> <pre><code class="language-ts">function deleteEntry(this: CollectionTypes, key: unknown) {   const target = toRaw(this)   const { has, get } = getProto(target)   let hadKey = has.call(target, key)   // 分别检查代理和非代理版本的key是否存在于Map/Set对象中   let hadKey = has.call(target, key)   if (!hadKey) {     key = toRaw(key)     hadKey = has.call(target.key)   }    // 如果当前操作的是Map对象则获取旧值   const oldValue = get ? get.call(target, key) : undefined   const result = target.delete(key)   if (hadKey) {     trigger(target, TriggerOpTypes.DELETE, key, undefined, oldValue)   }   return result }</code></pre> <p>注意：<code>get</code>和<code>has</code>方法中会同时跟踪代理和非代理版本的键对应的元素变化，而<code>deleteEntry</code>方法则只会触发查找到的代理或非代理版本的键对应的元素变化。</p> <h3 id="map和set的clear方法"><code>Map</code>和<code>Set</code>的<code>clear</code>方法</h3> <pre><code class="language-ts">function clear(this: IterableCollections) {   const target = toRaw(this)   const hadItems = target.size !== 0   const oldTarget = undefined   const result = target.clear()   if (hadItems) {     trigger(target, TriggerOpTypes.CLEAR, undefined, undefined, oldTarget)   }   return result }</code></pre> <h3 id="map和set的foreach方法"><code>Map</code>和<code>Set</code>的<code>forEach</code>方法</h3> <pre><code class="language-ts">function createForEach(isReadonly: boolean, isShallow: boolean) {   return function forEach(     this: IterableCollections,     callback: Function,     thisArg?: unknown   ) {     const observed = this as any     const target = observed[ReactiveFlags.RAW]     const rawTarget = toRaw(target)     const wrap = isShallow ? toShallow : isReadonly ? toReadonly : toReactive     !isReadonly &amp;&amp; track(rawTarget, TrackOpTypes.ITERATE, ITERATE_KEY)     return target.forEach((value: unknown, key: unknown) =&gt; {       // 将key和value都转换为代理对象       return callback.call(thisArg, wrap(value), wrap(key), observed)     })   } }</code></pre> <p>由于<code>forEach</code>会遍历所有元素（Map对象则是所有键值对），因此跟踪<code>ITERATE_KEY</code>即Map/Set对象元素个数发生变化则触发<code>forEach</code>函数的执行。</p> <h2 id="迭代器对象相关方法">迭代器对象相关方法</h2> <p>至此我们还没对<code>entries</code>,<code>values</code>,<code>keys</code>和<code>@@iterator</code>这些返回迭代器的对象方法进行代理，而源码中则在最后为<code>mutableInstrumentations</code>添加这些方法的代理。</p> <pre><code class="language-ts">const iteratorMethods = ['keys', 'values', 'entries', Symbol.iterator/*就是@@iterator*/] iteratorMethods.forEach(method =&gt; {   mutableInstrumentations[method as string] = createIterableMethod(     method,     false,     false   ) })</code></pre> <pre><code class="language-ts">function createIterableMethod(   method: string | symbol,   isReadonly: boolean,   isShallow: boolean ) {   return function(     this: IterableCollections,     ...args: unknown[]   ): Iterable &amp; Iterator {     /**      * 1. 针对readonly(reactive(new Map()))的情况，      *    target获取的是代理对象，而rawTarget的是Map或Set对象      * 2. 针对reactive(new Map())的情况，      *    target和rawTarget都是指向Map或Set对象      */      const target = (this as any)[ReactiveFlags.RAW]     const rawTarget = toRaw(target)      const targetIsMap = isMap(rawTarget)     const isPair = method === 'entries' || (method === Symbol.iterator &amp;&amp; targetIsMap)     /**      * 当调用的是Map对象的keys方法，副作用函数并没有访问值对象，即副作用函数只依赖Map对象的键而没有依赖值。      * 而键只能增加或删除，值可增加、删除和修改，那么此时当且仅当键增删即size属性发生变化时才会触发副作用函数的执行。      * 若依赖值，那么修改其中一个值也会触发副作用函数执行。      */     const isKeyOnly = method === 'keys' &amp;&amp; targetIsMap     const innerIterator = target[method](...args)     const wrap = isShallow ? toShallow : isReadonly ? toReadonly : toReactive     !isReadonly &amp;&amp;       track(         rawTarget,         TrackOpTypes.ITERATE,         isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY       )      return {       // 迭代器协议       next() {         const { value, done } = innerIterator.next()         return done           ? { value, done }           : {             value: isPair ? [wrap(value[0], wrap(value[1]))] : wrap(value),             done           }       },       // 可迭代协议       [Symbol.iterator]() {         return this       }     }   } }</code></pre> <h3 id="可迭代协议iterable-protocol">可迭代协议(iterable protocol)</h3> <p>可迭代协议(iterable protocol)，用于创建迭代器(iterator)。<br /> 如下内置类型都实现了可迭代协议：</p> <ul> <li>字符串</li> <li>数组</li> <li>Set</li> <li>Map</li> <li>arguements对象</li> <li>NodeList等DOM集合类型</li> </ul> <p>下面的语言特性将会接收可迭代协议返回的迭代器</p> <ul> <li><code>for...of</code>循环</li> <li>数据解构(<code>const [a, b] = [1, 2]</code>)</li> <li>扩展操作符(<code>const a = [1,2], b = [...a]</code>)</li> <li><code>Array.from()</code></li> <li>创建Set</li> <li>创建Map</li> <li><code>Promise.all()</code>接受可迭代对象</li> <li><code>Promise.race()</code>接受可迭代对象</li> <li><code>yield*</code>操作符</li> </ul> <p>让对象支持可迭代协议其实很简单，只需实现返回迭代器的<code>[Symbol.iterator]</code>方法即可。JavaScript Plain Old Object默认并没有支持可迭代协议，那么我们可以自行实现以下：</p> <pre><code class="language-ts">const iterablizeKeys = (obj: {}) =&gt; {   if (!obj[Symbol.iterator]) {     obj[Symbol.iterator] = () =&gt; {       const keys = Object.keys(obj) as const       let i = 0        // 返回一个迭代器       return {         next() {           return { value: keys[i++], done: i &gt; keys.length }         }       }     }   }    return obj }   const iterableObj = iterablizeKeys({a: 1, b: 2}) for (let item of iterableObj) {   console.log(item) } // 回显 a  // 回显 b Array.from(iterableObj) // 返回 ['a', 'b']</code></pre> <h3 id="迭代器协议iterator-protocol">迭代器协议(iterator protocol)</h3> <p>迭代器协议(iterator protocol)，提供不接受任何参数并返回<code>IteratorResult</code>对象的<code>next</code>方法，而<code>IteratorResult</code>对象包含指向当前元素的<code>value</code>属性和表示迭代是否已结束的<code>done</code>属性，当<code>done</code>属性值为<code>true</code>时表示迭代已结束。<br /> 迭代器协议的实现正如上面可迭代协议的示例中那样，不过我们还可以将可迭代协议和迭代对象在同一个对象上实现。</p> <pre><code class="language-ts">const iterablizeKeys = (obj: {}) =&gt; {   if (!obj[Symbol.iterator]) {     let iteratorState = {       keys: []       i: 0     }     // 迭代器协议     obj.next = () =&gt; ({ value: iteratorState.keys[iteratorState.i++], done: iteratorState.i &gt; iteratorState.key.length })      // 可迭代协议     obj[Symbol.iterator] = () =&gt; {       iteratorState.keys = Object.keys(obj) as const       iteratorState.i = 0        // 返回一个迭代器       return this     }   }    return obj }   const iterableObj = iterablizeKeys({a: 1, b: 2}) for (let item of iterableObj) {   console.log(item) } // 回显 a  // 回显 b Array.from(iterableObj) // 返回 ['a', 'b']</code></pre> <h2 id="总结"></h2> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-83967.htm">有一个数字矩阵，矩阵的每行从左到右是递增的，矩阵从上到下是递增的，请编写程序在这样的矩阵中查找某个数字是否存在。</a></p>
+                                        <p>下一个：<a href="/news/article-84699.htm">动物疫苗打一次管多长时间有效呢（动物疫苗打一次管多长时间有效呢图片）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-1-15-shadowrocket-node.htm" title="1月15日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度20.2M/S 免费Clash机场订阅地址">1月15日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度20.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-clash-node-daily-updates.htm" title="1月8日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址">1月8日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-69038.htm" title="一种优雅的Golang的库插件注册加载机制">一种优雅的Golang的库插件注册加载机制</a></li>
+                        <li class="py-2"><a href="/news/article-75679.htm" title="开一家宠物食品加工厂怎么样（开一家宠物食品加工厂怎么样赚钱吗）">开一家宠物食品加工厂怎么样（开一家宠物食品加工厂怎么样赚钱吗）</a></li>
+                        <li class="py-2"><a href="/news/article-41537.htm" title="领域事件和集成事详解">领域事件和集成事详解</a></li>
+                        <li class="py-2"><a href="/news/article-42527.htm" title="附近的动物医院在哪里啊（附近哪有动物医院?）">附近的动物医院在哪里啊（附近哪有动物医院?）</a></li>
+                        <li class="py-2"><a href="/news/article-61606.htm" title="领养狗狗需要什么手续（领养狗狗需要什么流程）">领养狗狗需要什么手续（领养狗狗需要什么流程）</a></li>
+                        <li class="py-2"><a href="/news/article-68374.htm" title="动物疫苗制作流程图片（动物疫苗工艺流程）">动物疫苗制作流程图片（动物疫苗工艺流程）</a></li>
+                        <li class="py-2"><a href="/news/article-61015.htm" title="缓存与数据库的一致性思考">缓存与数据库的一致性思考</a></li>
+                        <li class="py-2"><a href="/news/article-55880.htm" title="原生实现C#和Lua相互调用-Unity3D可用">原生实现C#和Lua相互调用-Unity3D可用</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>

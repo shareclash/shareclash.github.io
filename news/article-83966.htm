@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-83966.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>PHP魔术方法</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="介绍 PHP中的魔术方法是旨在执行某些任务的特殊方法。这些方法以双下划线(__)作为前缀命名。所有这些函数名称均已保留，除关联的神奇功能外，不能用于任何其他目的。类中的魔术方法必须声明为public。" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-83966.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="PHP魔术方法" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/445137fa2062059317c5dfbcdb3097bd.webp" />
+        <meta property="og:release_date" content="2025-03-29T09:01:15" />
+    <meta property="og:updated_time" content="2025-03-29T09:01:15" />
+        <meta property="og:description" content="介绍 PHP中的魔术方法是旨在执行某些任务的特殊方法。这些方法以双下划线(__)作为前缀命名。所有这些函数名称均已保留，除关联的神奇功能外，不能用于任何其他目的。类中的魔术方法必须声明为public。" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="PHP魔术方法">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2>介绍</h2> <p>PHP中的魔术方法是旨在执行某些任务的特殊方法。这些方法以双下划线(__)作为前缀命名。所有这些函数名称均已保留，除关联的神奇功能外，不能用于任何其他目的。类中的魔术方法必须声明为public。这些方法充当拦截器，当满足某些条件时会自动调用这些方法。</p> <p>当前在PHP中可以使用以下神奇方法</p> <h2>__睡觉</h2> <pre>public&nbsp;__sleep&nbsp;(&nbsp;void&nbsp;)&nbsp;:&nbsp;array</pre> <p>类中的serialize()方法检查它是否具有函数名称__sleep()。如果是这样，则该功能在任何序列化之前执行。应该返回一个数组，其中包含该对象应被序列化的所有变量的名称。</p> <h2>__醒来</h2> <pre>public&nbsp;__wakeup&nbsp;(&nbsp;void&nbsp;)&nbsp;:&nbsp;void</pre> <p>unserialize()方法检查是否存在一个具有魔术名称__wakeup()的函数。如果存在，此功能可以重建对象可能具有的任何资源。</p> <h2>__连载</h2> <pre>public&nbsp;__serialize&nbsp;(&nbsp;void&nbsp;)&nbsp;:&nbsp;array</pre> <p>serialize()方法还会检查类是否具有__serialize()方法。如果是这样，它将在任何序列化之前执行。它必须构造并返回代表对象序列化形式的键/值对的关联数组。</p> <h2>__反序列化</h2> <pre>public&nbsp;__unserialize&nbsp;(&nbsp;array&nbsp;$data&nbsp;)&nbsp;:&nbsp;void</pre> <p>unserialize()还会检查是否存在__unserialize()，它将传递从__serialize()返回的还原数组。然后，它可以根据需要从该数组还原对象的属性。</p> <h2>__toString</h2> <pre>public&nbsp;__toString&nbsp;(&nbsp;void&nbsp;)&nbsp;:&nbsp;string</pre> <p>__toString()方法描述对象的字符串表示形式。例如，echo $obj; 将打印。此方法必须返回一个字符串</p> <h2>__调用</h2> <pre>__invoke&nbsp;([&nbsp;$...&nbsp;]&nbsp;)&nbsp;:&nbsp;mixed</pre> <p>当脚本尝试将对象作为函数调用时，将调用此方法。</p> <h2>__set_state</h2> <pre>static&nbsp;__set_state&nbsp;(&nbsp;array&nbsp;$properties&nbsp;)&nbsp;:&nbsp;object</pre> <p>对于由var_export()导出的类，将调用此静态方法。它接收一个参数，该参数是一个包含以array（'property'=&gt; value，...）形式导出的属性的数组。</p> <h2>__调试信息</h2> <pre>__debugInfo&nbsp;(&nbsp;void&nbsp;)&nbsp;:&nbsp;array</pre> <p>当执行var_dump()来转储对象以获取应显示的属性时，将自动调用此方法。如果未定义，则将显示所有公共，受保护和私有属性。</p> <h2>__组</h2> <pre>public&nbsp;__set&nbsp;(&nbsp;string&nbsp;$name&nbsp;,&nbsp;mixed&nbsp;$value&nbsp;)&nbsp;:&nbsp;void</pre> <p>将数据写入不可访问的（受保护的或私有的）或不存在的属性时，将运行__set()。</p> <h2>__得到</h2> <pre>public&nbsp;__get&nbsp;(&nbsp;string&nbsp;$name&nbsp;)&nbsp;:&nbsp;mixed</pre> <p>__get()用于从不可访问的（受保护的或私有的）或不存在的属性中读取数据。</p> <h2>__isset</h2> <pre>public&nbsp;__isset&nbsp;(&nbsp;string&nbsp;$name&nbsp;)&nbsp;:&nbsp;bool</pre> <p>__isset()通过调用<code>isset()</code>或<code>empty()</code>访问不可访问（受保护或私有）或不存在的属性来触发。</p> <h2>__未设置</h2> <pre>public&nbsp;__unset&nbsp;(&nbsp;string&nbsp;$name&nbsp;)&nbsp;:&nbsp;void</pre> <p>当<code>unset()</code>在无法访问的（受保护的或私有的）或不存在的属性上使用__unset()时，将调用__unset()。</p> <div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-83271.htm">springMVC拦截器从Request中获取Json格式并解决request的请求流只能读取一次的问题</a></p>
+                                        <p>下一个：<a href="/news/article-83967.htm">有一个数字矩阵，矩阵的每行从左到右是递增的，矩阵从上到下是递增的，请编写程序在这样的矩阵中查找某个数字是否存在。</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-79088.htm" title="三国杀武将登场特效是什么意思啊（三国杀出场特效）">三国杀武将登场特效是什么意思啊（三国杀出场特效）</a></li>
+                        <li class="py-2"><a href="/news/article-61606.htm" title="领养狗狗需要什么手续（领养狗狗需要什么流程）">领养狗狗需要什么手续（领养狗狗需要什么流程）</a></li>
+                        <li class="py-2"><a href="/news/article-67762.htm" title="Spring Cache缓存框架详解">Spring Cache缓存框架详解</a></li>
+                        <li class="py-2"><a href="/news/article-72333.htm" title="我们如何在Java中实现自定义HashSet">我们如何在Java中实现自定义HashSet</a></li>
+                        <li class="py-2"><a href="/news/article-80438.htm" title="动物医院注册资金最低（动物医院注册资金最低多少）">动物医院注册资金最低（动物医院注册资金最低多少）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-25-node-share-links.htm" title="1月25日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度20.9M/S 免费Clash机场订阅地址">1月25日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度20.9M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-14-clash-node.htm" title="2月14日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.8M/S 免费Clash机场订阅地址">2月14日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-55332.htm" title="JS/JQ动态创建（添加）optgroup和option属性">JS/JQ动态创建（添加）optgroup和option属性</a></li>
+                        <li class="py-2"><a href="/news/article-41537.htm" title="领域事件和集成事详解">领域事件和集成事详解</a></li>
+                        <li class="py-2"><a href="/news/article-42528.htm" title="小动物疫苗注射证明是疫苗本吗（动物疫苗本上的十条约定）">小动物疫苗注射证明是疫苗本吗（动物疫苗本上的十条约定）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
