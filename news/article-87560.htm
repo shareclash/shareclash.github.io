@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-87560.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>socket.io在egg+vue中的使用</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="首先说明一下什么是socket.io，它和websocket、Ajax的区别在哪里。这里就不讲理论和运行机制了（我怕误人子弟…），只说一下我的理解。（socket.io/socketIO/socket" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-87560.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="socket.io在egg+vue中的使用" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/9f4b89ce8d7e0bb12cbfb602e700bf1a.webp" />
+        <meta property="og:release_date" content="2025-04-03T08:32:48" />
+    <meta property="og:updated_time" content="2025-04-03T08:32:48" />
+        <meta property="og:description" content="首先说明一下什么是socket.io，它和websocket、Ajax的区别在哪里。这里就不讲理论和运行机制了（我怕误人子弟…），只说一下我的理解。（socket.io/socketIO/socket" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="socket.io在egg+vue中的使用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-tomorrow-night-eighties"> <p>首先说明一下什么是<code>socket.io</code>，它和<code>websocket</code>、<code>Ajax</code>的区别在哪里。这里就不讲理论和运行机制了（我怕误人子弟…），只说一下我的理解。（<code>socket.io/socketIO/socket</code>有时候称呼的很乱，我不太清楚有没有具体的区别和特殊的含义，我习惯叫<code>socket.io</code>）</p> <ol> <li><code>socket.io</code>和<code>websocket</code>：<code>websocket</code>是一种客户端和服务器之间双向实时通信技术，是<code>HTML5</code>的新协议规范。<code>websocket</code>在建立握手连接时，数据是通过HTTP协议传输的，但是在<code>TCP</code>连接建立后，真正的数据传输阶段则不需要HTTP协议的参与。它讲究是随时随地的双向通信，应用场景包括客户端需要展示动态数据等。<code>socket.io</code>则是为了兼容不同的浏览器，在<code>websocket</code>上面封装了一层。</li> <li><code>socket.io</code>和<code>Ajax</code>：<code>Ajax</code>是单向的，即客户端通过HTTP协议和服务器单向通信，流程就是客户端发出请求，服务器做出相应。<code>socket.io</code>是双向的随时随地的通信，只是用一次HTTP协议建立连接<code>TCP</code>连接后，就不在使用HTTP协议了。优点也很明显节省带宽（HTTP数据包头本身的字节量较大）和服务器资源。</li> </ol> <p>其他的详细介绍网上有很多就不在说了，网上说的千奇百怪的我就不贴网址了。下面说一下<code>socket.io</code>在<code>egg</code>+<code>vue</code>项目中的具体使用。</p> <h2><a id="egg_6" rel="nofollow"></a><code>egg</code>服务器端中使用：</h2> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://eggjs.org/zh-cn/tutorials/socketio.html"  rel="nofollow">egg-socket.io的官方文档</a> 个人觉得他说的已经很清楚了…我大概重述总结一下吧。1、安装开启插件。2、配置<code>ws</code>引擎和命名空间。3、以sticky模式启动。4、配置<code>Nginx</code>。5、写<code>soceket.io</code>的controller和相应的router文件。（它中间件项目还没用到，我就不提了，有兴趣可以去看文档）。这个过程中需要动五个文件外加<code>nginx</code>的配置文件。<br /> 0、安装：<code>$ npm i egg-socket.io --save</code><br /> 1、<code>plugin.js</code>文件：开启<code>egg-socket.io</code>。</p> <pre><code class="prism language-black">exports.io = {   enable: true,   package: 'egg-socket.io', };</code></pre> <p>2、<code>config.default.js</code>文件：配置<code>ws</code>引擎和命名空间。</p> <pre><code class="prism language-black"> exports.io = {      namespace: {      init: { wsEngine: 'uws' },  //默认是ws引擎      '/': {        connectionMiddleware: [],        packetMiddleware: [],      },    },  };</code></pre> <p>3、<code>package.json</code>文件：修改启动方式</p> <pre><code class="prism language-black">{  "scripts": {    "dev": "egg-bin dev --sticky",    "start": "egg-scripts start --sticky"  } }</code></pre> <p>4、<code>nginx</code>的配置按照文档配置就行了，就不写了。<br /> 5、<code>router.js</code>文件：配置路由。</p> <pre><code class="prism language-black">module.exports = app =&gt; {  const { router, controller } = app;  app.io.of('/').route('request', app.io.controller.socketio.index);  // namespace'/'要和配置的一致，消息名称'request'要和vue中一致 }</code></pre> <p>6、<code>io/controller/socketio.js</code>文件：具体的业务代码</p> <pre><code class="prism language-black">class SocketIOController extends Controller {  async index() {    const { ctx } = this;    const message = ctx.args[0];   //接受第一个参数：消息参数判断执行哪个函数    if (message === 'hello') {      const { param } =  ctx.args[1]  // 接受第二个参数：真正需要的参数      // ...中间是具体的业务代码      ctx.socket.emit('sendData', 'this is a response');   //消息名称'sendData'要和vue中一致，返回给客户端    }  } } module.exports = SocketIOController;</code></pre> <h2><a id="vue_60" rel="nofollow"></a><code>vue</code>客户端中使用：</h2> <p>0、安装：<code>npm install vue-socket.io --save</code><br /> 1、<code>main.js</code>文件：引入<code>vue-socket.io</code></p> <pre><code>// 引入 socketio，配置了环境变量NODE_ENV，区分开发环境用的，没用到的可忽略。 // 环境变量VUE_APP_DEV_SERVER是需要连接的服务器地址 import Vue from 'vue'; import VueSocketIO from 'vue-socket.io'; if (process.env.NODE_ENV === 'production') {   Vue.use(VueSocketIO, window.location.origin);    } else {   Vue.use(VueSocketIO, process.env.VUE_APP_DEV_SERVER);   // 等同于 Vue.use(VueSocketIO, socketio('http://xxx.xxx.xx.xxx')); }</code></pre> <p>2、组件内使用</p> <pre><code>  mounted() {      this.$options.sockets.sendData= (data) =&gt; {   // ’sendData‘是由上面egg中controller中的emit决定的        console.log(data)   //  接受到的消息输出为'this is a response'      };            this.$socket.emit('request', 'hello', { param: 'this is a param' }); // 'request' 是由egg的router决定的，后面是传给egg.controller的具体参数            if (!this.intervalData) {  // 每五秒emit一次        this.intervalData = setInterval(() =&gt; {          this.$socket.emit('request', 'hello', { param: 'this is a param' });        }, 5000);      }  },    beforeDestroy() {    delete this.$options.sockets.sendData;    if (this.intervalTime) {      clearInterval(this.intervalTime);      this.intervalTime = null;    }  },</code></pre> <p>这样说明一下可能还是不太清楚（我也是尽力表达了），可以对比下图理解：<img decoding="async" src="http://img.555519.xyz/uploads3/20220609/6c70848ccfbc1e6dc02290ceb08dbca7.jpg" alt="socket.io在egg+vue中的使用"><br /> 另外补充一点：<code>nginx</code>的配置，及时配置好了本地开发时也会有<code>cros</code>问题，但代码部署到服务器上的时候却没有<code>cros</code>问题。是因为开发时本地页面访问云服务器，chrome 浏览器作了限制。我们项目的<code>nginx</code>配置中已经add_header了，但是<code>socket.io</code> 的 response 本身也有个 Access-Control-Allow-Origin 头，add_header 后变成两个，所以就出现问题了。解决办法：修改 chrome 启动参数，在桌面上另建一个快捷方式，目标加<code>--disable-web-security --user-data-dir="C:\temp"</code>参数，开发时使用这个快捷方式启动浏览器。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-86834.htm">领养宠物协议合法吗现在（领养宠物协议怎么写）</a></p>
+                                        <p>下一个：<a href="/news/article-87561.htm">动物疫苗什么时候打（动物疫苗什么时候打合适）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-16-free-node-subscribe.htm" title="3月16日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址">3月16日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-77021.htm" title="中国兽药公司前十名有哪些（中国兽药公司前十名有哪些品牌）">中国兽药公司前十名有哪些（中国兽药公司前十名有哪些品牌）</a></li>
+                        <li class="py-2"><a href="/news/article-70992.htm" title="重庆宠物领养中心地址查询（重庆宠物之家免费领养）">重庆宠物领养中心地址查询（重庆宠物之家免费领养）</a></li>
+                        <li class="py-2"><a href="/news/article-65826.htm" title="北京农大动物医院最好的医生是谁呀（北京农大动物医院公众号）">北京农大动物医院最好的医生是谁呀（北京农大动物医院公众号）</a></li>
+                        <li class="py-2"><a href="/news/article-77020.htm" title="华畜兽药是正规公司吗畜牧（华畜兽药是哪个公司的）">华畜兽药是正规公司吗畜牧（华畜兽药是哪个公司的）</a></li>
+                        <li class="py-2"><a href="/news/article-85396.htm" title="贫穷养猫（穷养猫还是富养猫）">贫穷养猫（穷养猫还是富养猫）</a></li>
+                        <li class="py-2"><a href="/news/article-74334.htm" title="宠物领养协议书模板图片下载（宠物领养协议书模板图片下载）">宠物领养协议书模板图片下载（宠物领养协议书模板图片下载）</a></li>
+                        <li class="py-2"><a href="/news/article-85395.htm" title="动物疫苗新规定最新版图片 动物疫苗新规定最新版图片大全">动物疫苗新规定最新版图片 动物疫苗新规定最新版图片大全</a></li>
+                        <li class="py-2"><a href="/news/article-78404.htm" title="东北农业动物医院在哪里啊（东北农业动物医院在哪里啊最近）">东北农业动物医院在哪里啊（东北农业动物医院在哪里啊最近）</a></li>
+                        <li class="py-2"><a href="/news/article-69684.htm" title="Java 轻松掌握字符缓冲流的使用_java">Java 轻松掌握字符缓冲流的使用_java</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">9</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
