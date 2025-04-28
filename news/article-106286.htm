@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-106286.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>选择排序极其优化</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="选择排序 思想： 双重for循环遍历数组，在每一轮比较中，找出最小元素的下标，将最小元素换到“首位”。 publicstaticvoidselectionSort(int[] arr){int min" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-106286.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="选择排序极其优化" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/44e931a05cbabb08a6c864609232ea04.webp" />
+        <meta property="og:release_date" content="2025-04-28T09:44:56" />
+    <meta property="og:updated_time" content="2025-04-28T09:44:56" />
+        <meta property="og:description" content="选择排序 思想： 双重for循环遍历数组，在每一轮比较中，找出最小元素的下标，将最小元素换到“首位”。 publicstaticvoidselectionSort(int[] arr){int min" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="选择排序极其优化">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h2><a id="_0" rel="nofollow"></a>选择排序</h2> <h3><a id="_1" rel="nofollow"></a>思想：</h3> <p>双重for循环遍历数组，在每一轮比较中，找出最小元素的下标，将最小元素换到“首位”。</p> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">static</span><span class="token keyword">void</span><span class="token function">selectionSort</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">int</span> minIndex<span class="token punctuation">;</span><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         minIndex<span class="token operator">=</span> i<span class="token punctuation">;</span><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span> i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token operator">&gt;</span> arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token comment">// 记录最小值的下标</span>                 minIndex<span class="token operator">=</span> j<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token comment">// 将最小元素交换至首位</span><span class="token keyword">int</span> temp<span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>         arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span> arr<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>         arr<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token operator">=</span> temp<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <h3><a id="_22" rel="nofollow"></a>复杂度：</h3> <p>时间复杂度：双重for循环，时间复杂度为O(n^2)<br /> 空间复杂度：使用有限个变量，空间复杂度为O(1)</p> <h3><a id="_25" rel="nofollow"></a>二元选择排序：</h3> <p>二元选择排序时选择排序的优化，选择排序时，我们每次都找出来当前最小值，那么我们当然也可以找到最大值！这就是二元选择排序的思想。</p> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">static</span><span class="token keyword">void</span><span class="token function">selectionSort2</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">int</span> minIndex<span class="token punctuation">,</span> maxIndex<span class="token punctuation">;</span><span class="token comment">// i 只需要遍历一半</span><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>         minIndex<span class="token operator">=</span> i<span class="token punctuation">;</span>         maxIndex<span class="token operator">=</span> i<span class="token punctuation">;</span><span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span> i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token operator">-</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token operator">&gt;</span> arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token comment">// 记录最小值的下标</span>                 minIndex<span class="token operator">=</span> j<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">if</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>maxIndex<span class="token punctuation">]</span><span class="token operator">&lt;</span> arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token comment">// 记录最大值的下标</span>                 maxIndex<span class="token operator">=</span> j<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token comment">// 如果 minIndex 和 maxIndex 都相等，那么他们必定都等于 i，且后面的所有数字都与 arr[i] 相等，此时已经排序完成</span><span class="token keyword">if</span><span class="token punctuation">(</span>minIndex<span class="token operator">==</span> maxIndex<span class="token punctuation">)</span><span class="token keyword">break</span><span class="token punctuation">;</span><span class="token comment">// 将最小元素交换至首位</span><span class="token keyword">int</span> temp<span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>         arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span> arr<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>         arr<span class="token punctuation">[</span>minIndex<span class="token punctuation">]</span><span class="token operator">=</span> temp<span class="token punctuation">;</span><span class="token comment">// 如果最大值的下标刚好是 i，由于 arr[i] 和 arr[minIndex] 已经交换了，所以这里要更新 maxIndex 的值。</span><span class="token keyword">if</span><span class="token punctuation">(</span>maxIndex<span class="token operator">==</span> i<span class="token punctuation">)</span> maxIndex<span class="token operator">=</span> minIndex<span class="token punctuation">;</span><span class="token comment">// 将最大元素交换至末尾</span><span class="token keyword">int</span> lastIndex<span class="token operator">=</span> arr<span class="token punctuation">.</span>length<span class="token operator">-</span><span class="token number">1</span><span class="token operator">-</span> i<span class="token punctuation">;</span>         temp<span class="token operator">=</span> arr<span class="token punctuation">[</span>lastIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>         arr<span class="token punctuation">[</span>lastIndex<span class="token punctuation">]</span><span class="token operator">=</span> arr<span class="token punctuation">[</span>maxIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>         arr<span class="token punctuation">[</span>maxIndex<span class="token punctuation">]</span><span class="token operator">=</span> temp<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <p>我们使用 minIndex 记录最小值的下标，maxIndex 记录最大值的下标。每次遍历后，将最小值交换到首位，最大值交换到末尾，就完成了排序。</p> <p>由于每一轮遍历可以排好两个数字，所以最外层的遍历只需遍历一半即可。</p> <h3><a id="_63" rel="nofollow"></a>复杂度：</h3> <p>虽然二元选择排序只需要遍历一半，但是治标不治本。依旧使用双重for循环。<br /> 时间复杂度：双重for循环，时间复杂度为O(n^2)<br /> 空间复杂度：使用有限个变量，空间复杂度为O(1)</p> </div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-105474.htm">动物疫苗管理法律法规最新文件是什么（动物疫苗法最新消息2019）</a></p>
+                                        <p>下一个：<a href="/news/article-106287.htm">Django的原生ORM框架如何支持MongoDB，同时应对客户使用时随时变动字段</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-23-free-shadowrocket-node.htm" title="3月23日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">3月23日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-free-shadowrocket-node.htm" title="3月17日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址">3月17日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-75679.htm" title="开一家宠物食品加工厂怎么样（开一家宠物食品加工厂怎么样赚钱吗）">开一家宠物食品加工厂怎么样（开一家宠物食品加工厂怎么样赚钱吗）</a></li>
+                        <li class="py-2"><a href="/news/article-100846.htm" title="深圳市宠物领养中心（深圳市宠物领养中心电话）">深圳市宠物领养中心（深圳市宠物领养中心电话）</a></li>
+                        <li class="py-2"><a href="/news/article-72334.htm" title="人穷养什么宠物好呢（人穷养什么宠物好呢图片）">人穷养什么宠物好呢（人穷养什么宠物好呢图片）</a></li>
+                        <li class="py-2"><a href="/news/article-87560.htm" title="socket.io在egg+vue中的使用">socket.io在egg+vue中的使用</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-14-free-v2ray.htm" title="4月14日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址">4月14日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-67762.htm" title="Spring Cache缓存框架详解">Spring Cache缓存框架详解</a></li>
+                        <li class="py-2"><a href="/news/article-104804.htm" title="docker修改默认存储位置">docker修改默认存储位置</a></li>
+                        <li class="py-2"><a href="/news/article-91923.htm" title="开宠物医院需要多少钱投资成本（开个宠物医院多少成本）">开宠物医院需要多少钱投资成本（开个宠物医院多少成本）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">83</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
