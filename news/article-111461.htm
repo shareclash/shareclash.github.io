@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://shareclash.github.io/news/article-111461.htm" />
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Android 弹窗设计规范</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="Android 弹窗又叫弹框、弹出层等，指代所有从界面中弹出的临时存在的窗口。它是我们在Android APP中常见的交互组件，用作提醒、做决定、处理某个任务。通过查找Android开发者指南中的一些" />
+    
+    <!-- Favicon -->
+    <link href="/assets/website/img/shareclash/favicon.ico" rel="icon">
+
+    <meta name="author" content="ShareClash官网订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://shareclash.github.io/news/article-111461.htm" />
+    <meta property="og:site_name" content="ShareClash官网订阅站" />
+    <meta property="og:title" content="Android 弹窗设计规范" />
+    <meta property="og:image" content="https://shareclash.github.io/uploads/20240527/100c27f572b5f3a33068040306072ade.webp" />
+        <meta property="og:release_date" content="2025-05-04T09:28:28" />
+    <meta property="og:updated_time" content="2025-05-04T09:28:28" />
+        <meta property="og:description" content="Android 弹窗又叫弹框、弹出层等，指代所有从界面中弹出的临时存在的窗口。它是我们在Android APP中常见的交互组件，用作提醒、做决定、处理某个任务。通过查找Android开发者指南中的一些" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Android 弹窗设计规范">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="/assets/website/js/frontend/shareclash/aos/aos.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="/assets/website/css/shareclash/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z0SYCQN5K6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Z0SYCQN5K6');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="/">
+                                <span>ShareClash</span>
+                                </a>
+            </div>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                                        <li><a class="nav-link" href="/">首页</a></li>
+                                        <li><a class="nav-link" href="/free-nodes/">免费节点</a></li>
+                                        <li><a class="nav-link" href="/paid-subscribe/">推荐机场</a></li>
+                                        <li><a class="nav-link" href="/client.htm">客户端</a></li>
+                                        <li><a class="nav-link" href="/news/">新闻资讯</a></li>
+                                    </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav><!-- .navbar -->
+            <div class="header-social-links d-flex align-items-center">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            </div>
+        </div>
+    </header><!-- End Header -->
+    <main id="main">
+        <!-- ======= Breadcrumbs ======= -->
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li>正文</li>
+                </ol>
+                <h1>新闻资讯</h1>
+            </div>
+        </section><!-- End Breadcrumbs -->
+        <section class="inner-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div id="content_views" class="htmledit_views"> <p>Android 弹窗又叫弹框、弹出层等，指代所有从界面中弹出的临时存在的窗口。它是我们在Android APP中常见的交互组件，用作提醒、做决定、处理某个任务。通过查找Android开发者指南中的一些官方规范（https://developer.android.com/guide/topics/ui）,它分为Toasts吐司提示、SnackBars底部提示框、Pickers选择器、Menus菜单、Dialogs对话框等。</p> <p>首先，普及一个有关组件性质的概念，模态（modal）和非模态（nonmodal/modeless）情境。模态是用户必须通过点击相关按钮或其他方式来退出之后才能进行其他操作，也即模态情境会打断用户的操作。反之，非模态是不会阻断用户的操作，用户可以继续之前的交互，不对其进行回应。通常，用户可以点击非模态窗口之外的其他位置来关闭它或等它自动消失。</p> <p>接下来依次讲一下各类弹框组件：</p> <p>1.Toast&nbsp;</p> <p>在业界绝大多数APP中，是非模态的，出现在屏幕底部，纯文字显示的，并且不支持交互的系统弹窗。使用方法如下：</p> <p>//第一个参数是上下文，第二个是需要显示的内容，第三个是显示时间(也可为Toast.LENGTH_SHORT) ，两个默认时长分别为 2s 和 3.5s。</p> <p>Toast.makeText(this,"我是文本显示内容",Toast.LENGTH_LONG);</p> <p>另外，也出现了各种打破规范的 Toasts ，比如模态的、带图标的、可交互的等，我们的应用不涉及这些，所以此处不做阐述，只使用非模态的那种方式，遵循系统默认字体和样式规范：</p> <p><strong>•&nbsp;</strong>一次只显示一个 Toast。</p> <p><strong>•&nbsp;</strong>纯文本的 Toasts 一般不超过 14 个字。</p> <p><strong>•&nbsp;</strong>0~10个字符显示时长用Toast.LENGTH_SHORT，超过10个字用Toast.LENGTH_LONG。</p> <p>【贴图】</p> <p>2.SnackBars&nbsp;</p> <p>Snackbars 是 Android 平台的控件，跟 Toasts 非常相似。两者的区别在于，Snackbars 可以包含一个操作，是可以交互的。并且是支持主动滑动关闭的。</p> <p>虽然现在的 Material Design 里已经找不到 Toasts，Snackbars 也可以取代 Toasts，但在实际运用中，还是 Toasts 用得比较多，Snackbars仅是安卓规范样式，这里不做介绍。</p> <p>【贴图】</p> <p>3.Pickers</p> <p>选择器展示了一组值，用户可以从中进行选择其中一个选项，常用于表单。</p> <p><strong>•&nbsp; </strong>显示在内容视图中，通常是嵌入表单中或出现在屏幕底部。</p> <p><strong>•&nbsp; </strong>内容通常包括一组值。</p> <p><strong>•&nbsp;&nbsp;</strong>当前选中的值在中间，以深色标识。</p> <p><strong>•&nbsp;&nbsp;</strong>选中选项后，再次点击触发控件或界面中其他位置，关闭选择器，选择成功。</p> <p><strong>•&nbsp;&nbsp;</strong>再次点击触发控件时，控件上一般包含「取消」和「确定」按钮，点击「确定」按钮，选择成功，同时关闭选择器。直接点击「取消」按钮或点击遮罩层可关闭选择器。</p> <p>【贴图】</p> <p>4.Menus</p> <p>主要介绍Pop Menus 气泡菜单和<strong>&nbsp;</strong>Bottom Menus 底部菜单</p> <p>（1） Pop Menus 气泡菜单&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p> <p><strong>•&nbsp;</strong>以 “小型气泡浮层” 的形式承载菜单功能。</p> <p><strong>•&nbsp;</strong>通常包含一个箭头，指向浮层出现的位置（有时候也不包含箭头）。</p> <p><strong>•&nbsp;&nbsp;</strong>选中某个菜单项后，自动关闭气泡浮层。</p> <p><strong>•&nbsp;</strong>一般是模态的。可在气泡浮层下显示遮罩层，也可不显示。点击遮罩层或界面中其他区域，可关闭浮层。（比较特别的是，像微信和 QQ，弹出气泡浮层后，界面中其他元素均不可点击，但仍可切换底部 tab。）</p> <p>（2）Bottom Menus 底部菜单</p> <p><strong>•&nbsp;&nbsp;</strong>以 “底部模态面板” 的形式承载菜单功能。从底部向上滑动出现的面板，可承载的菜单项较多。</p> <p><strong>•&nbsp;</strong>一般可以采用官方控件，向下滑动面板、点击「关闭」、「取消」按钮或遮罩层关闭面板。</p> <p><strong>•&nbsp;</strong>Action Sheets 和 Activity Views 可以看作一种特定的底部菜单。</p> <p><strong>•&nbsp;&nbsp;</strong>底部菜单用于筛选内容时：</p> <p><strong>① 单个筛选条件：</strong>选中选项后，自动关闭面板。</p> <p><strong>② 多个筛选条件：</strong>一般包含「重置」和「确定」按钮，选择菜单项后，点击「确定」才关闭面板，点击「重置」可清空所有已选条件。</p> <p>【贴图】</p> <p>5.Dialogs</p> <p>阐述一下，贴fttr的图，然后加上CCB里面的使用方法</p> <p>移动端弹窗设计规范总结（二）_laoyang520的博客-CSDN博客_移动端弹框实现，有相关介绍</p> <p>-------------------</p> <p>本文部分内容参考：</p> <p>移动端弹窗设计规范总结（一）_laoyang520的博客-CSDN博客_弹窗设计规范</p> <p>实用干货！UI设计师需要了解的 APP弹窗体系 - 优设网 - 学设计上优设</p> </p></div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-110537.htm">济南宠物狗领养（济南狗狗领养免费平台）</a></p>
+                                        <p>下一个：<a href="/news/article-111464.htm">Vue  el-input  trim() 去空格</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-103109.htm" title="Spring的两种依赖注入方式:setter方法注入与构造方法注入">Spring的两种依赖注入方式:setter方法注入与构造方法注入</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-27-free-node-subscribe.htm" title="4月27日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度22.6M/S 免费Clash机场订阅地址">4月27日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度22.6M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-99345.htm" title="C++默认参数报错">C++默认参数报错</a></li>
+                        <li class="py-2"><a href="/news/article-91146.htm" title="开个宠物医院需要什么条件才能开（开个宠物医院需要什么条件才能开呢）">开个宠物医院需要什么条件才能开（开个宠物医院需要什么条件才能开呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-24-clash-windows.htm" title="4月24日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址">4月24日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-88265.htm" title="猫疫苗打全大概得多少钱（猫打疫苗多钱钱）">猫疫苗打全大概得多少钱（猫打疫苗多钱钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-5-1-clash-node.htm" title="5月1日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度18.4M/S 免费Clash机场订阅地址">5月1日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度18.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/news/article-88264.htm" title="宠物打疫苗前可以驱虫吗（宠物打疫苗前可以驱虫吗有毒吗）">宠物打疫苗前可以驱虫吗（宠物打疫苗前可以驱虫吗有毒吗）</a></li>
+                        <li class="py-2"><a href="/news/article-86127.htm" title="vue中巧用三元表达式解析_vue.js">vue中巧用三元表达式解析_vue.js</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-5-3-clash-node-daily-updates.htm" title="5月3日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.2M/S 免费Clash机场订阅地址">5月3日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.2M/S 免费Clash机场订阅地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">16</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
+        <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                                    <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                ShareClash官网订阅站 版权所有
+                <br />
+                Powered by WordPress
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Vendor JS Files -->
+    <script src="/assets/website/js/frontend/shareclash/jquery-3.5.1.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/aos/aos.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/php-email-form/validate.js"></script>
+    <script src="/assets/website/js/frontend/shareclash/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/assets/website/js/frontend/shareclash/main.js"></script>
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+    <script src="/assets/website/js/frontend/G.js"></script>
+</body>
+
+</html>
