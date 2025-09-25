@@ -133,8 +133,8 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
 <p style="margin-bottom:3rem;color:#999;font-style:italic;">注：跳转链接可能会 <b style="color:red;">被墙</b> ，如多次打开失败，请先使用下面不稳定免费订阅后，再尝试点击链接</p><p>&nbsp;</p><p></p><h2>订阅链接</h2><p>&nbsp;</p><p><strong>clash订阅链接</strong></p><p>https://shareclash.github.io/uploads/2025/09/0-20250915.yaml</p><p>https://shareclash.github.io/uploads/2025/09/1-20250915.yaml</p><p>https://shareclash.github.io/uploads/2025/09/2-20250915.yaml</p><p>https://shareclash.github.io/uploads/2025/09/3-20250915.yaml</p><p>https://shareclash.github.io/uploads/2025/09/4-20250915.yaml</p><p>&nbsp;</p><p><strong>v2ray订阅链接:</strong></p><p>https://shareclash.github.io/uploads/2025/09/0-20250915.txt</p><p>https://shareclash.github.io/uploads/2025/09/2-20250915.txt</p><p>https://shareclash.github.io/uploads/2025/09/3-20250915.txt</p><p><strong>sing-box订阅链接</strong></p><p>https://shareclash.github.io/uploads/2025/09/20250915.json</p><p>&nbsp;</p><p>如果您需要高质量的付费服务,我们强烈推荐您试试「<a href="javascript:;" class="js_to" data-url="https://xianyuwangluo.top/#/register?code=" data-type="Xianyu" data-code="j5kX2iZI" rel="nofollow noopener" style="color:#c00;">闲鱼网络</a> 」。提供全球范围内快速稳定的高速节点,轻松处理8K高清视频流量,并可解锁流媒体网站和chatGPT。其服务器性能出色,确保您享受到高品质的体验。</p><h2>飞豹云Clash全方位指南：从入门到精通的网络代理解决方案</h2>  <h2>引言：数字时代的隐私守护者</h2>  <p>在数据成为新石油的21世纪，一次不安全的网络连接可能比忘记锁家门更危险。飞豹云Clash作为基于开源Clash核心的增强版工具，正在重新定义个人网络安全的标准。它不仅继承了Clash强大的技术基因，更通过本土化优化和功能创新，为中国用户打造了一把打开全球互联网的自由之钥。本文将带您深入探索这款工具的每一个技术细节，从基础安装到高阶配置，直至成为网络代理领域的"冲浪高手"。  </p>  <h2>第一章 认识飞豹云Clash的技术本质</h2>  <h3>1.1 核心架构解析</h3>  <p>飞豹云Clash采用模块化设计架构，其核心由三部分组成：<br /> - <strong>规则引擎</strong>：采用YAML格式的智能路由系统，可识别超过20种网络流量特征<br /> - <strong>协议转换层</strong>：实时解码Vmess/Shadowsocks/Trojan等协议<br /> - <strong>流量伪装模块</strong>：通过TLS1.3+WebSocket实现深度流量混淆  </p>  <h3>1.2 性能基准测试</h3>  <p>在实验室环境下对比测试显示：<br /> - 延迟降低率：较传统代理工具平均减少43%<br /> - 吞吐量提升：单线程可达280Mbps（千兆网络环境）<br /> - 内存占用：常驻内存控制在35MB以内  </p>  <h2>第二章 深度安装指南</h2>  <h3>2.1 多平台安装全流程</h3>  <p><strong>Windows系统特别注意事项</strong>：<br /> 1. 安装时需关闭Defender实时防护（安装后恢复）<br /> 2. 建议选择自定义安装路径（避免Program Files权限问题）<br /> 3. 首次运行需右键"以管理员身份运行"  </p>  <p><strong>macOS系统安全设置</strong>：<br /> ```bash</p>  <h1>终端执行命令解除Gatekeeper限制  <p>sudo xattr -rd com.apple.quarantine /Applications/ClashX.app ```</p>  <h3>2.2 环境预检清单</h3>  <ul> <li>确保系统已安装.NET Framework 4.8+（Windows）  </li> <li>检查443/7890端口未被占用  </li> <li>准备有效的订阅链接（建议测试用临时邮箱获取）  </li> </ul>  <h2>第三章 专业级配置实战</h2>  <h3>3.1 节点管理进阶技巧</h3>  <p><strong>智能节点筛选方案</strong>：<br /> <code>yaml proxies:   - name: "日本东京-优化线路"     type: vmess     server: tk01.flyleopard.com     port: 443     uuid: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx     alterId: 0     cipher: auto     tls: true     skip-cert-verify: false     network: ws     ws-path: /v2ray     ws-headers:       Host: cdn.example.com</code></p>  <h3>3.2 规则配置的艺术</h3>  <p><strong>自定义规则集范例</strong>：<br /> <code>yaml rules:   - DOMAIN-SUFFIX,google.com,PROXY   - DOMAIN-KEYWORD,spotify,DIRECT   - IP-CIDR,192.168.1.0/24,DIRECT   - GEOIP,CN,DIRECT   - MATCH,PROXY</code></p>  <h3>3.3 流量监控与优化</h3>  <ul> <li>使用<code>clash-dashboard</code>可视化界面  </li> <li>设置流量预警阈值（建议每月50GB触发提醒）  </li> <li>开启QUIC协议加速（需服务端支持）  </li> </ul>  <h2>第四章 企业级应用方案</h2>  <h3>4.1 团队共享配置</h3>  <p>通过<code>external-controller</code>实现：<br /> <code>yaml external-controller: 0.0.0.0:9090 secret: "your_shared_password"</code></p>  <h3>4.2 安全审计策略</h3>  <ul> <li>启用日志记录（保留周期建议7天）  </li> <li>配置自动节点切换（延迟>500ms触发）  </li> <li>设置API访问白名单  </li> </ul>  <h2>第五章 疑难问题深度排查</h2>  <h3>5.1 连接故障树分析</h3>  <p><code>mermaid graph TD     A[连接失败] --&gt; B{能ping通服务器?}     B --&gt;|是| C[检查端口开放]     B --&gt;|否| D[更换网络环境]     C --&gt; E[验证订阅有效性]     E --&gt; F[检查本地时间同步]</code></p>  <h3>5.2 性能优化参数</h3>  <p>```ini</p>  <h1>config.ini 调优参数  <p>tcp-fast-open=true udp-fallback-policy=restricted find-process-mode=strict ```</p>  <h2>第六章 未来技术展望</h2>  <p>2023年Q4即将推出的3.0版本将带来：<br /> - 基于AI的智能路由预测<br /> - 硬件级流量加密（Intel QAT支持）<br /> - 跨设备配置同步云服务  </p>  <h2>专业点评：重新定义网络自由的边界</h2>  <p>飞豹云Clash的出现绝非偶然——它是中国网民对数字权利追求的必然产物。在技术层面，其精妙的协议伪装机制犹如网络空间的"光学迷彩"，让审查系统变成"数字近视眼"；在用户体验维度，将原本需要命令行操作的复杂技术，转化为可视化的点击交互，这种"技术民主化"的实践值得赞赏。  </p>  <p>但更值得思考的是，这类工具正在悄然改变我们的网络行为模式。当一位大学生通过Clash访问arXiv获取最新论文，当记者用其安全传输敏感资料，当企业家借此分析海外市场——工具的价值已超越技术本身，成为知识平权的催化剂。  </p>  <p>需要注意的是，技术永远是把双刃剑。飞豹云Clash提供的自由需要与法律责任平衡使用，建议用户严格遵守《网络安全法》相关规定，将技术用于正当的知识获取和商务交流。毕竟，真正的自由源于自律，而最好的加密算法，永远是人心中的道德准则。</p>                 </div>
                 <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
-                                        <p>上一个：<a href="/free-nodes/2025-9-14-free-subscribe-node.htm">9月14日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.3M/S 免费Clash机场订阅地址</a></p>
-                                        <p>下一个：<a href="/free-nodes/2025-9-16-free-node-subscribe-links.htm">9月16日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a></p>
+                                        <p>上一个：<a href="/free-nodes/2025-9-14-free-subscribe-node.htm">9月14日 | 最新V2ray节点/Shadowrocket节点/SSR/Clash高速免费节点，最高速度20.3M/S 免费Clash机场订阅地址</a></p>
+                                        <p>下一个：<a href="/free-nodes/2025-9-16-free-node-subscribe-links.htm">9月16日 | 最新V2ray节点/SSR/Shadowrocket节点/Clash高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a></p>
                                     </div>
                                 <div class="panel panel-default mt-5">
                     <div class="panel-heading">
@@ -142,16 +142,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
                     </div>
                     <div class="panel-body">
                         <ul class="p-0 x-0">
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-14-free-subscribe-node.htm">9月14日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.3M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-13-clash-node.htm">9月13日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度19.8M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-12-shadowrocket-node.htm">9月12日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度21.5M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-11-free-node-subscribe.htm">9月11日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-10-free-node-subscribe-links.htm">9月10日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度22.6M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-9-clash-v2ray-ss-ssr.htm">9月9日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-8-free-ssr-subscribe.htm">9月8日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-7-shadowrocket-node.htm">9月7日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-6-free-v2ray-subscribe.htm">9月6日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度20.1M/S 免费Clash机场订阅地址</a></li>
-                                                        <li class="py-2"><a href="/free-nodes/2025-9-5-free-clash.htm">9月5日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-14-free-subscribe-node.htm">9月14日 | 最新V2ray节点/Shadowrocket节点/SSR/Clash高速免费节点，最高速度20.3M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-13-clash-node.htm">9月13日 | 最新SSR/Clash节点/V2ray节点/Shadowrocket高速免费节点，最高速度19.8M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-12-shadowrocket-node.htm">9月12日 | 最新Shadowrocket节点/V2ray节点/Clash节点/SSR高速免费节点，最高速度21.5M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-11-free-node-subscribe.htm">9月11日 | 最新Clash节点/Shadowrocket节点/SSR/V2ray高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-10-free-node-subscribe-links.htm">9月10日 | 最新Clash节点/Shadowrocket节点/V2ray节点/SSR高速免费节点，最高速度22.6M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-9-clash-v2ray-ss-ssr.htm">9月9日 | 最新V2ray节点/Shadowrocket节点/SSR/Clash高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-8-free-ssr-subscribe.htm">9月8日 | 最新Shadowrocket节点/V2ray节点/SSR/Clash高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-7-shadowrocket-node.htm">9月7日 | 最新SSR/Clash节点/V2ray节点/Shadowrocket高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-6-free-v2ray-subscribe.htm">9月6日 | 最新Shadowrocket节点/V2ray节点/SSR/Clash高速免费节点，最高速度20.1M/S 免费Clash机场订阅地址</a></li>
+                                                        <li class="py-2"><a href="/free-nodes/2025-9-5-free-clash.htm">9月5日 | 最新Shadowrocket节点/SSR/Clash节点/V2ray高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址</a></li>
                                                     </ul>
                     </div>
                 </div>
@@ -163,16 +163,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-8-31-free-v2ray.htm" title="8月31日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址">8月31日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-15-clash-v2ray-ss-ssr.htm" title="8月15日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.4M/S 免费Clash机场订阅地址">8月15日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.4M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-9-8-free-ssr-subscribe.htm" title="9月8日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址">9月8日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-20-free-clash.htm" title="8月20日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址">8月20日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-9-11-free-node-subscribe.htm" title="9月11日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址">9月11日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-9-17-free-node-subscribe-links.htm" title="9月17日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.4M/S 免费Clash机场订阅地址">9月17日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度19.4M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-8-4-free-v2ray.htm" title="8月4日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址">8月4日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-9-16-free-node-subscribe-links.htm" title="9月16日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址">9月16日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-9-4-free-shadowrocket-node.htm" title="9月4日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址">9月4日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-9-18-node-share-links.htm" title="9月18日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度18.8M/S 免费Clash机场订阅地址">9月18日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度18.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-17-free-node-subscribe-links.htm" title="9月17日 | 最新SSR/Shadowrocket节点/Clash节点/V2ray高速免费节点，最高速度19.4M/S 免费Clash机场订阅地址">9月17日 | 最新SSR/Shadowrocket节点/Clash节点/V2ray高速免费节点，最高速度19.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-17-free-v2ray.htm" title="8月17日 | 最新Clash节点/SSR/Shadowrocket节点/V2ray高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址">8月17日 | 最新Clash节点/SSR/Shadowrocket节点/V2ray高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-30-clash-v2ray-ss-ssr.htm" title="8月30日 | 最新Shadowrocket节点/SSR/V2ray节点/Clash高速免费节点，最高速度21.2M/S 免费Clash机场订阅地址">8月30日 | 最新Shadowrocket节点/SSR/V2ray节点/Clash高速免费节点，最高速度21.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-27-clash-windows.htm" title="8月27日 | 最新Clash节点/SSR/Shadowrocket节点/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址">8月27日 | 最新Clash节点/SSR/Shadowrocket节点/V2ray高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-20-free-ssr-node.htm" title="9月20日 | 最新SSR/Shadowrocket节点/Clash节点/V2ray高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址">9月20日 | 最新SSR/Shadowrocket节点/Clash节点/V2ray高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-9-clash-windows.htm" title="8月9日 | 最新V2ray节点/Clash节点/Shadowrocket节点/SSR高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址">8月9日 | 最新V2ray节点/Clash节点/Shadowrocket节点/SSR高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-9-3-free-clash-subscribe.htm" title="9月3日 | 最新SSR/V2ray节点/Clash节点/Shadowrocket高速免费节点，最高速度22M/S 免费Clash机场订阅地址">9月3日 | 最新SSR/V2ray节点/Clash节点/Shadowrocket高速免费节点，最高速度22M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-28-free-clash.htm" title="8月28日 | 最新SSR/V2ray节点/Shadowrocket节点/Clash高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址">8月28日 | 最新SSR/V2ray节点/Shadowrocket节点/Clash高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-25-clash-windows.htm" title="8月25日 | 最新V2ray节点/SSR/Clash节点/Shadowrocket高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址">8月25日 | 最新V2ray节点/SSR/Clash节点/Shadowrocket高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-8-20-free-clash.htm" title="8月20日 | 最新SSR/Shadowrocket节点/Clash节点/V2ray高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址">8月20日 | 最新SSR/Shadowrocket节点/Clash节点/V2ray高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址</a></li>
                     </ul>
     </div>
 </div>
@@ -184,7 +184,7 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-09/" title="2025-09 归档">2025-09</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-09/" title="2025-09 归档">2025-09</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">28</span> <a href="/date/2025-08/" title="2025-08 归档">2025-08</a></h4>
@@ -204,7 +204,8 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <footer id="footer">
         <div class="container">
             <div class="copyright">
-                                    <p>
+                                    <p>本站内容仅供学习与技术研究用途，无意传播或倡导任何违反法律法规的行为。在此声明：用户须自行了解所在地法律法规，合法合规使用；因使用不当产生的法律责任，与本站及作者无关；请在使用前仔细阅读本声明，继续使用即视为同意以上条款。</p>
+                    <p>
                                                 <a href="/">首页</a> |
                                                 <a href="/free-nodes/">免费节点</a> |
                                                 <a href="/paid-subscribe/">推荐机场</a> |
