@@ -1,4 +1,4 @@
-# 10月7日 | 最新Shadowrocket节点/SSR节点/Clash节点/V2ray节点/Singbox节点高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址  更新时间 2025-10-07 09:06:30
+# 10月13日 | 最新V2ray节点/SSR节点/Clash节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度22.7M/S 免费Clash机场订阅地址  更新时间 2025-10-13 05:15:27
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://shareclash.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### 免费Clash节点订阅链接
 
-- https://shareclash.github.io/uploads/2025/10/0-20251007.yaml
-- https://shareclash.github.io/uploads/2025/10/1-20251007.yaml
-- https://shareclash.github.io/uploads/2025/10/2-20251007.yaml
-- https://shareclash.github.io/uploads/2025/10/3-20251007.yaml
-- https://shareclash.github.io/uploads/2025/10/4-20251007.yaml
+- https://shareclash.github.io/uploads/2025/10/0-20251013.yaml
+- https://shareclash.github.io/uploads/2025/10/1-20251013.yaml
+- https://shareclash.github.io/uploads/2025/10/2-20251013.yaml
+- https://shareclash.github.io/uploads/2025/10/3-20251013.yaml
+- https://shareclash.github.io/uploads/2025/10/4-20251013.yaml
 
 ### 免费V2ray节点订阅链接
 
-- https://shareclash.github.io/uploads/2025/10/0-20251007.txt
-- https://shareclash.github.io/uploads/2025/10/1-20251007.txt
-- https://shareclash.github.io/uploads/2025/10/2-20251007.txt
-- https://shareclash.github.io/uploads/2025/10/3-20251007.txt
-- https://shareclash.github.io/uploads/2025/10/4-20251007.txt
+- https://shareclash.github.io/uploads/2025/10/0-20251013.txt
+- https://shareclash.github.io/uploads/2025/10/1-20251013.txt
+- https://shareclash.github.io/uploads/2025/10/2-20251013.txt
+- https://shareclash.github.io/uploads/2025/10/3-20251013.txt
+- https://shareclash.github.io/uploads/2025/10/4-20251013.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://shareclash.github.io/uploads/2025/10/20251007.json
+- https://shareclash.github.io/uploads/2025/10/20251013.json
 
 ## 更多Clash节点订阅 ：
 
