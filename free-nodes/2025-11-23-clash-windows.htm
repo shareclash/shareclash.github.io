@@ -141,29 +141,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Matsuri 支持哪些传输方式？</h5></div>
+    <div class="panel-heading"><h5>V2Ray QUIC 模式适合哪些网络环境？</h5></div>
     <div class="panel-body">
-        Matsuri 支持 TCP、gRPC、QUIC、WebSocket 等多种传输协议。用户可在配置文件中自由切换，根据服务器支持情况选择最优连接方式，以获得更低延迟与更强稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>WinXray 的节点延迟过高怎么办？</h5></div>
-    <div class="panel-body">
-        可通过策略组切换低延迟节点，或调整传输协议和端口。检查服务器网络和防火墙设置，确保网络通畅。必要时可启用 MUX 功能减少短连接延迟，提高整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Mihomo 节点分组管理有哪些优势？</h5></div>
-    <div class="panel-body">
-        节点可按地区、延迟或用途分类，结合策略组实现自动分流。便于管理大量节点，快速选择最优节点，提高访问速度和连接稳定性，同时优化维护效率和网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Surfboard 如何在 iPhone 上使用？</h5></div>
-    <div class="panel-body">
-        从 App Store 下载 Surfboard 后，导入 Clash 订阅链接即可使用。Surfboard 提供直观的节点切换和规则管理界面，可查看实时延迟与流量数据，非常适合希望简单上手的 iOS 用户。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何在 Sing-box 中设置多个 outbound 实现策略路由？</h5></div>
-    <div class="panel-body">
-        在 sing-box 的配置中定义多个 outbound 对象并为 routing 模块配置 rules，将不同目的地或应用流量指向对应 outbound，从而实现分流、负载均衡或故障转移等复杂路由策略。<hr />    </div>
+        QUIC 基于 UDP 协议，支持多路复用和零握手，适合高丢包和不稳定网络环境。可提升视频、游戏和即时通讯流量的稳定性和访问速度，提高网络体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Matsuri 日志太多如何调整日志级别？</h5></div>
@@ -171,14 +151,29 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         在 Matsuri 或其内核配置中修改日志级别参数（如从 debug 降为 info 或 warning），同时限制日志轮转与最大文件大小。生产环境建议关闭 debug 日志以减少磁盘 I/O 与性能影响。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray QUIC 模式适合哪些网络环境？</h5></div>
-    <div class="panel-body">
-        QUIC 基于 UDP 协议，支持多路复用和零握手，适合高丢包和不稳定网络环境。可提升视频、游戏和即时通讯流量的稳定性和访问速度，提高网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>QuantumultX 支持按端口和协议分流吗？</h5></div>
     <div class="panel-body">
         支持。QuantumultX 可以按 TCP、UDP、端口和应用协议分流流量，结合策略组使用，确保游戏、视频和广告屏蔽走最优节点，提高访问速度和网络稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Mihomo 节点分组管理有哪些优势？</h5></div>
+    <div class="panel-body">
+        节点可按地区、延迟或用途分类，结合策略组实现自动分流。便于管理大量节点，快速选择最优节点，提高访问速度和连接稳定性，同时优化维护效率和网络体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>WinXray 的节点延迟过高怎么办？</h5></div>
+    <div class="panel-body">
+        可通过策略组切换低延迟节点，或调整传输协议和端口。检查服务器网络和防火墙设置，确保网络通畅。必要时可启用 MUX 功能减少短连接延迟，提高整体网络体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何在 Sing-box 中设置多个 outbound 实现策略路由？</h5></div>
+    <div class="panel-body">
+        在 sing-box 的配置中定义多个 outbound 对象并为 routing 模块配置 rules，将不同目的地或应用流量指向对应 outbound，从而实现分流、负载均衡或故障转移等复杂路由策略。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Surfboard 如何在 iPhone 上使用？</h5></div>
+    <div class="panel-body">
+        从 App Store 下载 Surfboard 后，导入 Clash 订阅链接即可使用。Surfboard 提供直观的节点切换和规则管理界面，可查看实时延迟与流量数据，非常适合希望简单上手的 iOS 用户。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Surfboard 如何结合规则屏蔽广告？</h5></div>
@@ -188,7 +183,12 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Trojan 伪装域名如何选择以提升隐蔽性？</h5></div>
     <div class="panel-body">
-        伪装域名应选择真实可访问网站并配备有效证书，这样 Trojan 流量可模拟正常 HTTPS 请求，降低被封锁和检测的风险，提高节点长期可用性和访问稳定性。    </div>
+        伪装域名应选择真实可访问网站并配备有效证书，这样 Trojan 流量可模拟正常 HTTPS 请求，降低被封锁和检测的风险，提高节点长期可用性和访问稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Matsuri 支持哪些传输方式？</h5></div>
+    <div class="panel-body">
+        Matsuri 支持 TCP、gRPC、QUIC、WebSocket 等多种传输协议。用户可在配置文件中自由切换，根据服务器支持情况选择最优连接方式，以获得更低延迟与更强稳定性。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -217,16 +217,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-10-11-clash-node.htm" title="10月11日 | 最新V2ray节点/Clash节点/Singbox节点/Shadowrocket节点/SSR节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址">10月11日 | 最新V2ray节点/Clash节点/Singbox节点/Shadowrocket节点/SSR节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-2-free-ssr-subscribe.htm" title="12月2日 | 最新V2ray节点/SSR节点/Singbox节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">12月2日 | 最新V2ray节点/SSR节点/Singbox节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-7-free-v2ray-subscribe.htm" title="11月7日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址">11月7日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点高速免费节点，最高速度18.2M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-26-clash-windows.htm" title="11月26日 | 最新Singbox节点/Clash节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址">11月26日 | 最新Singbox节点/Clash节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-20-node-share-links.htm" title="11月20日 | 最新V2ray节点/Shadowrocket节点/SSR节点/Singbox节点/Clash节点高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址">11月20日 | 最新V2ray节点/Shadowrocket节点/SSR节点/Singbox节点/Clash节点高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-24-shadowrocket-node.htm" title="10月24日 | 最新SSR节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度22.5M/S 免费Clash机场订阅地址">10月24日 | 最新SSR节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度22.5M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-22-free-ssr-node.htm" title="10月22日 | 最新SSR节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址">10月22日 | 最新SSR节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-5-free-high-speed-nodes.htm" title="11月5日 | 最新Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址">11月5日 | 最新Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-4-free-subscribe-node.htm" title="11月4日 | 最新Clash节点/SSR节点/V2ray节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度22.5M/S 免费Clash机场订阅地址">11月4日 | 最新Clash节点/SSR节点/V2ray节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度22.5M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-4-free-node-subscribe.htm" title="12月4日 | 最新Singbox节点/SSR节点/Shadowrocket节点/Clash节点/V2ray节点高速免费节点，最高速度23M/S 免费Clash机场订阅地址">12月4日 | 最新Singbox节点/SSR节点/Shadowrocket节点/Clash节点/V2ray节点高速免费节点，最高速度23M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-11-clash-node.htm" title="11月11日 | 最新Shadowrocket节点/Clash节点/V2ray节点/SSR节点/Singbox节点高速免费节点，最高速度18M/S 免费Clash机场订阅地址">11月11日 | 最新Shadowrocket节点/Clash节点/V2ray节点/SSR节点/Singbox节点高速免费节点，最高速度18M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-17-clash-node-daily-updates.htm" title="11月17日 | 最新Shadowrocket节点/Clash节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">11月17日 | 最新Shadowrocket节点/Clash节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-18-clash-node.htm" title="11月18日 | 最新Shadowrocket节点/Singbox节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">11月18日 | 最新Shadowrocket节点/Singbox节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-15-free-v2ray.htm" title="11月15日 | 最新SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址">11月15日 | 最新SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-14-free-high-speed-nodes.htm" title="11月14日 | 最新Singbox节点/Clash节点/Shadowrocket节点/SSR节点/V2ray节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址">11月14日 | 最新Singbox节点/Clash节点/Shadowrocket节点/SSR节点/V2ray节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-19-free-subscribe-node.htm" title="11月19日 | 最新V2ray节点/Shadowrocket节点/Clash节点/Singbox节点/SSR节点高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址">11月19日 | 最新V2ray节点/Shadowrocket节点/Clash节点/Singbox节点/SSR节点高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-27-node-share.htm" title="11月27日 | 最新SSR节点/Shadowrocket节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度21M/S 免费Clash机场订阅地址">11月27日 | 最新SSR节点/Shadowrocket节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度21M/S 免费Clash机场订阅地址</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-13-node-share.htm" title="11月13日 | 最新Singbox节点/Shadowrocket节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度20M/S 免费Clash机场订阅地址">11月13日 | 最新Singbox节点/Shadowrocket节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度20M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-5-free-high-speed-nodes.htm" title="11月5日 | 最新Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址">11月5日 | 最新Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址</a></li>
                     </ul>
     </div>
 </div>
@@ -238,13 +238,10 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2025-10/" title="2025-10 归档">2025-10</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
             </li>
                     </ul>
     </div>

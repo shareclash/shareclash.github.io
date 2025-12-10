@@ -141,31 +141,6 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>V2RayN 的 GUI 界面如何导出节点？</h5></div>
-    <div class="panel-body">
-        V2RayN 提供节点导出功能，可生成分享链接或二维码。用户右键节点选择“分享”即可导出，以便在其他设备导入同样的代理配置，保持同步使用体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VMess 使用 AEAD 加密的优势是什么？</h5></div>
-    <div class="panel-body">
-        AEAD 加密提供更强的安全性和抗重放攻击能力，同时隐藏流量特征，降低被 DPI 检测风险。在高封锁环境下使用，可提升连接稳定性和长期可用性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS 的 XTLS 模式如何提升性能？</h5></div>
-    <div class="panel-body">
-        VLESS + XTLS 模式可以在加密传输中减少 TLS 握手和数据复制过程，从而显著降低延迟并减少 CPU 占用。这种优化特别适合高带宽或高并发的场景。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
-    <div class="panel-body">
-        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 用户流量配额如何设置？</h5></div>
-    <div class="panel-body">
-        管理员可为每个用户设置带宽和流量上限，超出限制时可降速或阻止访问。确保服务器资源合理分配，避免单用户占用过多带宽，提高整体网络公平性和使用效率。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>Clash.Meta 与原版 Clash 有何不同？</h5></div>
     <div class="panel-body">
         Clash.Meta 是社区优化版本，支持更多传输协议，如 Hysteria、TUIC、Reality 等。它还增强了 DNS 处理逻辑和脚本分流能力，适合追求极致速度和灵活规则配置的高级用户。<hr />    </div>
@@ -176,9 +151,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         支持。Mellow 的配置文件中可设置 DNS 服务器地址及模式（如 DoH、DoT）。用户可使用安全 DNS，如 Cloudflare 1.1.1.1 或 Google DNS，以减少污染风险。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>PassWall2 的“节点切换策略”如何配置？</h5></div>
+    <div class="panel-heading"><h5>VMess 使用 AEAD 加密的优势是什么？</h5></div>
     <div class="panel-body">
-        在 PassWall2 中可设置多节点策略，如“按延迟排序”、“自动选择最快节点”等。程序会定期测速，根据实时数据自动切换线路，保证连接的稳定性和速度。<hr />    </div>
+        AEAD 加密提供更强的安全性和抗重放攻击能力，同时隐藏流量特征，降低被 DPI 检测风险。在高封锁环境下使用，可提升连接稳定性和长期可用性。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>WinXray 如何保证视频流畅播放？</h5></div>
@@ -186,9 +161,34 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         WinXray 会结合延迟检测和策略组选择最佳节点转发视频流量。通过自动切换低延迟节点，可保证在线视频播放顺畅，减少卡顿和缓冲，提高整体体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>V2RayN 的 GUI 界面如何导出节点？</h5></div>
+    <div class="panel-body">
+        V2RayN 提供节点导出功能，可生成分享链接或二维码。用户右键节点选择“分享”即可导出，以便在其他设备导入同样的代理配置，保持同步使用体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
+    <div class="panel-body">
+        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Shadowrocket 节点测速功能如何优化游戏体验？</h5></div>
     <div class="panel-body">
-        Shadowrocket 会定期测速节点延迟和丢包率，并结合策略组自动切换最佳节点。保证游戏流量走低延迟节点，减少延迟和掉线，提高游戏流畅度和稳定性。    </div>
+        Shadowrocket 会定期测速节点延迟和丢包率，并结合策略组自动切换最佳节点。保证游戏流量走低延迟节点，减少延迟和掉线，提高游戏流畅度和稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>PassWall2 的“节点切换策略”如何配置？</h5></div>
+    <div class="panel-body">
+        在 PassWall2 中可设置多节点策略，如“按延迟排序”、“自动选择最快节点”等。程序会定期测速，根据实时数据自动切换线路，保证连接的稳定性和速度。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hiddify Next 用户流量配额如何设置？</h5></div>
+    <div class="panel-body">
+        管理员可为每个用户设置带宽和流量上限，超出限制时可降速或阻止访问。确保服务器资源合理分配，避免单用户占用过多带宽，提高整体网络公平性和使用效率。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>VLESS 的 XTLS 模式如何提升性能？</h5></div>
+    <div class="panel-body">
+        VLESS + XTLS 模式可以在加密传输中减少 TLS 握手和数据复制过程，从而显著降低延迟并减少 CPU 占用。这种优化特别适合高带宽或高并发的场景。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -217,16 +217,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-11-3-free-ssr-node.htm" title="11月3日 | 最新Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址">11月3日 | 最新Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-12-free-node-subscribe.htm" title="11月12日 | 最新Clash节点/Singbox节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址">11月12日 | 最新Clash节点/Singbox节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-18-free-clash-subscribe.htm" title="10月18日 | 最新Shadowrocket节点/Singbox节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址">10月18日 | 最新Shadowrocket节点/Singbox节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-25-clash-node-daily-updates.htm" title="10月25日 | 最新Clash节点/V2ray节点/Shadowrocket节点/SSR节点/Singbox节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址">10月25日 | 最新Clash节点/V2ray节点/Shadowrocket节点/SSR节点/Singbox节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-11-clash-node.htm" title="11月11日 | 最新Shadowrocket节点/Clash节点/V2ray节点/SSR节点/Singbox节点高速免费节点，最高速度18M/S 免费Clash机场订阅地址">11月11日 | 最新Shadowrocket节点/Clash节点/V2ray节点/SSR节点/Singbox节点高速免费节点，最高速度18M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-14-free-high-speed-nodes.htm" title="11月14日 | 最新Singbox节点/Clash节点/Shadowrocket节点/SSR节点/V2ray节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址">11月14日 | 最新Singbox节点/Clash节点/Shadowrocket节点/SSR节点/V2ray节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-28-free-shadowrocket-node.htm" title="11月28日 | 最新Clash节点/V2ray节点/SSR节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址">11月28日 | 最新Clash节点/V2ray节点/SSR节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-29-clash-node.htm" title="11月29日 | 最新SSR节点/Shadowrocket节点/Singbox节点/Clash节点/V2ray节点高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址">11月29日 | 最新SSR节点/Shadowrocket节点/Singbox节点/Clash节点/V2ray节点高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-21-clash-node-daily-updates.htm" title="11月21日 | 最新SSR节点/Singbox节点/V2ray节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址">11月21日 | 最新SSR节点/Singbox节点/V2ray节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-18-clash-node.htm" title="11月18日 | 最新Shadowrocket节点/Singbox节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">11月18日 | 最新Shadowrocket节点/Singbox节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-30-free-clash.htm" title="11月30日 | 最新Shadowrocket节点/SSR节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址">11月30日 | 最新Shadowrocket节点/SSR节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-17-clash-node-daily-updates.htm" title="11月17日 | 最新Shadowrocket节点/Clash节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">11月17日 | 最新Shadowrocket节点/Clash节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-22-free-node-subscribe.htm" title="11月22日 | 最新Shadowrocket节点/Singbox节点/Clash节点/SSR节点/V2ray节点高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址">11月22日 | 最新Shadowrocket节点/Singbox节点/Clash节点/SSR节点/V2ray节点高速免费节点，最高速度21.4M/S 免费Clash机场订阅地址</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-26-clash-windows.htm" title="11月26日 | 最新Singbox节点/Clash节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址">11月26日 | 最新Singbox节点/Clash节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-12-clash-v2ray-ss-ssr.htm" title="10月12日 | 最新V2ray节点/Shadowrocket节点/SSR节点/Singbox节点/Clash节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址">10月12日 | 最新V2ray节点/Shadowrocket节点/SSR节点/Singbox节点/Clash节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-13-free-node-subscribe.htm" title="10月13日 | 最新Clash节点/Shadowrocket节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度21M/S 免费Clash机场订阅地址">10月13日 | 最新Clash节点/Shadowrocket节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度21M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-31-free-ssr-node.htm" title="10月31日 | 最新Clash节点/Shadowrocket节点/V2ray节点/SSR节点/Singbox节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址">10月31日 | 最新Clash节点/Shadowrocket节点/V2ray节点/SSR节点/Singbox节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-15-free-v2ray.htm" title="11月15日 | 最新SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址">11月15日 | 最新SSR节点/V2ray节点/Clash节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-12-free-node-subscribe.htm" title="11月12日 | 最新Clash节点/Singbox节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址">11月12日 | 最新Clash节点/Singbox节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址</a></li>
                     </ul>
     </div>
 </div>
@@ -238,10 +238,10 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2025-10/" title="2025-10 归档">2025-10</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
             </li>
                     </ul>
     </div>
