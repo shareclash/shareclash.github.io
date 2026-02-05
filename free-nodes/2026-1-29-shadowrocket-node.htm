@@ -326,12 +326,23 @@ sudo ufw </span><span><span class="hljs-built_in">disable</span></span><span>
 <div class="clearfix"></div>
 <div class="col-md-12 mt-5">
         <p>上一个：<a href="/free-nodes/2026-1-28-clash-v2ray-ss-ssr.htm">1月28日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Trojan节点高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址</a></p>
+        <p>下一个：<a href="/free-nodes/2026-1-30-free-node-subscribe-links.htm">1月30日 | 最新V2ray节点/Clash节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点高速免费节点，最高速度18.1M/S 免费Clash机场订阅地址</a></p>
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Trojan 协议是如何伪装流量的？</h5></div>
+    <div class="panel-heading"><h5>Hysteria2 的多路复用功能有哪些优势？</h5></div>
     <div class="panel-body">
-        Trojan 利用 HTTPS 协议进行传输伪装，通过 TLS 加密实现高度隐蔽性。它让代理流量看起来与普通网站访问完全相同，从而难以被防火墙检测，是目前安全性较高的代理方案之一。<hr />    </div>
+        多路复用允许多个请求共享同一 QUIC 连接，减少握手次数和延迟。高并发情况下可以提升吞吐量和稳定性，特别适合短连接频繁请求的应用，如游戏或即时通讯。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hysteria2 的 QUIC 协议如何降低延迟？</h5></div>
+    <div class="panel-body">
+        QUIC 协议基于 UDP，多路复用和拥塞控制优化，可减少握手延迟和包重传次数。Hysteria2 利用 QUIC 的特性，使高延迟或丢包网络下依然保持低延迟和高稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Sing-box 如何通过域名规则实现精准分流？</h5></div>
+    <div class="panel-body">
+        Sing-box 支持根据域名匹配流量，将不同网站或应用流量分配到指定节点。结合策略组，可实现自动切换最优节点，优化访问速度和网络稳定性，提高整体使用体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 服务器启动后提示端口被占用，该如何处理？</h5></div>
@@ -339,14 +350,19 @@ sudo ufw </span><span><span class="hljs-built_in">disable</span></span><span>
         先用 netstat 或 ss 工具查看占用该端口的进程（例如 `ss -ltnp`），确认是旧进程或其他服务占用。停止占用进程或修改 V2Ray 配置端口，然后重启服务并检查防火墙规则是否开放了新端口。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Mihomo 的节点批量操作功能有哪些优势？</h5></div>
+    <div class="panel-heading"><h5>Mihomo 节点分组如何提升访问效率？</h5></div>
     <div class="panel-body">
-        Mihomo 支持批量导入、删除和更新节点，结合策略组管理，可高效维护大量节点。用户可以快速选择最佳节点，优化访问速度，同时减少手动操作的复杂度。<hr />    </div>
+        节点可按延迟、地区或用途分组，结合策略组实现自动分流。快速选择最优节点，可提高网页、视频和游戏访问速度，同时优化节点管理和维护效率，提升整体网络体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Sing-box 如何通过域名规则实现精准分流？</h5></div>
+    <div class="panel-heading"><h5>Surfboard 的规则导入失败可能是什么原因？</h5></div>
     <div class="panel-body">
-        Sing-box 支持根据域名匹配流量，将不同网站或应用流量分配到指定节点。结合策略组，可实现自动切换最优节点，优化访问速度和网络稳定性，提高整体使用体验。<hr />    </div>
+        可能是规则格式不兼容、语法错误或策略组缺失。确保导入文件符合 Surfboard 的 YAML 规范，并检查节点或策略组是否完整，可解决导入失败问题。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Trojan 协议是如何伪装流量的？</h5></div>
+    <div class="panel-body">
+        Trojan 利用 HTTPS 协议进行传输伪装，通过 TLS 加密实现高度隐蔽性。它让代理流量看起来与普通网站访问完全相同，从而难以被防火墙检测，是目前安全性较高的代理方案之一。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>WinXray 的测速功能不显示结果怎么办？</h5></div>
@@ -359,24 +375,9 @@ sudo ufw </span><span><span class="hljs-built_in">disable</span></span><span>
         VMess 连接不稳定可能由节点延迟过高、服务器防火墙、TLS 配置错误或 ISP 丢包引起。建议测试不同传输协议（如 WS、gRPC）或切换节点，检查日志确认具体错误信息。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Surfboard 的规则导入失败可能是什么原因？</h5></div>
+    <div class="panel-heading"><h5>Mihomo 的节点批量操作功能有哪些优势？</h5></div>
     <div class="panel-body">
-        可能是规则格式不兼容、语法错误或策略组缺失。确保导入文件符合 Surfboard 的 YAML 规范，并检查节点或策略组是否完整，可解决导入失败问题。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hysteria2 的 QUIC 协议如何降低延迟？</h5></div>
-    <div class="panel-body">
-        QUIC 协议基于 UDP，多路复用和拥塞控制优化，可减少握手延迟和包重传次数。Hysteria2 利用 QUIC 的特性，使高延迟或丢包网络下依然保持低延迟和高稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Mihomo 节点分组如何提升访问效率？</h5></div>
-    <div class="panel-body">
-        节点可按延迟、地区或用途分组，结合策略组实现自动分流。快速选择最优节点，可提高网页、视频和游戏访问速度，同时优化节点管理和维护效率，提升整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hysteria2 的多路复用功能有哪些优势？</h5></div>
-    <div class="panel-body">
-        多路复用允许多个请求共享同一 QUIC 连接，减少握手次数和延迟。高并发情况下可以提升吞吐量和稳定性，特别适合短连接频繁请求的应用，如游戏或即时通讯。    </div>
+        Mihomo 支持批量导入、删除和更新节点，结合策略组管理，可高效维护大量节点。用户可以快速选择最佳节点，优化访问速度，同时减少手动操作的复杂度。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -405,16 +406,16 @@ sudo ufw </span><span><span class="hljs-built_in">disable</span></span><span>
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-1-21-free-v2ray-subscribe.htm" title="1月21日 | 最新Trojan节点/Clash节点/Shadowrocket节点/V2ray节点/Singbox节点/SSR节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址">1月21日 | 最新Trojan节点/Clash节点/Shadowrocket节点/V2ray节点/Singbox节点/SSR节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-1-free-node-subscribe.htm" title="1月1日 | 最新Clash节点/V2ray节点/Singbox节点/Shadowrocket节点/SSR节点高速免费节点，最高速度21.2M/S 免费Clash机场订阅地址">1月1日 | 最新Clash节点/V2ray节点/Singbox节点/Shadowrocket节点/SSR节点高速免费节点，最高速度21.2M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-16-clash-node.htm" title="12月16日 | 最新Shadowrocket节点/SSR节点/V2ray节点/Singbox节点/Clash节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">12月16日 | 最新Shadowrocket节点/SSR节点/V2ray节点/Singbox节点/Clash节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-20-free-clash.htm" title="12月20日 | 最新SSR节点/Singbox节点/Clash节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度22.4M/S 免费Clash机场订阅地址">12月20日 | 最新SSR节点/Singbox节点/Clash节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度22.4M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-11-free-shadowrocket-node.htm" title="12月11日 | 最新SSR节点/Clash节点/V2ray节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">12月11日 | 最新SSR节点/Clash节点/V2ray节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-2-free-clash-subscribe.htm" title="1月2日 | 最新SSR节点/V2ray节点/Clash节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址">1月2日 | 最新SSR节点/V2ray节点/Clash节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-25-free-clash-subscribe.htm" title="1月25日 | 最新V2ray节点/Trojan节点/Shadowrocket节点/SSR节点/Clash节点/Singbox节点高速免费节点，最高速度22.7M/S 免费Clash机场订阅地址">1月25日 | 最新V2ray节点/Trojan节点/Shadowrocket节点/SSR节点/Clash节点/Singbox节点高速免费节点，最高速度22.7M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-28-clash-v2ray-ss-ssr.htm" title="1月28日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Trojan节点高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址">1月28日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Trojan节点高速免费节点，最高速度21.7M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-27-node-share.htm" title="1月27日 | 最新Clash节点/V2ray节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址">1月27日 | 最新Clash节点/V2ray节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-25-free-ssr-node.htm" title="12月25日 | 最新Shadowrocket节点/V2ray节点/Clash节点/Singbox节点/SSR节点高速免费节点，最高速度18.3M/S 免费Clash机场订阅地址">12月25日 | 最新Shadowrocket节点/V2ray节点/Clash节点/Singbox节点/SSR节点高速免费节点，最高速度18.3M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-8-free-v2ray-subscribe.htm" title="1月8日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址">1月8日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-22-node-share.htm" title="1月22日 | 最新SSR节点/V2ray节点/Trojan节点/Shadowrocket节点/Singbox节点/Clash节点高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址">1月22日 | 最新SSR节点/V2ray节点/Trojan节点/Shadowrocket节点/Singbox节点/Clash节点高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-15-node-share-links.htm" title="1月15日 | 最新Singbox节点/Shadowrocket节点/SSR节点/V2ray节点/Clash节点高速免费节点，最高速度18.7M/S 免费Clash机场订阅地址">1月15日 | 最新Singbox节点/Shadowrocket节点/SSR节点/V2ray节点/Clash节点高速免费节点，最高速度18.7M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-2-3-free-node-subscribe-links.htm" title="2月3日 | 最新Singbox节点/Clash节点/SSR节点/Shadowrocket节点/V2ray节点/Trojan节点高速免费节点，最高速度18.8M/S 免费Clash机场订阅地址">2月3日 | 最新Singbox节点/Clash节点/SSR节点/Shadowrocket节点/V2ray节点/Trojan节点高速免费节点，最高速度18.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-2-1-free-node-subscribe-links.htm" title="2月1日 | 最新Shadowrocket节点/SSR节点/Clash节点/Trojan节点/Singbox节点/V2ray节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址">2月1日 | 最新Shadowrocket节点/SSR节点/Clash节点/Trojan节点/Singbox节点/V2ray节点高速免费节点，最高速度21.1M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-18-free-high-speed-nodes.htm" title="1月18日 | 最新V2ray节点/Shadowrocket节点/Clash节点/Singbox节点/SSR节点/Trojan节点高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址">1月18日 | 最新V2ray节点/Shadowrocket节点/Clash节点/Singbox节点/SSR节点/Trojan节点高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-17-free-subscribe-node.htm" title="1月17日 | 最新Clash节点/V2ray节点/Shadowrocket节点/Singbox节点/SSR节点/Trojan节点高速免费节点，最高速度18.4M/S 免费Clash机场订阅地址">1月17日 | 最新Clash节点/V2ray节点/Shadowrocket节点/Singbox节点/SSR节点/Trojan节点高速免费节点，最高速度18.4M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-6-free-clash.htm" title="1月6日 | 最新SSR节点/Clash节点/Singbox节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址">1月6日 | 最新SSR节点/Clash节点/Singbox节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-19-free-shadowrocket-node.htm" title="1月19日 | 最新Clash节点/Singbox节点/SSR节点/Trojan节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址">1月19日 | 最新Clash节点/Singbox节点/SSR节点/Trojan节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-24-clash-v2ray-ss-ssr.htm" title="1月24日 | 最新V2ray节点/SSR节点/Clash节点/Trojan节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度20.8M/S 免费Clash机场订阅地址">1月24日 | 最新V2ray节点/SSR节点/Clash节点/Trojan节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度20.8M/S 免费Clash机场订阅地址</a></li>
                     </ul>
     </div>
 </div>
@@ -426,10 +427,10 @@ sudo ufw </span><span><span class="hljs-built_in">disable</span></span><span>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">28</span> <a href="/date/2026-01/" title="2026-01 归档">2026-01</a></h4>
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2026-02/" title="2026-02 归档">2026-02</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">19</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-01/" title="2026-01 归档">2026-01</a></h4>
             </li>
                     </ul>
     </div>
