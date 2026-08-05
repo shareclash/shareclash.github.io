@@ -152,34 +152,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 支持节点订阅的自动更新吗？</h5></div>
-    <div class="panel-body">
-        支持。用户可通过订阅 URL 批量更新节点，程序会自动下载并替换旧节点。定期自动更新可保证节点列表始终有效，减少手动维护的工作量，提高使用效率。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>SSR 的加密方式推荐使用哪种？</h5></div>
     <div class="panel-body">
         SSR 支持多种加密方式，如 aes-256-cfb、chacha20、rc4-md5 等。建议优先选择 chacha20 系列算法，在移动设备上性能更佳，同时具有较强的安全性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>PassWall2 的节点测速结果会自动更新吗？</h5></div>
-    <div class="panel-body">
-        PassWall2 可设置定期自动测速节点，更新延迟和可用性。结合策略组自动选择最优节点，可确保用户使用网络时始终连接到速度最快、最稳定的节点。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Sing-box 如何按端口分流流量？</h5></div>
-    <div class="panel-body">
-        Sing-box 支持根据端口匹配流量，将不同应用流量分配到指定节点。结合策略组使用，可精准分流，提高访问速度和网络稳定性，优化整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Clash 的规则模式有哪些？</h5></div>
-    <div class="panel-body">
-        Clash 提供三种主要模式：Global（全局代理）、Rule（规则代理）和Direct（直连）。全局模式会让所有流量通过代理；规则模式根据规则文件自动分流；直连模式则完全不经过代理。用户可根据需求灵活切换。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Shadowrocket 的分流规则如何实现广告拦截？</h5></div>
-    <div class="panel-body">
-        通过配置规则，将广告域名或请求路径匹配到黑名单策略，使请求直接阻断或重定向到本地地址。这样用户浏览网页或使用应用时可自动屏蔽大部分广告内容。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>何为 multiplex (mux)，启用后会有哪些利弊？</h5></div>
@@ -187,9 +162,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         mux 是多路复用技术，可在单一连接上传输多路流量，从而减少握手次数与连接开销。优点是提升短连接并发效率，缺点是在丢包或单连接异常时可能影响多条会话并增加调试复杂度。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>如何识别节点是否被封锁或限速？</h5></div>
+    <div class="panel-heading"><h5>Shadowrocket 的分流规则如何实现广告拦截？</h5></div>
     <div class="panel-body">
-        通过对比不同节点的 speedtest、ping、下载测速以及 traceroute 路由变化来判断；若多个节点同时异常可能是本地网络问题，单个节点异常则可能被封锁或运营商限速，应尝试更换端口或传输方式。<hr />    </div>
+        通过配置规则，将广告域名或请求路径匹配到黑名单策略，使请求直接阻断或重定向到本地地址。这样用户浏览网页或使用应用时可自动屏蔽大部分广告内容。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>V2RayN 与 WinXray 哪个更易用？</h5></div>
@@ -197,9 +172,34 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         V2RayN 界面更简洁，功能更稳定，而 WinXray 提供了更现代的界面和自动测速功能。对于初学者来说，V2RayN 上手更快；而追求高级功能的用户可能更喜欢 WinXray。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>如何识别节点是否被封锁或限速？</h5></div>
+    <div class="panel-body">
+        通过对比不同节点的 speedtest、ping、下载测速以及 traceroute 路由变化来判断；若多个节点同时异常可能是本地网络问题，单个节点异常则可能被封锁或运营商限速，应尝试更换端口或传输方式。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Clash 的规则模式有哪些？</h5></div>
+    <div class="panel-body">
+        Clash 提供三种主要模式：Global（全局代理）、Rule（规则代理）和Direct（直连）。全局模式会让所有流量通过代理；规则模式根据规则文件自动分流；直连模式则完全不经过代理。用户可根据需求灵活切换。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 支持节点订阅的自动更新吗？</h5></div>
+    <div class="panel-body">
+        支持。用户可通过订阅 URL 批量更新节点，程序会自动下载并替换旧节点。定期自动更新可保证节点列表始终有效，减少手动维护的工作量，提高使用效率。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>PassWall2 的节点测速结果会自动更新吗？</h5></div>
+    <div class="panel-body">
+        PassWall2 可设置定期自动测速节点，更新延迟和可用性。结合策略组自动选择最优节点，可确保用户使用网络时始终连接到速度最快、最稳定的节点。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Hiddify Next 支持 Reality 吗？</h5></div>
     <div class="panel-body">
-        支持。Hiddify Next 基于 sing-box 内核，可加载 Vless+Reality、Trojan+TLS 等高级协议配置。用户可直接导入机场订阅，无需手动修改复杂参数。    </div>
+        支持。Hiddify Next 基于 sing-box 内核，可加载 Vless+Reality、Trojan+TLS 等高级协议配置。用户可直接导入机场订阅，无需手动修改复杂参数。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Sing-box 如何按端口分流流量？</h5></div>
+    <div class="panel-body">
+        Sing-box 支持根据端口匹配流量，将不同应用流量分配到指定节点。结合策略组使用，可精准分流，提高访问速度和网络稳定性，优化整体网络体验。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -247,16 +247,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-7-8-free-node-subscribe.htm" title="7月8日 | 最新Clash节点/SSR节点/Shadowrocket节点/Trojan节点/Singbox节点/V2ray节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址">7月8日 | 最新Clash节点/SSR节点/Shadowrocket节点/Trojan节点/Singbox节点/V2ray节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-12-clash-node.htm" title="7月12日 | 最新SSR节点/Clash节点/V2ray节点/Singbox节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度18.5M/S 免费Clash机场订阅地址">7月12日 | 最新SSR节点/Clash节点/V2ray节点/Singbox节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度18.5M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-20-node-share.htm" title="7月20日 | 最新Trojan节点/Shadowrocket节点/V2ray节点/Singbox节点/Clash节点/SSR节点高速免费节点，最高速度22.1M/S 免费Clash机场订阅地址">7月20日 | 最新Trojan节点/Shadowrocket节点/V2ray节点/Singbox节点/Clash节点/SSR节点高速免费节点，最高速度22.1M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-11-shadowrocket-node.htm" title="7月11日 | 最新SSR节点/Clash节点/V2ray节点/Shadowrocket节点/Trojan节点/Singbox节点高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址">7月11日 | 最新SSR节点/Clash节点/V2ray节点/Shadowrocket节点/Trojan节点/Singbox节点高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-5-free-clash-subscribe.htm" title="7月5日 | 最新Singbox节点/SSR节点/Trojan节点/Shadowrocket节点/Clash节点/V2ray节点高速免费节点，最高速度22.5M/S 免费Clash机场订阅地址">7月5日 | 最新Singbox节点/SSR节点/Trojan节点/Shadowrocket节点/Clash节点/V2ray节点高速免费节点，最高速度22.5M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-6-13-free-clash-subscribe.htm" title="6月13日 | 最新V2ray节点/Shadowrocket节点/Clash节点/SSR节点/Trojan节点/Singbox节点高速免费节点，最高速度18.3M/S 免费Clash机场订阅地址">6月13日 | 最新V2ray节点/Shadowrocket节点/Clash节点/SSR节点/Trojan节点/Singbox节点高速免费节点，最高速度18.3M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-22-free-ssr-subscribe.htm" title="7月22日 | 最新Singbox节点/Shadowrocket节点/Clash节点/V2ray节点/Trojan节点/SSR节点高速免费节点，最高速度21.6M/S 免费Clash机场订阅地址">7月22日 | 最新Singbox节点/Shadowrocket节点/Clash节点/V2ray节点/Trojan节点/SSR节点高速免费节点，最高速度21.6M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-7-14-free-node-subscribe.htm" title="7月14日 | 最新SSR节点/Trojan节点/Singbox节点/Clash节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址">7月14日 | 最新SSR节点/Trojan节点/Singbox节点/Clash节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-6-23-free-clash-subscribe.htm" title="6月23日 | 最新V2ray节点/Singbox节点/SSR节点/Clash节点/Shadowrocket节点/Trojan节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址">6月23日 | 最新V2ray节点/Singbox节点/SSR节点/Clash节点/Shadowrocket节点/Trojan节点高速免费节点，最高速度19.6M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-6-22-free-node-subscribe.htm" title="6月22日 | 最新Clash节点/SSR节点/V2ray节点/Singbox节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度19.4M/S 免费Clash机场订阅地址">6月22日 | 最新Clash节点/SSR节点/V2ray节点/Singbox节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度19.4M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-6-9-free-node-subscribe-links.htm" title="6月9日 | 最新Shadowrocket节点/Clash节点/V2ray节点/Trojan节点/Singbox节点/SSR节点高速免费节点，最高速度20.3M/S 免费Clash机场订阅地址">6月9日 | 最新Shadowrocket节点/Clash节点/V2ray节点/Trojan节点/Singbox节点/SSR节点高速免费节点，最高速度20.3M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-6-21-node-share-links.htm" title="6月21日 | 最新SSR节点/Singbox节点/V2ray节点/Clash节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址">6月21日 | 最新SSR节点/Singbox节点/V2ray节点/Clash节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/2026-6-29-free-node-subscribe-links.htm" title="6月29日 | 最新Clash节点/Singbox节点/Trojan节点/Shadowrocket节点/V2ray节点/SSR节点高速免费节点，最高速度21M/S 免费Clash机场订阅地址">6月29日 | 最新Clash节点/Singbox节点/Trojan节点/Shadowrocket节点/V2ray节点/SSR节点高速免费节点，最高速度21M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-6-26-free-node-subscribe.htm" title="6月26日 | 最新Clash节点/Singbox节点/V2ray节点/Trojan节点/SSR节点/Shadowrocket节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址">6月26日 | 最新Clash节点/Singbox节点/V2ray节点/Trojan节点/SSR节点/Shadowrocket节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-6-11-clash-windows.htm" title="6月11日 | 最新Trojan节点/SSR节点/Shadowrocket节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址">6月11日 | 最新Trojan节点/SSR节点/Shadowrocket节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度19.1M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-subscribe-node-2026-7-29.htm" title="7月29日 | 最新V2ray节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点/Clash节点高速免费节点，最高速度18M/S 免费Clash机场订阅地址">7月29日 | 最新V2ray节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点/Clash节点高速免费节点，最高速度18M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-7-8-free-node-subscribe.htm" title="7月8日 | 最新Clash节点/SSR节点/Shadowrocket节点/Trojan节点/Singbox节点/V2ray节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址">7月8日 | 最新Clash节点/SSR节点/Shadowrocket节点/Trojan节点/Singbox节点/V2ray节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-7-23-free-ssr-node.htm" title="7月23日 | 最新Clash节点/Shadowrocket节点/V2ray节点/Trojan节点/SSR节点/Singbox节点高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址">7月23日 | 最新Clash节点/Shadowrocket节点/V2ray节点/Trojan节点/SSR节点/Singbox节点高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-7-3-free-clash-subscribe.htm" title="7月3日 | 最新Shadowrocket节点/Clash节点/Singbox节点/SSR节点/Trojan节点/V2ray节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址">7月3日 | 最新Shadowrocket节点/Clash节点/Singbox节点/SSR节点/Trojan节点/V2ray节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -268,7 +268,10 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2026-07/" title="2026-07 归档">2026-07</a></h4>
+                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2026-07/" title="2026-07 归档">2026-07</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">23</span> <a href="/date/2026-06/" title="2026-06 归档">2026-06</a></h4>
