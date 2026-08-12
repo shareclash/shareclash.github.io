@@ -1,4 +1,4 @@
-# 8月5日 | 最新V2ray节点/SSR节点/Singbox节点/Clash节点/Shadowrocket节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址  更新时间 2026-08-05 08:30:51
+# 8月12日 | 最新Singbox节点/V2ray节点/Clash节点/SSR节点/Shadowrocket节点高速免费节点，最高速度22M/S 免费Clash机场订阅地址  更新时间 2026-08-12 07:52:30
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://shareclash.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### 免费Clash节点订阅链接
 
-- https://shareclash.github.io/uploads/2026/08/0-20260805.yaml
-- https://shareclash.github.io/uploads/2026/08/1-20260805.yaml
-- https://shareclash.github.io/uploads/2026/08/2-20260805.yaml
-- https://shareclash.github.io/uploads/2026/08/3-20260805.yaml
-- https://shareclash.github.io/uploads/2026/08/4-20260805.yaml
+- https://shareclash.github.io/uploads/2026/08/0-20260812.yaml
+- https://shareclash.github.io/uploads/2026/08/1-20260812.yaml
+- https://shareclash.github.io/uploads/2026/08/2-20260812.yaml
+- https://shareclash.github.io/uploads/2026/08/3-20260812.yaml
+- https://shareclash.github.io/uploads/2026/08/4-20260812.yaml
 
 ### 免费V2ray节点订阅链接
 
-- https://shareclash.github.io/uploads/2026/08/0-20260805.txt
-- https://shareclash.github.io/uploads/2026/08/1-20260805.txt
-- https://shareclash.github.io/uploads/2026/08/2-20260805.txt
-- https://shareclash.github.io/uploads/2026/08/3-20260805.txt
-- https://shareclash.github.io/uploads/2026/08/4-20260805.txt
+- https://shareclash.github.io/uploads/2026/08/0-20260812.txt
+- https://shareclash.github.io/uploads/2026/08/1-20260812.txt
+- https://shareclash.github.io/uploads/2026/08/2-20260812.txt
+- https://shareclash.github.io/uploads/2026/08/3-20260812.txt
+- https://shareclash.github.io/uploads/2026/08/4-20260812.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://shareclash.github.io/uploads/2026/08/20260805.json
+- https://shareclash.github.io/uploads/2026/08/20260812.json
 
 ## 更多Clash节点订阅 ：
 
