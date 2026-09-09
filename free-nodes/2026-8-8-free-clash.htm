@@ -367,26 +367,6 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 节点订阅如何实现自动更新？</h5></div>
-    <div class="panel-body">
-        用户可添加订阅 URL，Nekoray 会定期自动下载并更新节点列表。保持节点最新可减少手动维护，提高节点可用性和网络连接稳定性，确保科学上网体验顺畅。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Potatso Lite 是否支持手动节点管理？</h5></div>
-    <div class="panel-body">
-        支持。用户可手动输入节点信息或扫描二维码导入节点，并可进行修改或删除。虽然不支持自动订阅更新，但足以满足轻量用户对节点管理和流量分流的需求。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 如何设置用户带宽限制？</h5></div>
-    <div class="panel-body">
-        管理员可为每个用户设置上传和下载带宽上限。超出限制可自动降速或阻止访问，保证服务器资源合理分配，避免单用户占用过多带宽，提高整体公平性和使用效率。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的端口复用有什么风险？</h5></div>
-    <div class="panel-body">
-        SSR 支持多端口配置以复用服务，但若端口过多或设置冲突，可能被扫描工具识别或误判为异常服务。建议保持配置简洁，并合理分配端口范围以减少暴露风险。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>Trojan-Go 与 Trojan 有什么区别？</h5></div>
     <div class="panel-body">
         Trojan-Go 是 Trojan 的改进版，加入了多路复用、WebSocket 和 gRPC 支持。它兼容原版配置，同时在性能和连接灵活性上更优秀，适合多环境部署。<hr />    </div>
@@ -397,14 +377,19 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         可以。Nekobox 与 Shadowsocks、Clash 等客户端独立运行，互不干扰。结合策略组使用，可灵活分配节点，实现多客户端管理和流量优化。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Hiddify Next 如何设置用户带宽限制？</h5></div>
+    <div class="panel-body">
+        管理员可为每个用户设置上传和下载带宽上限。超出限制可自动降速或阻止访问，保证服务器资源合理分配，避免单用户占用过多带宽，提高整体公平性和使用效率。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Nekoray 支持节点订阅批量更新吗？</h5></div>
     <div class="panel-body">
         支持。用户可通过订阅 URL 批量更新节点，程序会自动下载并替换旧节点。定期更新保证节点列表始终可用，减少手动维护，提高使用效率和便利性。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>PassWall2 的“节点切换策略”如何配置？</h5></div>
+    <div class="panel-heading"><h5>SSR 的端口复用有什么风险？</h5></div>
     <div class="panel-body">
-        在 PassWall2 中可设置多节点策略，如“按延迟排序”、“自动选择最快节点”等。程序会定期测速，根据实时数据自动切换线路，保证连接的稳定性和速度。<hr />    </div>
+        SSR 支持多端口配置以复用服务，但若端口过多或设置冲突，可能被扫描工具识别或误判为异常服务。建议保持配置简洁，并合理分配端口范围以减少暴露风险。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Nekoray 支持节点批量更新吗？</h5></div>
@@ -412,9 +397,24 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         支持。Nekoray 可通过订阅 URL 批量下载最新节点并替换旧节点。结合定时更新功能，可保持节点列表最新，减少手动维护和配置工作。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>PassWall2 的“节点切换策略”如何配置？</h5></div>
+    <div class="panel-body">
+        在 PassWall2 中可设置多节点策略，如“按延迟排序”、“自动选择最快节点”等。程序会定期测速，根据实时数据自动切换线路，保证连接的稳定性和速度。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 节点订阅如何实现自动更新？</h5></div>
+    <div class="panel-body">
+        用户可添加订阅 URL，Nekoray 会定期自动下载并更新节点列表。保持节点最新可减少手动维护，提高节点可用性和网络连接稳定性，确保科学上网体验顺畅。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
     <div class="panel-body">
-        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。    </div>
+        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Potatso Lite 是否支持手动节点管理？</h5></div>
+    <div class="panel-body">
+        支持。用户可手动输入节点信息或扫描二维码导入节点，并可进行修改或删除。虽然不支持自动订阅更新，但足以满足轻量用户对节点管理和流量分流的需求。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -462,16 +462,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-8-1.htm" title="8月1日 | 最新SSR节点/Clash节点/V2ray节点/Singbox节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址">8月1日 | 最新SSR节点/Clash节点/V2ray节点/Singbox节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-16-free-v2ray.htm" title="7月16日 | 最新Clash节点/SSR节点/Trojan节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度21.6M/S 免费Clash机场订阅地址">7月16日 | 最新Clash节点/SSR节点/Trojan节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度21.6M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-19-free-v2ray-subscribe.htm" title="7月19日 | 最新SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Trojan节点/Singbox节点高速免费节点，最高速度22.1M/S 免费Clash机场订阅地址">7月19日 | 最新SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Trojan节点/Singbox节点高速免费节点，最高速度22.1M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-17-free-clash-subscribe.htm" title="7月17日 | 最新Trojan节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Singbox节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址">7月17日 | 最新Trojan节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Singbox节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-28-free-v2ray.htm" title="7月28日 | 最新V2ray节点/Clash节点/Trojan节点/SSR节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址">7月28日 | 最新V2ray节点/Clash节点/Trojan节点/SSR节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-18-node-share.htm" title="8月18日 | 最新V2ray节点/SSR节点/Clash节点/Trojan节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度22.6M/S 免费Clash机场订阅地址">8月18日 | 最新V2ray节点/SSR节点/Clash节点/Trojan节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度22.6M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/shadowrocket-node-2026-8-13.htm" title="8月13日 | 最新Singbox节点/Trojan节点/Clash节点/V2ray节点/SSR节点/Shadowrocket节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址">8月13日 | 最新Singbox节点/Trojan节点/Clash节点/V2ray节点/SSR节点/Shadowrocket节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-12-free-shadowrocket-node.htm" title="8月12日 | 最新Trojan节点/Singbox节点/SSR节点/V2ray节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址">8月12日 | 最新Trojan节点/Singbox节点/SSR节点/V2ray节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-22-free-clash.htm" title="8月22日 | 最新Trojan节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点/SSR节点高速免费节点，最高速度19.8M/S 免费Clash机场订阅地址">8月22日 | 最新Trojan节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点/SSR节点高速免费节点，最高速度19.8M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/clash-windows-2026-9-1.htm" title="9月1日 | 最新V2ray节点/Singbox节点/Trojan节点/SSR节点/Clash节点/Shadowrocket节点高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址">9月1日 | 最新V2ray节点/Singbox节点/Trojan节点/SSR节点/Clash节点/Shadowrocket节点高速免费节点，最高速度19.3M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-4-free-shadowrocket-node.htm" title="9月4日 | 最新Shadowrocket节点/Clash节点/Trojan节点/V2ray节点/Singbox节点/SSR节点高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址">9月4日 | 最新Shadowrocket节点/Clash节点/Trojan节点/V2ray节点/Singbox节点/SSR节点高速免费节点，最高速度22.3M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-30-clash-node.htm" title="8月30日 | 最新Trojan节点/SSR节点/Clash节点/V2ray节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度23M/S 免费Clash机场订阅地址">8月30日 | 最新Trojan节点/SSR节点/Clash节点/V2ray节点/Shadowrocket节点/Singbox节点高速免费节点，最高速度23M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-28-free-shadowrocket-node.htm" title="8月28日 | 最新Singbox节点/Shadowrocket节点/V2ray节点/SSR节点/Trojan节点/Clash节点高速免费节点，最高速度19.7M/S 免费Clash机场订阅地址">8月28日 | 最新Singbox节点/Shadowrocket节点/V2ray节点/SSR节点/Trojan节点/Clash节点高速免费节点，最高速度19.7M/S 免费Clash机场订阅地址</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/2026-8-8-free-clash.htm" title="8月8日 | 最新Clash节点/Trojan节点/V2ray节点/SSR节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度22.5M/S 免费Clash机场订阅地址">8月8日 | 最新Clash节点/Trojan节点/V2ray节点/SSR节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度22.5M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-14-free-node-subscribe.htm" title="7月14日 | 最新SSR节点/Trojan节点/Singbox节点/Clash节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址">7月14日 | 最新SSR节点/Trojan节点/Singbox节点/Clash节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度22.2M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-22-free-ssr-subscribe.htm" title="7月22日 | 最新Singbox节点/Shadowrocket节点/Clash节点/V2ray节点/Trojan节点/SSR节点高速免费节点，最高速度21.6M/S 免费Clash机场订阅地址">7月22日 | 最新Singbox节点/Shadowrocket节点/Clash节点/V2ray节点/Trojan节点/SSR节点高速免费节点，最高速度21.6M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-30-clash-node-daily-updates.htm" title="7月30日 | 最新Singbox节点/Trojan节点/Shadowrocket节点/Clash节点/SSR节点/V2ray节点高速免费节点，最高速度20.5M/S 免费Clash机场订阅地址">7月30日 | 最新Singbox节点/Trojan节点/Shadowrocket节点/Clash节点/SSR节点/V2ray节点高速免费节点，最高速度20.5M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-27-free-v2ray-subscribe.htm" title="7月27日 | 最新Clash节点/Trojan节点/SSR节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址">7月27日 | 最新Clash节点/Trojan节点/SSR节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/shadowrocket-node-2026-8-7.htm" title="8月7日 | 最新Shadowrocket节点/SSR节点/Clash节点/Singbox节点/Trojan节点/V2ray节点高速免费节点，最高速度18.3M/S 免费Clash机场订阅地址">8月7日 | 最新Shadowrocket节点/SSR节点/Clash节点/Singbox节点/Trojan节点/V2ray节点高速免费节点，最高速度18.3M/S 免费Clash机场订阅地址</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -483,10 +483,10 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">19</span> <a href="/date/2026-07/" title="2026-07 归档">2026-07</a></h4>
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
             </li>
                     </ul>
     </div>
