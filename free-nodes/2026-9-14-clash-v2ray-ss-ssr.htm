@@ -147,39 +147,14 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 如何配置混淆以应对封锁升级？</h5></div>
+    <div class="panel-heading"><h5>Potatso Lite 如何结合手动节点选择优化访问？</h5></div>
     <div class="panel-body">
-        选择合适的混淆方式，如 tls1.2_ticket_auth，可模拟正常 HTTPS 流量。合理搭配协议和混淆参数，可有效降低被 DPI 检测和封锁的风险，提高节点长期稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何配置 Clash 的 GEOIP 分流？</h5></div>
-    <div class="panel-body">
-        Clash 支持使用 GEOIP 数据库进行区域分流。用户在规则文件中添加 `GEOIP,CN,DIRECT` 可使国内流量直连，而国外流量走代理，从而提升整体网络性能。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Surfboard 的配置文件可以与 Clash 通用吗？</h5></div>
-    <div class="panel-body">
-        Surfboard 基于 Clash 核心，因此支持大部分 YAML 配置文件，但部分字段如 rule-provider、external-controller 等可能不兼容。建议使用订阅转换工具将 Clash 文件转换为 Surfboard 兼容格式导入。<hr />    </div>
+        用户可根据网络延迟和用途手动切换节点，选择最优节点处理不同流量。虽然不支持自动更新，但在节点不稳定或特定需求下可以灵活调整，提高访问效率。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Mellow 有哪些优势？</h5></div>
     <div class="panel-body">
         Mellow 是一个轻量化的跨平台代理客户端，采用透明代理和规则路由技术。它支持 V2Ray、Trojan 等协议，适用于 macOS、Windows 等操作系统。Mellow 运行稳定、资源占用低，非常适合后台长期使用。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Clash 节点延迟检测如何帮助分流？</h5></div>
-    <div class="panel-body">
-        Clash 会定期测试节点延迟，并结合策略组自动选择最优节点处理流量。避免访问高延迟或失效节点，提高网页浏览、视频播放和游戏速度及稳定性，优化整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何把 Clash 规则与本地 hosts 文件结合使用？</h5></div>
-    <div class="panel-body">
-        可在 Clash 的 rules 中优先设置域名直连规则，并在系统 hosts 中添加常用站点的固定解析以加速 DNS 解析。注意 hosts 优先级高于 DNS，因此修改 hosts 需谨慎以避免与真实解析冲突。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Potatso Lite 如何结合手动节点选择优化访问？</h5></div>
-    <div class="panel-body">
-        用户可根据网络延迟和用途手动切换节点，选择最优节点处理不同流量。虽然不支持自动更新，但在节点不稳定或特定需求下可以灵活调整，提高访问效率。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Trojan-go 如何启用 WebSocket 支持？</h5></div>
@@ -192,9 +167,34 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         苹果系统更新后，Potatso Lite 可能需要重新授权 VPN 权限。请删除旧的 VPN 配置，重新安装并导入节点。若仍无法使用，可尝试更换网络模式或等待开发者更新兼容版本。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Clash 节点延迟检测如何帮助分流？</h5></div>
+    <div class="panel-body">
+        Clash 会定期测试节点延迟，并结合策略组自动选择最优节点处理流量。避免访问高延迟或失效节点，提高网页浏览、视频播放和游戏速度及稳定性，优化整体网络体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Surfboard 的配置文件可以与 Clash 通用吗？</h5></div>
+    <div class="panel-body">
+        Surfboard 基于 Clash 核心，因此支持大部分 YAML 配置文件，但部分字段如 rule-provider、external-controller 等可能不兼容。建议使用订阅转换工具将 Clash 文件转换为 Surfboard 兼容格式导入。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何把 Clash 规则与本地 hosts 文件结合使用？</h5></div>
+    <div class="panel-body">
+        可在 Clash 的 rules 中优先设置域名直连规则，并在系统 hosts 中添加常用站点的固定解析以加速 DNS 解析。注意 hosts 优先级高于 DNS，因此修改 hosts 需谨慎以避免与真实解析冲突。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 使用 WebSocket + TLS 有哪些优势？</h5></div>
     <div class="panel-body">
-        WebSocket + TLS 可将 V2Ray 流量伪装成 HTTPS 请求，隐藏真实通信特征。结合域名伪装和策略组使用，可以有效绕过封锁，提高节点安全性和连接稳定性，保持长期稳定访问。    </div>
+        WebSocket + TLS 可将 V2Ray 流量伪装成 HTTPS 请求，隐藏真实通信特征。结合域名伪装和策略组使用，可以有效绕过封锁，提高节点安全性和连接稳定性，保持长期稳定访问。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何配置 Clash 的 GEOIP 分流？</h5></div>
+    <div class="panel-body">
+        Clash 支持使用 GEOIP 数据库进行区域分流。用户在规则文件中添加 `GEOIP,CN,DIRECT` 可使国内流量直连，而国外流量走代理，从而提升整体网络性能。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 如何配置混淆以应对封锁升级？</h5></div>
+    <div class="panel-body">
+        选择合适的混淆方式，如 tls1.2_ticket_auth，可模拟正常 HTTPS 流量。合理搭配协议和混淆参数，可有效降低被 DPI 检测和封锁的风险，提高节点长期稳定性。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -242,16 +242,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-8-24-free-shadowrocket-node.htm" title="8月24日 | 最新SSR节点/Trojan节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址">8月24日 | 最新SSR节点/Trojan节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度22.9M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/shadowrocket-node-2026-8-29.htm" title="8月29日 | 最新Singbox节点/V2ray节点/Trojan节点/Shadowrocket节点/Clash节点/SSR节点高速免费节点，最高速度19.2M/S 免费Clash机场订阅地址">8月29日 | 最新Singbox节点/V2ray节点/Trojan节点/Shadowrocket节点/Clash节点/SSR节点高速免费节点，最高速度19.2M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-8-free-node-subscribe.htm" title="9月8日 | 最新SSR节点/Clash节点/Shadowrocket节点/V2ray节点/Singbox节点/Trojan节点高速免费节点，最高速度21.2M/S 免费Clash机场订阅地址">9月8日 | 最新SSR节点/Clash节点/Shadowrocket节点/V2ray节点/Singbox节点/Trojan节点高速免费节点，最高速度21.2M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/free-node-subscribe-links-2026-9-13.htm" title="9月13日 | 最新Shadowrocket节点/Trojan节点/SSR节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度22.1M/S 免费Clash机场订阅地址">9月13日 | 最新Shadowrocket节点/Trojan节点/SSR节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度22.1M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-20-node-share.htm" title="9月20日 | 最新Trojan节点/Singbox节点/Shadowrocket节点/SSR节点/Clash节点/V2ray节点高速免费节点，最高速度19.2M/S 免费Clash机场订阅地址">9月20日 | 最新Trojan节点/Singbox节点/Shadowrocket节点/SSR节点/Clash节点/V2ray节点高速免费节点，最高速度19.2M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/shadowrocket-node-2026-9-11.htm" title="9月11日 | 最新Singbox节点/Clash节点/V2ray节点/Shadowrocket节点/SSR节点/Trojan节点高速免费节点，最高速度18.7M/S 免费Clash机场订阅地址">9月11日 | 最新Singbox节点/Clash节点/V2ray节点/Shadowrocket节点/SSR节点/Trojan节点高速免费节点，最高速度18.7M/S 免费Clash机场订阅地址</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/shadowrocket-node-2026-8-7.htm" title="8月7日 | 最新Shadowrocket节点/SSR节点/Clash节点/Singbox节点/Trojan节点/V2ray节点高速免费节点，最高速度18.3M/S 免费Clash机场订阅地址">8月7日 | 最新Shadowrocket节点/SSR节点/Clash节点/Singbox节点/Trojan节点/V2ray节点高速免费节点，最高速度18.3M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-12-free-shadowrocket-node.htm" title="8月12日 | 最新Trojan节点/Singbox节点/SSR节点/V2ray节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址">8月12日 | 最新Trojan节点/Singbox节点/SSR节点/V2ray节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21.8M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-9-7.htm" title="9月7日 | 最新Shadowrocket节点/Clash节点/Trojan节点/Singbox节点/SSR节点/V2ray节点高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址">9月7日 | 最新Shadowrocket节点/Clash节点/Trojan节点/Singbox节点/SSR节点/V2ray节点高速免费节点，最高速度20.7M/S 免费Clash机场订阅地址</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-9-5.htm" title="9月5日 | 最新Singbox节点/Clash节点/V2ray节点/SSR节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址">9月5日 | 最新Singbox节点/Clash节点/V2ray节点/SSR节点/Trojan节点/Shadowrocket节点高速免费节点，最高速度20.4M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-10-free-node-subscribe.htm" title="9月10日 | 最新Clash节点/Trojan节点/Singbox节点/V2ray节点/Shadowrocket节点/SSR节点高速免费节点，最高速度21.6M/S 免费Clash机场订阅地址">9月10日 | 最新Clash节点/Trojan节点/Singbox节点/V2ray节点/Shadowrocket节点/SSR节点高速免费节点，最高速度21.6M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-20-clash-v2ray-ss-ssr.htm" title="8月20日 | 最新SSR节点/Clash节点/V2ray节点/Trojan节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址">8月20日 | 最新SSR节点/Clash节点/V2ray节点/Trojan节点/Singbox节点/Shadowrocket节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-9-16-free-ssr-subscribe.htm" title="9月16日 | 最新Singbox节点/SSR节点/Trojan节点/Clash节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址">9月16日 | 最新Singbox节点/SSR节点/Trojan节点/Clash节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度18.9M/S 免费Clash机场订阅地址</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-9-3.htm" title="9月3日 | 最新Clash节点/Trojan节点/SSR节点/Shadowrocket节点/Singbox节点/V2ray节点高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址">9月3日 | 最新Clash节点/Trojan节点/SSR节点/Shadowrocket节点/Singbox节点/V2ray节点高速免费节点，最高速度22.8M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-9-19.htm" title="9月19日 | 最新SSR节点/Shadowrocket节点/Clash节点/V2ray节点/Trojan节点/Singbox节点高速免费节点，最高速度19M/S 免费Clash机场订阅地址">9月19日 | 最新SSR节点/Shadowrocket节点/Clash节点/V2ray节点/Trojan节点/Singbox节点高速免费节点，最高速度19M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-10-free-v2ray.htm" title="8月10日 | 最新SSR节点/Trojan节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度20.2M/S 免费Clash机场订阅地址">8月10日 | 最新SSR节点/Trojan节点/Singbox节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度20.2M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-v2ray-subscribe-2026-8-25.htm" title="8月25日 | 最新SSR节点/V2ray节点/Trojan节点/Singbox节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21M/S 免费Clash机场订阅地址">8月25日 | 最新SSR节点/V2ray节点/Trojan节点/Singbox节点/Clash节点/Shadowrocket节点高速免费节点，最高速度21M/S 免费Clash机场订阅地址</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-9-22-node-share.htm" title="9月22日 | 最新SSR节点/Clash节点/Trojan节点/Shadowrocket节点/V2ray节点/Singbox节点高速免费节点，最高速度20M/S 免费Clash机场订阅地址">9月22日 | 最新SSR节点/Clash节点/Trojan节点/Shadowrocket节点/V2ray节点/Singbox节点高速免费节点，最高速度20M/S 免费Clash机场订阅地址</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -263,7 +263,7 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">16</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
